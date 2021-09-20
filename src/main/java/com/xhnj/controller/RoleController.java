@@ -68,7 +68,7 @@ public class RoleController {
     }
 
     @ApiOperation("编辑角色")
-    @PutMapping("/update")
+    @PostMapping("/update")
     public CommonResult update(TRole role) {
         int count = roleService.update(role);
         if(count > 0)
@@ -93,7 +93,5 @@ public class RoleController {
             return CommonResult.success(count);
         return CommonResult.failed();
     }
-
-
 
 }

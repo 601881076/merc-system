@@ -151,6 +151,13 @@
             <artifactId>jsoup</artifactId>
             <version>1.8.3</version>
         </dependency>
+
+        <!--easyexcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.1.2-beta5</version>
+        </dependency>
     </dependencies>
 
     <build>

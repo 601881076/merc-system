@@ -31,7 +31,7 @@ import java.util.Map;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "用户接口", tags = "用户接口类")
+@Api(value = "用户管理", tags = "用户接口类")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -93,7 +93,7 @@ public class AdminController {
 
 
     @ApiOperation("编辑用户")
-    @PutMapping("/update")
+    @PostMapping("/update")
     public CommonResult update(TAdmin admin) {
         int count = adminService.updateAdmin(admin);
         if(count > 0)

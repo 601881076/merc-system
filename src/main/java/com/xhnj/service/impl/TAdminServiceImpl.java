@@ -110,6 +110,9 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
 
     @Override
     public int updateAdmin(TAdmin admin) {
+        if(StrUtil.isNotBlank(admin.getPassword())){
+            admin.setPassword(null);
+        }
         return adminMapper.updateById(admin);
     }
 

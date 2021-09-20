@@ -71,6 +71,7 @@ secure:
       - /admin/register
       - /common/sms
       - /wx/**
+      - /withhold/**
 
 
 uploadFile:
