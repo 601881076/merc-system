@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.component.ValidateProcessor;
-import com.xhnj.constance.ValidateTypeConstant;
-import com.xhnj.constance.ValueConstance;
+import com.xhnj.constant.ValidateTypeConstant;
+import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TPlatformserialMapper;
 import com.xhnj.model.TPlatformserial;
 import com.xhnj.model.WithholdFailExcel;
@@ -67,7 +67,7 @@ public class TWithholdServiceImpl implements TWithholdService {
             withholdParam.setFromType(ValueConstance.SOURCE_MDD);
         }
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
-        list.stream().forEach(e ->e.setCardNo(businUtil.bankCard(e.getCardNo())));
+        list.stream().forEach(e ->e.setCardNo(businUtil.maskBankCard(e.getCardNo())));
         String fileName = "扣款报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");

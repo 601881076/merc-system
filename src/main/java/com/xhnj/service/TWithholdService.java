@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface TWithholdService {
 
+    /**
+     * 分页查询代扣明细
+     * @param batchNo
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
     IPage listPage(String batchNo, Integer pageSize, Integer pageNum);
 
     /**

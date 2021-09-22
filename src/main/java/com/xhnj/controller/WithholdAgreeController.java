@@ -1,13 +1,13 @@
 package com.xhnj.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
-import com.xhnj.service.TWithholdService;
+import com.xhnj.model.TPlatformserial;
+import com.xhnj.service.TWithholdAgreeService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 /*
@@ -19,16 +19,25 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/withhold/agree")
 public class WithholdAgreeController {
     @Autowired
-    private TWithholdService withholdService;
+    private TWithholdAgreeService withholdAgreeService;
+
+    @ApiOperation(value = "授权查询")
+    @GetMapping("/getDetail/{batchNo}")
+    public CommonResult<CommonPage<TPlatformserial>> list(@PathVariable("batchNo")String batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        IPage page = withholdAgreeService.listPage(batchNo,pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(page));
+    }
 
 
-    @ApiOperation(value = "上传代扣协议excel")
+    @ApiOperation(value = "取消授权上传")
     @PostMapping("/excelImport")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file){
-        int count = withholdService.uploadExcel(file);
+        int count = withholdAgreeService.uploadExcel(file);
         if(count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
     }
+
 
 }

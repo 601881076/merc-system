@@ -1,4 +1,4 @@
-package com.xhnj.constance;
+package com.xhnj.constant;
 
 /*
  @Description 常量值
@@ -20,5 +20,10 @@ public class ValueConstance {
      */
     public static final Integer WITHHOLD = 0;
     public static final Integer PAY = 1;
+
+    //----------------------代扣协议----------------
+    public static final int DEAL_SIGN = 0;   //签订
+    public static final int DEAL_DISMISS = 2;   //撤销
+
 
 }

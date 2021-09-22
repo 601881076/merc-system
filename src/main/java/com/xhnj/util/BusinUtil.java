@@ -72,7 +72,7 @@ public class BusinUtil {
      * @param cardNo 卡号
      * @return 脱敏后的卡号
      */
-    public String bankCard(String cardNo) {
+    public String maskBankCard(String cardNo) {
         if (StrUtil.isBlank(cardNo)) { return ""; }
         int length = cardNo.length();
         int beforeLength = 4;
@@ -92,19 +92,29 @@ public class BusinUtil {
 
     /**
      * 手机号脱敏 （中间四位隐藏）
-     * @param mobile 手机号
+     * @param phone 手机号
      * @return 脱敏后的手机号
      */
-    public String mobile(String mobile) {
-        if (StrUtil.isBlank(mobile)) {
+    public String maskPhone(String phone) {
+        if (StrUtil.isBlank(phone)) {
             return "";
         }
-        char[] chars = mobile.toCharArray();
+        char[] chars = phone.toCharArray();
         int i = 3;
         chars[i++] = '*';
         chars[i++] = '*';
         chars[i++] = '*';
         chars[i] = '*';
         return new String(chars);
+    }
+
+    /**
+     * 生成流水号
+     */
+    public String getBatchNo(String format, int n){
+        StringBuilder sb = new StringBuilder();
+        sb.append(DateUtil.format(DateUtil.date(), format))
+                .append(RandomUtil.randomNumbers(n));
+        return sb.toString();
     }
 }

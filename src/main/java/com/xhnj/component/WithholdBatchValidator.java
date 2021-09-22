@@ -1,38 +1,32 @@
 package com.xhnj.component;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
-import com.xhnj.constance.ValidateTypeConstant;
-import com.xhnj.constance.ValueConstance;
+import com.xhnj.constant.ValidateTypeConstant;
+import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TPlatformserialMapper;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TPlatformserial;
-import com.xhnj.pojo.vo.WithholdBatchSVO;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.util.BusinUtil;
+import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /*
  @Description 手动上传批量代扣excel校验
@@ -80,8 +74,9 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             if(list.size() > 1000){
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
-            //生成批次号
-            String batchNoStr = RandomUtil.randomNumbers(10);
+            //生成批次号,由当前用户+当前日期组成+随机数
+            String username = UserUtil.getCurrentAdminUser().getUsername();
+            String batchNoStr = username + DateUtil.format(DateUtil.date(), "yyyyMMdd")+RandomUtil.randomNumbers(7);
 
             List<TPlatformserial> originalList = new ArrayList<>();
             //转换数据类型

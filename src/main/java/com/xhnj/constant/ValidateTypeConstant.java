@@ -1,4 +1,4 @@
-package com.xhnj.constance;
+package com.xhnj.constant;
 
 /*
  @Description
@@ -12,4 +12,8 @@ public class ValidateTypeConstant {
      */
     public static final String WITHHOLD_BATCH = "withholdBatch";
 
+    /**
+     * 代扣协议批量取消
+     */
+    public static final String WITHHOLDAGREE_BATCH_CANCLE = "batchCancle";
 }
