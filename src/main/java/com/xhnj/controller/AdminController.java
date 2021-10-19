@@ -8,6 +8,7 @@ import com.xhnj.common.ResultCode;
 import com.xhnj.dto.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
 import com.xhnj.service.TAdminService;
+import com.xhnj.service.TRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class AdminController {
     private String tokenHead;
     @Autowired
     private TAdminService adminService;
+    @Autowired
+    private TRoleService roleService;
 
     @ApiOperation(value = "分页获取用户列表数据")
     @GetMapping("/list")
@@ -79,10 +82,19 @@ public class AdminController {
 
     @ApiOperation(value = "获取登录用户信息")
     @GetMapping("/info")
-    public CommonResult<TAdmin> info(Principal principal) {
+    public CommonResult<Map<String, Object>> info(Principal principal) {
         if (principal == null)
             return CommonResult.unauthorized(null);
-        return CommonResult.success(adminService.getAdminByUsername(principal.getName()));
+        TAdmin admin = adminService.getAdminByUsername(principal.getName());
+        Long id = admin.getId();
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", admin.getUsername());
+        data.put("userType", admin.getUserType());
+        data.put("nikeName", admin.getNickName());
+        data.put("roles", roleService.getUmsRole(id));
+        data.put("icon", admin.getIcon());
+        data.put("menus", roleService.getUmsMenuByAdminId(id));
+        return CommonResult.success(data);
     }
 
     @ApiOperation(value = "退出")

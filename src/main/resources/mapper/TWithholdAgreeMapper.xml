@@ -64,4 +64,14 @@
         AND deal_flag = #{dealFlag,jdbcType=INTEGER}
     </select>
 
+    <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+            <include refid="agreeSql" />
+        FROM t_withhold_agree
+        WHERE 1 = 1
+        <if test="withholdAgreeParam.successValue != null and withholdAgreeParam.successValue != ''">
+            AND
+        </if>
+    </select>
+
 </mapper>

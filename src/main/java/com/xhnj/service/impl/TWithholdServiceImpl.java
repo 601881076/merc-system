@@ -3,13 +3,16 @@ package com.xhnj.service.impl;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.component.ValidateProcessor;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstance;
+import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TPlatformserialMapper;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TPlatformserial;
 import com.xhnj.model.WithholdFailExcel;
 import com.xhnj.model.WithholdSuccessExcel;
@@ -41,8 +44,18 @@ public class TWithholdServiceImpl implements TWithholdService {
     private TPlatformserialService platformserialService;
     @Resource
     private TPlatformserialMapper platformserialMapper;
+    @Resource
+    private TBatchNoMapper batchNoMapper;
     @Autowired
     private BusinUtil businUtil;
+
+    @Override
+    public IPage batchPage(Integer pageSize, Integer pageNum) {
+        IPage<TBatchNo> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<TBatchNo> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("create_time");
+        return batchNoMapper.selectPage(page,wrapper);
+    }
 
     @Override
     public IPage listPage(String batchNo, Integer pageSize, Integer pageNum) {

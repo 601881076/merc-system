@@ -37,16 +37,16 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
-#    password:
-#    database: 1
-#    timeout: 3000
-#    maxIdle: 50
-#    maxTotal: 200
-#    maxWaitMillis: 2000
-#    testOnBorrow: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 1
+    timeout: 3000
+    maxIdle: 50
+    maxTotal: 200
+    maxWaitMillis: 2000
+    testOnBorrow: true
 
 pic:
   suffix: jpg,png,gif,mp4

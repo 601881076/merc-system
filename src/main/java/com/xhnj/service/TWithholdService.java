@@ -14,6 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 public interface TWithholdService {
 
     /**
+     * 分页查询扣款批次
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    IPage batchPage(Integer pageSize, Integer pageNum);
+
+    /**
      * 分页查询代扣明细
      * @param batchNo
      * @param pageSize

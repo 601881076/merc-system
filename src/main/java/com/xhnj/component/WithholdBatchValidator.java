@@ -51,6 +51,9 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void validateInner() throws BusinValidateException {
+        //验证权限
+
+
         BusinValidatorContext context = BusinValidatorContext.getCurrentContext();
         MultipartFile multipartFile = context.getRequestDto();
         if(multipartFile == null){

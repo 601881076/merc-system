@@ -3,6 +3,7 @@ package com.xhnj.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TPlatformserial;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.TWithholdService;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @ApiOperation("代扣")
 @RestController
-@RequestMapping("/withhold")
+@RequestMapping("/wh")
 public class WithholdController {
     @Autowired
     private TWithholdService withholdService;
@@ -43,12 +44,29 @@ public class WithholdController {
         withholdBaseService.exportExcel(response,withholdParam);
     }
 
-    @ApiOperation(value = "查询扣款明细")
+    @ApiOperation(value = "分页查询扣款批次")
+    @GetMapping("/page")
+    public CommonResult<CommonPage<TBatchNo>> page(@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        IPage page = withholdService.batchPage(pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(page));
+    }
+
+
+    @ApiOperation(value = "分页查询扣款明细")
     @GetMapping("/getDetail/{batchNo}")
     public CommonResult<CommonPage<TPlatformserial>> list(@PathVariable("batchNo")String batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = withholdService.listPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
+    }
+
+    @ApiOperation(value = "批次审核")
+    @GetMapping("/check/{batchId}")
+    public CommonResult check(@PathVariable("batchId")Long batchId){
+
+
+        return CommonResult.success(null);
     }
 
 }
