@@ -20,30 +20,20 @@
         serial_no,
         ret_own_spec,
         create_time,
-        update_time,
+        update_time
+
 
     </sql>
     <select id="listPage" resultType="com.xhnj.model.TBatchNo">
         select <include refid="batchNoSql"/> from t_batch_no where 1=1
         <if test="batchNo.createTime!=null">
-            and create_time=#{batchNo.createTime,jdbcType=DATE}
+            and create_time<![CDATA[ >= ]]>#{batchNo.createTime,jdbcType=TIMESTAMP}
         </if>
 
         <if test="batchNo.status!=null">
             and status=#{batchNo.status,jdbcType=INTEGER}
         </if>
-        <if test="batchNo.processStatus!=null">
-            and process_status=#{batchNo.processStatus,jdbcType=INTEGER}
-        </if>
-        <if test="batchNo.isAudit!=null">
-            and is_audit=#{batchNo.isAudit,jdbcType=INTEGER}
-        </if>
-        <if test="batchNo.isFinish!=null">
-            and is_finish=#{batchNo.isFinish,jdbcType=INTEGER}
-        </if>
-        <if test="batchNo.checkResult!=null">
-            and check_result=#{batchNo.checkResult,jdbcType=INTEGER}
-        </if>
+
 
     </select>
     <delete id="deleteById">
