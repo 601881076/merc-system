@@ -105,6 +105,14 @@ public class AdminController {
         return CommonResult.success(null);
     }
 
+    @ApiOperation(value = "添加用户")
+    @PostMapping("/insert")
+    public CommonResult insert(TAdmin admin){
+        int count=adminService.insertAdmin(admin);
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
 
     @ApiOperation("编辑用户")
     @PostMapping("/update")

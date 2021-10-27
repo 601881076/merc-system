@@ -62,7 +62,7 @@ public class WithholdController {
 
     @ApiOperation(value = "分页查询扣款批次")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TBatchNo>> page(TBatchNo batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TBatchNo>> page(@RequestBody TBatchNo batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = withholdService.batchPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));

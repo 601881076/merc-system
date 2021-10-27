@@ -56,7 +56,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         String token = null;
         //密码需要客户端加密后传递
         try {
-//            password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
+            password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
             UserDetails userDetails = loadUserByUsername(username);
             if(userDetails == null)
                 throw new UsernameNotFoundException("用户名或密码错误");
@@ -116,6 +116,13 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         return adminMapper.updateById(admin);
     }
 
+    @Override
+    public int insertAdmin(TAdmin admin) {
+        if(StrUtil.isNotBlank(admin.getPassword())){
+            admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        }
+        return adminMapper.insert(admin);
+    }
 
     @Transactional(rollbackFor = Exception.class)
     @Override

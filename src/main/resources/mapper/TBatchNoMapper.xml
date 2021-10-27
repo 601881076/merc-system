@@ -29,8 +29,10 @@
         <if test="batchNo.createTime!=null">
             and create_time<![CDATA[ >= ]]>#{batchNo.createTime,jdbcType=TIMESTAMP}
         </if>
-
-        <if test="batchNo.status!=null">
+        <if test="batchNo.batchNo!=null and batchNo.batchNo!=''">
+            and batch_no=#{batchNo.batchNo,jdbcType=VARCHAR}
+        </if>
+        <if test="batchNo.status!=null and batchNo.status!=''">
             and status=#{batchNo.status,jdbcType=INTEGER}
         </if>
 

@@ -64,6 +64,7 @@ secure:
       - /druid/**
       - /admin/login
       - /admin/register
+      - /admin/insert
       - /common/sms
       - /wx/**
       - /test/**

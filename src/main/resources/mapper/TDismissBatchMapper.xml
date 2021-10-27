@@ -8,12 +8,25 @@
         bank_code,
         system_batch,
         batch_desc,
+        total_trans,
         success_trans,
         fail_trans,
         status,
         create_time,
         update_time
     </sql>
+    <select id="listPage" resultType="com.xhnj.model.TDismissBatch">
+        select <include refid="dismissSql"/> from t_dismiss_batch where 1=1
+        <if test="dismissBatch.createTime!=null">
+            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dismissBatch.systemBatch!=null and dismissBatch.systemBatch!=''">
+            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
+        </if>
+        <if test="dismissBatch.status!=null and dismissBatch.status!=''">
+            and status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+    </select>
     <delete id="deleteById">
         delete from t_dismiss_batch where status=-1 and id=#{id}
     </delete>

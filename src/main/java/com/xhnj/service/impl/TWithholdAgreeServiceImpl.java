@@ -42,11 +42,11 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     }
 
     @Override
-    public IPage batchPage(Integer pageSize, Integer pageNum) {
+    public IPage batchPage(TDismissBatch dismissBatch,Integer pageSize, Integer pageNum) {
         IPage<TDismissBatch> page = new Page<>(pageNum, pageSize);
-        QueryWrapper<TDismissBatch> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("create_time");
-        return dismissBatchMapper.selectPage(page,wrapper);
+//        QueryWrapper<TDismissBatch> wrapper = new QueryWrapper<>();
+//        wrapper.orderByDesc("create_time");
+        return dismissBatchMapper.listPage(page,dismissBatch);
     }
 
     @Override

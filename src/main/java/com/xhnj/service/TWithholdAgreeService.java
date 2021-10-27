@@ -1,6 +1,7 @@
 package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.model.TDismissBatch;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,7 @@ public interface TWithholdAgreeService {
      * @param pageNum
      * @return
      */
-    IPage batchPage(Integer pageSize, Integer pageNum);
+    IPage batchPage(TDismissBatch dismissBatch, Integer pageSize, Integer pageNum);
 
     /**
      * 分页查询授权解除明细
