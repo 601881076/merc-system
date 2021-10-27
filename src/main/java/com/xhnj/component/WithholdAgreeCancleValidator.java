@@ -12,12 +12,16 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
+import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
+import com.xhnj.service.TAdminService;
 import com.xhnj.util.BusinUtil;
+import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +48,10 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
     private TDismissBatchMapper dismissBatchMapper;
     @Autowired
     private BusinUtil businUtil;
+    @Autowired
+    private TAdminService adminService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void validateInner() throws BusinValidateException {
@@ -74,6 +82,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             //校验是否重复取消
             //生成批次号
             String batchNo = businUtil.getBatchNo("yyyyMMdd", 10);
+            context.set("batchNo",batchNo);
+            context.set("totalTrans",list.size());
             AgreeDismissDetailVO vo = null;
             for (int i = 0; i < list.size(); i++) {
                 vo = (AgreeDismissDetailVO) list.get(i);
@@ -83,7 +93,19 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 withholdAgree.setSystemBatch(batchNo);
                 cancelList.add(withholdAgree);
             }
+            String username = UserUtil.getCurrentAdminUser().getUsername();
+            String password= (String) context.get("password");
+//            password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
+            TAdmin admin = adminService.getAdminByUsername(username);
+            Integer totalTrans = (Integer) context.get("totalTrans");
+            if(!passwordEncoder.matches(password,admin.getPassword())){
+                throw new BusinValidateException("密码不正确");
+            }
+            if (!totalTrans.equals(list.size())){
+                BusinValidateException validateException = new BusinValidateException("总数量与上传文件不一致");
+                throw validateException;
 
+            }
             List<String> cardNoList = cancelList.stream()
                     .map(TWithholdAgree::getCardNo).distinct()
                     .collect(Collectors.toList());
@@ -98,11 +120,15 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         //添加批次
         TDismissBatch dismissBatch = new TDismissBatch();
         dismissBatch.setFromType(ValueConstance.SOURCE_MDD);
+        dismissBatch.setSystemBatch((String) context.get("batchNo"));
+        dismissBatch.setTotalTrans((Integer) context.get("totalTrans"));
         dismissBatchMapper.insert(dismissBatch);
         //添加明细
         withholdAgreeMapper.addBatch(cancelList);
+        excelListener.getDatas().clear();
     }
 }

@@ -2,6 +2,8 @@ package com.xhnj.pojo.query;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /*
  @Description 授权查询条件
  *@author kang.li
@@ -9,8 +11,17 @@ import lombok.Data;
  */
 @Data
 public class WithholdAgreeParam {
-    private String successValue;
-    private String failValue;
-    private String unfinished;
-    private String latest;
+    private Date startDate;
+
+    private Date endDate;
+
+    private String mobileNo;
+
+    private String customerName;
+
+    private String cardNo;
+
+    private String certNo;
+
+    private Integer status;
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /*
  @Description
@@ -27,5 +28,13 @@ public class WithholdBaseServiceImpl implements WithholdBaseService {
           } else if(withholdParam.getPayResult() == 2){
               withholdService.exportExcelSuccess(response,withholdParam);
           }
+    }
+    @Override
+    public void exportExcel(HttpServletResponse response){
+        withholdService.exportExcelSuccess(response);
+    }
+    @Override
+    public void batchExport(HttpServletResponse response, List<String> list){
+        withholdService.batchExportExcelSuccess(response,list);
     }
 }

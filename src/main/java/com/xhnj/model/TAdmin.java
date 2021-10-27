@@ -51,7 +51,6 @@ public class TAdmin extends Model implements Serializable {
      */
     private String icon;
 
-    private String phone;
 
     /**
      * 邮箱
@@ -64,7 +63,6 @@ public class TAdmin extends Model implements Serializable {
      */
     private String nickName;
 
-    private String realName;
 
     /**
      * 备注信息

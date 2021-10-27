@@ -47,6 +47,14 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
     }
 
     @Override
+    public Page listLevel(MenuParam menuParam, Integer pageSize, Integer pageNum){
+        Page<TMenu> page = new Page<>(pageNum, pageSize);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("level",menuParam.getLevel());
+        return menuMapper.selectPage(page,wrapper);
+    }
+
+    @Override
     public List<MenuNode> treeList() {
             List<TMenu> menuList =  menuMapper.selectList(new QueryWrapper<TMenu>());
         List<MenuNode> result = menuList.stream()

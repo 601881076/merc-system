@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xhnj.mapper.TPlatformserialMapper">
+<mapper namespace="com.xhnj.mapper.TBatchDtlMapper">
 
 
     <sql id="plaSql">
@@ -31,7 +31,7 @@
     </sql>
 
     <insert id="addBatch" parameterType="list">
-        INSERT INTO t_platformserial
+        INSERT INTO t_batch_dtl
         (batch_no,           agreement_id,                 from_type,                bank_code,                 order_no,
         pay_type,           trade_time,                    pay_recv,                 currency,                  money,
         recv_account,       recv_account_name,             recv_bank_no,             recv_bank_name,            card_no,
@@ -70,27 +70,27 @@
 
 
 
-    <select id="getByOrderNoList" resultType="com.xhnj.model.TPlatformserial">
+    <select id="getByBatchNoList" resultType="com.xhnj.pojo.vo.WithholdDetailVO">
         SELECT
-           id
-        FROM t_platformserial
-        WHERE order_no IN
-        <foreach collection = "list" item = "orderNo" open = "(" close = ")" separator = "," >
-             #{orderNo}
+           <include refid="plaSql"/>
+        FROM t_batch_dtl
+        WHERE batch_no IN
+        <foreach collection = "list" item = "batchNo" open = "(" close = ")" separator = "," >
+             #{batchNo}
         </foreach>
     </select>
 
-    <select id="listPageByBatchNo" resultType="com.xhnj.model.TPlatformserial">
+    <select id="listPageByBatchNo" resultType="com.xhnj.model.TBatchDtl">
         SELECT
             <include refid="plaSql" />
-        FROM t_platformserial
+        FROM t_batch_dtl
         WHERE batch_no = #{batchNo,jdbcType=VARCHAR}
     </select>
 
     <select id="getList" resultType="com.xhnj.model.WithholdSuccessExcel">
         SELECT
            <include refid="plaSql" />
-        FROM t_platformserial
+        FROM t_batch_dtl
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
             AND from_type = #{withholdParam.fromType,jdbcType=INTEGER}
@@ -104,7 +104,7 @@
     <select id="getFailList" resultType="com.xhnj.model.WithholdFailExcel">
         SELECT
             <include refid="plaSql" />
-        FROM t_platformserial
+        FROM t_batch_dtl
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
             AND from_type = #{withholdParam.fromType,jdbcType=INTEGER}

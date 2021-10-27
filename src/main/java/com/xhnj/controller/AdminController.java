@@ -11,6 +11,7 @@ import com.xhnj.service.TAdminService;
 import com.xhnj.service.TRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,7 @@ import java.util.Map;
 @Api(value = "用户管理", tags = "用户接口类")
 @RestController
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController {
 
     @Value("${jwt.tokenHeader}")

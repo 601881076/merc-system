@@ -13,4 +13,5 @@ import lombok.Setter;
 public class MenuParam {
     private Long parentId;
     private String keyword;
+    private Integer level;
 }

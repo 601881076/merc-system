@@ -1,6 +1,7 @@
 package com.xhnj.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.xhnj.common.CommonResult;
 import com.xhnj.service.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,12 +29,12 @@ public class UploadController {
 
     @ApiOperation("图片上传")
     @PostMapping("/image")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request){
+    public CommonResult uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request){
         String url = uploadService.uploadPic(file, request);
         if(StrUtil.hasBlank(url)) {
-            return ResponseEntity.badRequest().build();
+            return CommonResult.failed();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(url);
+        return CommonResult.success(url);
     }
 
 }

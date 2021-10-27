@@ -1,5 +1,6 @@
 package com.xhnj.component;
 
+
 import com.xhnj.config.IgnoreUrlsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.util.PathMatcher;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -40,6 +42,12 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
         //OPTIONS请求直接放行
         if(request.getMethod().equals(HttpMethod.OPTIONS.toString())){
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            return;
+        }
+        //默认跳到登录页面
+        if("/".equals(request.getRequestURI())) {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            request.getRequestDispatcher("/index.html").forward(request, response);
             return;
         }
         //白名单请求直接放行

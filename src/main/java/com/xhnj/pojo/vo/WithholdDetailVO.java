@@ -43,7 +43,7 @@ public class WithholdDetailVO extends BaseRowModel {
 
     @ExcelProperty(value = "扣款金额", index = 5)
     @NotNull(message = "tranAmt param cannot be empty")
-    private BigDecimal tranAmt;
+    private BigDecimal money;
 
     private String rem;
 

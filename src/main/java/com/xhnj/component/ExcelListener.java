@@ -22,6 +22,7 @@ public class ExcelListener extends AnalysisEventListener {
 
     @Override
     public void invoke(Object o, AnalysisContext analysisContext) {
+        log.info("invok.....");
         datas.add(o);//数据存储到list，供批量处理，或后续自己业务逻辑处理。
         // doSomething(o);//根据自己业务做处理
     }
@@ -31,6 +32,7 @@ public class ExcelListener extends AnalysisEventListener {
     }
 
     public List<Object> getDatas() {
+        log.info("获取");
         return datas;
     }
 
@@ -40,6 +42,6 @@ public class ExcelListener extends AnalysisEventListener {
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-//         datas.clear();//解析结束销毁不用的资源
+        log.info("after..");
     }
 }

@@ -22,7 +22,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TPlatformserial implements Serializable {
+public class TBatchDtl implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

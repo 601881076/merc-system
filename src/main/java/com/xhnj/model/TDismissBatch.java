@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,6 +46,8 @@ public class TDismissBatch implements Serializable {
      */
     private String batchDesc;
 
+    private Integer totalTrans;
+
     /**
      * 成功笔数
      */
@@ -54,9 +58,11 @@ public class TDismissBatch implements Serializable {
      */
     private Integer failTrans;
 
-    private LocalDateTime createTime;
+    private Integer status;
 
-    private LocalDateTime updateTime;
+    private Date createTime;
+
+    private Date updateTime;
 
 
 }

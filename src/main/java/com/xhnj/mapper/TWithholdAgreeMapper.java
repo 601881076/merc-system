@@ -2,7 +2,6 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xhnj.model.TPlatformserial;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.apache.ibatis.annotations.Param;

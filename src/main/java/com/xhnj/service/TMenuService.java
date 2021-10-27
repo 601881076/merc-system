@@ -18,6 +18,8 @@ import java.util.List;
 public interface TMenuService extends IService<TMenu> {
     Page listPage(MenuParam menuParam, Integer pageSize, Integer pageNum);
 
+    Page listLevel(MenuParam menuParam,Integer pageSize, Integer pageNum);
+
     List<MenuNode> treeList();
 
     int create(TMenu menu);

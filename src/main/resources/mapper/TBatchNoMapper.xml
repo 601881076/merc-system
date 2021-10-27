@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TBatchNoMapper">
+    <sql id="batchNoSql">
+        id,
+        type,
+        is_timming,
+        system_type,
+        from_type,
+        bank_code,
+        batch_no,
+        system_batch,
+        batch_desc,
+        total_trans,
+        total_amt,
+        status,
+        success_trans,
+        fail_trans,
+        process_trans,
+        serial_no,
+        ret_own_spec,
+        create_time,
+        update_time,
+
+    </sql>
+    <select id="listPage" resultType="com.xhnj.model.TBatchNo">
+        select <include refid="batchNoSql"/> from t_batch_no where 1=1
+        <if test="batchNo.createTime!=null">
+            and create_time=#{batchNo.createTime,jdbcType=DATE}
+        </if>
+
+        <if test="batchNo.status!=null">
+            and status=#{batchNo.status,jdbcType=INTEGER}
+        </if>
+        <if test="batchNo.processStatus!=null">
+            and process_status=#{batchNo.processStatus,jdbcType=INTEGER}
+        </if>
+        <if test="batchNo.isAudit!=null">
+            and is_audit=#{batchNo.isAudit,jdbcType=INTEGER}
+        </if>
+        <if test="batchNo.isFinish!=null">
+            and is_finish=#{batchNo.isFinish,jdbcType=INTEGER}
+        </if>
+        <if test="batchNo.checkResult!=null">
+            and check_result=#{batchNo.checkResult,jdbcType=INTEGER}
+        </if>
+
+    </select>
+    <delete id="deleteById">
+        delete from t_batch_no where status=-1 and id=#{id}
+    </delete>
+</mapper>

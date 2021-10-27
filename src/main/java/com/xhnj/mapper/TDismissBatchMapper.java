@@ -2,6 +2,7 @@ package com.xhnj.mapper;
 
 import com.xhnj.model.TDismissBatch;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-09-22
  */
 public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
-
+    int deleteById(@Param("id")Long id);
 }

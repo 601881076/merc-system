@@ -1,10 +1,12 @@
 package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.pojo.query.WithholdParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /*
  @Description
@@ -19,7 +21,7 @@ public interface TWithholdService {
      * @param pageNum
      * @return
      */
-    IPage batchPage(Integer pageSize, Integer pageNum);
+    IPage batchPage(TBatchNo batchNo,Integer pageSize, Integer pageNum);
 
     /**
      * 分页查询代扣明细
@@ -43,6 +45,15 @@ public interface TWithholdService {
      * @return
      */
     void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam);
+    /**
+     * 下载模板
+     * @return
+     */
+    void exportExcelSuccess(HttpServletResponse response);
+    /**
+     * 批量导出
+     */
+    void batchExportExcelSuccess(HttpServletResponse response, List<String> list);
 
     /**
      * 导出失败
@@ -50,4 +61,10 @@ public interface TWithholdService {
      * @return
      */
     void exportExcelFail(HttpServletResponse response, WithholdParam withholdParam);
+
+    /**
+     * 删除
+     * @return
+     */
+    int delete(Long id);
 }

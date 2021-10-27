@@ -33,11 +33,20 @@ public class MenuController {
     @Autowired
     private TMenuService menuService;
 
-   /* @ApiOperation("获取所有菜单")
+    /*@ApiOperation("获取所有菜单")
     @GetMapping("/listAll")
     public CommonResult<List<TMenu>> listAll() {
         return CommonResult.success(menuService.list());
     }*/
+
+    @ApiOperation("根据级数获取菜单")
+    @GetMapping("/listLevel")
+    public CommonResult<CommonPage<TMenu>> listLevel(MenuParam menuParam,
+                                               @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        Page page = menuService.listLevel(menuParam, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(page));
+    }
 
     @ApiOperation(value = "分页获取菜单")
     @GetMapping("/list/{parentId}")

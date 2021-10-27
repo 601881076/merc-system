@@ -8,7 +8,7 @@ server:
 
   tomcat:
     max-swallow-size: -1
-  port: 8080
+  port: 8078
 
 
 #  ssl:
@@ -68,6 +68,12 @@ secure:
       - /wx/**
       - /test/**
       - /withhold/**
+      - /validateCode/**
+      - /uploadFiles/**
+      - /wh/download/wh
+      - /wh//batchExport
+      - /wad/download/wad
+      - /poundage/export
 
 
 uploadFile:

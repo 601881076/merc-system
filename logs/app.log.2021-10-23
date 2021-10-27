@@ -1,0 +1,1065 @@
+2021-10-23 13:18:19 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:19:27 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 13:19:27 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75072 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:19:27 -The following profiles are active: dev
+2021-10-23 13:19:27 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 13:19:27 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 13:19:28 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:19:28 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:19:28 -Finished Spring Data repository scanning in 26 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:19:29 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c081ba8c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2b2c6b40' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:19:29 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:19:29 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:19:29 -Starting service [Tomcat]
+2021-10-23 13:19:29 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:19:29 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:19:29 -Root WebApplicationContext: initialization completed in 2072 ms
+2021-10-23 13:19:31 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:19:31 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:19:32 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:19:32 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19f1d9ea, org.springframework.security.web.context.SecurityContextPersistenceFilter@b663360, org.springframework.security.web.header.HeaderWriterFilter@607c0841, org.springframework.security.web.authentication.logout.LogoutFilter@4341438d, com.xhnj.component.JwtAuthenticationTokenFilter@6f691905, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@72f46be6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@16cd970b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@630ce441, org.springframework.security.web.session.SessionManagementFilter@6530e380, org.springframework.security.web.access.ExceptionTranslationFilter@51198f7, com.xhnj.component.DynamicSecurityFilter@7c278672, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@53f171ea]
+2021-10-23 13:19:32 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:19:33 -LiveReload server is running on port 35729
+2021-10-23 13:19:33 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:19:33 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:19:33 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:19:34 -Started ScenicApplication in 7.017 seconds (JVM running for 8.809)
+2021-10-23 13:20:12 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 13:20:12 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 13:20:12 -Completed initialization in 1 ms
+2021-10-23 13:20:13 -checking username:admin
+2021-10-23 13:20:13 -path: /wh/excelImport
+2021-10-23 13:20:13 -{dataSource-1} inited
+2021-10-23 13:20:13 -authenticated user:admin
+2021-10-23 13:20:13 -start validate，validateType=withholdBatch，ValidatorContext={password=123, totalAmt=16, totalTrans=6}
+2021-10-23 13:20:13 -WithholdBatchValidator$$EnhancerBySpringCGLIB$$46cde18c is running
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -invok.....
+2021-10-23 13:20:14 -after..
+2021-10-23 13:20:14 -获取
+2021-10-23 13:20:14 -receive list size: 6
+2021-10-23 13:20:14 -获取
+2021-10-23 13:20:14 -end validate，validateType=withholdBatch，ValidatorContext={password=123, batchNo=admin202110231784173, totalAmt=16, totalTrans=6}，time consuming 559 ms
+2021-10-23 13:26:59 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:26:59 -{dataSource-1} closed
+2021-10-23 13:27:00 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75072 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:27:00 -The following profiles are active: dev
+2021-10-23 13:27:00 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:27:00 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:27:00 -Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:27:00 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c081ba8c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@14cd97e2' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:27:00 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:27:00 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:27:00 -Starting service [Tomcat]
+2021-10-23 13:27:00 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:27:00 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:27:00 -Root WebApplicationContext: initialization completed in 636 ms
+2021-10-23 13:27:01 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:27:02 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:27:02 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:27:02 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60dd910d, org.springframework.security.web.context.SecurityContextPersistenceFilter@45253a36, org.springframework.security.web.header.HeaderWriterFilter@146353c0, org.springframework.security.web.authentication.logout.LogoutFilter@6db0d6aa, com.xhnj.component.JwtAuthenticationTokenFilter@4c7d6879, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@43ae35f3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d5d8315, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35e42c96, org.springframework.security.web.session.SessionManagementFilter@4161bb06, org.springframework.security.web.access.ExceptionTranslationFilter@749e526b, com.xhnj.component.DynamicSecurityFilter@41520f97, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67a7a877]
+2021-10-23 13:27:02 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:27:02 -LiveReload server is running on port 35729
+2021-10-23 13:27:02 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:27:02 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:27:02 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:27:02 -Started ScenicApplication in 2.74 seconds (JVM running for 457.634)
+2021-10-23 13:27:02 -Condition evaluation unchanged
+2021-10-23 13:27:03 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 13:27:03 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 13:27:03 -Completed initialization in 2 ms
+2021-10-23 13:27:03 -checking username:admin
+2021-10-23 13:27:03 -path: /wh/excelImport
+2021-10-23 13:27:03 -{dataSource-2} inited
+2021-10-23 13:27:04 -authenticated user:admin
+2021-10-23 13:27:05 -start validate，validateType=withholdBatch，ValidatorContext={password=123, totalAmt=16, totalTrans=6}
+2021-10-23 13:27:05 -WithholdBatchValidator$$EnhancerBySpringCGLIB$$46cde18c is running
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -invok.....
+2021-10-23 13:27:05 -after..
+2021-10-23 13:27:05 -获取
+2021-10-23 13:27:05 -receive list size: 6
+2021-10-23 13:27:05 -获取
+2021-10-23 13:27:05 -end validate，validateType=withholdBatch，ValidatorContext={password=123, batchNo=admin202110236567790, totalAmt=16, totalTrans=6}，time consuming 628 ms
+2021-10-23 13:27:32 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:27:32 -{dataSource-2} closed
+2021-10-23 13:29:44 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 13:29:44 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75008 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:29:44 -The following profiles are active: dev
+2021-10-23 13:29:44 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 13:29:44 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 13:29:45 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:29:45 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:29:45 -Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:29:45 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:45 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$1d9fd5d7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:45 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:45 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@65817148' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:45 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:45 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:29:46 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:29:46 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:29:46 -Starting service [Tomcat]
+2021-10-23 13:29:46 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:29:46 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:29:46 -Root WebApplicationContext: initialization completed in 2094 ms
+2021-10-23 13:29:48 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:29:48 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:29:48 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:29:49 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ac506df, org.springframework.security.web.context.SecurityContextPersistenceFilter@1c69b806, org.springframework.security.web.header.HeaderWriterFilter@62dc93e3, org.springframework.security.web.authentication.logout.LogoutFilter@3ac8112f, com.xhnj.component.JwtAuthenticationTokenFilter@679e83a3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@26ee9169, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@556ea159, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@793aa5ea, org.springframework.security.web.session.SessionManagementFilter@634e463b, org.springframework.security.web.access.ExceptionTranslationFilter@6047bfc0, com.xhnj.component.DynamicSecurityFilter@31b764f6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@73010e8]
+2021-10-23 13:29:49 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:29:49 -LiveReload server is running on port 35729
+2021-10-23 13:29:49 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:29:50 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:29:50 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:29:50 -Started ScenicApplication in 7.289 seconds (JVM running for 9.135)
+2021-10-23 13:29:58 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 13:29:58 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 13:29:58 -Completed initialization in 1 ms
+2021-10-23 13:29:59 -checking username:admin
+2021-10-23 13:29:59 -path: /wh/excelImport
+2021-10-23 13:29:59 -{dataSource-1} inited
+2021-10-23 13:30:00 -authenticated user:admin
+2021-10-23 13:30:00 -start validate，validateType=withholdBatch，ValidatorContext={password=123, totalAmt=16, totalTrans=6}
+2021-10-23 13:30:00 -WithholdBatchValidator$$EnhancerBySpringCGLIB$$e144b15a is running
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -invok.....
+2021-10-23 13:30:00 -after..
+2021-10-23 13:30:00 -获取
+2021-10-23 13:30:00 -receive list size: 6
+2021-10-23 13:30:00 -获取
+2021-10-23 13:30:00 -end validate，validateType=withholdBatch，ValidatorContext={password=123, batchNo=admin202110239291582, totalAmt=16, totalTrans=6}，time consuming 482 ms
+2021-10-23 13:33:20 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:33:20 -{dataSource-1} closed
+2021-10-23 13:33:20 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75008 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:33:20 -The following profiles are active: dev
+2021-10-23 13:33:20 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:33:20 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:33:20 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:33:21 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$1d9fd5d7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@33637949' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:33:21 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:33:21 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:33:21 -Starting service [Tomcat]
+2021-10-23 13:33:21 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:33:21 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:33:21 -Root WebApplicationContext: initialization completed in 588 ms
+2021-10-23 13:33:22 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:33:22 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:33:22 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:33:22 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25448802, org.springframework.security.web.context.SecurityContextPersistenceFilter@321f1cca, org.springframework.security.web.header.HeaderWriterFilter@91dbfd0, org.springframework.security.web.authentication.logout.LogoutFilter@572aace8, com.xhnj.component.JwtAuthenticationTokenFilter@42361a21, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e59ba42, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ade7966, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c001401, org.springframework.security.web.session.SessionManagementFilter@364620c0, org.springframework.security.web.access.ExceptionTranslationFilter@5993271, com.xhnj.component.DynamicSecurityFilter@2a525864, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@50ebed50]
+2021-10-23 13:33:22 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:33:22 -LiveReload server is running on port 35729
+2021-10-23 13:33:22 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:33:22 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:33:23 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:33:23 -Started ScenicApplication in 2.731 seconds (JVM running for 221.611)
+2021-10-23 13:33:23 -Condition evaluation unchanged
+2021-10-23 13:43:12 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:43:12 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75008 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:43:12 -The following profiles are active: dev
+2021-10-23 13:43:13 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:43:13 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:43:13 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:43:13 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$1d9fd5d7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@4c8b31b3' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:13 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:43:13 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:43:13 -Starting service [Tomcat]
+2021-10-23 13:43:13 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:43:13 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:43:13 -Root WebApplicationContext: initialization completed in 628 ms
+2021-10-23 13:43:14 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:43:14 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:43:14 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:43:15 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@48074ee8, org.springframework.security.web.context.SecurityContextPersistenceFilter@49d559f3, org.springframework.security.web.header.HeaderWriterFilter@e6164b, org.springframework.security.web.authentication.logout.LogoutFilter@7865b198, com.xhnj.component.JwtAuthenticationTokenFilter@21382075, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b5abe37, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4bbebb59, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@24953fac, org.springframework.security.web.session.SessionManagementFilter@12b8595e, org.springframework.security.web.access.ExceptionTranslationFilter@17e4bb2d, com.xhnj.component.DynamicSecurityFilter@45ae0bb4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@89aa6d7]
+2021-10-23 13:43:15 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:43:15 -LiveReload server is running on port 35729
+2021-10-23 13:43:15 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:43:15 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:43:15 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:43:15 -Started ScenicApplication in 2.631 seconds (JVM running for 813.96)
+2021-10-23 13:43:15 -Condition evaluation unchanged
+2021-10-23 13:43:43 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:43:54 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 13:43:54 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 73592 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:43:54 -The following profiles are active: dev
+2021-10-23 13:43:54 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 13:43:54 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 13:43:55 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:43:55 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:43:55 -Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:43:56 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$fb0b7688] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3186ba91' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:43:56 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:43:56 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:43:56 -Starting service [Tomcat]
+2021-10-23 13:43:56 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:43:56 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:43:56 -Root WebApplicationContext: initialization completed in 2099 ms
+2021-10-23 13:43:59 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:43:59 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:43:59 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:44:00 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1964b574, org.springframework.security.web.context.SecurityContextPersistenceFilter@f3a18c5, org.springframework.security.web.header.HeaderWriterFilter@36183efa, org.springframework.security.web.authentication.logout.LogoutFilter@5880631c, com.xhnj.component.JwtAuthenticationTokenFilter@6b02c061, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ef4dc34, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@94de612, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@fceee93, org.springframework.security.web.session.SessionManagementFilter@7c6d68e1, org.springframework.security.web.access.ExceptionTranslationFilter@658add45, com.xhnj.component.DynamicSecurityFilter@200536be, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@65840cbb]
+2021-10-23 13:44:00 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:44:00 -LiveReload server is running on port 35729
+2021-10-23 13:44:00 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:44:00 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:44:00 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:44:01 -Started ScenicApplication in 7.269 seconds (JVM running for 9.316)
+2021-10-23 13:44:10 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 13:44:10 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 13:44:10 -Completed initialization in 2 ms
+2021-10-23 13:44:11 -checking username:admin
+2021-10-23 13:44:11 -path: /wad/excelImport
+2021-10-23 13:44:11 -{dataSource-1} inited
+2021-10-23 13:44:11 -authenticated user:admin
+2021-10-23 13:44:11 -start validate，validateType=batchCancle，ValidatorContext={password=123}
+2021-10-23 13:44:11 -WithholdAgreeCancleValidator is running
+2021-10-23 13:44:12 -invok.....
+2021-10-23 13:44:12 -invok.....
+2021-10-23 13:44:12 -after..
+2021-10-23 13:44:12 -获取
+2021-10-23 13:44:12 -receive list size: 2
+2021-10-23 13:44:12 -end validate，validateType=batchCancle，ValidatorContext={password=123, batchNo=202110232393772781}，time consuming 516 ms
+2021-10-23 13:44:26 -checking username:admin
+2021-10-23 13:44:26 -path: /wad/excelImport
+2021-10-23 13:44:26 -authenticated user:admin
+2021-10-23 13:44:26 -start validate，validateType=batchCancle，ValidatorContext={password=1234}
+2021-10-23 13:44:26 -WithholdAgreeCancleValidator is running
+2021-10-23 13:44:26 -invok.....
+2021-10-23 13:44:26 -invok.....
+2021-10-23 13:44:26 -after..
+2021-10-23 13:44:26 -获取
+2021-10-23 13:44:26 -receive list size: 4
+2021-10-23 13:44:26 -业务校验失败
+com.xhnj.common.exception.BusinValidateException: 密码不正确
+	at com.xhnj.component.WithholdAgreeCancleValidator.validateInner(WithholdAgreeCancleValidator.java:100)
+	at com.xhnj.common.proxy.ValidatorTemplateProxy.validateInner(ValidatorTemplateProxy.java:27)
+	at com.xhnj.component.BusinValidatorTemplate.validate(BusinValidatorTemplate.java:21)
+	at com.xhnj.component.ValidateProcessor.validate(ValidateProcessor.java:43)
+	at com.xhnj.service.impl.TWithholdAgreeServiceImpl.uploadExcel(TWithholdAgreeServiceImpl.java:68)
+	at com.xhnj.controller.WithholdAgreeDismissController.uploadExcel(WithholdAgreeDismissController.java:50)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.xhnj.component.DynamicSecurityFilter.doFilter(DynamicSecurityFilter.java:56)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.xhnj.component.DynamicSecurityFilter.doFilter(DynamicSecurityFilter.java:56)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.xhnj.component.JwtAuthenticationTokenFilter.doFilterInternal(JwtAuthenticationTokenFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-10-23 13:44:26 -系统异常：{}
+com.xhnj.common.exception.BusinValidateException: 密码不正确
+	at com.xhnj.component.WithholdAgreeCancleValidator.validateInner(WithholdAgreeCancleValidator.java:100)
+	at com.xhnj.common.proxy.ValidatorTemplateProxy.validateInner(ValidatorTemplateProxy.java:27)
+	at com.xhnj.component.BusinValidatorTemplate.validate(BusinValidatorTemplate.java:21)
+	at com.xhnj.component.ValidateProcessor.validate(ValidateProcessor.java:43)
+	at com.xhnj.service.impl.TWithholdAgreeServiceImpl.uploadExcel(TWithholdAgreeServiceImpl.java:68)
+	at com.xhnj.controller.WithholdAgreeDismissController.uploadExcel(WithholdAgreeDismissController.java:50)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.xhnj.component.DynamicSecurityFilter.doFilter(DynamicSecurityFilter.java:56)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:113)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:126)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:90)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.xhnj.component.DynamicSecurityFilter.doFilter(DynamicSecurityFilter.java:56)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:118)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:158)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at com.xhnj.component.JwtAuthenticationTokenFilter.doFilterInternal(JwtAuthenticationTokenFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:92)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-10-23 13:44:26 -Resolved [com.xhnj.common.exception.BusinValidateException: 密码不正确]
+2021-10-23 13:58:31 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:58:31 -{dataSource-1} closed
+2021-10-23 13:58:32 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 73592 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:58:32 -The following profiles are active: dev
+2021-10-23 13:58:32 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:58:32 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:58:32 -Finished Spring Data repository scanning in 25 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:58:32 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$fb0b7688] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5074affe' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:32 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:58:32 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:58:32 -Starting service [Tomcat]
+2021-10-23 13:58:32 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:58:32 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:58:32 -Root WebApplicationContext: initialization completed in 623 ms
+2021-10-23 13:58:33 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:58:33 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:58:33 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:58:34 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14e816a8, org.springframework.security.web.context.SecurityContextPersistenceFilter@177e9b71, org.springframework.security.web.header.HeaderWriterFilter@32440952, org.springframework.security.web.authentication.logout.LogoutFilter@56f36a33, com.xhnj.component.JwtAuthenticationTokenFilter@3f4ea888, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@46f77377, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@546bfc62, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@377c1819, org.springframework.security.web.session.SessionManagementFilter@5be75b0b, org.springframework.security.web.access.ExceptionTranslationFilter@20a6a5b, com.xhnj.component.DynamicSecurityFilter@3149586b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7a795f8a]
+2021-10-23 13:58:34 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:58:34 -LiveReload server is running on port 35729
+2021-10-23 13:58:34 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:58:34 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:58:34 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:58:34 -Started ScenicApplication in 2.573 seconds (JVM running for 881.406)
+2021-10-23 13:58:34 -Condition evaluation unchanged
+2021-10-23 13:58:51 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:58:57 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 13:58:57 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70068 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 13:58:57 -The following profiles are active: dev
+2021-10-23 13:58:57 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 13:58:57 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 13:58:58 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 13:58:58 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 13:58:58 -Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
+2021-10-23 13:58:59 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$34815f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6d7f8813' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 13:58:59 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 13:58:59 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:58:59 -Starting service [Tomcat]
+2021-10-23 13:58:59 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 13:58:59 -Initializing Spring embedded WebApplicationContext
+2021-10-23 13:58:59 -Root WebApplicationContext: initialization completed in 2185 ms
+2021-10-23 13:59:02 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 13:59:02 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 13:59:02 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 13:59:03 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@8aa1c73, org.springframework.security.web.context.SecurityContextPersistenceFilter@4f8d65c4, org.springframework.security.web.header.HeaderWriterFilter@1d6072c6, org.springframework.security.web.authentication.logout.LogoutFilter@56a04fbd, com.xhnj.component.JwtAuthenticationTokenFilter@7feb3b9a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@26959140, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@482ec3c0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@33ad2cab, org.springframework.security.web.session.SessionManagementFilter@432e7ec6, org.springframework.security.web.access.ExceptionTranslationFilter@3f94f099, com.xhnj.component.DynamicSecurityFilter@345126d6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@32a233a9]
+2021-10-23 13:59:03 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 13:59:03 -LiveReload server is running on port 35729
+2021-10-23 13:59:03 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 13:59:04 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 13:59:04 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 13:59:04 -Started ScenicApplication in 7.625 seconds (JVM running for 9.477)
+2021-10-23 13:59:58 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 13:59:58 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 13:59:58 -Completed initialization in 1 ms
+2021-10-23 13:59:58 -{dataSource-1} inited
+2021-10-23 14:10:52 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:10:52 -{dataSource-1} closed
+2021-10-23 14:10:52 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70068 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 14:10:52 -The following profiles are active: dev
+2021-10-23 14:10:52 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 14:10:52 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 14:10:52 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 14:10:52 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:52 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$34815f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:52 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:52 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2a99ab7d' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:52 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:52 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:10:53 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 14:10:53 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:10:53 -Starting service [Tomcat]
+2021-10-23 14:10:53 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 14:10:53 -Initializing Spring embedded WebApplicationContext
+2021-10-23 14:10:53 -Root WebApplicationContext: initialization completed in 617 ms
+2021-10-23 14:10:54 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 14:10:54 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 14:10:54 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 14:10:54 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77f79f2c, org.springframework.security.web.context.SecurityContextPersistenceFilter@665f585, org.springframework.security.web.header.HeaderWriterFilter@6b222964, org.springframework.security.web.authentication.logout.LogoutFilter@6039ab11, com.xhnj.component.JwtAuthenticationTokenFilter@4cf84db4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6300a99a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1913c597, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27aace6e, org.springframework.security.web.session.SessionManagementFilter@c8b822d, org.springframework.security.web.access.ExceptionTranslationFilter@4424248f, com.xhnj.component.DynamicSecurityFilter@34960b29, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@41018cd8]
+2021-10-23 14:10:54 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:10:54 -LiveReload server is running on port 35729
+2021-10-23 14:10:54 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 14:10:54 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:10:54 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 14:10:54 -Started ScenicApplication in 2.618 seconds (JVM running for 719.824)
+2021-10-23 14:10:54 -Condition evaluation unchanged
+2021-10-23 14:12:02 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:12:02 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70068 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 14:12:02 -The following profiles are active: dev
+2021-10-23 14:12:02 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 14:12:02 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 14:12:02 -Finished Spring Data repository scanning in 25 ms. Found 0 Redis repository interfaces.
+2021-10-23 14:12:02 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$34815f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@a8901ab' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:12:02 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 14:12:02 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:12:02 -Starting service [Tomcat]
+2021-10-23 14:12:02 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 14:12:02 -Initializing Spring embedded WebApplicationContext
+2021-10-23 14:12:02 -Root WebApplicationContext: initialization completed in 592 ms
+2021-10-23 14:12:03 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 14:12:04 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 14:12:04 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 14:12:04 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4dec8770, org.springframework.security.web.context.SecurityContextPersistenceFilter@787e80ae, org.springframework.security.web.header.HeaderWriterFilter@484ea21d, org.springframework.security.web.authentication.logout.LogoutFilter@69cb4dcf, com.xhnj.component.JwtAuthenticationTokenFilter@734dd9af, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3714dd8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e9249e1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cb6c492, org.springframework.security.web.session.SessionManagementFilter@dfad1e4, org.springframework.security.web.access.ExceptionTranslationFilter@69825edf, com.xhnj.component.DynamicSecurityFilter@1753f1f5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4162e16e]
+2021-10-23 14:12:04 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:12:04 -LiveReload server is running on port 35729
+2021-10-23 14:12:04 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 14:12:04 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:12:04 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 14:12:04 -Started ScenicApplication in 2.421 seconds (JVM running for 789.587)
+2021-10-23 14:12:04 -Condition evaluation unchanged
+2021-10-23 14:30:01 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:30:01 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70068 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 14:30:01 -The following profiles are active: dev
+2021-10-23 14:30:02 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 14:30:02 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 14:30:02 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 14:30:02 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$34815f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6cc93143' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 14:30:02 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 14:30:02 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:30:02 -Starting service [Tomcat]
+2021-10-23 14:30:02 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 14:30:02 -Initializing Spring embedded WebApplicationContext
+2021-10-23 14:30:02 -Root WebApplicationContext: initialization completed in 615 ms
+2021-10-23 14:30:03 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 14:30:03 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 14:30:03 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 14:30:03 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7d6f9bce, org.springframework.security.web.context.SecurityContextPersistenceFilter@256faa0, org.springframework.security.web.header.HeaderWriterFilter@5efff65b, org.springframework.security.web.authentication.logout.LogoutFilter@13bc0bca, com.xhnj.component.JwtAuthenticationTokenFilter@48fb8a4e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20ec8ab9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@180fdd1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7b251d61, org.springframework.security.web.session.SessionManagementFilter@4b1d8606, org.springframework.security.web.access.ExceptionTranslationFilter@4f9da0ab, com.xhnj.component.DynamicSecurityFilter@396e5636, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3036f4ef]
+2021-10-23 14:30:03 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 14:30:03 -LiveReload server is running on port 35729
+2021-10-23 14:30:03 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 14:30:04 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 14:30:04 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 14:30:04 -Started ScenicApplication in 2.424 seconds (JVM running for 1869.166)
+2021-10-23 14:30:04 -Condition evaluation unchanged
+2021-10-23 15:00:04 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:00:04 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70068 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:00:04 -The following profiles are active: dev
+2021-10-23 15:00:05 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:00:05 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:00:05 -Finished Spring Data repository scanning in 25 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:00:05 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$34815f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@139b53c2' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:00:05 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:00:05 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:00:05 -Starting service [Tomcat]
+2021-10-23 15:00:05 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:00:05 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:00:05 -Root WebApplicationContext: initialization completed in 636 ms
+2021-10-23 15:00:06 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:00:06 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:00:06 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:00:07 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4c95d47b, org.springframework.security.web.context.SecurityContextPersistenceFilter@4655e270, org.springframework.security.web.header.HeaderWriterFilter@43e500d5, org.springframework.security.web.authentication.logout.LogoutFilter@55977135, com.xhnj.component.JwtAuthenticationTokenFilter@51b0f654, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@15644fdd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7eec060c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@705146b3, org.springframework.security.web.session.SessionManagementFilter@3b7f2d2c, org.springframework.security.web.access.ExceptionTranslationFilter@d5bd730, com.xhnj.component.DynamicSecurityFilter@6e99c633, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7ffd1591]
+2021-10-23 15:00:07 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:00:07 -LiveReload server is running on port 35729
+2021-10-23 15:00:07 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:00:07 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:00:07 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:00:07 -Started ScenicApplication in 2.996 seconds (JVM running for 3672.42)
+2021-10-23 15:00:07 -Condition evaluation unchanged
+2021-10-23 15:01:57 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:02:05 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:02:05 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 70088 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:02:05 -The following profiles are active: dev
+2021-10-23 15:02:05 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:02:05 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:02:06 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:02:06 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:02:06 -Finished Spring Data repository scanning in 29 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:02:07 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$2ea04807] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@158baa98' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:02:07 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:02:07 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:02:07 -Starting service [Tomcat]
+2021-10-23 15:02:07 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:02:07 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:02:07 -Root WebApplicationContext: initialization completed in 2141 ms
+2021-10-23 15:02:10 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:02:10 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:02:10 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:02:11 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ff2e20b, org.springframework.security.web.context.SecurityContextPersistenceFilter@ce7c519, org.springframework.security.web.header.HeaderWriterFilter@4f6bc5ce, org.springframework.security.web.authentication.logout.LogoutFilter@1682c6c3, com.xhnj.component.JwtAuthenticationTokenFilter@14a4b121, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@59f98df3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@56f0aa8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e576af3, org.springframework.security.web.session.SessionManagementFilter@78304e0a, org.springframework.security.web.access.ExceptionTranslationFilter@3455ec02, com.xhnj.component.DynamicSecurityFilter@2105919c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@ea69d57]
+2021-10-23 15:02:11 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:02:11 -LiveReload server is running on port 35729
+2021-10-23 15:02:11 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:02:11 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:02:11 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:02:12 -Started ScenicApplication in 7.563 seconds (JVM running for 9.793)
+2021-10-23 15:03:17 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:03:17 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:03:17 -Completed initialization in 3 ms
+2021-10-23 15:03:49 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:03:56 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:03:56 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 12944 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:03:56 -The following profiles are active: dev
+2021-10-23 15:03:56 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:03:56 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:03:57 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:03:57 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:03:57 -Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:03:57 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:57 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c07c4b00] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:57 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:57 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@336af01' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:57 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:57 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:03:58 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:03:58 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:03:58 -Starting service [Tomcat]
+2021-10-23 15:03:58 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:03:58 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:03:58 -Root WebApplicationContext: initialization completed in 2102 ms
+2021-10-23 15:04:00 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:04:00 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:04:00 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:04:01 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a3f53fb, org.springframework.security.web.context.SecurityContextPersistenceFilter@2d5e56b2, org.springframework.security.web.header.HeaderWriterFilter@461f45e4, org.springframework.security.web.authentication.logout.LogoutFilter@774901f2, com.xhnj.component.JwtAuthenticationTokenFilter@1e9f224c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@25cae538, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@41988561, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32f459ee, org.springframework.security.web.session.SessionManagementFilter@517456ed, org.springframework.security.web.access.ExceptionTranslationFilter@40f1cc16, com.xhnj.component.DynamicSecurityFilter@62c5863e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6fbe531f]
+2021-10-23 15:04:01 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:04:01 -LiveReload server is running on port 35729
+2021-10-23 15:04:01 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:04:02 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:04:02 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:04:02 -Started ScenicApplication in 7.151 seconds (JVM running for 9.022)
+2021-10-23 15:04:21 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:04:21 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:04:21 -Completed initialization in 1 ms
+2021-10-23 15:06:03 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:06:04 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 12944 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:06:04 -The following profiles are active: dev
+2021-10-23 15:06:04 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:06:04 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:06:04 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:06:04 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c07c4b00] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@55ef936' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:06:04 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:06:04 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:06:04 -Starting service [Tomcat]
+2021-10-23 15:06:04 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:06:04 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:06:04 -Root WebApplicationContext: initialization completed in 670 ms
+2021-10-23 15:06:05 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:06:06 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:06:06 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:06:06 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5ac981e0, org.springframework.security.web.context.SecurityContextPersistenceFilter@334b4ca5, org.springframework.security.web.header.HeaderWriterFilter@4e724b02, org.springframework.security.web.authentication.logout.LogoutFilter@43950e1a, com.xhnj.component.JwtAuthenticationTokenFilter@66c56fe7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bef2ca0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17195484, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13946eee, org.springframework.security.web.session.SessionManagementFilter@6bbad997, org.springframework.security.web.access.ExceptionTranslationFilter@88e1a46, com.xhnj.component.DynamicSecurityFilter@46f349de, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5510f8f2]
+2021-10-23 15:06:06 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:06:06 -LiveReload server is running on port 35729
+2021-10-23 15:06:06 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:06:06 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:06:06 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:06:06 -Started ScenicApplication in 2.642 seconds (JVM running for 133.161)
+2021-10-23 15:06:06 -Condition evaluation unchanged
+2021-10-23 15:08:07 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:08:07 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 12944 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:08:07 -The following profiles are active: dev
+2021-10-23 15:08:07 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:08:07 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:08:07 -Finished Spring Data repository scanning in 26 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:08:07 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:07 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c07c4b00] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:07 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:07 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@45c0b2c4' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:07 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:07 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:08:08 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:08:08 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:08:08 -Starting service [Tomcat]
+2021-10-23 15:08:08 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:08:08 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:08:08 -Root WebApplicationContext: initialization completed in 683 ms
+2021-10-23 15:08:09 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:08:09 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:08:09 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:08:09 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@56368ca3, org.springframework.security.web.context.SecurityContextPersistenceFilter@3c3eb2d2, org.springframework.security.web.header.HeaderWriterFilter@3b2abef9, org.springframework.security.web.authentication.logout.LogoutFilter@8367610, com.xhnj.component.JwtAuthenticationTokenFilter@2a9762bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c20147e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7293ac75, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2569dace, org.springframework.security.web.session.SessionManagementFilter@7d79c1dc, org.springframework.security.web.access.ExceptionTranslationFilter@3d43afa4, com.xhnj.component.DynamicSecurityFilter@561d563a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@175d727a]
+2021-10-23 15:08:09 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:08:09 -LiveReload server is running on port 35729
+2021-10-23 15:08:09 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:08:09 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:08:09 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:08:10 -Started ScenicApplication in 2.672 seconds (JVM running for 256.373)
+2021-10-23 15:08:10 -Condition evaluation unchanged
+2021-10-23 15:08:12 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:31:29 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:31:29 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75856 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:31:29 -The following profiles are active: dev
+2021-10-23 15:31:29 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:31:29 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:31:31 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:31:31 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:31:31 -Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:31:31 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:31 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$ef01550b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:31 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:31 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3317f0c2' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:31 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:31 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:31:32 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:31:32 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:31:32 -Starting service [Tomcat]
+2021-10-23 15:31:32 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:31:32 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:31:32 -Root WebApplicationContext: initialization completed in 2184 ms
+2021-10-23 15:31:34 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:31:34 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:31:34 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:31:35 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fee9332, org.springframework.security.web.context.SecurityContextPersistenceFilter@21b5f241, org.springframework.security.web.header.HeaderWriterFilter@201f53ef, org.springframework.security.web.authentication.logout.LogoutFilter@4f194a13, com.xhnj.component.JwtAuthenticationTokenFilter@4c3343da, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@77c9ab2a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@12b2db8c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@14429c33, org.springframework.security.web.session.SessionManagementFilter@587c7c70, org.springframework.security.web.access.ExceptionTranslationFilter@2ad38c2c, com.xhnj.component.DynamicSecurityFilter@5e21066b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6a8a50ab]
+2021-10-23 15:31:35 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:31:35 -LiveReload server is running on port 35729
+2021-10-23 15:31:35 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:31:36 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:31:36 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:31:36 -Started ScenicApplication in 7.589 seconds (JVM running for 9.746)
+2021-10-23 15:31:46 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:31:46 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:31:46 -Completed initialization in 1 ms
+2021-10-23 15:36:20 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:36:27 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:36:27 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 72740 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:36:27 -The following profiles are active: dev
+2021-10-23 15:36:27 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:36:27 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:36:28 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:36:28 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:36:28 -Finished Spring Data repository scanning in 33 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:36:29 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$ed17704f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@384c421f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:36:29 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:36:29 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:36:29 -Starting service [Tomcat]
+2021-10-23 15:36:29 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:36:29 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:36:29 -Root WebApplicationContext: initialization completed in 2162 ms
+2021-10-23 15:36:32 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:36:32 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:36:32 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:36:33 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@450628aa, org.springframework.security.web.context.SecurityContextPersistenceFilter@1d014798, org.springframework.security.web.header.HeaderWriterFilter@665b065e, org.springframework.security.web.authentication.logout.LogoutFilter@4afbd23f, com.xhnj.component.JwtAuthenticationTokenFilter@65cf758e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@25907d68, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38b87029, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1a1f07c0, org.springframework.security.web.session.SessionManagementFilter@3274608f, org.springframework.security.web.access.ExceptionTranslationFilter@7d45e1a0, com.xhnj.component.DynamicSecurityFilter@76792995, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@39de145f]
+2021-10-23 15:36:33 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:36:33 -LiveReload server is running on port 35729
+2021-10-23 15:36:33 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:36:33 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:36:33 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:36:34 -Started ScenicApplication in 7.271 seconds (JVM running for 9.228)
+2021-10-23 15:36:49 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:36:49 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:36:49 -Completed initialization in 1 ms
+2021-10-23 15:37:54 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:38:01 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:38:01 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 46504 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:38:01 -The following profiles are active: dev
+2021-10-23 15:38:01 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:38:01 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:38:02 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:38:02 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:38:02 -Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:38:02 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:02 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c8f783a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:02 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:03 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@311f29a6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:03 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:03 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:38:03 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:38:03 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:38:03 -Starting service [Tomcat]
+2021-10-23 15:38:03 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:38:03 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:38:03 -Root WebApplicationContext: initialization completed in 2123 ms
+2021-10-23 15:38:05 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:38:05 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:38:06 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:38:06 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a5f239, org.springframework.security.web.context.SecurityContextPersistenceFilter@2193f50f, org.springframework.security.web.header.HeaderWriterFilter@4f75cae9, org.springframework.security.web.authentication.logout.LogoutFilter@1dee0654, com.xhnj.component.JwtAuthenticationTokenFilter@559f3ba, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@587f2883, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51ecc39f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@48d94de4, org.springframework.security.web.session.SessionManagementFilter@12189b69, org.springframework.security.web.access.ExceptionTranslationFilter@7dfcbad2, com.xhnj.component.DynamicSecurityFilter@590837fc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5de81b7d]
+2021-10-23 15:38:06 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:38:06 -LiveReload server is running on port 35729
+2021-10-23 15:38:07 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:38:07 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:38:07 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:38:08 -Started ScenicApplication in 7.367 seconds (JVM running for 9.346)
+2021-10-23 15:38:12 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:38:12 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:38:12 -Completed initialization in 1 ms
+2021-10-23 15:40:06 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:40:06 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 46504 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:40:06 -The following profiles are active: dev
+2021-10-23 15:40:07 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:40:07 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:40:07 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:40:07 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$c8f783a9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7163fe2a' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:07 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:40:07 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:40:07 -Starting service [Tomcat]
+2021-10-23 15:40:07 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:40:07 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:40:07 -Root WebApplicationContext: initialization completed in 615 ms
+2021-10-23 15:40:08 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:40:08 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:40:08 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:40:08 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@8767cb4, org.springframework.security.web.context.SecurityContextPersistenceFilter@19cea78e, org.springframework.security.web.header.HeaderWriterFilter@33139979, org.springframework.security.web.authentication.logout.LogoutFilter@2fcff509, com.xhnj.component.JwtAuthenticationTokenFilter@593dc0a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36ea8902, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@199d16f7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5b10dec1, org.springframework.security.web.session.SessionManagementFilter@218f7335, org.springframework.security.web.access.ExceptionTranslationFilter@567f2e83, com.xhnj.component.DynamicSecurityFilter@132ecb6a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@157a0141]
+2021-10-23 15:40:09 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:40:09 -LiveReload server is running on port 35729
+2021-10-23 15:40:09 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:40:09 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:40:09 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:40:09 -Started ScenicApplication in 2.908 seconds (JVM running for 130.8)
+2021-10-23 15:40:09 -Condition evaluation unchanged
+2021-10-23 15:40:11 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:40:19 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:40:19 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 63992 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:40:19 -The following profiles are active: dev
+2021-10-23 15:40:19 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:40:19 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:40:20 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:40:20 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:40:20 -Finished Spring Data repository scanning in 31 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:40:20 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:20 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$ccdbb5e5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:20 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:20 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@1094c55f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:20 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:20 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:40:21 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:40:21 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:40:21 -Starting service [Tomcat]
+2021-10-23 15:40:21 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:40:21 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:40:21 -Root WebApplicationContext: initialization completed in 2146 ms
+2021-10-23 15:40:23 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:40:23 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:40:24 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:40:24 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6b903852, org.springframework.security.web.context.SecurityContextPersistenceFilter@654e4433, org.springframework.security.web.header.HeaderWriterFilter@7ea2cc7d, org.springframework.security.web.authentication.logout.LogoutFilter@3499fedf, com.xhnj.component.JwtAuthenticationTokenFilter@40117385, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a2e979e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@550fb5f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@14a4b68e, org.springframework.security.web.session.SessionManagementFilter@b2822ba, org.springframework.security.web.access.ExceptionTranslationFilter@38d36ccc, com.xhnj.component.DynamicSecurityFilter@55ec2040, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1e854323]
+2021-10-23 15:40:24 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:40:24 -LiveReload server is running on port 35729
+2021-10-23 15:40:24 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:40:25 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:40:25 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:40:25 -Started ScenicApplication in 7.488 seconds (JVM running for 9.406)
+2021-10-23 15:40:33 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:40:33 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:40:33 -Completed initialization in 1 ms
+2021-10-23 15:42:33 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:42:33 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 63992 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:42:33 -The following profiles are active: dev
+2021-10-23 15:42:34 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:42:34 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:42:34 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:42:34 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$ccdbb5e5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@123c9272' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:42:34 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:42:34 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:42:34 -Starting service [Tomcat]
+2021-10-23 15:42:34 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:42:34 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:42:34 -Root WebApplicationContext: initialization completed in 647 ms
+2021-10-23 15:42:35 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:42:35 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:42:35 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:42:36 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4936d952, org.springframework.security.web.context.SecurityContextPersistenceFilter@6068fa2, org.springframework.security.web.header.HeaderWriterFilter@26dfd5ba, org.springframework.security.web.authentication.logout.LogoutFilter@2cf0d8a3, com.xhnj.component.JwtAuthenticationTokenFilter@29a53c10, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e7cc2f4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@36d6b884, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2487f588, org.springframework.security.web.session.SessionManagementFilter@22b15ed1, org.springframework.security.web.access.ExceptionTranslationFilter@28a80759, com.xhnj.component.DynamicSecurityFilter@79830023, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2d8f7ac1]
+2021-10-23 15:42:36 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:42:36 -LiveReload server is running on port 35729
+2021-10-23 15:42:36 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:42:36 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:42:36 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:42:36 -Started ScenicApplication in 2.674 seconds (JVM running for 140.051)
+2021-10-23 15:42:36 -Condition evaluation unchanged
+2021-10-23 15:48:44 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:48:44 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 63992 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:48:44 -The following profiles are active: dev
+2021-10-23 15:48:45 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:48:45 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:48:45 -Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:48:45 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$ccdbb5e5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2cc81a47' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:48:45 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:48:45 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:48:45 -Starting service [Tomcat]
+2021-10-23 15:48:45 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:48:45 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:48:45 -Root WebApplicationContext: initialization completed in 586 ms
+2021-10-23 15:48:46 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:48:46 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:48:46 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:48:46 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2dc87fd7, org.springframework.security.web.context.SecurityContextPersistenceFilter@5382d2bf, org.springframework.security.web.header.HeaderWriterFilter@f4b2442, org.springframework.security.web.authentication.logout.LogoutFilter@720e5795, com.xhnj.component.JwtAuthenticationTokenFilter@6d2a2588, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4596953e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13a9d0fa, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@228c8679, org.springframework.security.web.session.SessionManagementFilter@6de9270b, org.springframework.security.web.access.ExceptionTranslationFilter@6f7f2fae, com.xhnj.component.DynamicSecurityFilter@35a65097, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3e549f65]
+2021-10-23 15:48:46 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:48:46 -LiveReload server is running on port 35729
+2021-10-23 15:48:46 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:48:46 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:48:46 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:48:47 -Started ScenicApplication in 2.475 seconds (JVM running for 510.661)
+2021-10-23 15:48:47 -Condition evaluation unchanged
+2021-10-23 15:51:57 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:52:11 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:52:12 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 75072 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:52:12 -The following profiles are active: dev
+2021-10-23 15:52:12 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:52:12 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:52:13 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:52:13 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:52:13 -Finished Spring Data repository scanning in 34 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:52:13 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:13 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$1d31a2b4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:13 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:13 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@6aa6313f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:13 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:13 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:14 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:52:14 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:52:14 -Starting service [Tomcat]
+2021-10-23 15:52:14 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:52:14 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:52:14 -Root WebApplicationContext: initialization completed in 2391 ms
+2021-10-23 15:52:17 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:52:17 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:52:17 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:52:18 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e7b3ace, org.springframework.security.web.context.SecurityContextPersistenceFilter@1f079a9f, org.springframework.security.web.header.HeaderWriterFilter@68129043, org.springframework.security.web.authentication.logout.LogoutFilter@42f548a0, com.xhnj.component.JwtAuthenticationTokenFilter@66fedfaf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40be25d5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@691046dd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fb13f9c, org.springframework.security.web.session.SessionManagementFilter@250b63f6, org.springframework.security.web.access.ExceptionTranslationFilter@1b89da7a, com.xhnj.component.DynamicSecurityFilter@56cfd5c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f744d63]
+2021-10-23 15:52:18 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:52:18 -LiveReload server is running on port 35729
+2021-10-23 15:52:18 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:52:19 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:52:19 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:52:19 -Started ScenicApplication in 8.815 seconds (JVM running for 10.826)
+2021-10-23 15:52:50 -Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:52:55 -HV000001: Hibernate Validator 6.1.7.Final
+2021-10-23 15:52:55 -Starting ScenicApplication using Java 1.8.0_181 on LAPTOP-2S5FP8NU with PID 72524 (C:\Users\xhnj\Downloads\ums-admin\target\classes started by xhnj in C:\Users\xhnj\Downloads\ums-admin)
+2021-10-23 15:52:55 -The following profiles are active: dev
+2021-10-23 15:52:55 -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-10-23 15:52:55 -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-10-23 15:52:56 -Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-23 15:52:56 -Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-10-23 15:52:56 -Finished Spring Data repository scanning in 30 ms. Found 0 Redis repository interfaces.
+2021-10-23 15:52:57 -Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Bean 'redisConfig' of type [com.xhnj.config.RedisConfig$$EnhancerBySpringCGLIB$$1fb0ceed] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@18465684' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-23 15:52:57 -Tomcat initialized with port(s): 8078 (http)
+2021-10-23 15:52:57 -Initializing ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:52:57 -Starting service [Tomcat]
+2021-10-23 15:52:57 -Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-10-23 15:52:57 -Initializing Spring embedded WebApplicationContext
+2021-10-23 15:52:57 -Root WebApplicationContext: initialization completed in 2220 ms
+2021-10-23 15:53:00 -Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2021-10-23 15:53:00 -Can not find table primary key in Class: "com.xhnj.model.TRoleMenu".
+2021-10-23 15:53:00 -Can not find table primary key in Class: "com.xhnj.model.TAdminRole".
+2021-10-23 15:53:01 -Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4da5187f, org.springframework.security.web.context.SecurityContextPersistenceFilter@7f39b8ce, org.springframework.security.web.header.HeaderWriterFilter@4389a9e4, org.springframework.security.web.authentication.logout.LogoutFilter@5e488ae6, com.xhnj.component.JwtAuthenticationTokenFilter@6aca737a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@9d9de09, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e8d9f7c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65632d81, org.springframework.security.web.session.SessionManagementFilter@26c2e591, org.springframework.security.web.access.ExceptionTranslationFilter@150151c1, com.xhnj.component.DynamicSecurityFilter@785cce4e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@480e0a51]
+2021-10-23 15:53:01 -Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-23 15:53:01 -LiveReload server is running on port 35729
+2021-10-23 15:53:01 -Adding welcome page: class path resource [static/index.html]
+2021-10-23 15:53:02 -Starting ProtocolHandler ["http-nio-8078"]
+2021-10-23 15:53:02 -Tomcat started on port(s): 8078 (http) with context path ''
+2021-10-23 15:53:02 -Started ScenicApplication in 7.763 seconds (JVM running for 9.724)
+2021-10-23 15:54:36 -Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-23 15:54:36 -Initializing Servlet 'dispatcherServlet'
+2021-10-23 15:54:36 -Completed initialization in 1 ms

@@ -32,6 +32,7 @@ public class TBatchNo implements Serializable {
 
     private Integer isTimming;
 
+    private String systemType;
     /**
      * 来源(DD、SDSP、MDD)
      */
@@ -62,7 +63,7 @@ public class TBatchNo implements Serializable {
     private BigDecimal totalAmt;
 
     /**
-     * 状态(0->待提交;1->已提交;2->已完成)
+     * 状态(-1->hold ;0->等待运行;1->已提交银行;2->已从银行获取结果;3->已通知上游)
      */
     private Integer status;
 
@@ -83,7 +84,7 @@ public class TBatchNo implements Serializable {
 
     private String serialNo;
 
-    private Integer isFinish;
+    private String retOwnSpec;
 
     private Date createTime;
 
