@@ -11,9 +11,9 @@ import java.util.Date;
  */
 @Data
 public class WithholdAgreeParam {
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
     private String mobileNo;
 

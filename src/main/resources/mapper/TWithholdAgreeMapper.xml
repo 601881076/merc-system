@@ -88,10 +88,10 @@
             <include refid="agreeSql" />
         FROM t_withhold_agree
         WHERE 1 = 1
-        <if test="withholdAgreeParam.startDate != null">
+        <if test="withholdAgreeParam.startDate != null and withholdAgreeParam.startDate != ''">
             AND start_date<![CDATA[ <= ]]>#{withholdAgreeParam.startDate,jdbcType=TIMESTAMP}
         </if>
-        <if test="withholdAgreeParam.endDate != null">
+        <if test="withholdAgreeParam.endDate != null and withholdAgreeParam.endDate != ''">
             AND end_date<![CDATA[ >= ]]>#{withholdAgreeParam.endDate,jdbcType=TIMESTAMP}
         </if>
         <if test="withholdAgreeParam.mobileNo != null and withholdAgreeParam.mobileNo != ''">

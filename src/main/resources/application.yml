@@ -73,6 +73,7 @@ secure:
       - /uploadFiles/**
       - /wh/download/wh
       - /wh//batchExport
+      - /wh/export
       - /wad/download/wad
       - /poundage/export
 
@@ -100,7 +101,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
     ## 关闭sql打印
-    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
 
   global-config:

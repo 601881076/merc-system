@@ -23,7 +23,7 @@ public class WithholdAgreeController {
 
     @ApiOperation(value = "授权条件查询")
     @GetMapping("/query")
-    public CommonResult<CommonPage<TWithholdAgree>> list(@RequestBody WithholdAgreeParam withholdAgreeParam, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TWithholdAgree>> list(WithholdAgreeParam withholdAgreeParam, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = withholdAgreeService.conditionQuery(withholdAgreeParam,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));

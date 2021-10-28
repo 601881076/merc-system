@@ -60,9 +60,9 @@ public class TDismissBatch implements Serializable {
 
     private Integer status;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
 
 }

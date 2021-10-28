@@ -172,7 +172,7 @@ public class TWithholdServiceImpl implements TWithholdService {
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
-            Sheet sheet = new Sheet(1,0, WithholdSuccessExcel.class);
+            Sheet sheet = new Sheet(1,0, WithholdFailExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
             sheet.setSheetName("扣款失败报告");

@@ -2,6 +2,7 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xhnj.model.TRoleMenu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ import java.util.List;
  * @since 2021-02-24
  */
 public interface TRoleMenuMapper extends BaseMapper<TRoleMenu> {
-    int addBatch(List<TRoleMenu> roleMenuList);
+    int addBatch(@Param("roleMenuList") List<TRoleMenu> roleMenuList);
 
-    int deleteByRoleId(Long roleId);
+    int deleteByRoleId(@Param("roleId") Long roleId);
 
 }

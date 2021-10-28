@@ -86,9 +86,9 @@ public class TBatchNo implements Serializable {
 
     private String retOwnSpec;
 
-    private Date createTime;
+    private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
 
 
 }
