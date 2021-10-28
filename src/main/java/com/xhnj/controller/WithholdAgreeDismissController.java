@@ -32,7 +32,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TDismissBatch>> page(@RequestBody TDismissBatch dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TDismissBatch>> page(TDismissBatch dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = withholdAgreeService.batchPage(dismissBatch,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));

@@ -4,17 +4,35 @@
 
     <sql id="agreeSql">
         id,
+        system_type,
         source_type,
+        deal_flag,
         bank_code,
         bank_name,
+        system_batch,
+        fin_label_cd,
+        project_no,
+        agreement_id,
+        bizserial_no,
         mobile_no,
         card_no,
         customer_name,
         cert_type,
         cert_no,
+        check_no,
+        send_no,
+        own_spec,
+        re_own_spec,
         status,
+        is_send,
+        bank_ret_code,
         reason,
-        create_time
+        single_max,
+        day_max,
+        month_max,
+        sum_max,
+        start_date,
+        end_date
     </sql>
 
     <insert id="addBatch" parameterType="list">
@@ -70,10 +88,10 @@
             <include refid="agreeSql" />
         FROM t_withhold_agree
         WHERE 1 = 1
-        <if test="withholdAgreeParam.startDate != null and withholdAgreeParam.startDate != ''">
+        <if test="withholdAgreeParam.startDate != null">
             AND start_date<![CDATA[ <= ]]>#{withholdAgreeParam.startDate,jdbcType=TIMESTAMP}
         </if>
-        <if test="withholdAgreeParam.endDate != null and withholdAgreeParam.endDate != ''">
+        <if test="withholdAgreeParam.endDate != null">
             AND end_date<![CDATA[ >= ]]>#{withholdAgreeParam.endDate,jdbcType=TIMESTAMP}
         </if>
         <if test="withholdAgreeParam.mobileNo != null and withholdAgreeParam.mobileNo != ''">
