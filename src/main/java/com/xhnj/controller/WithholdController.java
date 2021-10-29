@@ -105,8 +105,8 @@ public class WithholdController {
     }
     @ApiOperation(value = "批量批次审核")
     @GetMapping("/batchCheck")
-    public CommonResult batchCheck(String batchId){
-        List<String> list = Arrays.asList(batchId.split(","));
+    public CommonResult batchCheck(@RequestParam List<String> list){
+//        List<String> list = Arrays.asList(batchId.split(","));
         int count=batchCheckService.insert(list);
         if (count>0){
             return CommonResult.success(count);
