@@ -69,8 +69,8 @@ public class WithholdController {
     }
     @ApiOperation(value = "批量导出")
     @GetMapping("/batchExport")
-    public void batchExport(HttpServletResponse response,@RequestParam(value="batchNo") String batchNo){
-        List<String> list = Arrays.asList(batchNo.split(","));
+    public void batchExport(HttpServletResponse response,@RequestParam List<String> list){
+//        List<String> list = Arrays.asList(batchNo.split(","));
         withholdBaseService.batchExport(response,list);
     }
 
