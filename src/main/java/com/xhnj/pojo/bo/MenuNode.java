@@ -1,4 +1,4 @@
-package com.xhnj.bo;
+package com.xhnj.pojo.bo;
 
 import com.xhnj.model.TMenu;
 import lombok.Getter;

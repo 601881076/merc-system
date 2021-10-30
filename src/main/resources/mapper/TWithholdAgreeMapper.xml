@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TWithholdAgreeMapper">
+
+    <sql id="agreeSql">
+        id,
+        system_type,
+        source_type,
+        deal_flag,
+        bank_code,
+        bank_name,
+        system_batch,
+        fin_label_cd,
+        project_no,
+        agreement_id,
+        bizserial_no,
+        mobile_no,
+        card_no,
+        customer_name,
+        cert_type,
+        cert_no,
+        check_no,
+        send_no,
+        own_spec,
+        re_own_spec,
+        status,
+        is_send,
+        bank_ret_code,
+        reason,
+        single_max,
+        day_max,
+        month_max,
+        sum_max,
+        start_date,
+        end_date
+    </sql>
+
+    <insert id="addBatch" parameterType="list">
+        INSERT INTO t_withhold_agree
+        (source_type,           deal_flag,                 bank_code,                bank_name,system_batch,                 project_no,
+        agreement_id,           bizserial_no,              mobile_no,                   card_no,                customer_name,
+        cert_type,                cert_no,                     check_no,               send_no,                    own_spec
+        )
+        VALUES
+        <foreach collection ="list" item="item" index= "index" separator =",">
+            (
+            #{item.sourceType, jdbcType=BIGINT},
+            #{item.dealFlag, jdbcType=BIGINT},
+            #{item.bankCode,jdbcType=VARCHAR},
+            #{item.bankName,jdbcType=VARCHAR},
+            #{item.systemBatch,jdbcType=VARCHAR},
+            #{item.projectNo,jdbcType=VARCHAR},
+            #{item.agreementId,jdbcType=VARCHAR},
+            #{item.bizserialNo,jdbcType=VARCHAR},
+            #{item.mobileNo,jdbcType=VARCHAR},
+            #{item.cardNo,jdbcType=VARCHAR},
+            #{item.customerName,jdbcType=VARCHAR},
+            #{item.certType,jdbcType=VARCHAR},
+            #{item.certNo,jdbcType=VARCHAR},
+            #{item.checkNo,jdbcType=VARCHAR},
+            #{item.sendNo,jdbcType=VARCHAR},
+            #{item.ownSpec,jdbcType=VARCHAR}
+            )
+        </foreach >
+    </insert>
+
+    <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+            <include refid="agreeSql" />
+        FROM t_withhold_agree
+        WHERE system_batch = #{batchNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getByCardNo" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+          source_type,
+          status
+        FROM t_withhold_agree
+        WHERE card_no IN
+        <foreach  collection="cardNoList" item="req" open="(" close=")" separator=" or ">
+             #{req,jdbcType=VARCHAR}
+        </foreach>
+        AND deal_flag = #{dealFlag,jdbcType=INTEGER}
+    </select>
+
+    <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+            <include refid="agreeSql" />
+        FROM t_withhold_agree
+        WHERE 1 = 1
+        <if test="withholdAgreeParam.startDate != null and withholdAgreeParam.startDate != ''">
+            AND start_date<![CDATA[ <= ]]>#{withholdAgreeParam.startDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="withholdAgreeParam.endDate != null and withholdAgreeParam.endDate != ''">
+            AND end_date<![CDATA[ >= ]]>#{withholdAgreeParam.endDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="withholdAgreeParam.mobileNo != null and withholdAgreeParam.mobileNo != ''">
+            AND mobile_no=#{withholdAgreeParam.mobileNo,jdbcType=VARCHAR}
+        </if>
+        <if test="withholdAgreeParam.customerName != null and withholdAgreeParam.customerName != ''">
+            AND customer_name=#{withholdAgreeParam.customerName,jdbcType=VARCHAR}
+        </if>
+        <if test="withholdAgreeParam.cardNo != null and withholdAgreeParam.cardNo != ''">
+            AND card_no=#{withholdAgreeParam.cardNo,jdbcType=VARCHAR}
+        </if>
+        <if test="withholdAgreeParam.certNo != null and withholdAgreeParam.certNo != ''">
+            AND cert_no=#{withholdAgreeParam.certNo,jdbcType=VARCHAR}
+        </if>
+        <if test="withholdAgreeParam.status != null and withholdAgreeParam.status != ''">
+            AND status=#{withholdAgreeParam.status,jdbcType=INTEGER}
+        </if>
+    </select>
+
+</mapper>

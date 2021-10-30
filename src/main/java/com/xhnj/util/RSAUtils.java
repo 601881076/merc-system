@@ -363,12 +363,12 @@ public class RSAUtils {
     public static void main(String[] args) throws  Exception{
         // 公钥进行加密
         String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGk7yClNchcw5NogMYfEFCIxhGRI8RHBlwn1aGTgHZDMNXWFm+1uZbqYg/P9bHzodlwkHzMa+5Ybm/f8HlOfQPVD851V4RCF0ns0O+tzJNB/e2bRE9v29b+cgYg1WG/GZDAwItXbOGtVXsbBf8NUQUWZXp8U4WpenTK/l29Cg/nQIDAQAB";
-        String jsdata = encryptedDataOnJava("123",publicKey);
+        String jsdata = encryptedDataOnJava("1234",publicKey);
         System.out.println(jsdata);
 
         // 私钥进行解密
         String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIaTvIKU1yFzDk2iAxh8QUIjGEZEjxEcGXCfVoZOAdkMw1dYWb7W5lupiD8/1sfOh2XCQfMxr7lhub9/weU59A9UPznVXhEIXSezQ763Mk0H97ZtET2/b1v5yBiDVYb8ZkMDAi1ds4a1VexsF/w1RBRZlenxThal6dMr+Xb0KD+dAgMBAAECgYAJ9QpgmwSj2/B1/APAnwjxDMmyAUaYnHyhYZi0TTdDyPb3EnlpblsS8yM6ks2gcP6Bn/LjPIzk6X8l1R0Sicwt7nf9ITjHAbJmqpqpxq84pu3Pjehwypv+2Cg6qUVAv6tdoaYG3Xuc0hXvrgpDXrdUev04A6INFeo4WnCe3sEAfQJBANPNIqR+vt+LKvH6uCUc3qdAWwJDhhRzr2hbo+6YwivimQZp+s2mNcGnuh+tQ5Hbsdy1RBZJBvWfBSLsicsopb8CQQCiqR+gfA4wIxz1lkvskszRq/sVENXCEMSU2fXmoEJCEao/+mu2TX+ITztT3ShntpAV1rjsEaQl9GtGZiHvTQmjAkEAyB/4L72i1M5GkcX44PhaWWYxl/39Xq3Ae7a7OuMT9Stys+DHnjECciztbKjmQ5d2g7iy0OvHq6XJ0Kn3uQJ7OQJAUggOviWyFg6vPR9l/NHv31HnVzFdS/ie2x6sx3lM0PsNrCRDi/W7emfS2LFw/hTwx0K5kbw31zhTnXZGaOOmFwJASaqHp4gLi4gOmwNuiobdod0rxWEcFJ/nyMDestAC1StAIMm/HAMepsLChHqfcUw7OfkltgJfQsdVzX6Q7ag6pQ==";
-        String returnDate = decryptDataOnJava(jsdata, privateKey);
+        String returnDate = decryptDataOnJava("$2a$10$5Ob5.0NLmCA2jbOwt3IrX.qT2kXdLDuPANmKcr8MtVZyQE5PVKnFu", privateKey);
         System.out.println("returnDate: " + returnDate);
     }
 }

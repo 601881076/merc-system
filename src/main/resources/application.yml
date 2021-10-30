@@ -1,4 +1,6 @@
 server:
+  servlet:
+    context-path: /ums
   session-timeout: 172800 # 48Сʱ
   #    tomcat:
   #        max-threads: 1000
@@ -8,7 +10,7 @@ server:
 
   tomcat:
     max-swallow-size: -1
-  port: 8080
+  port: 8078
 
 
 #  ssl:
@@ -21,7 +23,7 @@ server:
 
 spring:
   application:
-    name: scenic-admin
+    name: ums-admin
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
@@ -41,15 +43,10 @@ spring:
       enabled: true
       additional-paths: src
 
-  cache:
-    type: ehcache
-    ehcache:
-      config: config/ehcache.xml
-
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
-  secret: scenic-admin-secret #JWT加解密使用的密钥
+  secret: ums-admin-secret #JWT加解密使用的密钥
   expiration: 2592000  #JWT的超期限时间(60*60*24 (86400) 一天)
   tokenHead: Bearer  #JWT负载中拿到开头
 
@@ -61,16 +58,20 @@ secure:
       - /v2/api-docs
       - /v3/api-docs
       - /webjars/**
+      - /**/doc.html
       - /**/*.js
       - /**/*.css
       - /**/*.png
       - /**/*.ico
+      - /**/*.icon
+      - /**/*.ttf
+      - /**/*.woff
       - /actuator/**
       - /druid/**
       - /admin/login
-      - /admin/register
       - /common/sms
-      - /wx/**
+      - /validateCode/**
+      - /uploadFiles/**
 
 
 uploadFile:
@@ -96,7 +97,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
     ## 关闭sql打印
-    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
 
   global-config:

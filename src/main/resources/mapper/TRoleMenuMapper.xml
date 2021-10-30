@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TRoleMenuMapper">
+    <delete id="deleteByRoleId">
+        delete from t_role_menu where role_id=#{roleId,jdbcType=VARBINARY}
+    </delete>
+    <insert id="addBatch" parameterType="list">
+        insert into t_role_menu
+        (
+            role_id,menu_id
+        )
+        values
+        <foreach collection="roleMenuList" item="item" index= "index" separator =",">
+            (
+            #{item.roleId},
+            #{item.menuId}
+            )
+        </foreach>
+
+    </insert>
+</mapper>

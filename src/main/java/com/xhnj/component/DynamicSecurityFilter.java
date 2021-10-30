@@ -1,7 +1,9 @@
 package com.xhnj.component;
 
+
 import com.xhnj.config.IgnoreUrlsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
@@ -12,6 +14,7 @@ import org.springframework.util.PathMatcher;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -23,6 +26,9 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
     private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
+
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     @Autowired
     public void setMyAccessDecisionManager(DynamicAccessDecisionManager dynamicAccessDecisionManager) {
@@ -40,6 +46,13 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
         //OPTIONS请求直接放行
         if(request.getMethod().equals(HttpMethod.OPTIONS.toString())){
             fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            return;
+        }
+        //默认跳到登录页面
+         String requestURI = request.getRequestURI();
+        if("/".equals(requestURI) || (contextPath+"/").equals(requestURI)) {
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            request.getRequestDispatcher("/index.html").forward(request, response);
             return;
         }
         //白名单请求直接放行

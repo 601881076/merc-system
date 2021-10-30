@@ -2,7 +2,7 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xhnj.bo.MenuNode;
+import com.xhnj.pojo.bo.MenuNode;
 import com.xhnj.model.TMenu;
 import com.xhnj.pojo.query.MenuParam;
 import java.util.List;
@@ -17,6 +17,8 @@ import java.util.List;
  */
 public interface TMenuService extends IService<TMenu> {
     Page listPage(MenuParam menuParam, Integer pageSize, Integer pageNum);
+
+    Page listLevel(MenuParam menuParam,Integer pageSize, Integer pageNum);
 
     List<MenuNode> treeList();
 

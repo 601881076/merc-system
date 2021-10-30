@@ -2,10 +2,10 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.bo.MenuNode;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TMenu;
+import com.xhnj.pojo.bo.MenuNode;
 import com.xhnj.pojo.query.MenuParam;
 import com.xhnj.service.TMenuService;
 import io.swagger.annotations.Api;
@@ -26,18 +26,27 @@ import java.util.List;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "菜单接口", tags = "菜单接口类")
+@Api(value = "菜单接口", tags = "菜单接口")
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
     @Autowired
     private TMenuService menuService;
 
-   /* @ApiOperation("获取所有菜单")
+    /*@ApiOperation("获取所有菜单")
     @GetMapping("/listAll")
     public CommonResult<List<TMenu>> listAll() {
         return CommonResult.success(menuService.list());
     }*/
+
+    @ApiOperation("根据级数获取菜单")
+    @GetMapping("/listLevel")
+    public CommonResult<CommonPage<TMenu>> listLevel(MenuParam menuParam,
+                                               @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        Page page = menuService.listLevel(menuParam, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(page));
+    }
 
     @ApiOperation(value = "分页获取菜单")
     @GetMapping("/list/{parentId}")

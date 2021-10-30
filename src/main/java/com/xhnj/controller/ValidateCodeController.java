@@ -3,11 +3,10 @@ package com.xhnj.controller;
 /*
  @Description 验证码
  *@author kang.li
- *@date 2021/2/22 11:25   
  */
-
 import com.xhnj.common.CommonResult;
 import com.xhnj.util.ValidateCodeUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@Api(value = "验证码", tags = "验证码接口")
 @RestController
 @RequestMapping("/validateCode")
 @Slf4j
@@ -35,9 +35,7 @@ public class ValidateCodeController {
             response.setHeader("Cache-Control", "no-cache");
             response.setHeader("Expire", "0");
             response.setHeader("Pragma", "no-cache");
-            // getRandomCodeImage方法会直接将生成的验证码图片写入response
             validateCode.getRandomCodeImage(request, response);
-            // System.out.println("session里面存储的验证码为："+session.getAttribute("JCCODE"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,10 +57,8 @@ public class ValidateCodeController {
     @GetMapping("/checkCaptcha")
     public boolean getCheckCaptcha(@RequestParam("code") String code, HttpSession session) {
         try {
-            //toLowerCase() 不区分大小写进行验证码校验
             String sessionCode= String.valueOf(session.getAttribute("JCCODE")).toLowerCase();
             String receivedCode = code.toLowerCase();
-            log.info("session里的验证码{}, 用户的验证码{}", sessionCode, receivedCode);
             return !sessionCode.equals("") && !receivedCode.equals("") && sessionCode.equals(receivedCode);
         } catch (Exception e) {
             return false;

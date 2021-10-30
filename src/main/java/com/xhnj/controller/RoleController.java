@@ -25,7 +25,7 @@ import java.util.List;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "角色接口", tags = "角色接口类")
+@Api(value = "角色接口", tags = "角色接口")
 @RestController
 @RequestMapping("/role")
 public class RoleController {
@@ -68,8 +68,8 @@ public class RoleController {
     }
 
     @ApiOperation("编辑角色")
-    @PutMapping("/update")
-    public CommonResult update(TRole role) {
+    @PostMapping("/update")
+    public CommonResult update(@RequestBody TRole role) {
         int count = roleService.update(role);
         if(count > 0)
             return CommonResult.success(count);
@@ -93,7 +93,5 @@ public class RoleController {
             return CommonResult.success(count);
         return CommonResult.failed();
     }
-
-
 
 }

@@ -18,8 +18,15 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -49,22 +56,41 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!--  knife4j -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            &lt;!&ndash;<version>8.0.11</version>&ndash;&gt;
+            <!--<version>8.0.11</version>-->
             <version>8.0.16</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+
+        <!-- Druid配置加密  不需要新建配置类-->
+        <dependency>
+            <groupId>com.github.drtrang</groupId>
+            <artifactId>druid-spring-boot2-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.drtrang</groupId>
+            <artifactId>druid-spring-boot2-actuator-starter</artifactId>
             <version>1.1.10</version>
         </dependency>
 
@@ -153,24 +179,37 @@
             <version>1.8.3</version>
         </dependency>
 
-        <!-- Druid配置  不需要新建配置类-->
         <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot2-starter</artifactId>
-            <version>1.1.10</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.64</version>
         </dependency>
         <dependency>
-            <groupId>com.github.drtrang</groupId>
-            <artifactId>druid-spring-boot2-actuator-starter</artifactId>
-            <version>1.1.10</version>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.64</version>
         </dependency>
 
-        <!-- sqlserver -->
+        <!-- 解决 Failed to load class "org.slf4j.impl.StaticLoggerBinder 问题 -->
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
         </dependency>
+
+        <!--easyexcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.1.2-beta5</version>
+        </dependency>
+
+        <!-- redis -->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>-->
     </dependencies>
 
     <build>

@@ -1,4 +1,4 @@
-package com.xhnj.dto;
+package com.xhnj.pojo.query;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
