@@ -1,4 +1,6 @@
 server:
+  servlet:
+    context-path: /ums
   session-timeout: 172800 # 48Сʱ
   #    tomcat:
   #        max-threads: 1000
@@ -21,7 +23,7 @@ server:
 
 spring:
   application:
-    name: scenic-admin
+    name: ums-admin
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
@@ -44,7 +46,7 @@ spring:
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
-  secret: scenic-admin-secret #JWT加解密使用的密钥
+  secret: ums-admin-secret #JWT加解密使用的密钥
   expiration: 2592000  #JWT的超期限时间(60*60*24 (86400) 一天)
   tokenHead: Bearer  #JWT负载中拿到开头
 
@@ -56,26 +58,20 @@ secure:
       - /v2/api-docs
       - /v3/api-docs
       - /webjars/**
+      - /**/doc.html
       - /**/*.js
       - /**/*.css
       - /**/*.png
       - /**/*.ico
+      - /**/*.icon
+      - /**/*.ttf
+      - /**/*.woff
       - /actuator/**
       - /druid/**
       - /admin/login
-      - /admin/register
-      - /admin/insert
       - /common/sms
-      - /wx/**
-      - /test/**
-      - /withhold/**
       - /validateCode/**
       - /uploadFiles/**
-      - /wh/download/wh
-      - /wh//batchExport
-      - /wh/export
-      - /wad/download/wad
-      - /poundage/export
 
 
 uploadFile:

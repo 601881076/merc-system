@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  *@author kang.li
  *@date 2021/2/19 9:19   
  */
-@Api(value = "文件上传接口", tags = "文件上传接口类")
+@Api(value = "文件上传接口", tags = "文件上传接口")
 @RestController
 @RequestMapping("/upload")
 public class UploadController {

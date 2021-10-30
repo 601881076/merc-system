@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
-import com.xhnj.dto.UmsAdminLoginParam;
+import com.xhnj.pojo.query.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
 import com.xhnj.service.TAdminService;
 import com.xhnj.service.TRoleService;
@@ -19,7 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +33,7 @@ import java.util.Map;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "用户管理", tags = "用户接口类")
+@Api(value = "用户管理", tags = "用户接口")
 @RestController
 @RequestMapping("/admin")
 @Slf4j
@@ -60,18 +60,19 @@ public class AdminController {
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping("/login")
-    public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam, BindingResult result, HttpSession session) {
+    public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam, BindingResult result, HttpServletRequest request) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
             return CommonResult.failed(fieldErrors.get(0).getDefaultMessage());
         }
         //校验验证码
-        String sessionCode = String.valueOf(session.getAttribute("JCCODE")).toLowerCase();
+        String sessionCode = String.valueOf(request.getServletContext().getAttribute("JCCODE")).toLowerCase();
         String receivedCode = umsAdminLoginParam.getCode().toLowerCase();
         boolean b = !sessionCode.equals("") && !receivedCode.equals("") && sessionCode.equals(receivedCode);
         if(!b){
             return CommonResult.failed(ResultCode.VALIDATE_FAILED,"验证码错误");
         }
+
         String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
         if (token == null) {
             return CommonResult.validateFailed("登录失败");

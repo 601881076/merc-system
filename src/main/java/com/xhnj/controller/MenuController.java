@@ -2,10 +2,10 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.bo.MenuNode;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TMenu;
+import com.xhnj.pojo.bo.MenuNode;
 import com.xhnj.pojo.query.MenuParam;
 import com.xhnj.service.TMenuService;
 import io.swagger.annotations.Api;
@@ -26,7 +26,7 @@ import java.util.List;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "菜单接口", tags = "菜单接口类")
+@Api(value = "菜单接口", tags = "菜单接口")
 @RestController
 @RequestMapping("/menu")
 public class MenuController {

@@ -10,6 +10,7 @@ import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.vo.BatchNoVO;
 import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.service.WithholdAgreeDismissBaseService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 /*
  @Description 代扣协议取消
  *@author kang.li
- *@date 2021/9/25 20:36   
+ *@date 2021/9/25 20:36
  */
+@Api(value = "代扣协议取消", tags = "代扣协议取消接口")
 @RestController
 @RequestMapping("/wad")
 public class WithholdAgreeDismissController {
@@ -45,6 +47,7 @@ public class WithholdAgreeDismissController {
         IPage page = withholdAgreeService.listPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
+
     @ApiOperation(value = "授权取消删除")
     @PostMapping("/delete/{id}")
     public CommonResult delete(@PathVariable("id") Long id) {
@@ -67,6 +70,7 @@ public class WithholdAgreeDismissController {
             return CommonResult.success(data);
         return CommonResult.failed();
     }
+
     @ApiOperation(value = "下载授权取消模板")
     @GetMapping("/download/wad")
     public void downloadExport(HttpServletResponse response){

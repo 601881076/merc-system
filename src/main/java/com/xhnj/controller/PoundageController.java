@@ -2,6 +2,7 @@ package com.xhnj.controller;
 
 import com.xhnj.pojo.query.PoundageParam;
 import com.xhnj.service.PoundageService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *@author kang.li
  *@date 2021/9/25 20:40   
  */
+@Api(value = "信息手续费", tags = "信息手续费接口")
 @RestController
 @RequestMapping("/poundage")
 public class PoundageController {

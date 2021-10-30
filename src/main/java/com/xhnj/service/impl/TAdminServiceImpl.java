@@ -4,14 +4,13 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.bo.AdminUserDetails;
+import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TAdmin;
 import com.xhnj.mapper.TAdminMapper;
 import com.xhnj.service.TAdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.util.JwtTokenUtil;
-import com.xhnj.util.RSAUtils;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         String token = null;
         //密码需要客户端加密后传递
         try {
-            password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
+            //password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
             UserDetails userDetails = loadUserByUsername(username);
             if(userDetails == null)
                 throw new UsernameNotFoundException("用户名或密码错误");

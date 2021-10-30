@@ -1,4 +1,5 @@
 package com.xhnj.config;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.xhnj.component.SwaggerProperties;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  *@author kang.li
  *@date 2021/2/19 9:39
  */
-
+@EnableKnife4j
 @Configuration
 public class Swagger3Config {
     @Autowired
@@ -42,7 +43,7 @@ public class Swagger3Config {
                 .description(swaggerProperties.getApplicationDescription())//网页描述
                 .contact(new Contact("作者", "作者地址", "******qq.com"))
                 .version("Application Version: " + swaggerProperties.getApplicationVersion() + ", Spring Boot Version: " + SpringBootVersion.getVersion())//接口版本号
-                .termsOfServiceUrl("http://localhost:8099")
+                .termsOfServiceUrl("http://localhost:8078")
                 .build();
     }
 

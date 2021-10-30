@@ -12,6 +12,7 @@ import com.xhnj.pojo.vo.BatchNoVO;
 import com.xhnj.service.TBatchCheckService;
 import com.xhnj.service.TWithholdService;
 import com.xhnj.service.WithholdBaseService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +28,7 @@ import java.util.List;
  *@author kang.li
  *@date 2021/9/18 16:14   
  */
-@ApiOperation("代扣")
+@Api(value = "代扣", tags = "代扣接口")
 @RestController
 @RequestMapping("/wh")
 public class WithholdController {
@@ -67,6 +68,7 @@ public class WithholdController {
         IPage page = withholdService.batchPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
+
     @ApiOperation(value = "批量导出")
     @GetMapping("/batchExport")
     public void batchExport(HttpServletResponse response,@RequestParam(value="batchNo") String batchNo){
@@ -88,6 +90,7 @@ public class WithholdController {
 
         return CommonResult.success(null);
     }*/
+
     @ApiOperation(value = "下载扣款模板")
     @GetMapping("/download/wh")
     public void downloadExport(HttpServletResponse response){
@@ -103,6 +106,7 @@ public class WithholdController {
             return CommonResult.success(count);
         return CommonResult.failed();
     }
+
     @ApiOperation(value = "批量批次审核")
     @GetMapping("/batchCheck")
     public CommonResult batchCheck(String batchId){

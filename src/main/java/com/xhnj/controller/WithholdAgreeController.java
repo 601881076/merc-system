@@ -6,6 +6,7 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import com.xhnj.service.TWithholdAgreeService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
  *@author kang.li
  *@date 2021/9/17 20:14   
  */
+@Api(value = "代扣协议", tags = "代扣协议接口")
 @RestController
 @RequestMapping("/withhold/agree")
 public class WithholdAgreeController {

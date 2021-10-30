@@ -30,7 +30,7 @@ import java.util.Map;
 @RequestMapping("test")
 public class TestController {
 
-    @Autowired
+   /* @Autowired
     private ExcelListener excelListener;
     @Autowired
     private RedisUtils redisUtils;
@@ -54,5 +54,5 @@ public class TestController {
             e.printStackTrace();
         }
         return CommonResult.success(null);
-    }
+    }*/
 }

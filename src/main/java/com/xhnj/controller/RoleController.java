@@ -25,7 +25,7 @@ import java.util.List;
  * @author lk
  * @since 2021-02-24
  */
-@Api(value = "角色接口", tags = "角色接口类")
+@Api(value = "角色接口", tags = "角色接口")
 @RestController
 @RequestMapping("/role")
 public class RoleController {

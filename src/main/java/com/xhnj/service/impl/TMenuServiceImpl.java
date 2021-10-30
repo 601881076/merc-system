@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xhnj.bo.MenuNode;
+import com.xhnj.pojo.bo.MenuNode;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.mapper.TMenuMapper;
 import com.xhnj.model.TMenu;

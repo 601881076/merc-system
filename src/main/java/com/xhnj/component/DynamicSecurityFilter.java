@@ -3,6 +3,7 @@ package com.xhnj.component;
 
 import com.xhnj.config.IgnoreUrlsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
@@ -26,6 +27,9 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
     @Autowired
     private IgnoreUrlsConfig ignoreUrlsConfig;
 
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+
     @Autowired
     public void setMyAccessDecisionManager(DynamicAccessDecisionManager dynamicAccessDecisionManager) {
         super.setAccessDecisionManager(dynamicAccessDecisionManager);
@@ -45,7 +49,8 @@ public class DynamicSecurityFilter extends AbstractSecurityInterceptor implement
             return;
         }
         //默认跳到登录页面
-        if("/".equals(request.getRequestURI())) {
+         String requestURI = request.getRequestURI();
+        if("/".equals(requestURI) || (contextPath+"/").equals(requestURI)) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             request.getRequestDispatcher("/index.html").forward(request, response);
             return;

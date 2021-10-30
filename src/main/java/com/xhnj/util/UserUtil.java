@@ -1,6 +1,6 @@
 package com.xhnj.util;
 
-import com.xhnj.bo.AdminUserDetails;
+import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.model.TAdmin;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
