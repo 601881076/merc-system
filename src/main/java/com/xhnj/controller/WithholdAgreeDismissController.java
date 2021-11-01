@@ -88,7 +88,7 @@ public class WithholdAgreeDismissController {
         int count = WithholdAgreeDismissBaseService.update(1, batchNo);
 
         // 审核通过之后讲批次号发往消息队列
-        batchNo.forEach(item -> mqSend(exchange, "/ums", "item"));
+        batchNo.forEach(item -> mqSend(exchange, "/ums", item));
 
         if(count > 0)
             return CommonResult.success(count);
