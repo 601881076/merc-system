@@ -6,7 +6,7 @@
         type,
         is_timming,
         system_type,
-        from_type,
+        source_type,
         bank_code,
         batch_no,
         system_batch,
@@ -41,4 +41,17 @@
     <delete id="deleteById">
         delete from t_batch_no where status=-1 and id=#{id}
     </delete>
+
+
+    <!--审核员授权取消审批-拒绝操作-->
+    <update id="updateStatusByBatchNo" parameterType="list">
+        update t_batch_check set
+        status = #{status}, check_result = #{checkResult}
+        where batch_id in
+        (
+        <foreach collection="batchNo" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+    </update>
 </mapper>

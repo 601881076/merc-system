@@ -1,5 +1,6 @@
 package com.xhnj.service;
 
+import com.xhnj.model.TBatchNo;
 import com.xhnj.pojo.query.WithholdParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -25,4 +26,11 @@ public interface WithholdBaseService {
      * 批量导出
      */
     void batchExport(HttpServletResponse response, List<String> list);
+
+    /**
+     * 导出批量信息
+     * @param batchNo
+     * @return
+     */
+    void exportExcel(HttpServletResponse response, TBatchNo batchNo);
 }

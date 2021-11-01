@@ -2,6 +2,7 @@ package com.xhnj.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.mapper.TBatchDtlMapper;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.WithholdFailExcel;
 import com.xhnj.model.WithholdSuccessExcel;
 import com.xhnj.model.TBatchDtl;
@@ -29,6 +30,11 @@ public class TBatchDtlServiceImpl extends ServiceImpl<TBatchDtlMapper, TBatchDtl
     @Override
     public List<WithholdSuccessExcel> getList(WithholdParam withholdParam) {
         return platformserialMapper.getList(withholdParam);
+    }
+
+    @Override
+    public List<WithholdSuccessExcel> getListToBatchNo(TBatchNo batchNo) {
+        return platformserialMapper.getListToBatchNo(batchNo);
     }
 
     @Override

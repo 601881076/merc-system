@@ -67,4 +67,11 @@ public interface TWithholdService {
      * @return
      */
     int delete(Long id);
+
+    /**
+     * 导出成功
+     * @param batchNo
+     * @return
+     */
+    void exportExcelSuccess(HttpServletResponse response, TBatchNo batchNo);
 }

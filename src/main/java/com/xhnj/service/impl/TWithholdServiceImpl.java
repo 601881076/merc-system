@@ -81,6 +81,33 @@ public class TWithholdServiceImpl implements TWithholdService {
 
         return batchNoMapper.deleteById(id);
     }
+
+    @Override
+    public void exportExcelSuccess(HttpServletResponse response, TBatchNo batchNo) {
+
+        List<WithholdSuccessExcel> list = platformserialService.getListToBatchNo(batchNo);
+        list.stream().forEach(e ->e.setCardNo(businUtil.maskBankCard(e.getCardNo())));
+        String fileName = "授权取消审批报告";
+        try {
+            response.setContentType("application/vnd.ms-excel;charset=utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
+            ServletOutputStream out = response.getOutputStream();
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
+            Sheet sheet = new Sheet(1,0, WithholdSuccessExcel.class);
+            //设置自适应宽度
+            sheet.setAutoWidth(Boolean.TRUE);
+            sheet.setSheetName("授权取消审批报告");
+            writer.write(list,sheet);
+            writer.finish();
+            out.flush();
+            response.getOutputStream().close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam) {
         if(withholdParam.getFromType() == null){

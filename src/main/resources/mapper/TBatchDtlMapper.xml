@@ -30,6 +30,30 @@
         create_time
     </sql>
 
+    <sql id="batchNoSql">
+        id,
+        type,
+        is_timming,
+        system_type,
+        source_type,
+        bank_code,
+        batch_no,
+        system_batch,
+        batch_desc,
+        total_trans,
+        total_amt,
+        status,
+        success_trans,
+        fail_trans,
+        process_trans,
+        serial_no,
+        ret_own_spec,
+        create_time,
+        update_time
+
+
+    </sql>
+
     <insert id="addBatch" parameterType="list">
         INSERT INTO t_batch_dtl
         (batch_no,           agreement_id,                 from_type,                bank_code,                 order_no,
@@ -97,6 +121,20 @@
         </if>
         <if test="withholdParam.payResult != null">
             AND pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
+        </if>
+    </select>
+
+
+    <select id="getListToBatchNo" resultType="com.xhnj.model.TBatchNo">
+        select <include refid="batchNoSql"/> from t_batch_no where 1=1
+        <if test="batchNo.createTime!=null">
+            and create_time<![CDATA[ >= ]]>#{batchNo.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="batchNo.batchNo!=null and batchNo.batchNo!=''">
+            and batch_no=#{batchNo.batchNo,jdbcType=VARCHAR}
+        </if>
+        <if test="batchNo.status!=null and batchNo.status!=''">
+            and status=#{batchNo.status,jdbcType=INTEGER}
         </if>
     </select>
 

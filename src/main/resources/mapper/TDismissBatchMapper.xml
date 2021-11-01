@@ -1,20 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TDismissBatchMapper">
+
+    <resultMap id="BaseMap" type="com.xhnj.pojo.query.DisMissBatchQuery">
+        <result property="id" column="id" />
+        <result property="sourceType" column="source_type" />
+        <result property="bankCode" column="bank_code" />
+        <result property="systemBatch" column="system_batch" />
+        <result property="batchDesc" column="batch_desc" />
+        <result property="totalTrans" column="total_trans" />
+        <result property="successTrans" column="success_trans" />
+        <result property="failTrans" column="fail_trans" />
+        <result property="status" column="status" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <collection property="batchCheckList" ofType="com.xhnj.model.TBatchCheck">
+            <result property="id" column="de_id" />
+            <result property="batchId" column="batch_id" />
+            <result property="type" column="type" />
+            <result property="checkResult" column="check_result" />
+            <result property="upUserId" column="up_user_id" />
+            <result property="upUserName" column="up_user_name" />
+            <result property="checkUserId" column="check_user_id" />
+            <result property="checkUserName" column="check_user_name" />
+            <result property="remark" column="de_pic" />
+            <result property="createTime" column="create_time" />
+            <result property="checkTime" column="check_time" />
+            <result property="updateTime" column="update_time" />
+        </collection>
+    </resultMap>
+
+
     <sql id="dismissSql">
-        id,
-        system_type,
-        source_type,
-        bank_code,
-        system_batch,
-        batch_desc,
-        total_trans,
-        success_trans,
-        fail_trans,
-        status,
-        create_time,
-        update_time
+        dis.id,
+        dis.system_type,
+        dis.source_type,
+        dis.bank_code,
+        dis.system_batch,
+        dis.batch_desc,
+        dis.total_trans,
+        dis.success_trans,
+        dis.fail_trans,
+        dis.status,
+        dis.create_time,
+        dis.update_time
     </sql>
+
+
+    <select id="listPageDouble" resultMap="BaseMap">
+        select
+            <include refid="dismissSql"/>
+        from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
+        where 1=1
+        <if test="dismissBatch.createTime != null">
+            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dismissBatch.systemBatch !=null and dismissBatch.systemBatch != ''">
+            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
+        </if>
+        <if test="dismissBatch.status != null and dismissBatch.status != ''">
+            and status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+    </select>
+
+
     <select id="listPage" resultType="com.xhnj.model.TDismissBatch">
         select <include refid="dismissSql"/> from t_dismiss_batch where 1=1
         <if test="dismissBatch.createTime!=null">
@@ -31,15 +80,4 @@
         delete from t_dismiss_batch where status=-1 and id=#{id}
     </delete>
 
-    <!--审核员授权取消审批-拒绝操作-->
-    <update id="updateStatusByBatchNo" parameterType="list">
-        update t_batch_check set
-        status = #{status}, check_result = #{checkResult}
-        where batch_id in
-        (
-        <foreach collection="batchNo" item="item" index="index" separator=",">
-        #{item}
-        </foreach>
-        )
-    </update>
 </mapper>

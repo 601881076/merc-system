@@ -1,5 +1,6 @@
 package com.xhnj.service;
 
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.WithholdFailExcel;
 import com.xhnj.model.WithholdSuccessExcel;
 import com.xhnj.pojo.query.WithholdParam;
@@ -15,6 +16,8 @@ import java.util.List;
 public interface TBatchDtlService {
 
     List<WithholdSuccessExcel> getList(WithholdParam withholdParam);
+
+    List<WithholdSuccessExcel> getListToBatchNo(TBatchNo batchNo);
 
     List<WithholdFailExcel> getFailList(WithholdParam withholdParam);
 

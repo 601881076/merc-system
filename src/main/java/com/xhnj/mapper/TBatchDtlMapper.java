@@ -2,6 +2,7 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.WithholdFailExcel;
 import com.xhnj.model.WithholdSuccessExcel;
 import com.xhnj.model.TBatchDtl;
@@ -25,6 +26,8 @@ public interface TBatchDtlMapper extends BaseMapper<TBatchDtl> {
     List<WithholdDetailVO> getByBatchNoList(@Param("list") List<String> list);
 
     List<WithholdSuccessExcel> getList(@Param("withholdParam")WithholdParam withholdParam);
+
+    List<WithholdSuccessExcel> getListToBatchNo(@Param("batchNo") TBatchNo batchNo);
 
     List<WithholdFailExcel> getFailList(@Param("withholdParam")WithholdParam withholdParam);
 
