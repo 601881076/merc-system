@@ -126,3 +126,7 @@ wechat:
   initpwd: 123
   ##微信一键首次登陆插入用户表的初始昵称
   initnickname: lQj
+
+#消息队列配置
+mq:
+  exchange: UMSDDEXCHANGE # 交换机地址

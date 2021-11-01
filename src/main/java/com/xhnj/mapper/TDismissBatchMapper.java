@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
+
+import javax.validation.constraints.Max;
+import java.util.List;
 
 /**
  * <p>
@@ -16,4 +20,6 @@ import org.apache.ibatis.annotations.Param;
 public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
     IPage listPage(IPage<TDismissBatch> page,@Param("dismissBatch") TDismissBatch dismissBatch);
     int deleteById(@Param("id")Long id);
+
+    int updateStatusByBatchNo(@Param("status") int status, @Param("checkResult") int checkResult, @Param("batchNo") List<String> batchNo);
 }

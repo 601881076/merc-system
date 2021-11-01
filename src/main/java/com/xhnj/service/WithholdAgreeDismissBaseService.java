@@ -1,6 +1,7 @@
 package com.xhnj.service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public interface WithholdAgreeDismissBaseService {
     /**
@@ -13,4 +14,13 @@ public interface WithholdAgreeDismissBaseService {
      * @return
      */
     int delete(Long id);
+
+    /**
+     * 审核员授权取消审批操作
+     * @param option 操作类型：1-批准，2-拒绝
+     * @param batchNoList
+     * @return
+     */
+    int update(int option, List<String> batchNoList);
+
 }

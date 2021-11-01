@@ -4,7 +4,7 @@
     <sql id="dismissSql">
         id,
         system_type,
-        from_type,
+        source_type,
         bank_code,
         system_batch,
         batch_desc,
@@ -30,4 +30,16 @@
     <delete id="deleteById">
         delete from t_dismiss_batch where status=-1 and id=#{id}
     </delete>
+
+    <!--审核员授权取消审批-拒绝操作-->
+    <update id="updateStatusByBatchNo" parameterType="list">
+        update t_batch_check set
+        status = #{status}, check_result = #{checkResult}
+        where batch_id in
+        (
+        <foreach collection="batchNo" item="item" index="index" separator=",">
+        #{item}
+        </foreach>
+        )
+    </update>
 </mapper>

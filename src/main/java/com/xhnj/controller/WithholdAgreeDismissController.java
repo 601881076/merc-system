@@ -12,11 +12,16 @@ import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.service.WithholdAgreeDismissBaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.MessageDeliveryMode;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /*
  @Description 代扣协议取消
@@ -26,11 +31,19 @@ import javax.servlet.http.HttpServletResponse;
 @Api(value = "代扣协议取消", tags = "代扣协议取消接口")
 @RestController
 @RequestMapping("/wad")
+@Slf4j
 public class WithholdAgreeDismissController {
+
+    @Value("${mq.exchange}")
+    private String exchange;
+
     @Autowired
     private TWithholdAgreeService withholdAgreeService;
     @Autowired
     private WithholdAgreeDismissBaseService WithholdAgreeDismissBaseService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
@@ -57,6 +70,31 @@ public class WithholdAgreeDismissController {
         return CommonResult.failed();
     }
 
+
+    @ApiOperation(value = "授权取消审批拒绝")
+    @GetMapping("/update")
+    public CommonResult update(@RequestParam List<String> batchNo){
+        log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
+        int count = WithholdAgreeDismissBaseService.update(2, batchNo);
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
+
+    @ApiOperation(value = "授权取消审批批准")
+    @GetMapping("/approve")
+    public CommonResult approve(@RequestParam List<String> batchNo){
+        log.info("授权取消审批批准传入参数 = " + batchNo.toString());
+        int count = WithholdAgreeDismissBaseService.update(1, batchNo);
+
+        // 审核通过之后讲批次号发往消息队列
+        batchNo.forEach(item -> mqSend(exchange, "/ums", "item"));
+
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
+
     @ApiOperation(value = "取消授权excel上传")
     @PostMapping("/excelImport")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file, BatchNoVO batchNoVO){
@@ -77,4 +115,18 @@ public class WithholdAgreeDismissController {
 
         WithholdAgreeDismissBaseService.exportExcel(response);
     }
+
+    /**
+     * 推送消息队列
+     * @param exchange
+     * @param routeKey
+     * @param message
+     */
+    public void mqSend(String exchange, String routeKey, String message) {
+        rabbitTemplate.convertAndSend(exchange, routeKey, message, msg -> {
+            msg.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+            return msg;
+        });
+    }
+
 }
