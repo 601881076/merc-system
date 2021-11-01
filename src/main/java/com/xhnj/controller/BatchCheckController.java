@@ -7,8 +7,11 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.pojo.query.DeductionBatchQuery;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.ApprovalManagementService;
+import com.xhnj.service.BatchCheckService;
 import com.xhnj.service.WithholdBaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,23 +51,21 @@ public class BatchCheckController {
     /** 授权管理实现类*/
     @Autowired
     ApprovalManagementService approvalManagementService;
-    /** 导出实现类*/
-    @Autowired
-    private WithholdBaseService withholdBaseService;
 
 
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TDismissBatch>> page(TDismissBatch dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
-                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+    public CommonResult<CommonPage<TDismissBatch>> page(DisMissBatchQuery dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        log.info("授权取消批次查询参数" + dismissBatch.toString());
         IPage page = approvalManagementService.batchPage(dismissBatch,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
 
 
     @ApiOperation(value = "授权取消审批拒绝")
-    @GetMapping("/update")
-    public CommonResult update(@RequestParam List<String> batchNo){
+    @GetMapping("/refuse")
+    public CommonResult refuse(@RequestParam List<String> batchNo){
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
         int count = approvalManagementService.update(2, batchNo);
         if(count > 0)
@@ -89,9 +90,9 @@ public class BatchCheckController {
 
     @ApiOperation(value = "下载批量导出报告")
     @GetMapping("/excelBatchExport")
-    public void excelBatchExport(HttpServletResponse response, TBatchNo batchNo){
-        log.info("下载取消授权批量报告");
-        withholdBaseService.exportExcel(response,batchNo);
+    public void excelBatchExport(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery){
+        log.info("下载取消授权批量报告, 参数{0}", disMissBatchQuery.toString());
+        approvalManagementService.exportExcel(response,disMissBatchQuery);
     }
 
 

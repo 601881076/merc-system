@@ -13,10 +13,8 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
-import com.xhnj.model.TBatchNo;
-import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.WithholdFailExcel;
-import com.xhnj.model.WithholdSuccessExcel;
+import com.xhnj.model.*;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TBatchDtlService;
@@ -83,10 +81,10 @@ public class TWithholdServiceImpl implements TWithholdService {
     }
 
     @Override
-    public void exportExcelSuccess(HttpServletResponse response, TBatchNo batchNo) {
+    public void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery dismissBatch) {
 
-        List<WithholdSuccessExcel> list = platformserialService.getListToBatchNo(batchNo);
-        list.stream().forEach(e ->e.setCardNo(businUtil.maskBankCard(e.getCardNo())));
+        List<TBatchCheckSuccessExcel> list = platformserialService.getListToBatchCheck(dismissBatch);
+
         String fileName = "授权取消审批报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");

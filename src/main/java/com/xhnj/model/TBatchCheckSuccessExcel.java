@@ -23,29 +23,25 @@ import java.util.Date;
 * @company:        newLand
 */
 @Data
-public class TBatchNoSuccessExcel extends BaseRowModel {
+public class TBatchCheckSuccessExcel extends BaseRowModel {
 
-    @ExcelProperty(value = "是否定时", index = 0)
-    private String systemTypes;
     @ExcelProperty(value = "数据来源", index = 0)
-    private String systemType;
-    @ExcelProperty(value = "银行编码", index = 1)
+    private String sourceType;
+    /*@ExcelProperty(value = "银行编码", index = 1)
     private Date bankCode;
-    @ExcelProperty(value = "批次号", index = 3)
+    @ExcelProperty(value = "批次号", index = 2)
     private String batchNo;
-    @ExcelProperty(value = "批次说明", index = 4)
+    @ExcelProperty(value = "批次说明", index = 3)
     private String batchDesc;
-    @ExcelProperty(value = "总比数", index = 6)
+    @ExcelProperty(value = "总比数", index = 4)
     private String totalTrans;
-    @ExcelProperty(value = "总金额(元)", index = 6)
-    private String totalAmt;
-    @ExcelProperty(value = "提交状态", index = 6)
+    @ExcelProperty(value = "提交状态", index = 5)
     private String statuss;
     @ExcelProperty(value = "成功笔数", index = 6)
     private String successTrans;
-    @ExcelProperty(value = "失败笔数", index = 6)
+    @ExcelProperty(value = "失败笔数", index = 7)
     private String failTrans;
-    @ExcelProperty(value = "处理中笔数", index = 6)
-    private String processTrans;
+    @ExcelProperty(value = "状态", index = 8)
+    private String status;*/
 
 }

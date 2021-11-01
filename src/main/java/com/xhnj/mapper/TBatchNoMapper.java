@@ -19,5 +19,4 @@ public interface TBatchNoMapper extends BaseMapper<TBatchNo> {
     IPage<TBatchNo> listPage(IPage<TBatchNo> page,@Param("batchNo") TBatchNo batchNo);
     int deleteById(@Param("id") Long id);
 
-    int updateStatusByBatchNo(@Param("status") int status, @Param("checkResult") int checkResult, @Param("batchNo") List<String> batchNo);
 }

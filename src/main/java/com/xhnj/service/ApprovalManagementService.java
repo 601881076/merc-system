@@ -5,6 +5,8 @@ import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.WithholdSuccessExcel;
+import com.xhnj.pojo.query.DeductionBatchQuery;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +32,7 @@ public interface ApprovalManagementService {
      * @param pageNum
      * @return
      */
-    IPage batchPage(TDismissBatch dismissBatch, Integer pageSize, Integer pageNum);
+    IPage batchPage(DisMissBatchQuery dismissBatch, Integer pageSize, Integer pageNum);
 
     /**
      * 审核员授权取消审批操作
@@ -43,10 +45,10 @@ public interface ApprovalManagementService {
 
     /**
      * 导出报告
-     * @param batchNo
+     * @param disMissBatchQuery
      * @return
      */
-    void exportExcel(HttpServletResponse response, TBatchNo batchNo);
+    void exportExcel(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery);
 
 
 }

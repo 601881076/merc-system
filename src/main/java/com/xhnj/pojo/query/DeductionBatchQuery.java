@@ -1,35 +1,39 @@
 package com.xhnj.pojo.query;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xhnj.model.TBatchCheck;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DisMissBatchQuery implements Serializable  {
+public class DeductionBatchQuery implements Serializable  {
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
+    private Integer type;
+
+    private Integer isTimming;
+
+    private String systemType;
     /**
-     * 来源(0->DD、1->SDSP、2->MDD)
+     * 来源(DD、SDSP、MDD)
      */
     private Integer sourceType;
 
-    /**
-     * 银行编码
-     */
     private String bankCode;
 
     /**
-     * 系统批次号
+     * 批次号
      */
+    private String batchNo;
+
     private String systemBatch;
 
     /**
@@ -37,8 +41,20 @@ public class DisMissBatchQuery implements Serializable  {
      */
     private String batchDesc;
 
-    /** 总比数*/
+    /**
+     * 总笔数
+     */
     private Integer totalTrans;
+
+    /**
+     * 总金额
+     */
+    private BigDecimal totalAmt;
+
+    /**
+     * 状态(-1->hold ;0->等待运行;1->已提交银行;2->已从银行获取结果;3->已通知上游)
+     */
+    private String status;
 
     /**
      * 成功笔数
@@ -50,12 +66,18 @@ public class DisMissBatchQuery implements Serializable  {
      */
     private Integer failTrans;
 
-    /** 状态*/
-    private String status;
+    /**
+     * 处理中笔数
+     */
+    private Integer processTrans;
 
-    private Date createTime;
+    private String serialNo;
 
-    private Date updateTime;
+    private String retOwnSpec;
+
+    private String createTime;
+
+    private String updateTime;
 
     /** 查询开始时间*/
     private String startTime;
@@ -66,7 +88,6 @@ public class DisMissBatchQuery implements Serializable  {
     /** 上传用户*/
     private String upUserName;
 
-    private TBatchCheck batchCheckList;
-
+    private TBatchCheck batchCheck;
 
 }

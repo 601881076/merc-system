@@ -1,6 +1,7 @@
 package com.xhnj.service;
 
 import com.xhnj.model.TBatchNo;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,8 +30,8 @@ public interface WithholdBaseService {
 
     /**
      * 导出批量信息
-     * @param batchNo
+     * @param dismissBatch
      * @return
      */
-    void exportExcel(HttpServletResponse response, TBatchNo batchNo);
+    void exportExcel(HttpServletResponse response, DisMissBatchQuery dismissBatch);
 }

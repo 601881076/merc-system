@@ -9,13 +9,16 @@ import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TDismissBatchMapper;
+import com.xhnj.mapper.TDismissBatchQueryMapper;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.WithholdSuccessExcel;
+import com.xhnj.pojo.query.DeductionBatchQuery;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.ApprovalManagementService;
+import com.xhnj.service.BatchCheckService;
 import com.xhnj.service.TWithholdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,17 +33,20 @@ import java.util.List;
 @Service
 public class ApprovalManagementServiceImpl implements ApprovalManagementService {
 
-    @Resource
-    TBatchNoMapper batchNoMapper;
 
     @Resource
-    TDismissBatchMapper dismissBatchMapper;
+    TBatchCheckMapper batchCheckMapper;
 
+    @Resource
+    TDismissBatchQueryMapper listPageDouble;
+
+    @Resource
+    BatchCheckService batchCheckService;
 
     @Override
-    public IPage batchPage(TDismissBatch dismissBatch, Integer pageSize, Integer pageNum) {
+    public IPage batchPage(DisMissBatchQuery dismissBatch, Integer pageSize, Integer pageNum) {
         IPage<DisMissBatchQuery> page = new Page<>(pageNum, pageSize);
-        return dismissBatchMapper.listPageDouble(page,dismissBatch);
+        return listPageDouble.listPageDouble(page,dismissBatch);
     }
 
     @Override
@@ -52,11 +58,11 @@ public class ApprovalManagementServiceImpl implements ApprovalManagementService 
         // 审核状态(0->待提交;1->已提交;2->审核通过;3->审核拒绝)
         int checkResult = option == 1 ? 2 : 3;
 
-        return batchNoMapper.updateStatusByBatchNo(status, checkResult, batchNoList);
+        return batchCheckMapper.updateStatusByBatchNo(status, checkResult, batchNoList);
     }
 
     @Override
-    public void exportExcel(HttpServletResponse response, TBatchNo batchNo) {
-
+    public void exportExcel(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
+        batchCheckService.exportExcelSuccess(response,disMissBatchQuery);
     }
 }
