@@ -7,25 +7,26 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/*
+/**
  @Description
  *@author kang.li
- *@date 2021/9/20 16:43   
+ *@date 2021/9/20 16:43
  */
 @Data
 public class WithholdSuccessExcel extends BaseRowModel {
     @ExcelProperty(value = "银行账号", index = 0)
-    private String recvAccount;
-    @ExcelProperty(value = "交易日期", index = 1)
+    private String card_no;
+    @ExcelProperty(value = "扣款日期", index = 1)
     private Date tradeTime;
     @ExcelProperty(value = "扣款金额(元)", index = 2)
     private BigDecimal money;
-    @ExcelProperty(value = "附言", index = 3)
-    private String postscript;
-    @ExcelProperty(value = "姓名", index = 4)
-    private String customerName;
-    @ExcelProperty(value = "卡号", index = 5)
-    private String cardNo;
-    @ExcelProperty(value = "用途", index = 6)
-    private String usages;
+    @ExcelProperty(value = "银行卡户名", index = 3)
+    private String customer_name;
+    @ExcelProperty(value = "合同号", index = 4)
+    private String contract_no;
+    @ExcelProperty(value = "Belong to", index = 5)
+    private String Belong="TA";
+    @ExcelProperty(value = "Comments", index = 6)
+    private String comments;
+
 }

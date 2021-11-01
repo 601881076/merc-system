@@ -8,7 +8,7 @@
         is_timming,
         batch_no,
         agreement_id,
-        from_type,
+        source_type,
         bank_code,
         order_no,
         pay_type,
@@ -93,11 +93,15 @@
         FROM t_batch_dtl
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
-            AND from_type = #{withholdParam.fromType,jdbcType=INTEGER}
+            AND source_type = #{withholdParam.fromType,jdbcType=INTEGER}
         </if>
         <if test="withholdParam.payResult != null">
             AND pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
         </if>
+        AND batch_no IN
+        <foreach collection = "withholdParam.batchNo" item = "batchNo" open = "(" close = ")" separator = "," >
+            #{batchNo}
+        </foreach>
     </select>
 
 
