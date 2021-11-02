@@ -13,10 +13,8 @@ import com.xhnj.model.WithholdSuccessExcel;
 import com.xhnj.pojo.query.DeductionBatchQuery;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
-import com.xhnj.service.ApprovalManagementService;
-import com.xhnj.service.BatchCheckService;
-import com.xhnj.service.TBatchDtlService;
-import com.xhnj.service.TWithholdService;
+import com.xhnj.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,14 +24,16 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
+@Slf4j
 public class BatchCheckServiceImpl implements BatchCheckService {
 
     @Resource
-    private TBatchDtlService platformserialService;
+    private TBatchChecUploadService tBatchChecUploadService;
 
     @Override
     public void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
-        List<TBatchCheckSuccessExcel> list = platformserialService.getListToBatchCheck(disMissBatchQuery);
+        log.info("授权取消审批报告");
+        List<TBatchCheckSuccessExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery);
 
         String fileName = "授权取消审批报告";
         try {

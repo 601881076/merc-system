@@ -45,44 +45,48 @@ public class BatchCheckController {
 
     @Value("${mq.exchange}")
     private String exchange;
-    /** mq消息队列处理*/
+    /**
+     * mq消息队列处理
+     */
     @Autowired
     private RabbitTemplate rabbitTemplate;
-    /** 授权管理实现类*/
+    /**
+     * 授权管理实现类
+     */
     @Autowired
     ApprovalManagementService approvalManagementService;
 
 
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TDismissBatch>> page(DisMissBatchQuery dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TDismissBatch>> page(DisMissBatchQuery dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权取消批次查询参数" + dismissBatch.toString());
-        IPage page = approvalManagementService.batchPage(dismissBatch,pageSize, pageNum);
+        IPage page = approvalManagementService.batchPage(dismissBatch, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
 
 
     @ApiOperation(value = "授权取消审批拒绝")
     @GetMapping("/refuse")
-    public CommonResult refuse(@RequestParam List<String> batchNo){
+    public CommonResult refuse(@RequestParam List<String> batchNo) {
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
         int count = approvalManagementService.update(2, batchNo);
-        if(count > 0)
+        if (count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
     }
 
     @ApiOperation(value = "授权取消审批批准")
     @GetMapping("/approve")
-    public CommonResult approve(@RequestParam List<String> batchNo){
+    public CommonResult approve(@RequestParam List<String> batchNo) {
         log.info("授权取消审批批准传入参数 = " + batchNo.toString());
         int count = approvalManagementService.update(1, batchNo);
 
         // 审核通过之后讲批次号发往消息队列
         batchNo.forEach(item -> mqSend(exchange, "/ums", item));
 
-        if(count > 0)
+        if (count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
     }
@@ -90,14 +94,15 @@ public class BatchCheckController {
 
     @ApiOperation(value = "下载批量导出报告")
     @GetMapping("/excelBatchExport")
-    public void excelBatchExport(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery){
-        log.info("下载取消授权批量报告, 参数{0}", disMissBatchQuery.toString());
-        approvalManagementService.exportExcel(response,disMissBatchQuery);
+    public void excelBatchExport(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
+        log.info("下载取消授权批量报告, 参数 = " + disMissBatchQuery.toString());
+        approvalManagementService.exportExcel(response, disMissBatchQuery);
     }
 
 
     /**
      * 推送消息队列
+     *
      * @param exchange
      * @param routeKey
      * @param message
@@ -108,7 +113,6 @@ public class BatchCheckController {
             return msg;
         });
     }
-
 
 
 }

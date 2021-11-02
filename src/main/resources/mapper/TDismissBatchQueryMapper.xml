@@ -3,9 +3,9 @@
 <mapper namespace="com.xhnj.mapper.TDismissBatchQueryMapper">
 
     <resultMap id="BaseMap" type="com.xhnj.pojo.query.DisMissBatchQuery">
-<!--        <result property="id" column="id" />-->
+        <result property="id" column="id" />
         <result property="sourceType" column="source_type" />
-        <!--<result property="bankCode" column="bank_code" />
+        <result property="bankCode" column="bank_code" />
         <result property="systemBatch" column="system_batch" />
         <result property="batchDesc" column="batch_desc" />
         <result property="totalTrans" column="total_trans" />
@@ -26,15 +26,15 @@
             <result property="checkUserName" column="check_user_name" />
             <result property="remark" column="de_pic" />
             <result property="checkTime" column="check_time" />
-        </collection>-->
+        </collection>
     </resultMap>
 
 
     <sql id="dismissSql">
-       /* dis.id,
-        dis.system_type,*/
-        dis.source_type
-        /*dis.bank_code,
+        dis.id,
+        dis.system_type,
+        dis.source_type,
+        dis.bank_code,
         dis.system_batch,
         dis.batch_desc,
         dis.total_trans,
@@ -46,7 +46,7 @@
         chk.check_time,
         chk.status,
         chk.check_result,
-        chk.up_user_name*/
+        chk.up_user_name
     </sql>
 
 
@@ -54,7 +54,7 @@
         select
             <include refid="dismissSql"/>
         from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
-        where dis.type = 1
+        where chk.type = 1
         <if test="dismissBatch.startTime != null">
             and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>

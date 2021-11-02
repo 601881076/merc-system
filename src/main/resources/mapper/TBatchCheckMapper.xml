@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TBatchCheckMapper">
+
+    <sql id="dismissSql">
+        /*dis.system_type,*/
+        dis.source_type
+        /*dis.bank_code,
+        dis.system_batch,
+        dis.batch_desc,
+        dis.total_trans,
+        dis.success_trans,
+        dis.fail_trans,
+        dis.status,
+        dis.create_time,
+        dis.update_time,
+        chk.check_time,
+        chk.status,
+        chk.check_result,
+        chk.up_user_name*/
+    </sql>
+
+
     <sql id="batchCheckSql">
         id,
         batch_id,
@@ -31,21 +51,38 @@
             )
         </foreach>
     </insert>
-    <insert id="insertCheck" parameterType="list">
-        insert into t_batch_check
-        (batch_id,type,up_user_id,up_user_name,check_user_id,check_user_name,remark)
-        VALUES
-        <foreach collection="list" item="item" index="index" separator=",">
-            (
-            #{item.batchId,jdbcType=BIGINT},
-            #{item.type,jdbcType=TINYINT},
-            #{item.upUserId,jdbcType=BIGINT},
-            #{item.upUserName,jdbcType=VARCHAR},
-            #{item.checkUserId,jdbcType=BIGINT},
-            #{item.checkUserName,jdbcType=VARCHAR},
-            #{item.remark,jdbcType=VARCHAR}
-            )
+
+    <!--审核员授权取消审批-拒绝操作-->
+    <update id="updateStatusByBatchNo" parameterType="list">
+        update t_batch_check set
+        status = #{status}, check_result = #{checkResult}
+        where batch_id in
+        (
+        <foreach collection="batchNo" item="item" index="index" separator=",">
+            #{item}
         </foreach>
+        )
+    </update>
+
+    <select id="getListToBatchNo" resultType="com.xhnj.model.TBatchCheckSuccessExcel">
+        select
+        <include refid="dismissSql"/>
+        from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
+        where 1 = 1
+        <if test="dismissBatch.startTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.endTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.status !=null and dismissBatch.status != ''">
+            and dis.status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+        <if test="dismissBatch.upUserName != null and dismissBatch.upUserName != ''">
+            and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
     </insert>
     <select id="secOne" resultType="java.lang.Boolean">
        SELECT count(batch_id) from t_batch_check where batch_id=#{batchid,jdbcType=BIGINT}
