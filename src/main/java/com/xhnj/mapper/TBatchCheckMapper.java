@@ -19,6 +19,9 @@ import java.util.List;
 public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
     int insert(@Param("list") List<TBatchCheck> list);
 
+
+    int insertCheck(@Param("list") List<TBatchCheck> batchId);
+
     List<TBatchCheckSuccessExcel> getListToBatchNo(@Param("dismissBatch") DisMissBatchQuery dismissBatch);
 
     int updateStatusByBatchNo(@Param("status") int status, @Param("checkResult") int checkResult, @Param("batchNo") List<String> batchNo);
