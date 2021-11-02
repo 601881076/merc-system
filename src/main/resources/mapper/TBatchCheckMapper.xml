@@ -51,6 +51,24 @@
             )
         </foreach>
     </insert>
+    <insert id="insertCheck" parameterType="list">
+        insert into t_batch_check
+        (batch_id,batch_no,type,up_user_id,up_user_name,check_user_id,check_user_name,remark)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.batchId,jdbcType=BIGINT},
+            #{item.batchNo,jdbcType=VARCHAR},
+            #{item.type,jdbcType=TINYINT},
+            #{item.upUserId,jdbcType=BIGINT},
+            #{item.upUserName,jdbcType=VARCHAR},
+            #{item.checkUserId,jdbcType=BIGINT},
+            #{item.checkUserName,jdbcType=VARCHAR},
+            #{item.remark,jdbcType=VARCHAR}
+            )
+        </foreach>
+        )
+    </insert>
 
     <!--审核员授权取消审批-拒绝操作-->
     <update id="updateStatusByBatchNo" parameterType="list">
@@ -83,7 +101,15 @@
         </if>
     </select>
 
-    <select id="secOne" resultType="java.lang.Boolean">
-       SELECT count(batch_id) from t_batch_check where batch_id=#{batchid,jdbcType=BIGINT}
+
+    <select id="secChenckOne" resultType="java.lang.Long">
+       SELECT count(batch_id) from t_batch_check where batch_no=#{batchno,jdbcType=VARCHAR}
+    </select>
+
+    <select id="secBatchOne" resultType="java.lang.Long">
+       SELECT id from t_batch_no where batch_no=#{batchno,jdbcType=VARCHAR}
+    </select>
+    <select id="secDisOne" resultType="java.lang.Long">
+       SELECT id from t_dismiss_batch where system_batch=#{batchno,jdbcType=VARCHAR}
     </select>
 </mapper>

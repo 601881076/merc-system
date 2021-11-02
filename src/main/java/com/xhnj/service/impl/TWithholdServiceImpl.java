@@ -113,8 +113,7 @@ public class TWithholdServiceImpl implements TWithholdService {
             withholdParam.setFromType(ValueConstance.SOURCE_MDD);
         }
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
-        log.info(list.toString());
-        list.stream().forEach(e ->e.setCard_no(businUtil.maskBankCard(e.getCard_no())));
+        list.stream().forEach(e ->e.setRecvAccount(businUtil.maskBankCard(e.getRecvAccount())));
         String fileName = "扣款成功报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
@@ -192,6 +191,7 @@ public class TWithholdServiceImpl implements TWithholdService {
             withholdParam.setFromType(ValueConstance.SOURCE_MDD);
         }
         List<WithholdFailExcel> list = platformserialService.getFailList(withholdParam);
+        list.stream().forEach(e ->e.setRecvAccount(businUtil.maskBankCard(e.getRecvAccount())));
         String fileName = "扣款失败报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
