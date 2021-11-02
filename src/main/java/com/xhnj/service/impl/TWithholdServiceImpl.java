@@ -31,13 +31,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 /*
  @Description
  *@author kang.li
  *@date 2021/9/18 17:14   
  */
 @Service
+@Slf4j
 public class TWithholdServiceImpl implements TWithholdService {
     @Autowired
     private ValidateProcessor validateProcessor;
@@ -112,8 +113,9 @@ public class TWithholdServiceImpl implements TWithholdService {
             withholdParam.setFromType(ValueConstance.SOURCE_MDD);
         }
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
-        list.stream().forEach(e ->e.setCardNo(businUtil.maskBankCard(e.getCardNo())));
-        String fileName = "扣款报告";
+        log.info(list.toString());
+        list.stream().forEach(e ->e.setCard_no(businUtil.maskBankCard(e.getCard_no())));
+        String fileName = "扣款成功报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setCharacterEncoding("utf-8");
@@ -123,7 +125,7 @@ public class TWithholdServiceImpl implements TWithholdService {
             Sheet sheet = new Sheet(1,0, WithholdSuccessExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
-            sheet.setSheetName("扣款报告");
+            sheet.setSheetName("扣款成功报告");
             writer.write(list,sheet);
             writer.finish();
             out.flush();
