@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TBatchCheckMapper">
+
+    <sql id="dismissSql">
+        /*dis.system_type,*/
+        dis.source_type
+        /*dis.bank_code,
+        dis.system_batch,
+        dis.batch_desc,
+        dis.total_trans,
+        dis.success_trans,
+        dis.fail_trans,
+        dis.status,
+        dis.create_time,
+        dis.update_time,
+        chk.check_time,
+        chk.status,
+        chk.check_result,
+        chk.up_user_name*/
+    </sql>
+
+
     <sql id="batchCheckSql">
         id,
         batch_id,
@@ -42,4 +62,24 @@
         </foreach>
         )
     </update>
+
+    <select id="getListToBatchNo" resultType="com.xhnj.model.TBatchCheckSuccessExcel">
+        select
+        <include refid="dismissSql"/>
+        from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
+        where 1 = 1
+        <if test="dismissBatch.startTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.endTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.status !=null and dismissBatch.status != ''">
+            and dis.status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+        <if test="dismissBatch.upUserName != null and dismissBatch.upUserName != ''">
+            and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
 </mapper>

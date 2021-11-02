@@ -27,7 +27,7 @@ public class TBatchCheckSuccessExcel extends BaseRowModel {
 
     @ExcelProperty(value = "数据来源", index = 0)
     private String sourceType;
-    /*@ExcelProperty(value = "银行编码", index = 1)
+    @ExcelProperty(value = "银行编码", index = 1)
     private Date bankCode;
     @ExcelProperty(value = "批次号", index = 2)
     private String batchNo;
@@ -42,6 +42,7 @@ public class TBatchCheckSuccessExcel extends BaseRowModel {
     @ExcelProperty(value = "失败笔数", index = 7)
     private String failTrans;
     @ExcelProperty(value = "状态", index = 8)
-    private String status;*/
+    private String status;
+
 
 }
