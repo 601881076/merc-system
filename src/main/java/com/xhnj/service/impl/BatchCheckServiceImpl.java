@@ -5,6 +5,8 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.enums.BatchStatusEnum;
+import com.xhnj.enums.SourceTypeEnum;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TDismissBatchQueryMapper;
 import com.xhnj.model.TBatchCheckSuccessExcel;
@@ -35,9 +37,44 @@ public class BatchCheckServiceImpl implements BatchCheckService {
         log.info("授权取消审批报告");
         List<TBatchCheckSuccessExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery);
 
-        list.forEach(tBatchCheckSuccessExcel -> {
-            log.info(tBatchCheckSuccessExcel.toString());
+        list.stream().forEach(item -> {
+            log.info("sourceType = " + item.getSourceType());
+            switch (item.getSourceType()) {
+                case "0" :
+                    item.setSourceType(SourceTypeEnum.sourceTypeDD.desc());
+                    break;
+                case "1" :
+                    item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
+                    break;
+                case "2" :
+                    item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
+                    break;
+                default:
+                    break;
+            }
+
+            switch (item.getStatus()) {
+                case "-1" :
+                    item.setStatus(BatchStatusEnum.STATUS_HOLD.desc());
+                    break;
+                case "0" :
+                    item.setStatus(BatchStatusEnum.STATUS_WATI.desc());
+                    break;
+                case "1" :
+                    item.setStatus(BatchStatusEnum.STATUS_COMMIT.desc());
+                    break;
+                case "2" :
+                    item.setStatus(BatchStatusEnum.STATUS_REQUEST.desc());
+                    break;
+                case "3" :
+                    item.setStatus(BatchStatusEnum.STATUS_MSG.desc());
+                    break;
+                default:
+                    break;
+            }
+            log.info(item.toString());
         });
+
         String fileName = "授权取消审批报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");

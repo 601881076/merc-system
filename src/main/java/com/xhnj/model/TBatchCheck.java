@@ -32,6 +32,11 @@ public class TBatchCheck implements Serializable {
     private Long batchId;
 
     /**
+     * 批次号
+     */
+    private String batchNo;
+
+    /**
      * 批次类型(0->代扣;1->授权取消)
      */
     private Integer type;

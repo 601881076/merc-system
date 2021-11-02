@@ -17,7 +17,7 @@ public class WithholdFailExcel extends BaseRowModel {
     @ExcelProperty(value = "银行账号", index = 0)
     private String recvAccount;
     @ExcelProperty(value = "客户合同号", index = 1)
-    private String projectNo;
+    private String contractNo;
     @ExcelProperty(value = "姓名", index = 2)
     private String customerName;
     @ExcelProperty(value = "扣款金额(元)", index = 3)

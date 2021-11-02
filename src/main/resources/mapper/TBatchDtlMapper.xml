@@ -30,7 +30,9 @@
         usages,
         summary,
         postscript,
-        create_time
+        create_time,
+        reason,
+        contract_no
     </sql>
 
     <sql id="batchNoSql">
