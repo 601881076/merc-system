@@ -138,7 +138,7 @@
         </foreach >
     </insert>
 
-    <select id="getListToBatchNo" resultMap="com.xhnj.model.TBatchCheckSuccessExcel">
+    <select id="getListToBatchNo" resultMap="BaseMap">
         select
         <include refid="dismissSql"/>
         from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
