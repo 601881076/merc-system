@@ -14,18 +14,18 @@ import java.util.Date;
  */
 @Data
 public class WithholdSuccessExcel extends BaseRowModel {
-    @ExcelProperty(value = "银行账号", index = 0)
-    private String card_no;
+    @ExcelProperty(value = "FAFC收款银行账号", index = 0)
+    private String recvAccount;
     @ExcelProperty(value = "扣款日期", index = 1)
     private Date tradeTime;
     @ExcelProperty(value = "扣款金额(元)", index = 2)
     private BigDecimal money;
     @ExcelProperty(value = "银行卡户名", index = 3)
-    private String customer_name;
+    private String customerName;
     @ExcelProperty(value = "合同号", index = 4)
-    private String contract_no;
+    private String contractNo;
     @ExcelProperty(value = "Belong to", index = 5)
-    private String Belong="TA";
+    final private String Belong="TA";
     @ExcelProperty(value = "Comments", index = 6)
     private String comments;
 
