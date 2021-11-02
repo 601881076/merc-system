@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface TBatchCheckService extends IService<TBatchCheck> {
     int insert(List<String> list);
+    int insertCheck(List<String> batchId);
 }

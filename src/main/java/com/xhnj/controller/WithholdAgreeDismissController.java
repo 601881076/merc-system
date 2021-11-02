@@ -8,6 +8,7 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.vo.BatchNoVO;
+import com.xhnj.service.TBatchCheckService;
 import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.service.WithholdAgreeDismissBaseService;
 import io.swagger.annotations.Api;
@@ -41,6 +42,8 @@ public class WithholdAgreeDismissController {
     private TWithholdAgreeService withholdAgreeService;
     @Autowired
     private WithholdAgreeDismissBaseService WithholdAgreeDismissBaseService;
+    @Autowired
+    private TBatchCheckService batchCheckService;
 
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
@@ -87,5 +90,17 @@ public class WithholdAgreeDismissController {
 
         WithholdAgreeDismissBaseService.exportExcel(response);
     }
+
+    @ApiOperation(value = "授权取消提交")
+    @GetMapping("/batchCheckSub")
+    public CommonResult batchCheckSub(@RequestParam List<String> batchId){
+        log.info("batchId;"+batchId.toString());
+        int count=batchCheckService.insertCheck(batchId);
+        if (count>0){
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
 
 }

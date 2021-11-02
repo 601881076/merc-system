@@ -72,7 +72,6 @@ public class WithholdController {
     @ApiOperation(value = "批量导出")
     @GetMapping("/batchExport")
     public void batchExport(HttpServletResponse response,@RequestParam List<String> batchNo){
-//        List<String> list = Arrays.asList(batchNo.split(","));
         withholdBaseService.batchExport(response,batchNo);
     }
 
@@ -110,7 +109,6 @@ public class WithholdController {
     @ApiOperation(value = "批量批次审核")
     @GetMapping("/batchCheck")
     public CommonResult batchCheck(@RequestParam List<String> batchId){
-//        List<String> list = Arrays.asList(batchId.split(","));
         int count=batchCheckService.insert(batchId);
         if (count>0){
             return CommonResult.success(count);

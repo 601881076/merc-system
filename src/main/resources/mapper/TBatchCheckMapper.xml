@@ -37,11 +37,12 @@
     </sql>
     <insert id="insert" parameterType="list">
         insert into t_batch_check
-            (batch_id,up_user_id,up_user_name,check_user_id,check_user_name,remark)
+            (batch_id,type,up_user_id,up_user_name,check_user_id,check_user_name,remark)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
              #{item.batchId,jdbcType=BIGINT},
+             #{item.type,jdbcType=TINYINT},
              #{item.upUserId,jdbcType=BIGINT},
              #{item.upUserName,jdbcType=VARCHAR},
              #{item.checkUserId,jdbcType=BIGINT},
@@ -82,4 +83,8 @@
         </if>
     </select>
 
+    </insert>
+    <select id="secOne" resultType="java.lang.Boolean">
+       SELECT count(batch_id) from t_batch_check where batch_id=#{batchid,jdbcType=BIGINT}
+    </select>
 </mapper>
