@@ -83,7 +83,6 @@
         </if>
     </select>
 
-    </insert>
     <select id="secOne" resultType="java.lang.Boolean">
        SELECT count(batch_id) from t_batch_check where batch_id=#{batchid,jdbcType=BIGINT}
     </select>
