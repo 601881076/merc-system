@@ -3,9 +3,9 @@
 <mapper namespace="com.xhnj.mapper.TBatchCheckMapper">
 
     <sql id="dismissSql">
-        /*dis.system_type,*/
-        dis.source_type
-        /*dis.bank_code,
+        dis.system_type,
+        dis.source_type,
+        dis.bank_code,
         dis.system_batch,
         dis.batch_desc,
         dis.total_trans,
@@ -15,9 +15,9 @@
         dis.create_time,
         dis.update_time,
         chk.check_time,
-        chk.status,
+        chk.status chkStatus,
         chk.check_result,
-        chk.up_user_name*/
+        chk.up_user_name
     </sql>
 
 

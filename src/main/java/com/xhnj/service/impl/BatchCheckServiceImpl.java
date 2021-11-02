@@ -35,6 +35,9 @@ public class BatchCheckServiceImpl implements BatchCheckService {
         log.info("授权取消审批报告");
         List<TBatchCheckSuccessExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery);
 
+        list.forEach(tBatchCheckSuccessExcel -> {
+            log.info(tBatchCheckSuccessExcel.toString());
+        });
         String fileName = "授权取消审批报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
@@ -42,7 +45,7 @@ public class BatchCheckServiceImpl implements BatchCheckService {
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
-            Sheet sheet = new Sheet(1,0, WithholdSuccessExcel.class);
+            Sheet sheet = new Sheet(1,0, TBatchCheckSuccessExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
             sheet.setSheetName("授权取消审批报告");

@@ -46,7 +46,8 @@
         chk.check_time,
         chk.status,
         chk.check_result,
-        chk.up_user_name
+        chk.up_user_name,
+        chk.batch_id
     </sql>
 
 

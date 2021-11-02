@@ -35,14 +35,19 @@ public class TBatchCheckSuccessExcel extends BaseRowModel {
     private String batchDesc;
     @ExcelProperty(value = "总比数", index = 4)
     private String totalTrans;
-    @ExcelProperty(value = "提交状态", index = 5)
-    private String statuss;
-    @ExcelProperty(value = "成功笔数", index = 6)
+    @ExcelProperty(value = "成功笔数", index = 5)
     private String successTrans;
-    @ExcelProperty(value = "失败笔数", index = 7)
+    @ExcelProperty(value = "失败笔数", index = 6)
     private String failTrans;
-    @ExcelProperty(value = "状态", index = 8)
+    @ExcelProperty(value = "状态", index = 7)
     private String status;
-
+    @ExcelProperty(value = "上传人姓名", index = 8)
+    private String upUserName;
+    @ExcelProperty(value = "审核时间", index = 9)
+    private String checkTime;
+    @ExcelProperty(value = "审核结果", index = 10)
+    private String checkResult;
+    @ExcelProperty(value = "审核状态", index = 11)
+    private String chkStatus;
 
 }
