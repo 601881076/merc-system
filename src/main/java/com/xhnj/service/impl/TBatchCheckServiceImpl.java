@@ -84,7 +84,7 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
         if(list.size() ==0){
             return 0;
         }else {
-            return batchCheckMapper.insertCheck(list);
+            return batchCheckMapper.insert(list);
         }
     }
 }

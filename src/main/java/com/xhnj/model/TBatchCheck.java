@@ -32,7 +32,7 @@ public class TBatchCheck implements Serializable {
     private Long batchId;
 
     /**
-     * 批次表id
+     * 批次号
      */
     private String batchNo;
 
