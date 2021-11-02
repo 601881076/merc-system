@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TBatchNo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 批次表 Mapper 接口
@@ -16,4 +18,5 @@ import org.apache.ibatis.annotations.Param;
 public interface TBatchNoMapper extends BaseMapper<TBatchNo> {
     IPage<TBatchNo> listPage(IPage<TBatchNo> page,@Param("batchNo") TBatchNo batchNo);
     int deleteById(@Param("id") Long id);
+
 }

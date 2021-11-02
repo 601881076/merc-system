@@ -3,6 +3,7 @@ package com.xhnj.mapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.parameters.P;
 
@@ -19,7 +20,10 @@ import java.util.List;
  */
 public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
     IPage listPage(IPage<TDismissBatch> page,@Param("dismissBatch") TDismissBatch dismissBatch);
+
+    IPage listPageDouble(IPage<DisMissBatchQuery> page, @Param("dismissBatch") TDismissBatch dismissBatch);
+
     int deleteById(@Param("id")Long id);
 
-    int updateStatusByBatchNo(@Param("status") int status, @Param("checkResult") int checkResult, @Param("batchNo") List<String> batchNo);
+
 }

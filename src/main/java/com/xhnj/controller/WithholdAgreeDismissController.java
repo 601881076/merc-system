@@ -42,9 +42,6 @@ public class WithholdAgreeDismissController {
     @Autowired
     private WithholdAgreeDismissBaseService WithholdAgreeDismissBaseService;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
-
     @ApiOperation(value = "分页查询授权取消批次")
     @GetMapping("/page")
     public CommonResult<CommonPage<TDismissBatch>> page(TDismissBatch dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
@@ -70,31 +67,6 @@ public class WithholdAgreeDismissController {
         return CommonResult.failed();
     }
 
-
-    @ApiOperation(value = "授权取消审批拒绝")
-    @GetMapping("/update")
-    public CommonResult update(@RequestParam List<String> batchNo){
-        log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
-        int count = WithholdAgreeDismissBaseService.update(2, batchNo);
-        if(count > 0)
-            return CommonResult.success(count);
-        return CommonResult.failed();
-    }
-
-    @ApiOperation(value = "授权取消审批批准")
-    @GetMapping("/approve")
-    public CommonResult approve(@RequestParam List<String> batchNo){
-        log.info("授权取消审批批准传入参数 = " + batchNo.toString());
-        int count = WithholdAgreeDismissBaseService.update(1, batchNo);
-
-        // 审核通过之后讲批次号发往消息队列
-        batchNo.forEach(item -> mqSend(exchange, "/ums", item));
-
-        if(count > 0)
-            return CommonResult.success(count);
-        return CommonResult.failed();
-    }
-
     @ApiOperation(value = "取消授权excel上传")
     @PostMapping("/excelImport")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file, BatchNoVO batchNoVO){
@@ -114,19 +86,6 @@ public class WithholdAgreeDismissController {
     public void downloadExport(HttpServletResponse response){
 
         WithholdAgreeDismissBaseService.exportExcel(response);
-    }
-
-    /**
-     * 推送消息队列
-     * @param exchange
-     * @param routeKey
-     * @param message
-     */
-    public void mqSend(String exchange, String routeKey, String message) {
-        rabbitTemplate.convertAndSend(exchange, routeKey, message, msg -> {
-            msg.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
-            return msg;
-        });
     }
 
 }

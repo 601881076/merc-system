@@ -15,12 +15,6 @@ public interface WithholdAgreeDismissBaseService {
      */
     int delete(Long id);
 
-    /**
-     * 审核员授权取消审批操作
-     * @param option 操作类型：1-批准，2-拒绝
-     * @param batchNoList
-     * @return
-     */
-    int update(int option, List<String> batchNoList);
+
 
 }

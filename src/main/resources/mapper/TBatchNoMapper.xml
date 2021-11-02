@@ -6,7 +6,7 @@
         type,
         is_timming,
         system_type,
-        from_type,
+        source_type,
         bank_code,
         batch_no,
         system_batch,
@@ -41,4 +41,5 @@
     <delete id="deleteById">
         delete from t_batch_no where status=-1 and id=#{id}
     </delete>
+
 </mapper>

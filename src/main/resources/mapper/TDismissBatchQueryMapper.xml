@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xhnj.mapper.TDismissBatchMapper">
+<mapper namespace="com.xhnj.mapper.TDismissBatchQueryMapper">
 
     <resultMap id="BaseMap" type="com.xhnj.pojo.query.DisMissBatchQuery">
-        <result property="id" column="id" />
+<!--        <result property="id" column="id" />-->
         <result property="sourceType" column="source_type" />
-        <result property="bankCode" column="bank_code" />
+        <!--<result property="bankCode" column="bank_code" />
         <result property="systemBatch" column="system_batch" />
         <result property="batchDesc" column="batch_desc" />
         <result property="totalTrans" column="total_trans" />
@@ -18,24 +18,23 @@
             <result property="id" column="de_id" />
             <result property="batchId" column="batch_id" />
             <result property="type" column="type" />
+            <result property="status" column="status" />
             <result property="checkResult" column="check_result" />
             <result property="upUserId" column="up_user_id" />
             <result property="upUserName" column="up_user_name" />
             <result property="checkUserId" column="check_user_id" />
             <result property="checkUserName" column="check_user_name" />
             <result property="remark" column="de_pic" />
-            <result property="createTime" column="create_time" />
             <result property="checkTime" column="check_time" />
-            <result property="updateTime" column="update_time" />
-        </collection>
+        </collection>-->
     </resultMap>
 
 
     <sql id="dismissSql">
-        dis.id,
-        dis.system_type,
-        dis.source_type,
-        dis.bank_code,
+       /* dis.id,
+        dis.system_type,*/
+        dis.source_type
+        /*dis.bank_code,
         dis.system_batch,
         dis.batch_desc,
         dis.total_trans,
@@ -43,7 +42,11 @@
         dis.fail_trans,
         dis.status,
         dis.create_time,
-        dis.update_time
+        dis.update_time,
+        chk.check_time,
+        chk.status,
+        chk.check_result,
+        chk.up_user_name*/
     </sql>
 
 
@@ -51,33 +54,19 @@
         select
             <include refid="dismissSql"/>
         from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
-        where 1=1
-        <if test="dismissBatch.createTime != null">
-            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
+        where dis.type = 1
+        <if test="dismissBatch.startTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
-        <if test="dismissBatch.systemBatch !=null and dismissBatch.systemBatch != ''">
-            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
+        <if test="dismissBatch.endTime != null">
+            and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
-        <if test="dismissBatch.status != null and dismissBatch.status != ''">
-            and status=#{dismissBatch.status,jdbcType=INTEGER}
+        <if test="dismissBatch.status !=null and dismissBatch.status != ''">
+            and dis.status=#{dismissBatch.status,jdbcType=INTEGER}
         </if>
-    </select>
-
-
-    <select id="listPage" resultType="com.xhnj.model.TDismissBatch">
-        select <include refid="dismissSql"/> from t_dismiss_batch where 1=1
-        <if test="dismissBatch.createTime!=null">
-            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="dismissBatch.systemBatch!=null and dismissBatch.systemBatch!=''">
-            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
-        </if>
-        <if test="dismissBatch.status!=null and dismissBatch.status!=''">
-            and status=#{dismissBatch.status,jdbcType=INTEGER}
+        <if test="dismissBatch.upUserName != null and dismissBatch.upUserName != ''">
+            and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
         </if>
     </select>
-    <delete id="deleteById">
-        delete from t_dismiss_batch where status=-1 and id=#{id}
-    </delete>
 
 </mapper>

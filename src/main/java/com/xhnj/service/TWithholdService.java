@@ -2,6 +2,7 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TBatchNo;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,4 +68,11 @@ public interface TWithholdService {
      * @return
      */
     int delete(Long id);
+
+    /**
+     * 导出成功
+     * @param dismissBatch
+     * @return
+     */
+    void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery dismissBatch);
 }

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -35,9 +37,14 @@ public class TBatchCheck implements Serializable {
     private Integer type;
 
     /**
-     * 审核结果(0->待复审；1->复审通过;2->初审拒绝;3->复审拒绝)
+     * 审核结果(0->待审核；1->通过;2->拒绝)
      */
     private Integer checkResult;
+
+    /**
+     * 审核状态(0->待提交;1->已提交;2->审核通过;3->审核拒绝)
+     */
+    private Integer status;
 
     /**
      * 上传人id
@@ -64,14 +71,14 @@ public class TBatchCheck implements Serializable {
      */
     private String remark;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 审核时间
      */
-    private LocalDateTime checkTime;
+    private Date checkTime;
 
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
 }

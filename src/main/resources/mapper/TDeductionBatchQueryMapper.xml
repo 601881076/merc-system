@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TDeductionBatchQueryMapper">
+
+    <resultMap id="BaseMap" type="com.xhnj.pojo.query.DeductionBatchQuery">
+        <result property="id" column="id" />
+        <result property="type" column="type" />
+        <result property="isTimming" column="is_timming" />
+        <result property="systemType" column="system_type" />
+        <result property="sourceType" column="source_type" />
+        <result property="bankCode" column="bank_code" />
+        <result property="batchNo" column="batch_no" />
+        <result property="systemBatch" column="system_batch" />
+        <result property="batchDesc" column="batch_desc" />
+        <result property="totalTrans" column="total_trans" />
+        <result property="totalAmt" column="total_amt" />
+        <result property="status" column="status" />
+        <result property="successTrans" column="success_trans" />
+        <result property="failTrans" column="fail_trans" />
+        <result property="processTrans" column="process_trans" />
+        <result property="serialNo" column="serial_no" />
+        <result property="retOwnSpec" column="ret_own_spec" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <collection property="batchCheck" ofType="com.xhnj.model.TBatchCheck">
+            <result property="id" column="de_id" />
+            <result property="batchId" column="batch_id" />
+            <result property="type" column="type" />
+            <result property="status" column="status" />
+            <result property="checkResult" column="check_result" />
+            <result property="upUserId" column="up_user_id" />
+            <result property="upUserName" column="up_user_name" />
+            <result property="checkUserId" column="check_user_id" />
+            <result property="checkUserName" column="check_user_name" />
+            <result property="remark" column="de_pic" />
+            <result property="checkTime" column="check_time" />
+        </collection>
+    </resultMap>
+
+
+    <sql id="SqlList">
+        batch.type,
+        batch.is_timming,
+        batch.system_type,
+        batch.source_type,
+        batch.bank_code,
+        batch.batch_no,
+        batch.system_batch,
+        batch.batch_desc,
+        batch.total_trans,
+        CONVERT(batch.total_amt/100, decimal(15,2)) AS "total_amt",
+        batch.status,
+        batch.success_trans,
+        batch.fail_trans,
+        batch.process_trans,
+        batch.serial_no,
+        batch.ret_own_spec,
+        batch.create_time,
+        batch.update_time,
+        chk.status,
+        chk.up_user_name,
+        chk.check_time
+    </sql>
+
+
+    <select id="listPage" resultMap="BaseMap">
+        select
+            <include refid="SqlList"/>
+        from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_id
+        where chk.type = 0
+        <if test="dismissBatch.startTime != null">
+            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.endTime != null">
+            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="dismissBatch.status!=null and dismissBatch.status!=''">
+            and batch.status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+        <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
+            and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

@@ -1,5 +1,7 @@
 package com.xhnj.service.impl;
 
+import com.xhnj.model.TBatchNo;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.TWithholdService;
 import com.xhnj.service.WithholdBaseService;
@@ -36,5 +38,11 @@ public class WithholdBaseServiceImpl implements WithholdBaseService {
     @Override
     public void batchExport(HttpServletResponse response, List<String> list){
         withholdService.batchExportExcelSuccess(response,list);
+    }
+
+
+    @Override
+    public void exportExcel(HttpServletResponse response, DisMissBatchQuery dismissBatch) {
+        withholdService.exportExcelSuccess(response,dismissBatch);
     }
 }
