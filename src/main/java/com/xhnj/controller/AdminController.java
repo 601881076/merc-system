@@ -7,6 +7,7 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
 import com.xhnj.pojo.query.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
+import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
 import com.xhnj.service.TAdminService;
 import com.xhnj.service.TRoleService;
 import io.swagger.annotations.Api;
@@ -128,6 +129,15 @@ public class AdminController {
     @PostMapping("/delete/{id}")
     public CommonResult delete(@PathVariable("id") Long id) {
         int count = adminService.deleteAdmin(id);
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("更改密码")
+    @PostMapping("/updatepass")
+    public CommonResult updatePass(UmsAdminUpdatePassParam UmsAdminUpdatePassParam) {
+        int count = adminService.updatePass(UmsAdminUpdatePassParam);
         if(count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
