@@ -128,6 +128,7 @@ public class AdminController {
     @ApiOperation("删除用户")
     @PostMapping("/delete/{id}")
     public CommonResult delete(@PathVariable("id") Long id) {
+        log.info("删除用户 = " + id);
         int count = adminService.deleteAdmin(id);
         if(count > 0)
             return CommonResult.success(count);

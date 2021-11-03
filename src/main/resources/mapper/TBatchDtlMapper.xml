@@ -61,7 +61,7 @@
 
     <insert id="addBatch" parameterType="list">
         INSERT INTO t_batch_dtl
-        (batch_no,           agreement_id,                 from_type,                bank_code,                 order_no,
+        (batch_no,           agreement_id,                 source_type,                bank_code,                 order_no,
         pay_type,           trade_time,                    pay_recv,                 currency,                  money,
         recv_account,       recv_account_name,             recv_bank_no,             recv_bank_name,            card_no,
         customer_name,      pay_bank_no,                   pay_bank_name,            usages,                    summary,
