@@ -143,4 +143,13 @@ public class AdminController {
         return CommonResult.failed();
     }
 
+    @ApiOperation("管理员重置密码")
+    @PostMapping("/resetpass")
+    public CommonResult resetPass(TAdmin admin) {
+        int count = adminService.resetPass(admin);
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
+
 }

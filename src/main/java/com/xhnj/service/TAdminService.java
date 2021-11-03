@@ -25,6 +25,8 @@ public interface TAdminService extends IService<TAdmin> {
 
     int updateAdmin(TAdmin admin);
 
+    int resetPass(TAdmin admin);
+
     int insertAdmin(TAdmin admin);
 
     int deleteAdmin(Long id);

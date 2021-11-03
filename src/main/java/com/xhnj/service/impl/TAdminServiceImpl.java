@@ -110,6 +110,14 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    public int resetPass(TAdmin admin) {
+        if(StrUtil.isBlank(admin.getPassword())) {
+            throw new BusinessException("用户密码不能为空");
+        }
+        return adminMapper.updateById(admin);
+    }
+
+    @Override
     public int updateAdmin(TAdmin admin) {
         if(StrUtil.isNotBlank(admin.getPassword())){
             admin.setPassword(null);
