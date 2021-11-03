@@ -123,7 +123,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
 
         //添加批次
         TDismissBatch dismissBatch = new TDismissBatch();
-        dismissBatch.setFromType(ValueConstance.SOURCE_MDD);
+        dismissBatch.setSourceType(ValueConstance.SOURCE_MDD);
         dismissBatch.setSystemBatch((String) context.get("batchNo"));
         dismissBatch.setTotalTrans((Integer) context.get("totalTrans"));
         dismissBatchMapper.insert(dismissBatch);

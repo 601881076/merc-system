@@ -36,7 +36,7 @@ public class TBatchNo implements Serializable {
     /**
      * 来源(DD、SDSP、MDD)
      */
-    private Integer fromType;
+    private Integer sourceType;
 
     private String bankCode;
 

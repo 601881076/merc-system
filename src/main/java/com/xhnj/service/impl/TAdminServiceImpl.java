@@ -8,6 +8,7 @@ import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TAdmin;
 import com.xhnj.mapper.TAdminMapper;
+import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
 import com.xhnj.service.TAdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.util.JwtTokenUtil;
@@ -130,5 +131,22 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         if(id == null)
             throw new BusinessException("用户id不能为空");
         return adminMapper.deleteById(id);
+    }
+
+    @Override
+    public int updatePass(UmsAdminUpdatePassParam adminpass) {
+        if(adminpass.getType()==0){
+            String password = RSAUtils.decryptDataOnJava(adminpass.getOpassword(), privateKey);
+            UserDetails userDetails = loadUserByUsername(adminpass.getUsername());
+            if(userDetails == null)
+                throw new UsernameNotFoundException("用户名或密码错误");
+            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+                throw new BadCredentialsException("密码不正确");
+            }
+        }
+        TAdmin admin=new TAdmin();
+        admin.setUsername(adminpass.getUsername());
+        admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
+        return adminMapper.updateById(admin);
     }
 }

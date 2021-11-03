@@ -29,7 +29,7 @@ public class TDismissBatch implements Serializable {
     /**
      * 来源(0->DD、1->SDSP、2->MDD)
      */
-    private Integer fromType;
+    private Integer sourceType;
 
     /**
      * 银行编码
