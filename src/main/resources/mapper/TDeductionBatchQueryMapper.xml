@@ -58,6 +58,7 @@
         batch.create_time,
         batch.update_time,
         chk.status,
+        chk.check_result,
         chk.up_user_name,
         chk.check_time
     </sql>
