@@ -3,6 +3,7 @@ package com.xhnj.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.model.TAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xhnj.model.TAdminRole;
 import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -32,5 +33,7 @@ public interface TAdminService extends IService<TAdmin> {
     int deleteAdmin(Long id);
 
     int updatePass(UmsAdminUpdatePassParam admin);
+
+    int updateRole(TAdminRole tadminrole);
 
 }

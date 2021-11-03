@@ -4,6 +4,8 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.mapper.TAdminRoleMapper;
+import com.xhnj.model.TAdminRole;
 import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TAdmin;
@@ -42,6 +44,8 @@ import javax.annotation.Resource;
 public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> implements TAdminService {
     @Resource
     private TAdminMapper adminMapper;
+    @Resource
+    private TAdminRoleMapper tadminrolemapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -156,5 +160,13 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         admin.setUsername(adminpass.getUsername());
         admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
         return adminMapper.updateById(admin);
+    }
+
+    @Override
+    public int updateRole(TAdminRole tadminrole) {
+        if(tadminrole.getUserId()==null){
+            throw new BusinessException("用户id不能为空");
+        }
+        return  tadminrolemapper.updRole(tadminrole);
     }
 }

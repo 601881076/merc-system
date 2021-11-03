@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
+import com.xhnj.model.TAdminRole;
 import com.xhnj.pojo.query.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
 import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
@@ -152,5 +153,12 @@ public class AdminController {
             return CommonResult.success(count);
         return CommonResult.failed();
     }
-
+    @ApiOperation("分配角色")
+    @PostMapping("/updaterole")
+    public CommonResult updateRole(TAdminRole tadminrole) {
+        int count = adminService.updateRole(tadminrole);
+        if(count > 0)
+            return CommonResult.success(count);
+        return CommonResult.failed();
+    }
 }
