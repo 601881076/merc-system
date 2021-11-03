@@ -58,6 +58,7 @@
         batch.create_time,
         batch.update_time,
         chk.status,
+        chk.check_result,
         chk.up_user_name,
         chk.check_time
     </sql>
@@ -68,10 +69,10 @@
             <include refid="SqlList"/>
         from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_id
         where chk.type = 0
-        <if test="dismissBatch.startTime != null">
+        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
-        <if test="dismissBatch.endTime != null">
+        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
         <if test="dismissBatch.status!=null and dismissBatch.status!=''">
