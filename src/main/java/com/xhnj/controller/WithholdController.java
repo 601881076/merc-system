@@ -14,6 +14,7 @@ import com.xhnj.service.TWithholdService;
 import com.xhnj.service.WithholdBaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ import java.util.List;
 @Api(value = "代扣", tags = "代扣接口")
 @RestController
 @RequestMapping("/wh")
+@Slf4j
 public class WithholdController {
     @Autowired
     private TWithholdService withholdService;
@@ -65,6 +67,7 @@ public class WithholdController {
     @GetMapping("/page")
     public CommonResult<CommonPage<TBatchNo>> page(TBatchNo batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        log.info("batchNo" + batchNo.toString());
         IPage page = withholdService.batchPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }

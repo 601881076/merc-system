@@ -2,6 +2,7 @@ package com.xhnj.mapper;
 
 import com.xhnj.model.TAdminRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-10-20
  */
 public interface TAdminRoleMapper extends BaseMapper<TAdminRole> {
-
+    int updRole(@Param("tadminrole") TAdminRole tadminrole);
 }

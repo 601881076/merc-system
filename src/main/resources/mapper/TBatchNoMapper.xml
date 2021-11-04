@@ -26,9 +26,15 @@
     </sql>
     <select id="listPage" resultType="com.xhnj.model.TBatchNo">
         select <include refid="batchNoSql"/> from t_batch_no where 1=1
-        <if test="batchNo.createTime!=null">
-            and create_time<![CDATA[ >= ]]>#{batchNo.createTime,jdbcType=TIMESTAMP}
+
+        <if test="batchNo.startDate !=null and batchNo.startDate != ''">
+            and create_time<![CDATA[ >= ]]>#{batchNo.startDate,jdbcType=TIMESTAMP}
         </if>
+
+        <if test="batchNo.endDate !=null and batchNo.endDate != ''">
+            and create_time<![CDATA[ <= ]]>#{batchNo.endDate,jdbcType=TIMESTAMP}
+        </if>
+
         <if test="batchNo.batchNo!=null and batchNo.batchNo!=''">
             and batch_no=#{batchNo.batchNo,jdbcType=VARCHAR}
         </if>

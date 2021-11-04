@@ -67,7 +67,7 @@
     <select id="listPage" resultMap="BaseMap">
         select
             <include refid="SqlList"/>
-        from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_id
+        from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_no
         where chk.type = 0
         <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
