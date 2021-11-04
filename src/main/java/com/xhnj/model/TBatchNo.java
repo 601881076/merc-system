@@ -1,6 +1,7 @@
 package com.xhnj.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -89,6 +90,31 @@ public class TBatchNo implements Serializable {
     private String createTime;
 
     private String updateTime;
+
+    private String startDate;
+
+    private String endDate;
+
+    /** 卡号*/
+    @TableField(exist = false)
+    private String cardNo;
+
+    @TableField(exist = false)
+    private String certNo;
+
+    /** 客户名称*/
+    @TableField(exist = false)
+    private String customerName;
+
+    /** 手机号*/
+    @TableField(exist = false)
+    private String mobileNo;
+
+
+
+
+
+
 
 
 }
