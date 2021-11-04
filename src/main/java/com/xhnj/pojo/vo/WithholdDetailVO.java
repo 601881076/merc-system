@@ -15,6 +15,8 @@ import java.math.BigDecimal;
  */
 @Data
 public class WithholdDetailVO extends BaseRowModel {
+    @ExcelProperty(value = "银行代码", index = 0)
+    private String bankCode;
 
     @ExcelProperty(value = "协议编号", index = 1)
     @NotBlank(message = "agreementid param cannot be empty")
@@ -27,7 +29,7 @@ public class WithholdDetailVO extends BaseRowModel {
 
     private String certNo;
 
-    @ExcelProperty(value = "姓名", index = 3)
+    @ExcelProperty(value = "姓名", index = 2)
     @NotBlank(message = "customerName param cannot be empty")
     private String customerName;
 
@@ -35,24 +37,25 @@ public class WithholdDetailVO extends BaseRowModel {
 
     private String cardType;
 
-    @ExcelProperty(value = "银行卡号", index = 4)
+    @ExcelProperty(value = "银行卡号", index = 3)
     @NotBlank(message = "cardNo param cannot be empty")
     private String cardNo;
 
     private String summary;
 
-    @ExcelProperty(value = "扣款金额", index = 5)
+    @ExcelProperty(value = "扣款金额", index = 4)
     @NotNull(message = "tranAmt param cannot be empty")
     private BigDecimal money;
 
     private String rem;
 
-    @ExcelProperty(value = "用途", index = 6)
+    @ExcelProperty(value = "用途", index = 5)
     @NotBlank(message = "usages param cannot be empty")
     private String usages;
 
-    @ExcelProperty(value = "银行代码", index = 0)
-    private String bankCode;
+    @ExcelProperty(value = "合同号码", index = 6)
+    @NotBlank(message = "合同号码不能为空")
+    private String contractNo;
 
     private String batchNoStr;
 }
