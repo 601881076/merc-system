@@ -56,10 +56,10 @@
             <include refid="dismissSql"/>
         from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
         where chk.type = 1
-        <if test="dismissBatch.startTime != null">
+        <if test="dismissBatch.startTime != null and  dismissBatch.startTime != ''">
             and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
-        <if test="dismissBatch.endTime != null">
+        <if test="dismissBatch.endTime != null and  dismissBatch.endTime != ''">
             and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
         <if test="dismissBatch.status !=null and dismissBatch.status != ''">
