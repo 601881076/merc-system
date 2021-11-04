@@ -83,6 +83,11 @@ public class TAdmin extends Model implements Serializable {
     private Date loginTime;
 
     /**
+     * 首次登录时间
+     */
+    private Date firstLoginTime;
+
+    /**
      * 帐号启用状态：0->禁用；1->启用
      */
     @ApiModelProperty(value = "状态", required = true)
