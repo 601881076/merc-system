@@ -52,9 +52,14 @@ public class DeductionBatchQuery implements Serializable  {
     private BigDecimal totalAmt;
 
     /**
-     * 状态(-1->hold ;0->等待运行;1->已提交银行;2->已从银行获取结果;3->已通知上游)
+     * 状态(审核状态(0->待提交;1->已提交;2->审核通过;3->审核拒绝))
      */
     private String status;
+
+    /**
+     * 状态(-1->hold ;0->等待运行;1->已提交银行;2->已从银行获取结果;3->已通知上游)
+     */
+    private String isAudit;
 
     /**
      * 成功笔数

@@ -76,7 +76,10 @@
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
         <if test="dismissBatch.status!=null and dismissBatch.status!=''">
-            and batch.status=#{dismissBatch.status,jdbcType=INTEGER}
+            and chk.status=#{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+        <if test="dismissBatch.isAudit!=null and dismissBatch.isAudit!=''">
+            and batch.status=#{dismissBatch.isAudit,jdbcType=INTEGER}
         </if>
         <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
             and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
