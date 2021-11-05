@@ -84,6 +84,9 @@
         <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
             and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
         </if>
+        <if test="dismissBatch.batchNo!=null and dismissBatch.batchNo!=''">
+            and batch.batch_no=#{dismissBatch.batchNo,jdbcType=VARCHAR}
+        </if>
     </select>
 
 </mapper>
