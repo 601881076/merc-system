@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TBatchDtl;
 import com.xhnj.pojo.query.WithholdParam;
@@ -59,6 +60,8 @@ public class WithholdController {
     @ApiOperation(value = "下载扣款报告")
     @GetMapping("/export")
     public void excelExport(HttpServletResponse response, WithholdParam withholdParam){
+        if(withholdParam.getBatchNo().size() == 0)
+            throw new BusinessException("批次号不能为空");
         withholdBaseService.exportExcel(response,withholdParam);
     }
 
