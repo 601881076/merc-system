@@ -6,6 +6,8 @@ import com.xhnj.pojo.query.DeductionBatchQuery;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 扣款批次审批 Mapper 查询接口
@@ -15,7 +17,9 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-09-22
  */
 public interface TDeductionBatchQueryMapper extends BaseMapper<DeductionBatchQuery> {
-    IPage listPage(IPage<DeductionBatchQuery> page, @Param("dismissBatch") DeductionBatchQuery deductionBatchQuery);
+    IPage listPage(IPage<DeductionBatchQuery> page,
+                   @Param("dismissBatch") DeductionBatchQuery deductionBatchQuery,
+                   @Param("statusList")List<String> statusList);
 
 
 }
