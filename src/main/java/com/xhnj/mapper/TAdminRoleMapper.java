@@ -14,4 +14,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface TAdminRoleMapper extends BaseMapper<TAdminRole> {
     int updRole(@Param("tadminrole") TAdminRole tadminrole);
+
+    int insertRole(@Param("tadminrole") TAdminRole tadminrole);
+
+    long getRole(@Param("tadminrole") TAdminRole tadminrole);
 }

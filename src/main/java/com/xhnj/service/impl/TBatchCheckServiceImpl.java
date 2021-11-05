@@ -1,6 +1,7 @@
 package com.xhnj.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xhnj.common.exception.BusinessException;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchNo;
@@ -48,11 +49,12 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
             batchCheck.setUpUserId(id);
             batchCheck.setUpUserName(username);
             batchCheck.setType(0);
+            batchCheck.setStatus(1);
             list.add(batchCheck);
         }
         log.info("list:"+list.toString());
         if(list.size() ==0){
-            return 0;
+            throw new BusinessException("批次已提交，请勿重复提交");
         }else {
             return batchCheckMapper.insert(list);
         }
@@ -78,11 +80,12 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
             batchCheck.setUpUserId(id);
             batchCheck.setUpUserName(username);
             batchCheck.setType(1);
+            batchCheck.setStatus(1);
             list.add(batchCheck);
         }
         log.info("list:"+list.toString());
         if(list.size() ==0){
-            return 0;
+            throw new BusinessException("批次已提交，请勿重复提交");
         }else {
             return batchCheckMapper.insert(list);
         }

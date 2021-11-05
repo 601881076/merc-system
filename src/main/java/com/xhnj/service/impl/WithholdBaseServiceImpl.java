@@ -1,5 +1,6 @@
 package com.xhnj.service.impl;
 
+import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
@@ -23,6 +24,9 @@ public class WithholdBaseServiceImpl implements WithholdBaseService {
 
     @Override
     public void exportExcel(HttpServletResponse response, WithholdParam withholdParam) {
+          if(withholdParam.getBatchNo().size() == 0)
+            throw new BusinessException("批次号不能为空");
+
           if(withholdParam.getPayResult() == null){
               withholdService.exportExcelSuccess(response,withholdParam);
           } else if(withholdParam.getPayResult() == 3){

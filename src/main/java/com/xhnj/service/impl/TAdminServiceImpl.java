@@ -169,6 +169,11 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         if(tadminrole.getUserId()==null){
             throw new BusinessException("用户id不能为空");
         }
-        return  tadminrolemapper.updRole(tadminrole);
+        if(tadminrolemapper.getRole(tadminrole)>0){
+            return  tadminrolemapper.updRole(tadminrole);
+        }else{
+            return  tadminrolemapper.insertRole(tadminrole);
+        }
+
     }
 }
