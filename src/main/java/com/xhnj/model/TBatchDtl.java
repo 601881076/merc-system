@@ -38,7 +38,7 @@ public class TBatchDtl implements Serializable {
     /**
      * 来源(DD、SDSP、MDD)
      */
-    private Integer fromType;
+    private Integer srouceType;
 
     /**
      * 银行编码

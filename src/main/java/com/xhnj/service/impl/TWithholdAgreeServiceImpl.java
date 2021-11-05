@@ -41,6 +41,9 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     public IPage conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
         log.info("授权报告查询");
         IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
+
+        withholdAgree.getStatus();
+
         return withholdAgreeMapper.conditionQuery(page,withholdAgree);
     }
 
