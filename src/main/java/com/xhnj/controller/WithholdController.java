@@ -60,8 +60,6 @@ public class WithholdController {
     @ApiOperation(value = "下载扣款报告")
     @GetMapping("/export")
     public void excelExport(HttpServletResponse response, WithholdParam withholdParam){
-        if(withholdParam.getBatchNo().size() == 0)
-            throw new BusinessException("批次号不能为空");
         withholdBaseService.exportExcel(response,withholdParam);
     }
 
