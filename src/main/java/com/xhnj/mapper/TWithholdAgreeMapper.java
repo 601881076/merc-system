@@ -2,6 +2,7 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +25,8 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgreeParam") WithholdAgreeParam withholdAgreeParam);
 
     int addBatch(@Param("list") List<TWithholdAgree> list);
+
+    IPage<TWithholdAgree> listPage(IPage<TWithholdAgree> page, @Param("withholdAgree") TWithholdAgree withholdAgree);
+
 
 }
