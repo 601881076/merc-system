@@ -144,5 +144,9 @@
         <if test="withholdParam.payResult != null">
             AND pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
         </if>
+        AND batch_no IN
+        <foreach collection = "withholdParam.batchNo" item = "batchNo" open = "(" close = ")" separator = "," >
+            #{batchNo}
+        </foreach>
     </select>
 </mapper>
