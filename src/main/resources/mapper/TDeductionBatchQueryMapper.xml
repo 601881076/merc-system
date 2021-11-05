@@ -26,7 +26,7 @@
             <result property="id" column="de_id" />
             <result property="batchId" column="batch_id" />
             <result property="type" column="type" />
-            <result property="status" column="status" />
+            <result property="status" column="chkStatus" />
             <result property="checkResult" column="check_result" />
             <result property="upUserId" column="up_user_id" />
             <result property="upUserName" column="up_user_name" />
@@ -57,7 +57,7 @@
         batch.ret_own_spec,
         batch.create_time,
         batch.update_time,
-        chk.status,
+        chk.status chkStatus,
         chk.check_result,
         chk.up_user_name,
         chk.check_time
