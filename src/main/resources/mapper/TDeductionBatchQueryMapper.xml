@@ -57,7 +57,7 @@
         batch.ret_own_spec,
         batch.create_time,
         batch.update_time,
-        chk.status chkStatus,
+        IFNULL(chk.status,0) chkStatus,
         chk.check_result,
         chk.up_user_name,
         chk.check_time
