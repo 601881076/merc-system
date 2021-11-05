@@ -113,6 +113,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 platformserial.setFromType(ValueConstance.SOURCE_MDD);
                 platformserial.setPayType(0);
                 platformserial.setMoney(businUtil.coverAmount(withholdDetailVO.getMoney(),1));
+                log.info("money = " + withholdDetailVO.getMoney());
                 platformserial.setCurrency("人民币");
                 originalList.add(platformserial);
                 totalAmt = totalAmt.add(platformserial.getMoney());
