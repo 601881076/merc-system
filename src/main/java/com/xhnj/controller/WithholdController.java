@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Api(value = "代扣", tags = "代扣接口")
 @RestController
-@RequestMapping("/wh")
+@RequestMapping("/")
 @Slf4j
 public class WithholdController {
     @Autowired
