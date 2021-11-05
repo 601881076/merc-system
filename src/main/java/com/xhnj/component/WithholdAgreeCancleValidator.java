@@ -75,7 +75,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             if(list == null){
                 throw new BusinValidateException("未读取到数据");
             }
-            log.info("receive list size11: {}",list.size());
+            log.info("receive list size: {}",list.size());
             if(list.size() > 1000){
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
@@ -91,6 +91,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 withholdAgree.setDealFlag(ValueConstance.DEAL_DISMISS);
                 withholdAgree.setSourceType(ValueConstance.SOURCE_MDD);
                 withholdAgree.setSystemBatch(batchNo);
+
                 cancelList.add(withholdAgree);
             }
             String username = UserUtil.getCurrentAdminUser().getUsername();

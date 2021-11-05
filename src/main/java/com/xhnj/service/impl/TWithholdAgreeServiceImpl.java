@@ -13,6 +13,7 @@ import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.util.BusinUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,7 @@ import java.util.List;
  *@date 2021/9/19 18:00   
  */
 @Service
+@Slf4j
 public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     @Autowired
     private ValidateProcessor validateProcessor;
@@ -36,9 +38,10 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     private BusinUtil businUtil;
 
     @Override
-    public IPage conditionQuery(WithholdAgreeParam withholdAgreeParam, Integer pageSize, Integer pageNum) {
+    public IPage conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
+        log.info("授权报告查询");
         IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
-        return withholdAgreeMapper.conditionQuery(page,withholdAgreeParam);
+        return withholdAgreeMapper.conditionQuery(page,withholdAgree);
     }
 
     @Override
