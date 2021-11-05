@@ -21,7 +21,7 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
 
     List<TWithholdAgree> getByCardNo(@Param("cardNoList") List<String> cardNoList, @Param("dealFlag") Integer dealFlag);
 
-    IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgreeParam") WithholdAgreeParam withholdAgreeParam);
+    IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     int addBatch(@Param("list") List<TWithholdAgree> list);
 

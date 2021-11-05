@@ -8,6 +8,7 @@ import com.xhnj.pojo.query.WithholdAgreeParam;
 import com.xhnj.service.TWithholdAgreeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +20,17 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "代扣协议", tags = "代扣协议接口")
 @RestController
 @RequestMapping("/withhold/agree")
+@Slf4j
 public class WithholdAgreeController {
     @Autowired
     private TWithholdAgreeService withholdAgreeService;
 
     @ApiOperation(value = "授权条件查询")
     @GetMapping("/query")
-    public CommonResult<CommonPage<TWithholdAgree>> list(WithholdAgreeParam withholdAgreeParam, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TWithholdAgree>> list(TWithholdAgree withholdAgree, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        IPage page = withholdAgreeService.conditionQuery(withholdAgreeParam,pageSize, pageNum);
+        log.info("授权条件查询，请求参数{}", withholdAgree.toString());
+        IPage page = withholdAgreeService.conditionQuery(withholdAgree,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
 

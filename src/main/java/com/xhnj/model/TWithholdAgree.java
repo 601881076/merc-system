@@ -124,9 +124,9 @@ public class TWithholdAgree implements Serializable {
 
     private BigDecimal sumMax;
 
-    private Date startDate;
+    private String startDate;
 
-    private Date endDate;
+    private String endDate;
 
     private Date createTime;
 

@@ -91,6 +91,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 withholdAgree.setDealFlag(ValueConstance.DEAL_DISMISS);
                 withholdAgree.setSourceType(ValueConstance.SOURCE_MDD);
                 withholdAgree.setSystemBatch(batchNo);
+
                 cancelList.add(withholdAgree);
             }
             String username = UserUtil.getCurrentAdminUser().getUsername();
