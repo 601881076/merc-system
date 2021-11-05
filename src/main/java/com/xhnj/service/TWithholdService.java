@@ -2,6 +2,7 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TBatchNo;
+import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,7 @@ public interface TWithholdService {
      * @param pageNum
      * @return
      */
-    IPage batchPage(TBatchNo batchNo,Integer pageSize, Integer pageNum);
+    IPage batchPage(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum);
 
     /**
      * 分页查询代扣明细

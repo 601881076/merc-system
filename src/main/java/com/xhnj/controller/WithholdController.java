@@ -7,6 +7,7 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TBatchDtl;
+import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.pojo.vo.BatchNoVO;
 import com.xhnj.service.TBatchCheckService;
@@ -65,10 +66,10 @@ public class WithholdController {
 
     @ApiOperation(value = "分页查询扣款批次")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TBatchNo>> page(TBatchNo batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
-                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        log.info("batchNo" + batchNo.toString());
-        IPage page = withholdService.batchPage(batchNo,pageSize, pageNum);
+    public CommonResult<CommonPage<TWithholdAgree>> page(TWithholdAgree withholdAgree, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        log.info("授权报告查询{}",withholdAgree.toString());
+        IPage page = withholdService.batchPage(withholdAgree,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
 

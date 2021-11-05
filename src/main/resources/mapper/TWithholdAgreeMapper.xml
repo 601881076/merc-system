@@ -111,4 +111,80 @@
         </if>
     </select>
 
+
+    <sql id="withholdAgree">
+        id		,
+        system_type	,
+        source_type	,
+        deal_flag	,
+        bank_code	,
+        bank_name	,
+        system_batch	,
+        fin_label_cd	,
+        project_no	,
+        agreement_id	,
+        bizserial_no	,
+        mobile_no	,
+        card_no		,
+        customer_name 	,
+        cert_type	,
+        cert_no		,
+        check_no	,
+        send_no		,
+        own_spec	,
+        re_own_spec	,
+        status		,
+        is_send		,
+        sms_status	,
+        bank_ret_code 	,
+        reason		,
+        single_max	,
+        day_max		,
+        month_max	,
+        sum_max		,
+        start_date	,
+        end_date	,
+        create_time	,
+        update_time
+
+    </sql>
+
+    <select id="listPage" resultType="com.xhnj.model.TWithholdAgree">
+        select <include refid="withholdAgree"/> from t_withhold_agree where 1=1
+
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+            and card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
+            and bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.status !=null">
+            and status = #{withholdAgree.status,jdbcType=INTEGER}
+        </if>
+
+
+    </select>
+
 </mapper>

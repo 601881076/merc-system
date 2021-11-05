@@ -13,6 +13,7 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
+import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.model.*;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
@@ -51,12 +52,14 @@ public class TWithholdServiceImpl implements TWithholdService {
     @Autowired
     private BusinUtil businUtil;
 
+    @Resource
+    private TWithholdAgreeMapper withholdAgreeMapper;
+
     @Override
-    public IPage batchPage(TBatchNo batchNo, Integer pageSize, Integer pageNum) {
-        IPage<TBatchNo> page = new Page<>(pageNum, pageSize);
-//        QueryWrapper<TBatchNo> wrapper = new QueryWrapper<>();
-//        wrapper.orderByDesc("create_time");
-        return batchNoMapper.listPage(page,batchNo);
+    public IPage batchPage(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
+        IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
+
+        return withholdAgreeMapper.listPage(page,withholdAgree);
     }
 
     @Override
