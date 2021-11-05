@@ -147,9 +147,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
 
     @Override
     public int updatePass(UmsAdminUpdatePassParam adminpass) {
+        log.info("修改密码："+adminpass.toString());
+        UserDetails userDetails = loadUserByUsername(adminpass.getUsername());
         if(adminpass.getType()==0){
-            String password = RSAUtils.decryptDataOnJava(adminpass.getOpassword(), privateKey);
-            UserDetails userDetails = loadUserByUsername(adminpass.getUsername());
+            String password = adminpass.getOpassword();
             if(userDetails == null)
                 throw new UsernameNotFoundException("用户名或密码错误");
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
@@ -158,6 +159,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         }
         TAdmin admin=new TAdmin();
         admin.setUsername(adminpass.getUsername());
+        admin.setId(adminpass.getId());
         admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
         return adminMapper.updateById(admin);
     }

@@ -99,7 +99,14 @@ public class AdminController {
         data.put("roles", roleService.getUmsRole(id));
         data.put("icon", admin.getIcon());
         data.put("menus", roleService.getUmsMenuByAdminId(id));
+        if (admin.getFirstLoginTime()== null) {
+            data.put("fistFlag", "0");
+        }else{
+            data.put("fistFlag", "1");
+        }
         return CommonResult.success(data);
+
+
     }
 
     @ApiOperation(value = "退出")
