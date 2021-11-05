@@ -38,7 +38,7 @@
     </sql>
     <insert id="insert" parameterType="list">
         insert into t_batch_check
-            (batch_id,batch_no,type,up_user_id,up_user_name,check_user_id,check_user_name,remark)
+            (batch_id,batch_no,type,up_user_id,up_user_name,check_user_id,check_user_name,remark,status)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
@@ -50,13 +50,14 @@
              #{item.checkUserId,jdbcType=BIGINT},
              #{item.checkUserName,jdbcType=VARCHAR},
              #{item.remark,jdbcType=VARCHAR}
+             #{item.status,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
     <!--授权取消审核提交-->
     <insert id="insertCheck" parameterType="list">
         insert into t_batch_check
-            (batch_id,batch_no,type,up_user_id,up_user_name,check_user_id,check_user_name,remark)
+            (batch_id,batch_no,type,up_user_id,up_user_name,check_user_id,check_user_name,remark,status)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
@@ -68,6 +69,7 @@
             #{item.checkUserId,jdbcType=BIGINT},
             #{item.checkUserName,jdbcType=VARCHAR},
             #{item.remark,jdbcType=VARCHAR}
+            #{item.status,jdbcType=VARCHAR}
             )
         </foreach>
         )
