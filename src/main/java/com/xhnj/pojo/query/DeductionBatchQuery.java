@@ -9,6 +9,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -54,7 +55,7 @@ public class DeductionBatchQuery implements Serializable  {
     /**
      * 状态(审核状态(0->待提交;1->已提交;2->审核通过;3->审核拒绝))
      */
-    private int status;
+    private String status;
 
     /**
      * 状态(-1->hold ;0->等待运行;1->已提交银行;2->已从银行获取结果;3->已通知上游)
