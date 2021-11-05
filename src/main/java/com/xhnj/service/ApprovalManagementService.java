@@ -1,10 +1,7 @@
 package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xhnj.model.TBatchCheck;
-import com.xhnj.model.TBatchNo;
-import com.xhnj.model.TDismissBatch;
-import com.xhnj.model.WithholdSuccessExcel;
+import com.xhnj.model.*;
 import com.xhnj.pojo.query.DeductionBatchQuery;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
@@ -40,7 +37,7 @@ public interface ApprovalManagementService {
      * @param batchNoList
      * @return
      */
-    int update(int option, List<String> batchNoList);
+    int update(int option, List<String> batchNoList, TAdmin admin);
 
 
     /**
