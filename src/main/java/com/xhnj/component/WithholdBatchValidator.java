@@ -139,6 +139,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNo.setBatchNo(batchNoStr);
 
             batchNoMapper.insert(batchNo);
+
             //批量插入明细
             platformserialMapper.addBatch(originalList);
         } catch (IOException e) {
