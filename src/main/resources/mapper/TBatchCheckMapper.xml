@@ -49,8 +49,8 @@
              #{item.upUserName,jdbcType=VARCHAR},
              #{item.checkUserId,jdbcType=BIGINT},
              #{item.checkUserName,jdbcType=VARCHAR},
-             #{item.remark,jdbcType=VARCHAR}
-             #{item.status,jdbcType=VARCHAR}
+             #{item.remark,jdbcType=VARCHAR},
+             #{item.status,jdbcType=TINYINT}
             )
         </foreach>
     </insert>
@@ -68,8 +68,8 @@
             #{item.upUserName,jdbcType=VARCHAR},
             #{item.checkUserId,jdbcType=BIGINT},
             #{item.checkUserName,jdbcType=VARCHAR},
-            #{item.remark,jdbcType=VARCHAR}
-            #{item.status,jdbcType=VARCHAR}
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.status,jdbcType=TINYINT}
             )
         </foreach>
         )
