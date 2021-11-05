@@ -1,6 +1,7 @@
 package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xhnj.model.TAdmin;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchCheckSuccessExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
@@ -24,7 +25,10 @@ public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
 
     List<TBatchCheckSuccessExcel> getListToBatchNo(@Param("dismissBatch") DisMissBatchQuery dismissBatch);
 
-    int updateStatusByBatchNo(@Param("status") int status, @Param("checkResult") int checkResult, @Param("batchNo") List<String> batchNo);
+    int updateStatusByBatchNo(@Param("status") int status,
+                              @Param("checkResult") int checkResult,
+                              @Param("batchNo") List<String> batchNo,
+                              @Param("admin")TAdmin admin);
 
     Long  secChenckOne(@Param("batchno")String batchno);
 

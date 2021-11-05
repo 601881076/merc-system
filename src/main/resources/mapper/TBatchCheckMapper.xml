@@ -78,8 +78,8 @@
     <!--审核员授权取消审批-拒绝操作-->
     <update id="updateStatusByBatchNo" parameterType="list">
         update t_batch_check set
-        status = #{status}, check_result = #{checkResult}
-        where batch_id in
+        status = #{status}, check_result = #{checkResult}, check_user_id = #{admin.id}, check_user_name = #{admin.username}
+        where batch_no in
         (
         <foreach collection="batchNo" item="item" index="index" separator=",">
             #{item}

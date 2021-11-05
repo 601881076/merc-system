@@ -4,6 +4,7 @@ package com.xhnj.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.model.TAdmin;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatch;
@@ -13,6 +14,7 @@ import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.ApprovalManagementService;
 import com.xhnj.service.BatchCheckService;
 import com.xhnj.service.WithholdBaseService;
+import com.xhnj.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +73,11 @@ public class BatchCheckController {
     @GetMapping("/refuse")
     public CommonResult refuse(@RequestParam List<String> batchNo) {
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
-        int count = approvalManagementService.update(2, batchNo);
+
+        // 获取当前登录用户
+        TAdmin currentUser = UserUtil.getCurrentAdminUser();
+
+        int count = approvalManagementService.update(2, batchNo, currentUser);
         if (count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
@@ -81,10 +87,14 @@ public class BatchCheckController {
     @GetMapping("/approve")
     public CommonResult approve(@RequestParam List<String> batchNo) {
         log.info("授权取消审批批准传入参数 = " + batchNo.toString());
-        int count = approvalManagementService.update(1, batchNo);
+
+        // 获取当前登录用户
+        TAdmin currentUser = UserUtil.getCurrentAdminUser();
+
+        int count = approvalManagementService.update(1, batchNo, currentUser);
 
         // 审核通过之后讲批次号发往消息队列
-        batchNo.forEach(item -> mqSend(exchange, "/ums", item));
+//        batchNo.forEach(item -> mqSend(exchange, "/ums", item));
 
         if (count > 0)
             return CommonResult.success(count);
