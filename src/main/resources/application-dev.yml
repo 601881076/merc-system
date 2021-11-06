@@ -3,7 +3,7 @@ dispatch:
 logging:
   level:
     root: info
-    com.bootdo: info
+    com.xhnj: info
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
