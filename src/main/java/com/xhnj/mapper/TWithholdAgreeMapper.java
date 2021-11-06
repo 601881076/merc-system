@@ -23,6 +23,24 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
 
     IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
 
+    /**
+     * 查询短信发送未完成授权
+     * @param page
+     * @param withholdAgree
+     * @return
+     */
+    IPage<TWithholdAgree> selectSmsIsNotCompleted(IPage<TWithholdAgree> page,
+                                                  @Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 查询最新一条数据
+     * @param page
+     * @param withholdAgree
+     * @return
+     */
+    IPage<TWithholdAgree> selectLatestDate(IPage<TWithholdAgree> page,
+                                           @Param("withholdAgree") TWithholdAgree withholdAgree);
+
     int addBatch(@Param("list") List<TWithholdAgree> list);
 
 }

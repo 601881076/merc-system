@@ -83,45 +83,45 @@
         AND deal_flag = #{dealFlag,jdbcType=INTEGER}
     </select>
 
-    <sql id="withholdAgree">
-        id		,
-        system_type	,
-        source_type	,
-        deal_flag	,
-        bank_code	,
-        bank_name	,
-        system_batch	,
-        fin_label_cd	,
-        project_no	,
-        agreement_id	,
-        bizserial_no	,
-        mobile_no	,
-        card_no		,
-        customer_name 	,
-        cert_type	,
-        cert_no		,
-        check_no	,
-        send_no		,
-        own_spec	,
-        re_own_spec	,
-        status		,
-        is_send		,
-        sms_status	,
-        bank_ret_code 	,
-        reason		,
-        single_max	,
-        day_max		,
-        month_max	,
-        sum_max		,
-        start_date	,
-        end_date	,
-        create_time	,
-        update_time
+    <sql id="withholdAgreeSql">
+        agree.id		,
+        agree.system_type	,
+        agree.source_type	,
+        agree.deal_flag	,
+        agree.bank_code	,
+        agree.bank_name	,
+        agree.system_batch	,
+        agree.fin_label_cd	,
+        agree.project_no	,
+        agree.agreement_id	,
+        agree.bizserial_no	,
+        agree.mobile_no	,
+        agree.card_no		,
+        agree.customer_name 	,
+        agree.cert_type	,
+        agree.cert_no		,
+        agree.check_no	,
+        agree.send_no		,
+        agree.own_spec	,
+        agree.re_own_spec	,
+        agree.status		,
+        agree.is_send		,
+        agree.sms_status	,
+        agree.bank_ret_code 	,
+        agree.reason		,
+        agree.single_max	,
+        agree.day_max		,
+        agree.month_max	,
+        agree.sum_max		,
+        agree.start_date	,
+        agree.end_date	,
+        agree.create_time	,
+        agree.update_time
 
     </sql>
 
     <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
-        select <include refid="withholdAgree"/> from t_withhold_agree where 1=1
+        select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1=1
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
             and date_format(start_date, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
@@ -156,6 +156,79 @@
         </if>
 
 
+    </select>
+
+    <!--查询短信发送未完成授权-->
+    <select id="selectSmsIsNotCompleted" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+            <include refid="withholdAgreeSql"/>
+        FROM t_withhold_agree agree,  t_withhold_agree_sms sms
+        where agree.bizserial_no = sms.bizserial_no
+
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and date_format(agree.start_date, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and date_format(agree.end_date, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+            and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
+            and agree.bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <!--查询最新一条数据-->
+    <select id="selectLatestDate" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+        <include refid="withholdAgreeSql"/>
+        FROM t_withhold_agree agree where 1= 1
+
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and date_format(agree.start_date, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and date_format(agree.end_date, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+            and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
+            and agree.bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        </if>
+
+        order by agree.create_time desc
     </select>
 
 </mapper>

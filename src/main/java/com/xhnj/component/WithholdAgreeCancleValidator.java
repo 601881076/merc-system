@@ -75,7 +75,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             if(list == null){
                 throw new BusinValidateException("未读取到数据");
             }
-            log.info("receive list size: {}",list.size());
+            log.info("receive list size 授权取消上传: {}",list.size());
             if(list.size() > 1000){
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
@@ -111,10 +111,14 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                     .map(TWithholdAgree::getCardNo).distinct()
                     .collect(Collectors.toList());
             List<TWithholdAgree> agreeList = withholdAgreeMapper.getByCardNo(cardNoList, ValueConstance.DEAL_DISMISS);
+
+            log.info("agreeList");
+            log.info(agreeList.toString());
+
             if(CollUtil.isNotEmpty(agreeList)){
                 for (TWithholdAgree agree: agreeList) {
                     if(!"2".equals(agree.getStatus().toString())){
-                        throw new BusinValidateException("dismiss data repeat");
+                        throw new BusinValidateException("重置失败数据");
                     }
                 }
             }
