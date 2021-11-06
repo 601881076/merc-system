@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TConfigMapper">
+    <sql id="confSql">
+        field_name,
+        name,
+        value
+    </sql>
+    <select id="selctOne" resultType="com.xhnj.model.TConfig">
+        SELECT <include refid="confSql"/> from t_config  where field_name=#{configs.fieldName,jdbcType=VARBINARY}
+    </select>
+    <update id="updOne" >
+        UPDATE t_config  SET value=#{configs.fieldName,jdbcType=VARBINARY}  where field_name=#{configs.fieldName,jdbcType=VARBINARY}
+    </update>
+</mapper>
