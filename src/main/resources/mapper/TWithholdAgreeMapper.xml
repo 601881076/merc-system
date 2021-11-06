@@ -120,6 +120,7 @@
 
     </sql>
 
+
     <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
         select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1=1
 
@@ -149,6 +150,10 @@
 
         <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
             and bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
+            and deal_flag = #{withholdAgree.dealFlag,jdbcType=INTEGER}
         </if>
 
         <if test="withholdAgree.status !=null">
@@ -230,5 +235,8 @@
 
         order by agree.create_time desc
     </select>
+
+
+
 
 </mapper>
