@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2021-11-06
  */
 public interface TDismissBatchCheckMapper extends BaseMapper<TDismissBatchCheck> {
-    IPage listPage(IPage<DisMissBatchQuery> page, @Param("dismissBatch") DisMissBatchQuery dismissBatch);
+    IPage listPage(IPage<DisMissBatchQuery> page, @Param("dismissBatch") DisMissBatchQuery dismissBatch, @Param("statusList")List<String> statusList);
 
     int addbatch(@Param("list") List<TDismissBatchCheck> list);
 

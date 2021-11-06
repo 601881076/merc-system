@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,7 +35,11 @@ public class TDismissBatchCheckServiceImpl extends ServiceImpl<TDismissBatchChec
     @Override
     public IPage batchPage(DisMissBatchQuery dismissBatch, Integer pageSize, Integer pageNum) {
         IPage<DisMissBatchQuery> page = new Page<>(pageNum, pageSize);
-        return dismissBatchCheckMapper.listPage(page,dismissBatch);
+        String[] statusList = dismissBatch.getStatus().split(",");
+
+        ArrayList< String> arrayList = new ArrayList<String>(statusList.length);
+        Collections.addAll(arrayList, statusList);
+        return dismissBatchCheckMapper.listPage(page,dismissBatch,arrayList);
     }
 
     @Transactional(rollbackFor = Exception.class)
