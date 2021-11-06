@@ -54,7 +54,7 @@
     <select id="listPageDouble" resultMap="BaseMap">
         select
             <include refid="dismissSql"/>
-        from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id and chk.type = 1
+        from t_dismiss_batch dis left join t_withhold_agree chk on dis.system_batch = chk.system_batch
         where 1 = 1
         <if test="dismissBatch.startTime != null and  dismissBatch.startTime != ''">
             and date_format(dis.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
