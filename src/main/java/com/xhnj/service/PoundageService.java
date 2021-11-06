@@ -10,4 +10,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface PoundageService {
     void exportExcel(HttpServletResponse response,  PoundageParam poundageParam);
+
+    void pdfExport(HttpServletResponse response,  PoundageParam poundageParam);
 }

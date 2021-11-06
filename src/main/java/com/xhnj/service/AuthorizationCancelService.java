@@ -3,6 +3,8 @@ package com.xhnj.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
 * @Description:    授权取消列表 接口类
 * @Author:         tan_yi
@@ -24,6 +26,12 @@ public interface AuthorizationCancelService {
      */
     IPage listPage(TDismissBatch dismissBatch, Integer pageSize, Integer pageNum);
 
+    /**
+     * 授权取消导出报告
+     * @param dismissBatch
+     * @return
+     */
+    void exportExcel(HttpServletResponse response, TDismissBatch dismissBatch);
 
 
 }
