@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Paper;
+
 /*
  @Description 代扣协议
  *@author kang.li
@@ -31,6 +33,13 @@ public class WithholdAgreeController {
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权条件查询，请求参数{}", withholdAgree.toString());
         IPage page = withholdAgreeService.conditionQuery(withholdAgree,pageSize, pageNum);
+
+        // 当status = 4 且 totalpage > 1 时，需修改返回的totalpage数量
+        int status = withholdAgree.getStatus();
+
+        long totalPage = status == 4  ? 1 : page.getTotal();
+        page.setTotal(totalPage);
+
         return CommonResult.success(CommonPage.restPage(page));
     }
 

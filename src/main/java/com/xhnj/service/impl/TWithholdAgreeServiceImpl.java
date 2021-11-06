@@ -42,9 +42,24 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         log.info("授权报告查询");
         IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
 
-        withholdAgree.getStatus();
-
-        return withholdAgreeMapper.conditionQuery(page,withholdAgree);
+        // 根据前端上送状态判断本次查询内容
+        // 1 > 成功; 2 > 失败；3 > 短信发送未完成授权（需要关联短信表）；4 > 只显示最新授权状态（查询最新一条）；5 > 授权取消查标识为接触的数据
+        int status = withholdAgree.getStatus();
+        log.info("状态{}", status);
+        switch (status) {
+            case 3:
+                // 短信发送未完成授权（需要关联短信表）
+                return withholdAgreeMapper.selectSmsIsNotCompleted(page,withholdAgree);
+            case 4:
+                // 查询最新的一条数据
+                page = new Page<>(1,1);
+                return withholdAgreeMapper.selectLatestDate(page,withholdAgree);
+            case 5:
+                //
+                return withholdAgreeMapper.conditionQuery(page,withholdAgree);
+            default:
+                return withholdAgreeMapper.conditionQuery(page,withholdAgree);
+        }
     }
 
     @Override
