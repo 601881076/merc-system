@@ -31,9 +31,9 @@ public class TBatchNo implements Serializable {
 
     private Integer type;
 
-    private Integer isTimming;
+    private Integer isHold;
 
-    private String systemType;
+    private Integer systemType;
     /**
      * 来源(DD、SDSP、MDD)
      */

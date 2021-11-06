@@ -3,7 +3,7 @@
 <mapper namespace="com.xhnj.mapper.TDeductionDetailMapper">
     <sql id="plaSql">
         id,
-        is_timming,
+        is_hold,
         batch_no,
         agreement_id,
         source_type,

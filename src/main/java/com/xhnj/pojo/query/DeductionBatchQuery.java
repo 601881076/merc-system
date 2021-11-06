@@ -20,7 +20,7 @@ public class DeductionBatchQuery implements Serializable  {
 
     private Integer type;
 
-    private Integer isTimming;
+    private Integer isHold;
 
     private String systemType;
     /**

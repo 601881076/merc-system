@@ -5,7 +5,7 @@
     <resultMap id="BaseMap" type="com.xhnj.pojo.query.DeductionBatchQuery">
         <result property="id" column="id" />
         <result property="type" column="type" />
-        <result property="isTimming" column="is_timming" />
+        <result property="isHold" column="is_hold" />
         <result property="systemType" column="system_type" />
         <result property="sourceType" column="source_type" />
         <result property="bankCode" column="bank_code" />
@@ -25,7 +25,6 @@
         <collection property="batchCheck" ofType="com.xhnj.model.TBatchCheck">
             <result property="id" column="de_id" />
             <result property="batchId" column="batch_id" />
-            <result property="type" column="type" />
             <result property="status" column="chkStatus" />
             <result property="checkResult" column="check_result" />
             <result property="upUserId" column="up_user_id" />
@@ -40,7 +39,7 @@
 
     <sql id="SqlList">
         batch.type,
-        batch.is_timming,
+        batch.is_hold,
         batch.system_type,
         batch.source_type,
         batch.bank_code,
@@ -67,7 +66,7 @@
     <select id="listPage" resultMap="BaseMap">
         select
             <include refid="SqlList"/>
-        from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_no and chk.type = 0
+        from t_batch_no batch left join t_batch_check chk on batch.batch_no = chk.batch_no
         where 1 = 1
         <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')

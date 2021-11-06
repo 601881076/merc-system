@@ -87,7 +87,7 @@
         agree.id		,
         agree.system_type	,
         agree.source_type	,
-        agree.deal_flag	,
+/*        agree.deal_flag	,*/
         agree.bank_code	,
         agree.bank_name	,
         agree.system_batch	,
@@ -152,9 +152,9 @@
             and bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
         </if>
 
-        <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
+    <!--    <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
             and deal_flag = #{withholdAgree.dealFlag,jdbcType=INTEGER}
-        </if>
+        </if>-->
 
         <if test="withholdAgree.status !=null">
             and status = #{withholdAgree.status,jdbcType=INTEGER}

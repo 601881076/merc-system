@@ -2,7 +2,6 @@ package com.xhnj.component;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.map.MapUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
 import com.xhnj.annotation.BusinValidator;
@@ -11,10 +10,10 @@ import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TDismissBatchMapper;
-import com.xhnj.mapper.TWithholdAgreeMapper;
+import com.xhnj.mapper.TWithholdCancleMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
-import com.xhnj.model.TWithholdAgree;
+import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.util.BusinUtil;
@@ -43,7 +42,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
     private ExcelListener excelListener;
 
     @Autowired
-    private TWithholdAgreeMapper withholdAgreeMapper;
+    private TWithholdCancleMapper withholdCancleMapper;
     @Autowired
     private TDismissBatchMapper dismissBatchMapper;
     @Autowired
@@ -65,7 +64,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             throw new BusinValidateException("文件格式错误");
         }
 
-        List<TWithholdAgree> cancelList = new ArrayList<>();
+        List<TWithholdCancle> cancelList = new ArrayList<>();
         try {
             ExcelReader excelReader = new ExcelReader(multipartFile.getInputStream(), null, excelListener);
             //读取信息
@@ -80,19 +79,20 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
             //校验是否重复取消
-            //生成批次号
+            //生成系统批次号
             String batchNo = businUtil.getBatchNo("yyyyMMdd", 10);
             context.set("batchNo",batchNo);
             context.set("totalTrans",list.size());
             AgreeDismissDetailVO vo = null;
             for (int i = 0; i < list.size(); i++) {
                 vo = (AgreeDismissDetailVO) list.get(i);
-                TWithholdAgree withholdAgree = BeanUtil.copyProperties(vo, TWithholdAgree.class);
-                withholdAgree.setDealFlag(ValueConstance.DEAL_DISMISS);
-                withholdAgree.setSourceType(ValueConstance.SOURCE_MDD);
-                withholdAgree.setSystemBatch(batchNo);
+                TWithholdCancle withholdCancle = BeanUtil.copyProperties(vo, TWithholdCancle.class);
+                withholdCancle.setSystemType(ValueConstance.SYSTEM_TYPE_MDD);
+                withholdCancle.setSourceType(ValueConstance.SOURCE_MDD);
+                withholdCancle.setSystemBatch(batchNo);
+                withholdCancle.setAgreementId(vo.getAgreementid());
 
-                cancelList.add(withholdAgree);
+                cancelList.add(withholdCancle);
             }
             String username = UserUtil.getCurrentAdminUser().getUsername();
             String password= (String) context.get("password");
@@ -108,16 +108,16 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
 
             }
             List<String> cardNoList = cancelList.stream()
-                    .map(TWithholdAgree::getCardNo).distinct()
+                    .map(TWithholdCancle::getCardNo).distinct()
                     .collect(Collectors.toList());
-            List<TWithholdAgree> agreeList = withholdAgreeMapper.getByCardNo(cardNoList, ValueConstance.DEAL_DISMISS);
+            List<TWithholdCancle> withholdCancleList = withholdCancleMapper.getByCardNo(cardNoList);
 
             log.info("agreeList");
-            log.info(agreeList.toString());
+            log.info(withholdCancleList.toString());
 
-            if(CollUtil.isNotEmpty(agreeList)){
-                for (TWithholdAgree agree: agreeList) {
-                    if(!"2".equals(agree.getStatus().toString())){
+            if(CollUtil.isNotEmpty(withholdCancleList)){
+                for (TWithholdCancle cancle: withholdCancleList) {
+                    if(!"2".equals(cancle.getStatus().toString())){
                         throw new BusinValidateException("重置失败数据");
                     }
                 }
@@ -128,12 +128,13 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
 
         //添加批次
         TDismissBatch dismissBatch = new TDismissBatch();
+        dismissBatch.setSystemType(ValueConstance.SYSTEM_TYPE_MDD);
         dismissBatch.setSourceType(ValueConstance.SOURCE_MDD);
         dismissBatch.setSystemBatch((String) context.get("batchNo"));
         dismissBatch.setTotalTrans((Integer) context.get("totalTrans"));
         dismissBatchMapper.insert(dismissBatch);
         //添加明细
-        withholdAgreeMapper.addBatch(cancelList);
+        withholdCancleMapper.addBatch(cancelList);
         excelListener.getDatas().clear();
     }
 }

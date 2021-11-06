@@ -3,10 +3,9 @@ package com.xhnj.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
-import com.xhnj.model.TBatchDtl;
+import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
-import com.xhnj.pojo.query.DeductionDetailQuery;
-import com.xhnj.service.DeductionDetailService;
+import com.xhnj.service.AuthCancelDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +31,8 @@ public class AuthoCancellDetailController {
 
     @ApiOperation(value = "分页查询授权取消明细")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TBatchDtl>> list(AuthCancelDetailQuery detailQuery, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
-                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+    public CommonResult<CommonPage<TWithholdCancle>> list(AuthCancelDetailQuery detailQuery, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = AuthCancelDetailService.listPage(detailQuery,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }

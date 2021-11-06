@@ -11,15 +11,15 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 批次审批表
+ * 授权取消批次审批表
  * </p>
  *
  * @author lk
- * @since 2021-10-25
+ * @since 2021-11-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TBatchCheck implements Serializable {
+public class TDismissBatchCheck implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,15 +27,11 @@ public class TBatchCheck implements Serializable {
     private Long id;
 
     /**
-     * 批次表id
+     * 授权取消批次表id
      */
     private Long batchId;
 
-    /**
-     * 批次号
-     */
-    private String batchNo;
-
+    private String systemBatch;
 
     /**
      * 审核结果(0->待审核；1->通过;2->拒绝)

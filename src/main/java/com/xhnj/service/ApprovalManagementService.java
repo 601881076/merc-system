@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
-* @Description:    授权取消审批接口
+* @Description:    代扣审批接口
  * 包含页面查询、批准、拒绝、批量导出报告
 * @Author:         tan_yi
 * @CreateDate:     2021/11/1 17:24

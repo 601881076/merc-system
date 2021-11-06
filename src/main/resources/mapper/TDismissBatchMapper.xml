@@ -17,7 +17,6 @@
         <collection property="batchCheckList" ofType="com.xhnj.model.TBatchCheck">
             <result property="id" column="de_id" />
             <result property="batchId" column="batch_id" />
-            <result property="type" column="type" />
             <result property="checkResult" column="check_result" />
             <result property="upUserId" column="up_user_id" />
             <result property="upUserName" column="up_user_name" />
@@ -95,7 +94,7 @@
 				batch.success_trans,
 				batch.fail_trans,
                 batch.create_time
-        from t_dismiss_batch batch left join t_batch_check chk on batch.id = chk.batch_id and chk.type = 1
+        from t_dismiss_batch batch left join t_dismiss_batch_check chk on batch.id = chk.batch_id
         where 1 = 1
         <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')

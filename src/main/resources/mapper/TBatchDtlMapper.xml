@@ -8,9 +8,9 @@
 
     <sql id="plaSql">
         id,
-        is_timming,
         batch_no,
         agreement_id,
+        system_type,
         source_type,
         bank_code,
         order_no,
@@ -38,7 +38,7 @@
     <sql id="batchNoSql">
         id,
         type,
-        is_timming,
+        is_hold,
         system_type,
         source_type,
         bank_code,
@@ -65,7 +65,7 @@
         pay_type,           trade_time,                    pay_recv,                 currency,                  money,
         recv_account,       recv_account_name,             recv_bank_no,             recv_bank_name,            card_no,
         customer_name,      pay_bank_no,                   pay_bank_name,            usages,                    summary,
-        postscript
+        postscript,     system_type
 
         )
         VALUES
@@ -73,7 +73,7 @@
             (
             #{item.batchNo,jdbcType=VARCHAR},
             #{item.agreementId, jdbcType=VARCHAR},
-            #{item.fromType,jdbcType=INTEGER} ,
+            #{item.sourceType,jdbcType=INTEGER},
             #{item.bankCode,jdbcType=VARCHAR} ,
             #{item.orderNo,jdbcType=VARCHAR} ,
             #{item.payType,jdbcType=INTEGER} ,
@@ -91,8 +91,8 @@
             #{item.payBankName,jdbcType=VARCHAR},
             #{item.usages,jdbcType=VARCHAR},
             #{item.summary,jdbcType=VARCHAR},
-            #{item.postscript,jdbcType=VARCHAR}
-
+            #{item.postscript,jdbcType=VARCHAR},
+            #{item.systemType,jdbcType=INTEGER}
             )
         </foreach >
     </insert>

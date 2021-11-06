@@ -6,6 +6,7 @@ import com.xhnj.mapper.TAuthCancelDetailMapper;
 import com.xhnj.mapper.TDeductionDetailMapper;
 import com.xhnj.model.TBatchDtl;
 import com.xhnj.model.TWithholdAgree;
+import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
 import com.xhnj.pojo.query.DeductionDetailQuery;
 import com.xhnj.service.AuthCancelDetailService;
@@ -26,7 +27,7 @@ public class AuthCancelDetailServiceImpl implements AuthCancelDetailService {
     TAuthCancelDetailMapper authCancelDetailMapper;
     @Override
     public IPage listPage(AuthCancelDetailQuery detailQuery, Integer pageSize, Integer pageNum) {
-        IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
+        IPage<TWithholdCancle> page = new Page<>(pageNum, pageSize);
         return authCancelDetailMapper.listPage(page,detailQuery);
     }
 

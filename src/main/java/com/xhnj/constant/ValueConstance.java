@@ -8,11 +8,16 @@ package com.xhnj.constant;
 public class ValueConstance {
 
     /**
-     * 来源类型
+     * 系统来源类型
      */
-    public static final Integer SOURCE_DD = 0;
-    public static final Integer SOURCE_SDSP = 1;
-    public static final Integer SOURCE_MDD = 2;
+    public static final Integer SYSTEM_TYPE_MDD = 6;
+
+
+    /**
+     * 数据来源类型
+     */
+    public static final Integer SOURCE_INTERFACE = 0;
+    public static final Integer SOURCE_MDD = 1;
 
 
     /**
@@ -24,6 +29,5 @@ public class ValueConstance {
     //----------------------代扣协议----------------
     public static final int DEAL_SIGN = 0;   //签订
     public static final int DEAL_DISMISS = 2;   //撤销
-
 
 }

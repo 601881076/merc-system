@@ -5,6 +5,7 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.service.TWithholdAgreeService;
+import com.xhnj.service.TWithholdCancleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -27,20 +28,25 @@ public class WithholdAgreeController {
     @Autowired
     private TWithholdAgreeService withholdAgreeService;
 
+    @Autowired
+    private TWithholdCancleService withholdCancleService;
+
     @ApiOperation(value = "授权条件查询")
     @GetMapping("/query")
     public CommonResult<CommonPage<TWithholdAgree>> list(TWithholdAgree withholdAgree, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权条件查询，请求参数{}", withholdAgree.toString());
 
-        // 如果status = 5，则查询 操作标志 = 2 的数据。
+        // 如果status = 4，则查询 操作标志 = 2 的数据。
         if (null != withholdAgree.getStatus()) {
             int status = withholdAgree.getStatus();
-            if (5 == status) {
+            if (4 == status) {
                 log.info("操作标志");
-                withholdAgree.setStatus(null);
+                //withholdAgree.setStatus(null);
                 // 给操作标志字段赋值
-                withholdAgree.setDealFlag(2);
+                //withholdAgree.setDealFlag(2);
+                IPage<TWithholdAgree> page = withholdCancleService.conditionQuery(withholdAgree, pageSize, pageNum);
+                return CommonResult.success(CommonPage.restPage(page));
             }
         }
 

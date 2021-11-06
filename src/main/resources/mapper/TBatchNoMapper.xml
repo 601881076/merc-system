@@ -4,7 +4,7 @@
     <sql id="batchNoSql">
         id,
         type,
-        is_timming,
+        is_hold,
         system_type,
         source_type,
         bank_code,

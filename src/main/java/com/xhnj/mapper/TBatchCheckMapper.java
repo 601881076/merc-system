@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * <p>
- * 批次审批表 Mapper 接口
+ * 代扣批次审批表 Mapper 接口
  * </p>
  *
  * @author lk

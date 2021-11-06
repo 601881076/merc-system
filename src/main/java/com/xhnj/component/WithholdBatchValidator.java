@@ -101,6 +101,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 platformserial.setBatchNo(batchNoStr);
                 platformserial.setOrderNo(businUtil.generateOrderNo());
                 platformserial.setPayRecv(ValueConstance.WITHHOLD);
+                platformserial.setSystemType(6);
                 platformserial.setSourceType(ValueConstance.SOURCE_MDD);
                 platformserial.setPayType(0);
                 platformserial.setMoney(businUtil.coverAmount(withholdDetailVO.getMoney(),1));
@@ -126,6 +127,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             TBatchNo batchNo = BeanUtil.copyProperties(list.get(0), TBatchNo.class);
             batchNo.setTotalTrans(list.size());
             batchNo.setTotalAmt(businUtil.coverAmount(totalAmt,1));
+            batchNo.setSystemType(6);
             batchNo.setSourceType(ValueConstance.SOURCE_MDD);
             batchNo.setBatchNo(batchNoStr);
 

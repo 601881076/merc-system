@@ -29,11 +29,11 @@ public class TBatchDtl implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Integer isTimming;
-
     private String batchNo;
 
     private String agreementId;
+
+    private Integer systemType;
 
     /**
      * 来源(DD、SDSP、MDD)

@@ -363,7 +363,7 @@ public class RSAUtils {
     public static void main(String[] args) throws  Exception{
         // 公钥进行加密
         String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGk7yClNchcw5NogMYfEFCIxhGRI8RHBlwn1aGTgHZDMNXWFm+1uZbqYg/P9bHzodlwkHzMa+5Ybm/f8HlOfQPVD851V4RCF0ns0O+tzJNB/e2bRE9v29b+cgYg1WG/GZDAwItXbOGtVXsbBf8NUQUWZXp8U4WpenTK/l29Cg/nQIDAQAB";
-        String jsdata = encryptedDataOnJava("1234",publicKey);
+        String jsdata = encryptedDataOnJava("123",publicKey);
         System.out.println(jsdata);
 
         // 私钥进行解密

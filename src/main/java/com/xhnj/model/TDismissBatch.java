@@ -25,6 +25,8 @@ public class TDismissBatch implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    private Integer systemType;
+
     /**
      * 来源(0->DD、1->SDSP、2->MDD)
      */
