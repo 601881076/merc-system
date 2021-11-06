@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TAuthCancelDetailMapper">
+
+    <sql id="agreeSql">
+        id,
+        system_type,
+        source_type,
+        deal_flag,
+        bank_code,
+        bank_name,
+        system_batch,
+        fin_label_cd,
+        project_no,
+        agreement_id,
+        bizserial_no,
+        mobile_no,
+        card_no,
+        customer_name,
+        cert_type,
+        cert_no,
+        check_no,
+        send_no,
+        own_spec,
+        re_own_spec,
+        status,
+        is_send,
+        bank_ret_code,
+        reason,
+        single_max,
+        day_max,
+        month_max,
+        sum_max,
+        start_date,
+        end_date
+    </sql>
+
+
+
+    <select id="listPage" resultType="com.xhnj.model.TWithholdAgree">
+        SELECT
+            <include refid="agreeSql" />
+        FROM t_withhold_agree
+        WHERE system_batch = #{batchNo,jdbcType=VARCHAR}
+        <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tbatchDtl.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tbatchDtl.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
+            and status=#{tbatchDtl.status,jdbcType=INTEGER}
+        </if>
+    </select>
+
+
+
+</mapper>

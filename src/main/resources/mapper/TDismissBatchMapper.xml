@@ -76,8 +76,50 @@
             and status=#{dismissBatch.status,jdbcType=INTEGER}
         </if>
     </select>
+
     <delete id="deleteById">
         delete from t_dismiss_batch where status=-1 and id=#{id}
     </delete>
+
+    <!--授权取消列表分页查询-->
+    <select id="cancelPage" resultType="com.xhnj.model.TDismissBatch">
+        select  batch.id,
+                batch.source_type,
+				chk.check_result,
+				chk.`status` checkStatus,
+				batch.bank_code,
+				batch.system_batch,
+				batch.batch_desc,
+				batch.total_trans,
+				batch.`status`,
+				batch.success_trans,
+				batch.fail_trans,
+                batch.create_time
+        from t_dismiss_batch batch left join t_batch_check chk on batch.id = chk.batch_id and chk.type = 1
+        where 1 = 1
+        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
+            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
+            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="dismissBatch.status != null">
+            and batch.status = #{dismissBatch.status,jdbcType=INTEGER}
+        </if>
+
+        /* 审核状态*/
+        <if test="dismissBatch.checkStatus != null and dismissBatch.checkStatus != ''">
+            and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
+        </if>
+
+        /* 批次号*/
+        <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
+            and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
+        </if>
+
+
+    </select>
 
 </mapper>

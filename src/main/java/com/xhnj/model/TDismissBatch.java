@@ -1,13 +1,12 @@
 package com.xhnj.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -63,6 +62,22 @@ public class TDismissBatch implements Serializable {
     private String createTime;
 
     private String updateTime;
+
+    /** 查询条件 > 开始时间*/
+    @TableField(exist = false)
+    private String startTime;
+
+    /** 查询条件 > 结束时间*/
+    @TableField(exist = false)
+    private String endTime;
+
+    /** 审核结果*/
+    @TableField(exist = false)
+    private Integer checkResult;
+
+    /** 审核状态*/
+    @TableField(exist = false)
+    private Integer checkStatus;
 
 
 }
