@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TWithholdAgreeMapper">
 
-    <sql id="agreeSql">
+    <sql id="withholdAgreeSql1">
         id,
         system_type,
         source_type,
@@ -66,7 +66,7 @@
 
     <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdAgree">
         SELECT
-            <include refid="agreeSql" />
+            <include refid="withholdAgreeSql1" />
         FROM t_withhold_agree
         WHERE system_batch = #{batchNo,jdbcType=VARCHAR}
     </select>
