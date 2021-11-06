@@ -6,6 +6,8 @@ import com.xhnj.model.TDismissBatch;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 授权取消批次表 Mapper 接口
@@ -26,6 +28,9 @@ public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
      * @return
      */
     IPage cancelPage(IPage<TDismissBatch> page, @Param("dismissBatch") TDismissBatch dismissBatch);
+
+
+    List<TDismissBatch> cancelExport(@Param("dismissBatch") TDismissBatch dismissBatch);
 
 
 

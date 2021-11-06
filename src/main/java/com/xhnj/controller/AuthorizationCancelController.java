@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TDismissBatch;
-import com.xhnj.service.impl.AuthorizationCancelServiceImpl;
+import com.xhnj.service.AuthorizationCancelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
 * @Description:    授权取消列表
@@ -32,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthorizationCancelController {
 
     @Autowired
-    private AuthorizationCancelServiceImpl cancelService;
+    private AuthorizationCancelService cancelService;
 
     @ApiOperation(value = "授权取消列表分页查询")
     @GetMapping("/cancelPage")
@@ -43,5 +45,14 @@ public class AuthorizationCancelController {
         IPage page = cancelService.listPage(dismissBatch,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
+
+
+    @ApiOperation(value = "授权取消列表批量导出")
+    @GetMapping("/excelBatchExport")
+    public void excelBatchExport(HttpServletResponse response, TDismissBatch dismissBatch) {
+        log.info("授权取消列表批量导出, 参数 = " + dismissBatch.toString());
+        cancelService.exportExcel(response, dismissBatch);
+    }
+
 
 }

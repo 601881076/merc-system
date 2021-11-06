@@ -1,5 +1,7 @@
 package com.xhnj.model;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,7 +20,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TDismissBatch implements Serializable {
+public class TDismissBatch extends BaseRowModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,36 +30,47 @@ public class TDismissBatch implements Serializable {
     /**
      * 来源(0->DD、1->SDSP、2->MDD)
      */
+    @ExcelProperty(value = "数据来源", index = 0)
     private Integer sourceType;
 
     /**
      * 银行编码
      */
+    @ExcelProperty(value = "银行编码", index = 3)
     private String bankCode;
 
     /**
      * 系统批次号
      */
+    @ExcelProperty(value = "批次号", index = 4)
     private String systemBatch;
 
     /**
      * 批次说明
      */
+    @ExcelProperty(value = "批次说明", index = 5)
     private String batchDesc;
 
+    @ExcelProperty(value = "总比数", index = 6)
     private Integer totalTrans;
 
     /**
      * 成功笔数
      */
+    @ExcelProperty(value = "成功笔数", index = 8)
     private Integer successTrans;
 
     /**
      * 失败笔数
      */
+    @ExcelProperty(value = "失败笔数", index = 9)
     private Integer failTrans;
 
     private Integer status;
+
+    @TableField(exist = false)
+    @ExcelProperty(value = "授权处理状态", index = 7)
+    private String statusString;
 
     private String createTime;
 
@@ -75,9 +88,18 @@ public class TDismissBatch implements Serializable {
     @TableField(exist = false)
     private Integer checkResult;
 
+    @ExcelProperty(value = "审核结果", index = 1)
+    @TableField(exist = false)
+    private String checkResultString;
+
+
     /** 审核状态*/
     @TableField(exist = false)
     private Integer checkStatus;
+
+    @TableField(exist = false)
+    @ExcelProperty(value = "审核状态", index = 2)
+    private String checkStatusString;
 
 
 }
