@@ -5,15 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TAdmin;
-import com.xhnj.model.TBatchCheck;
-import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatch;
-import com.xhnj.pojo.query.DeductionBatchQuery;
 import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.ApprovalManagementService;
-import com.xhnj.service.BatchCheckService;
-import com.xhnj.service.WithholdBaseService;
 import com.xhnj.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,6 +60,8 @@ public class BatchCheckController {
         IPage page = approvalManagementService.batchPage(dismissBatch, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
+
+
 
 
     @ApiOperation(value = "授权取消审批拒绝")
