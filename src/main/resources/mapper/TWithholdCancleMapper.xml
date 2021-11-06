@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xhnj.mapper.TWithholdCancleMapper">
+
+    <sql id="withholdCancleSql">
+        id,
+        system_type,
+        source_type,
+        bank_code,
+        bank_name,
+        system_batch,
+        fin_label_cd,
+        project_no,
+        agreement_id,
+        bizserial_no,
+        mobile_no,
+        card_no,
+        customer_name,
+        cert_type,
+        cert_no,
+        own_spec,
+        re_own_spec,
+        status,
+        is_send,
+        bank_ret_code,
+        reason,
+        contract_date,
+        end_date
+    </sql>
+
+    <sql id="withholdAgreeSql">
+        agree.id		,
+        agree.system_type	,
+        agree.source_type	,
+        agree.bank_code	,
+        agree.bank_name	,
+        agree.system_batch	,
+        agree.fin_label_cd	,
+        agree.project_no	,
+        agree.agreement_id	,
+        agree.bizserial_no	,
+        agree.mobile_no	,
+        agree.card_no		,
+        agree.customer_name 	,
+        agree.cert_type	,
+        agree.cert_no		,
+        agree.own_spec	,
+        agree.re_own_spec	,
+        agree.status		,
+        agree.is_send		,
+        agree.bank_ret_code 	,
+        agree.reason		,
+        agree.end_date	,
+        agree.create_time	,
+        agree.update_time
+
+    </sql>
+
+
+    <insert id="addBatch" parameterType="list">
+        INSERT INTO t_withhold_cancle
+        (system_type,           source_type,               bank_code,                  bank_name,                 system_batch,
+        fin_label_cd,           project_no,                agreement_id,               bizserial_no,              mobile_no,
+        card_no,                customer_name,             cert_type,                  cert_no,                   own_spec
+        )
+        VALUES
+        <foreach collection ="list" item="item" index= "index" separator =",">
+            (
+            #{item.systemType, jdbcType=BIGINT},
+            #{item.sourceType, jdbcType=BIGINT},
+            #{item.bankCode,jdbcType=VARCHAR},
+            #{item.bankName,jdbcType=VARCHAR},
+            #{item.systemBatch,jdbcType=VARCHAR},
+            #{item.finLabelCd,jdbcType=VARCHAR},
+            #{item.projectNo,jdbcType=VARCHAR},
+            #{item.agreementId,jdbcType=VARCHAR},
+            #{item.bizserialNo,jdbcType=VARCHAR},
+            #{item.mobileNo,jdbcType=VARCHAR},
+            #{item.cardNo,jdbcType=VARCHAR},
+            #{item.customerName,jdbcType=VARCHAR},
+            #{item.certType,jdbcType=VARCHAR},
+            #{item.certNo,jdbcType=VARCHAR},
+            #{item.ownSpec,jdbcType=VARCHAR}
+            )
+        </foreach >
+    </insert>
+
+
+    <select id="getByCardNo" resultType="com.xhnj.model.TWithholdCancle">
+        SELECT
+        source_type,
+        status
+        FROM t_withhold_cancle
+        WHERE card_no IN
+        <foreach  collection="cardNoList" item="req" open="(" close=")" separator=" or ">
+            #{req,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdCancle">
+        SELECT
+            <include refid="withholdCancleSql" />
+        FROM t_withhold_cancle
+        WHERE system_batch = #{batchNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
+        select <include refid="withholdAgreeSql"/> from t_withhold_cancle  agree where 1=1
+
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and date_format(start_date, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and date_format(end_date, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+            and card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
+            and bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.status !=null">
+            and status = #{withholdAgree.status,jdbcType=INTEGER}
+        </if>
+
+    </select>
+
+</mapper>
