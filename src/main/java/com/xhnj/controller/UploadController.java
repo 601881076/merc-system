@@ -1,14 +1,16 @@
 package com.xhnj.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonResult;
 import com.xhnj.service.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class UploadController {
 
     @ApiOperation("图片上传")
     @PostMapping("/image")
+    @MyLog(operate = "添加", objectType = "文件上传", objectName = "文件上传", descript = "图片上传")
     public CommonResult uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request){
         String url = uploadService.uploadPic(file, request);
         if(StrUtil.hasBlank(url)) {

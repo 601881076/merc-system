@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -94,6 +95,9 @@ public class TDismissBatch extends BaseRowModel implements Serializable {
     @TableField(exist = false)
     private String checkResultString;
 
+    /** 审核状态查询条件*/
+    @TableField(exist = false)
+    private List<String> checkStatusList;
 
     /** 审核状态*/
     @TableField(exist = false)

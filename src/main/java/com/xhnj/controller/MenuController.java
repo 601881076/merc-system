@@ -2,6 +2,7 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TMenu;
@@ -66,6 +67,7 @@ public class MenuController {
 
     @ApiOperation("添加菜单")
     @PostMapping("/add")
+    @MyLog(operate = "添加", objectType = "菜单", objectName = "菜单管理", descript = "添加菜单")
     public CommonResult create(@Validated @RequestBody TMenu menu, BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -79,6 +81,7 @@ public class MenuController {
 
     @ApiOperation("编辑菜单")
     @PostMapping("/update")
+    @MyLog(operate = "修改", objectType = "菜单", objectName = "菜单管理", descript = "编辑菜单")
     public CommonResult update(@Validated @RequestBody TMenu menu, BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -92,6 +95,7 @@ public class MenuController {
 
     @ApiOperation("删除菜单")
     @PostMapping("/delete/{id}")
+    @MyLog(operate = "删除", objectType = "菜单", objectName = "菜单管理", descript = "删除菜单")
     public CommonResult delete(@PathVariable("id") Long id) {
         int count = menuService.delete(id);
         if(count > 0)

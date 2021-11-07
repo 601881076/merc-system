@@ -1,11 +1,9 @@
 package com.xhnj.pojo.query;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.xhnj.model.TBatchCheck;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
