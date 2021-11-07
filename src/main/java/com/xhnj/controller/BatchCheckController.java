@@ -84,6 +84,9 @@ public class BatchCheckController {
         // 获取当前登录用户
         TAdmin currentUser = UserUtil.getCurrentAdminUser();
 
+        // 校验当前批次状态是否为 审核成功/审核失败。
+
+
         int count = approvalManagementService.update(1, batchNo, currentUser);
 
         // 审核通过之后讲批次号发往消息队列

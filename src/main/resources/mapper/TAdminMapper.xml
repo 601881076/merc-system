@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TAdminMapper">
 
+    <!--用户上传文件时，输入密码次数超过3次禁用该用户-->
+    <update id="updateUserStatusToDisableByUserName" >
+        update t_admin set status = 0 where id=#{admin.id,jdbcType=INTEGER}
+    </update>
 </mapper>
