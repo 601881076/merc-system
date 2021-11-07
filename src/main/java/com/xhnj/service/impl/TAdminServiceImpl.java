@@ -74,6 +74,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
 //            updateLoginTimeByUsername(username);
             //insertLoginLog(username);
             TAdmin user = UserUtil.getCurrentAdminUser();
+
+            if (0 == user.getStatus())
+                return "502";
+
             user.setLoginTime(DateUtil.date());
             adminMapper.updateById(user);
         } catch (AuthenticationException e) {

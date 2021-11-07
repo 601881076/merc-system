@@ -81,6 +81,12 @@ public class AdminController {
         if (token == null) {
             return CommonResult.validateFailed("登录失败");
         }
+
+        // 校验用户是否被锁
+        if ("502".equals(token))
+            return CommonResult.failed(ResultCode.USER_DISSABLE,"用户已被锁，无法登录");
+
+
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
