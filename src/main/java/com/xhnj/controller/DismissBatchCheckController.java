@@ -2,12 +2,12 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.service.ApprovalManagementService;
 import com.xhnj.service.TDismissBatchCheckService;
 import com.xhnj.util.UserUtil;
 import io.swagger.annotations.Api;
@@ -16,11 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -53,6 +51,7 @@ public class DismissBatchCheckController {
 
     @ApiOperation(value = "授权取消审批拒绝")
     @GetMapping("/refuse")
+    @MyLog(operate = "修改", objectType = "授权批次", objectName = "授权取消审批", descript = "授权取消审批拒绝")
     public CommonResult refuse(@RequestParam List<String> batchNo) {
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
 
@@ -67,6 +66,7 @@ public class DismissBatchCheckController {
 
     @ApiOperation(value = "授权取消审批批准")
     @GetMapping("/approve")
+    @MyLog(operate = "修改", objectType = "授权批次", objectName = "授权取消审批", descript = "授权取消审批批准")
     public CommonResult approve(@RequestParam List<String> batchNo) {
         log.info("授权取消审批批准传入参数 = " + batchNo.toString());
 

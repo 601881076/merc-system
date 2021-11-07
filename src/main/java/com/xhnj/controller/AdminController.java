@@ -2,6 +2,7 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
@@ -62,6 +63,7 @@ public class AdminController {
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping("/login")
+    @MyLog(operate = "登录", objectType = "登录操作", objectName = "登录", descript = "登录以后返回token")
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam, BindingResult result, HttpServletRequest request) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -111,12 +113,14 @@ public class AdminController {
 
     @ApiOperation(value = "退出")
     @PostMapping("/logout")
+    @MyLog(operate = "退出", objectType = "退出操作", objectName = "退出", descript = "退出")
     public CommonResult logout() {
         return CommonResult.success(null);
     }
 
     @ApiOperation(value = "添加用户")
     @PostMapping("/insert")
+    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "用户管理", descript = "添加用户")
     public CommonResult insert(TAdmin admin){
         int count=adminService.insertAdmin(admin);
         if(count > 0)
@@ -126,6 +130,7 @@ public class AdminController {
 
     @ApiOperation("编辑用户")
     @PostMapping("/update")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "用户管理", descript = "修改用户信息")
     public CommonResult update(TAdmin admin) {
         int count = adminService.updateAdmin(admin);
         if(count > 0)
@@ -135,6 +140,7 @@ public class AdminController {
 
     @ApiOperation("删除用户")
     @PostMapping("/delete/{id}")
+    @MyLog(operate = "删除", objectType = "系统权限管理", objectName = "用户管理", descript = "删除用户信息")
     public CommonResult delete(@PathVariable("id") Long id) {
         log.info("删除用户 = " + id);
         int count = adminService.deleteAdmin(id);
@@ -145,6 +151,7 @@ public class AdminController {
 
     @ApiOperation("更改密码")
     @PostMapping("/updatepass")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "用户管理", descript = "修改用户密码")
     public CommonResult updatePass(UmsAdminUpdatePassParam UmsAdminUpdatePassParam) {
         int count = adminService.updatePass(UmsAdminUpdatePassParam);
         if(count > 0)
@@ -154,6 +161,7 @@ public class AdminController {
 
     @ApiOperation("管理员重置密码")
     @PostMapping("/resetpass")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "用户管理", descript = "管理员重置密码")
     public CommonResult resetPass(TAdmin admin) {
         int count = adminService.resetPass(admin);
         if(count > 0)
@@ -162,6 +170,7 @@ public class AdminController {
     }
     @ApiOperation("分配角色")
     @PostMapping("/updaterole")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "用户角色分配")
     public CommonResult updateRole(TAdminRole tadminrole) {
         int count = adminService.updateRole(tadminrole);
         if(count > 0)

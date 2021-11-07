@@ -125,7 +125,7 @@ public class PoundageServiceImpl implements PoundageService {
 
             // 创建字体
 //            bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            bf = BaseFont.createFont("C:\\Windows\\Fonts\\simsun.ttc,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            bf = BaseFont.createFont("C:\\data\\pdf\\simsun.ttc,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
             font = new Font(bf, 12);// 使用字体
             font2 = new Font(bf, 12, Font.BOLD);// 使用加粗字体

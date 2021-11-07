@@ -3,6 +3,7 @@ package com.xhnj.controller;
 import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
@@ -85,6 +86,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "授权取消删除")
     @PostMapping("/delete/{id}")
+    @MyLog(operate = "删除", objectType = "授权批次", objectName = "授权取消删除", descript = "授权取消删除")
     public CommonResult delete(@PathVariable("id") Long id) {
         int count =WithholdAgreeDismissBaseService.delete(id);
         if(count > 0)
@@ -94,6 +96,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "取消授权excel上传")
     @PostMapping("/excelImport")
+    @MyLog(operate = "添加", objectType = "取消授权批次", objectName = "授权取消管理", descript = "取消授权excel上传")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file, BatchNoVO batchNoVO){
 
         // 校验密码输入次数是否超过三次
@@ -142,6 +145,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "授权取消提交")
     @GetMapping("/batchCheckSub")
+    @MyLog(operate = "添加", objectType = "授权批次", objectName = "授权取消管理", descript = "授权取消提交")
     public CommonResult batchCheckSub(@RequestParam List<String> batchId){
         log.info("batchId;"+batchId.toString());
         int count=batchCheckService.insertCheck(batchId);

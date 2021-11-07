@@ -2,6 +2,7 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TAdmin;
@@ -64,6 +65,7 @@ public class BatchCheckController {
 
     @ApiOperation(value = "代扣批次审批拒绝")
     @GetMapping("/refuse")
+    @MyLog(operate = "修改", objectType = "代扣批次", objectName = "扣款批次审批", descript = "代扣批次审批拒绝")
     public CommonResult refuse(@RequestParam List<String> batchNo) {
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
 
@@ -78,6 +80,7 @@ public class BatchCheckController {
 
     @ApiOperation(value = "代扣批次审批批准")
     @GetMapping("/approve")
+    @MyLog(operate = "修改", objectType = "代扣批次", objectName = "扣款批次审批", descript = "代扣批次审批批准")
     public CommonResult approve(@RequestParam List<String> batchNo) {
         log.info("授权取消审批批准传入参数 = " + batchNo.toString());
 

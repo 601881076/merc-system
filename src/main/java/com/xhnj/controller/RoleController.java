@@ -2,6 +2,7 @@ package com.xhnj.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TMenu;
@@ -56,6 +57,7 @@ public class RoleController {
 
     @ApiOperation("添加角色")
     @PostMapping("/add")
+    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "角色管理", descript = "添加角色")
     public CommonResult create(@Validated @RequestBody TRole role, BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -69,6 +71,7 @@ public class RoleController {
 
     @ApiOperation("编辑角色")
     @PostMapping("/update")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "编辑角色")
     public CommonResult update(@RequestBody TRole role) {
         int count = roleService.update(role);
         if(count > 0)
@@ -78,6 +81,7 @@ public class RoleController {
 
     @ApiOperation("删除角色")
     @PostMapping("/delete/{id}")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "删除角色")
     public CommonResult delete(@PathVariable("id") Long id) {
         int count = roleService.delete(id);
         if(count > 0)
@@ -87,6 +91,7 @@ public class RoleController {
 
     @ApiOperation("分配菜单")
     @PostMapping("/allocMenu")
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "分配菜单")
     public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
         int count = roleService.allocMenu(roleId, menuIds);
         if(count > 0)

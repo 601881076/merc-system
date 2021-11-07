@@ -3,6 +3,7 @@ package com.xhnj.controller;
 import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
@@ -61,6 +62,7 @@ public class WithholdController {
 
     @ApiOperation(value = "上传代扣excel")
     @PostMapping("/excelImport")
+    @MyLog(operate = "添加", objectType = "代扣批次", objectName = "扣款批次上传", descript = "上传代扣excel")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file,@Validated BatchNoVO batchNoVO){
 
         // 校验密码输入次数是否超过三次
@@ -149,6 +151,7 @@ public class WithholdController {
 
     @ApiOperation(value = "扣款批次删除")
     @PostMapping("/delete/{id}")
+    @MyLog(operate = "添加", objectType = "代扣批次", objectName = "批量扣款管理", descript = "扣款批次删除")
     public CommonResult delete(@PathVariable("id") Long id) {
         int count =withholdService.delete(id);
         if(count > 0)
@@ -158,6 +161,7 @@ public class WithholdController {
 
     @ApiOperation(value = "批量批次审核")
     @GetMapping("/batchCheck")
+    @MyLog(operate = "添加", objectType = "代扣批次", objectName = "批量扣款管理", descript = "批量批次审核")
     public CommonResult batchCheck(@RequestParam List<String> batchId){
         int count=batchCheckService.insert(batchId);
         if (count>0){
