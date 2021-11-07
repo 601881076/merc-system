@@ -109,9 +109,15 @@
         </if>
 
         /* 审核状态*/
-        <if test="dismissBatch.checkStatus != null and dismissBatch.checkStatus != ''">
+        <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
             and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
+
+            and chk.status in
+            <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
+               #{item, jdbcType=INTEGER}
+            </foreach >
         </if>
+
 
         /* 批次号*/
         <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
