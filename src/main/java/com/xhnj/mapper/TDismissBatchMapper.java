@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2021-09-22
  */
 public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
-    IPage listPage(IPage<TDismissBatch> page,@Param("dismissBatch") TDismissBatch dismissBatch);
+    IPage<TDismissBatch> listPage(IPage<TDismissBatch> page,@Param("dismissBatch") TDismissBatch dismissBatch);
 
     IPage listPageDouble(IPage<DisMissBatchQuery> page, @Param("dismissBatch") TDismissBatch dismissBatch);
 
@@ -27,7 +27,7 @@ public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
      * @param dismissBatch
      * @return
      */
-    IPage cancelPage(IPage<TDismissBatch> page, @Param("dismissBatch") TDismissBatch dismissBatch);
+    IPage<TDismissBatch> cancelPage(IPage<TDismissBatch> page, @Param("dismissBatch") TDismissBatch dismissBatch);
 
 
     List<TDismissBatch> cancelExport(@Param("dismissBatch") TDismissBatch dismissBatch);
@@ -36,5 +36,5 @@ public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
 
     int deleteById(@Param("id")Long id);
 
-
+    int add(@Param("dismissBatch") TDismissBatch dismissBatch);
 }

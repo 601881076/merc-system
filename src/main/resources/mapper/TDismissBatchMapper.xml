@@ -45,6 +45,19 @@
         dis.update_time
     </sql>
 
+    <insert id="add" parameterType="com.xhnj.model.TDismissBatch">
+       insert into t_dismiss_batch(
+           system_type,                        source_type,                bank_code,              system_batch,
+           total_trans,                       success_trans,                 fail_trans,           status
+
+
+       ) values(
+         #{dismissBatch.systemType},          #{dismissBatch.sourceType},   #{dismissBatch.bankCode},   #{dismissBatch.systemBatch},
+         #{dismissBatch.totalTrans},        #{dismissBatch.successTrans},     #{dismissBatch.failTrans},    #{dismissBatch.status}
+      )
+
+    </insert>
+
 
     <select id="listPageDouble" resultMap="BaseMap">
         select
