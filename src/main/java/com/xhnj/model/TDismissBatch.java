@@ -1,6 +1,5 @@
 package com.xhnj.model;
 
-import com.alibaba.excel.metadata.BaseRowModel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TDismissBatch extends BaseRowModel implements Serializable {
+public class TDismissBatch implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -63,12 +62,12 @@ public class TDismissBatch extends BaseRowModel implements Serializable {
 
     private Integer status;
 
-    @TableField(exist = false)
-    private String statusString;
-
     private String createTime;
 
     private String updateTime;
+
+    @TableField(exist = false)
+    private String statusString;
 
     /** 查询条件 > 开始时间*/
     @TableField(exist = false)
@@ -86,9 +85,11 @@ public class TDismissBatch extends BaseRowModel implements Serializable {
     private String checkResultString;
 
     /** 审核状态查询条件*/
+    @TableField(exist = false)
     private List<String> checkStatusList;
 
     /** 审核状态*/
+    @TableField(exist = false)
     private Integer checkStatus;
 
     @TableField(exist = false)
