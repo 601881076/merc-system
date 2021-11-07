@@ -2,4 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TLogMapper">
 
+    <select id="listPage" resultType="com.xhnj.model.TLog">
+        select user_name, operate, object_type, object_name, descript, create_time
+        from t_log
+        where 1 = 1
+
+        /* 开始时间*/
+        <if test="tlog.startDate !=null and tlog.startDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tlog.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        /* 结束时间*/
+        <if test="tlog.endDate !=null and tlog.endDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tlog.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        /* 用户*/
+        <if test="tlog.userName !=null and tlog.userName != ''">
+            and user_name = #{tlog.userName, jdbcType=VARCHAR}
+        </if>
+
+        /* 操作动作*/
+        <if test="tlog.operate !=null and tlog.operate != ''">
+            and operate = #{tlog.operate, jdbcType=VARCHAR}
+        </if>
+
+        /* 操作对象名称*/
+        <if test="tlog.objectType !=null and tlog.objectType != ''">
+            and object_type = #{tlog.objectType, jdbcType=VARCHAR}
+        </if>
+
+        /* 操作对象名称*/
+        <if test="tlog.objectName !=null and tlog.objectName != ''">
+            and object_name = #{tlog.objectName, jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

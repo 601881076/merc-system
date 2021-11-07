@@ -1,6 +1,7 @@
 package com.xhnj.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModelProperty;
@@ -56,5 +57,11 @@ public class TLog extends Model implements Serializable {
     private String createTime;
 
     private Integer updateTime;
+
+    @TableField(exist = false)
+    private String startDate;
+
+    @TableField(exist = false)
+    private String endDate;
 
 }
