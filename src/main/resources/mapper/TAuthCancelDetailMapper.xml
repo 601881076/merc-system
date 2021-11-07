@@ -34,7 +34,7 @@
         SELECT
             <include refid="cancleSql" />
         FROM t_withhold_cancle
-        WHERE system_batch = #{batchNo,jdbcType=VARCHAR}
+        WHERE 1=1
         <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
             and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tbatchDtl.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
