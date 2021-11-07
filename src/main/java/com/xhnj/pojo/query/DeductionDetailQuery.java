@@ -22,5 +22,4 @@ public class DeductionDetailQuery implements Serializable  {
     private String endTime;
 
 
-    private int status;
 }
