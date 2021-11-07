@@ -10,6 +10,7 @@ import com.xhnj.enums.CheckResultEnum;
 import com.xhnj.enums.CheckStatusEnum;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.service.AuthorizationCancelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,66 +45,73 @@ public class AuthorizationCancelServiceImpl implements AuthorizationCancelServic
     }
 
     @Override
-    public void exportExcel(HttpServletResponse response, TDismissBatch dismissBatch) {
+    public void exportExcel(HttpServletResponse response, TDismissBatchExcel dismissBatch) {
         log.info("授权取消列表批量导出");
 
         // 获取导出数据
-        List<TDismissBatch> list = dismissBatchMapper.cancelExport(dismissBatch);
+        List<TDismissBatchExcel> list = dismissBatchMapper.cancelExport(dismissBatch);
 
         list.stream().forEach(item -> {
             // 审核结果
-            switch (item.getCheckResult()) {
-                case 0 :
-                    item.setCheckResultString(CheckResultEnum.CHECK_RESULT_WATI.desc());
-                    break;
-                case 1:
-                    item.setCheckResultString(CheckResultEnum.CHECK_RESULT_PASS.desc());
-                    break;
-                case 2 :
-                    item.setCheckResultString(CheckResultEnum.CHECK_RESULT_REFUSE.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getCheckResult()) {
+                switch (item.getCheckResult()) {
+                    case 0 :
+                        item.setCheckResultString(CheckResultEnum.CHECK_RESULT_WATI.desc());
+                        break;
+                    case 1:
+                        item.setCheckResultString(CheckResultEnum.CHECK_RESULT_PASS.desc());
+                        break;
+                    case 2 :
+                        item.setCheckResultString(CheckResultEnum.CHECK_RESULT_REFUSE.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
 
             // 审核状态
-            switch (item.getCheckStatus()) {
-                case 0 :
-                    item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_WAIT.desc());
-                    break;
-                case 1 :
-                    item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_COMMIT.desc());
-                    break;
-                case 2 :
-                    item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_PASS.desc());
-                    break;
-                case 3 :
-                    item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_REFUSE.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getCheckStatus()) {
+                switch (item.getCheckStatus()) {
+                    case 0 :
+                        item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_WAIT.desc());
+                        break;
+                    case 1 :
+                        item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_COMMIT.desc());
+                        break;
+                    case 2 :
+                        item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_PASS.desc());
+                        break;
+                    case 3 :
+                        item.setCheckStatusString(CheckStatusEnum.CHECK_STATUS_REFUSE.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
+
 
             // 授权处理状态
             // 状态
-            switch (item.getStatus()) {
-                case -1 :
-                    item.setStatusString(BatchStatusEnum.STATUS_HOLD.desc());
-                    break;
-                case 0 :
-                    item.setStatusString(BatchStatusEnum.STATUS_WATI.desc());
-                    break;
-                case 1 :
-                    item.setStatusString(BatchStatusEnum.STATUS_COMMIT.desc());
-                    break;
-                case 2 :
-                    item.setStatusString(BatchStatusEnum.STATUS_REQUEST.desc());
-                    break;
-                case 3 :
-                    item.setStatusString(BatchStatusEnum.STATUS_MSG.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getStatus()) {
+                switch (item.getStatus()) {
+                    case -1 :
+                        item.setStatusString(BatchStatusEnum.STATUS_HOLD.desc());
+                        break;
+                    case 0 :
+                        item.setStatusString(BatchStatusEnum.STATUS_WATI.desc());
+                        break;
+                    case 1 :
+                        item.setStatusString(BatchStatusEnum.STATUS_COMMIT.desc());
+                        break;
+                    case 2 :
+                        item.setStatusString(BatchStatusEnum.STATUS_REQUEST.desc());
+                        break;
+                    case 3 :
+                        item.setStatusString(BatchStatusEnum.STATUS_MSG.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
@@ -115,7 +123,7 @@ public class AuthorizationCancelServiceImpl implements AuthorizationCancelServic
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
-            Sheet sheet = new Sheet(1,0, TDismissBatch.class);
+            Sheet sheet = new Sheet(1,0, TDismissBatchExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
             sheet.setSheetName("授权取消审批报告");

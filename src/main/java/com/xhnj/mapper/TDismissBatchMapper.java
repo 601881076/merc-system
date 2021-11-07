@@ -3,6 +3,7 @@ package com.xhnj.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,7 +31,7 @@ public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
     IPage cancelPage(IPage<TDismissBatch> page, @Param("dismissBatch") TDismissBatch dismissBatch);
 
 
-    List<TDismissBatch> cancelExport(@Param("dismissBatch") TDismissBatch dismissBatch);
+    List<TDismissBatchExcel> cancelExport(@Param("dismissBatch") TDismissBatchExcel dismissBatch);
 
 
 
