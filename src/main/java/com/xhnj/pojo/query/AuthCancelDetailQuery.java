@@ -18,5 +18,5 @@ public class AuthCancelDetailQuery {
     private String endTime;
 
 
-    private int status;
+    private String status;
 }
