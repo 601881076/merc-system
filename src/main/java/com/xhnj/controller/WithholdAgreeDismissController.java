@@ -7,6 +7,7 @@ import com.xhnj.annotation.MyLog;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.common.ResultCode;
 import com.xhnj.mapper.TAdminMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
@@ -116,7 +117,8 @@ public class WithholdAgreeDismissController {
             // 当输入密码次数大于3次时需要锁用户。
             if (flag) {
                 adminMapper.updateUserStatusToDisableByUserName(user);
-                throw new BadCredentialsException("输入密码次数超过3次，用户已被禁用");
+                return CommonResult.failed(ResultCode.PASSWOR_DOVERRUN,"输入密码次数超过3次，用户已被禁用");
+
             }
 
             throw new BadCredentialsException("密码不正确");

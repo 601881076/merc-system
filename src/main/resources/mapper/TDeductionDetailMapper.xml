@@ -40,8 +40,5 @@
         <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
             and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tbatchDtl.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
-        <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
-            and status=#{tbatchDtl.status,jdbcType=INTEGER}
-        </if>
     </select>
 </mapper>
