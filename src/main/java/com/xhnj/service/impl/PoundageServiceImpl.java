@@ -5,14 +5,19 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.xhnj.mapper.TBatchDtlMapper;
+import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.model.PoundageExcel;
 import com.xhnj.model.TBatchDtl;
+import com.xhnj.pojo.query.FeeMoneyQuery;
 import com.xhnj.pojo.query.PoundageParam;
 import com.xhnj.service.PoundageService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +41,9 @@ import java.util.List;
 public class PoundageServiceImpl implements PoundageService {
     @Resource
     private TBatchDtlMapper platformserialMapper;
+
+    @Resource
+    private TBatchNoMapper batchNoMapper;
 
     @Override
     public void exportExcel(HttpServletResponse response, PoundageParam poundageParam) {
@@ -81,12 +89,20 @@ public class PoundageServiceImpl implements PoundageService {
 
         try {
             String fileName = "信息手续费报表PDF";
-            response.setContentType("application/force-download;charset=utf-8");
+            response.setContentType("application/pdf;charset=utf-8");
             response.setCharacterEncoding("utf-8");
             response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("gb2312"), "ISO8859-1" ) + ".pdf");
             ServletOutputStream out = response.getOutputStream();
 
-            createPDF(out);
+            // 获取数据
+            List<FeeMoneyQuery> list = batchNoMapper.getFeeMoneySum(poundageParam);
+
+            list.forEach(item -> {
+                log.info(item.toString());
+            });
+
+            // 创建PDF
+            createPDF(list,out);
 
             out.flush();
             response.getOutputStream().close();
@@ -97,10 +113,9 @@ public class PoundageServiceImpl implements PoundageService {
         }
     }
 
-    public void createPDF(OutputStream out) {
+    public void createPDF(List<FeeMoneyQuery> list,OutputStream out) {
         // 创建文档对象
         Document document = new Document();
-
 
         try {
             // 设置字体
@@ -108,38 +123,57 @@ public class PoundageServiceImpl implements PoundageService {
             Font font = null;
             Font font2 = null;
 
-            bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",
-                    BaseFont.NOT_EMBEDDED);//创建字体
-            font = new Font(bf, 12);//使用字体
-            font2 = new Font(bf, 12, Font.BOLD);//使用字体
+            // 创建字体
+//            bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
+            bf = BaseFont.createFont("C:\\Windows\\Fonts\\simsun.ttc,1", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+            font = new Font(bf, 12);// 使用字体
+            font2 = new Font(bf, 12, Font.BOLD);// 使用加粗字体
 
             // 获取PDF写入流
             PdfWriter.getInstance(document, out);
 
             document.open();
             // 设置标题
-            Paragraph elements = new Paragraph("常州武进1区飞行报告", font2);
+            Paragraph elements = new Paragraph("信息手续费报告", font2);
             elements.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(elements);
 
-            // 生成一个两列的表格
-            PdfPTable table = new PdfPTable(3);
-            PdfPCell cell;
-            cell = new PdfPCell(new Phrase("Cell with colspan 3"));
-            cell.setColspan(3);
+            // 生成一个四列的表格
+            PdfPTable table = new PdfPTable(4);
+            // 标题
+            PdfPCell cell = new PdfPCell(new Paragraph("日期范围", font2));
             table.addCell(cell);
-            cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
-            cell.setRowspan(2);
+            cell = new PdfPCell(new Paragraph("扣款成功交易笔数", font2));
             table.addCell(cell);
-            table.addCell("row 1; cell 1");
-            table.addCell("row 1; cell 2");
-            table.addCell("row 2; cell 1");
-            table.addCell("row 2; cell 2");
+            cell = new PdfPCell(new Paragraph("扣款银行", font2));
+            table.addCell(cell);
+            cell = new PdfPCell(new Paragraph("信息服务费", font2));
+            table.addCell(cell);
+
+            // 数据塞入表格
+            for (int i = 0; i < list.size(); i++) {
+                // 时间
+                cell = new PdfPCell(new Paragraph(list.get(i).getTime()));
+                table.addCell(cell);
+                // 交易笔数
+                cell = new PdfPCell(new Paragraph(String.valueOf(list.get(i).getSuccessTrans())));
+                table.addCell(cell);
+                // 银行名称
+                elements = new Paragraph(list.get(i).getBankName(), font2);
+                cell = new PdfPCell(elements);
+                table.addCell(cell);
+
+                // 信息服务费
+                cell = new PdfPCell(new Paragraph(list.get(i).getFeeMoney().toString()));
+                table.addCell(cell);
+            }
 
             // 将表格对象塞入PDF
             document.add(table);
             document.addCreationDate();
             document.close();
+
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {

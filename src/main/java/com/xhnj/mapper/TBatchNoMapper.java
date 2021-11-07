@@ -3,6 +3,8 @@ package com.xhnj.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TBatchNo;
+import com.xhnj.pojo.query.FeeMoneyQuery;
+import com.xhnj.pojo.query.PoundageParam;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,4 +21,10 @@ public interface TBatchNoMapper extends BaseMapper<TBatchNo> {
     IPage<TBatchNo> listPage(IPage<TBatchNo> page,@Param("batchNo") TBatchNo batchNo);
     int deleteById(@Param("id") Long id);
 
+    /**
+     * PDF导出，数据查询
+     * @param poundageParam
+     * @return
+     */
+    List<FeeMoneyQuery> getFeeMoneySum(@Param("param") PoundageParam poundageParam);
 }

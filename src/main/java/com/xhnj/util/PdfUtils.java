@@ -36,7 +36,7 @@ public class PdfUtils {
         BaseFont bf;
         Font font = null;
         Font font2 = null;
-        try {
+        /*try {
 
             bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",
                     BaseFont.NOT_EMBEDDED);//创建字体
@@ -44,13 +44,21 @@ public class PdfUtils {
             font2 = new Font(bf, 12, Font.BOLD);//使用字体
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         // 创建文档对象
         Document document = new Document();
         try {
             // 获取PDF写入流
             PdfWriter.getInstance(document, new FileOutputStream("D:\\Desktop\\test.pdf"));
             document.open();
+
+            // 设置字体
+            //新增改进代码 -------------------------------
+            BaseFont bfChinese = BaseFont.createFont("C:\\Windows\\Fonts\\simsun.ttc",  BaseFont.IDENTITY_H, 	BaseFont.NOT_EMBEDDED);//1 不能省略
+            Font fontChinese = new Font(bfChinese, 10, Font.NORMAL);
+
+
+
             // 设置标题
             Paragraph elements = new Paragraph("常州武进1区飞行报告", font2);
             elements.setAlignment(Paragraph.ALIGN_CENTER);
@@ -61,23 +69,20 @@ public class PdfUtils {
             png.setAlignment(Image.ALIGN_CENTER);
             document.add(png);*/
 
-            // 生成一个两列的表格
-//            PdfPTable table = createTable();
-            PdfPTable table = new PdfPTable(3);
-            PdfPCell cell;
-            cell = new PdfPCell(new Phrase("Cell with colspan 3"));
-            cell.setColspan(3);
-            table.addCell(cell);
-            cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
-            cell.setRowspan(2);
-            table.addCell(cell);
-            table.addCell("row 1; cell 1");
-            table.addCell("row 1; cell 2");
-            table.addCell("row 2; cell 1");
-            table.addCell("row 2; cell 2");
+            //3、创建左边数据表格PdfPTable iTable，划分为N列
+
+            PdfPTable leftTable = new PdfPTable(4);//创建左边表格
+            //4、往左边表格中写入数据，加入iTable中
+            //4-1表格中可以合并单元格
+            PdfPCell leftCell = new PdfPCell(new Paragraph("Hello"));
+            leftCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            leftCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            leftCell.setFixedHeight(20);
+            leftCell.setColspan(4);
+            leftTable.addCell(leftCell);
 
             // 将表格对象塞入PDF
-            document.add(table);
+            document.add(leftTable);
 
             document.addCreationDate();
             document.close();
