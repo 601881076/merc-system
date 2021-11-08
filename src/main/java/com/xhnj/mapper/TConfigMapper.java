@@ -5,6 +5,8 @@ import com.xhnj.model.TAdminRole;
 import com.xhnj.model.TConfig;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 配置表 Mapper 接口
@@ -14,7 +16,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2021-11-06
  */
 public interface TConfigMapper extends BaseMapper<TConfig> {
-    TConfig selctOne(@Param("tadminrole") TConfig configs);
+    List<TConfig> selctOne(@Param("config") TConfig configs);
 
-    int updOne(@Param("tadminrole") TConfig configs);
+    int updOne(@Param("config") TConfig configs);
 }
