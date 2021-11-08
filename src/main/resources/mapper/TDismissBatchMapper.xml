@@ -124,8 +124,6 @@
 
         /* 审核状态*/
         <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
-            and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
-
             and chk.status in
             <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
                #{item, jdbcType=INTEGER}
