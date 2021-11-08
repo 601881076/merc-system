@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TAdminRoleMapper">
     <update id="updRole" >
-        update t_admin_role set  role_id#{tadminrole.roleId,jdbcType=VARBINARY} where user_id=#{tadminrole.userId,jdbcType=VARBINARY}
+        update t_admin_role set  role_id=#{tadminrole.roleId,jdbcType=VARBINARY} where user_id=#{tadminrole.userId,jdbcType=VARBINARY}
     </update>
     <select id="getRole" resultType="long">
         SELECT count(role_id) from t_admin_role where user_id=#{tadminrole.userId,jdbcType=VARBINARY}
