@@ -62,4 +62,55 @@ public class ApprovalManagementServiceImpl implements ApprovalManagementService 
     public void exportExcel(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
         batchCheckService.exportExcelSuccess(response,disMissBatchQuery);
     }
+
+    /**
+     * 根据批次查询审核已通过的
+     * @param batchNoList
+     * @return
+     */
+    @Override
+    public List<TBatchCheck> selectCheckPassBatch(List<String> batchNoList) {
+        return batchCheckMapper.selectCheckPassBatch(batchNoList);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

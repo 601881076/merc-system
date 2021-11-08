@@ -74,7 +74,9 @@
     <!--审核员授权取消审批-拒绝操作-->
     <update id="updateStatusByBatchNo" parameterType="list">
         update t_batch_check set
-        status = #{status}, check_result = #{checkResult}, check_user_id = #{admin.id}, check_user_name = #{admin.username}
+        status = #{status}, check_result = #{checkResult},
+        check_user_id = #{admin.id}, check_user_name = #{admin.username},
+        update_time = NOW()
         where batch_no in
         (
         <foreach collection="batchNo" item="item" index="index" separator=",">
@@ -113,4 +115,53 @@
     <select id="secDisOne" resultType="java.lang.Long">
        SELECT id from t_dismiss_batch where system_batch=#{batchno,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectCheckPassBatch" resultType="com.xhnj.model.TBatchCheck">
+        select batch_no from t_batch_check where status in (0, 2, 3) and batch_no in
+        <foreach collection="batchNoList" item="batchNo" index="index" open="(" separator="," close=")">
+            #{batchNo,jdbcType=VARCHAR}
+        </foreach>
+
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

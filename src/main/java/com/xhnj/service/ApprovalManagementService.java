@@ -47,5 +47,12 @@ public interface ApprovalManagementService {
      */
     void exportExcel(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery);
 
+    /**
+     * 根据批次查询审核已通过的
+     * @param batchNoList
+     * @return
+     */
+    List<TBatchCheck> selectCheckPassBatch(List<String> batchNoList);
+
 
 }
