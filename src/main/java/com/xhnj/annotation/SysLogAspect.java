@@ -43,7 +43,6 @@ public class SysLogAspect {
     //切面 配置通知
     @AfterReturning("logPoinCut()")
     public void saveSysLog(JoinPoint joinPoint) {
-        System.out.println("切面。。。。。");
         //保存日志
         TLog tLog = new TLog();
 
@@ -70,14 +69,11 @@ public class SysLogAspect {
             tLog.setDescript(myLog.descript());
         }
 
-
-
-
         //获取请求的类名
-        String className = joinPoint.getTarget().getClass().getName();
+        /*String className = joinPoint.getTarget().getClass().getName();
         //获取请求的方法名
         String methodName = method.getName();
-        tLog.setObjectName(className + "." + methodName);
+        tLog.setObjectName(className + "." + methodName);*/
 
         //请求的参数
         /*Object[] args = joinPoint.getArgs();
@@ -91,6 +87,7 @@ public class SysLogAspect {
         /*HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         sysLog.setIp(IPUtils.getIpAddr(request));*/
 
+        log.info("用户{} 进行了{} 操作", tLog.getUserName(), tLog.getDescript());
         //调用service保存SysLog实体类到数据库
         sysLogService.insertAdmin(tLog);
     }

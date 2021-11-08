@@ -142,7 +142,7 @@
 
 
     <!--授权取消列表分页查询-->
-    <select id="cancelExport" resultType="com.xhnj.model.TDismissBatch">
+    <select id="cancelExport" resultType="com.xhnj.model.TDismissBatchExcel">
         select  batch.id,
         batch.source_type,
         chk.check_result,
@@ -170,8 +170,13 @@
         </if>
 
         /* 审核状态*/
-        <if test="dismissBatch.checkStatus != null and dismissBatch.checkStatus != ''">
+        <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
             and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
+
+            and chk.status in
+            <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
+                #{item, jdbcType=INTEGER}
+            </foreach >
         </if>
 
         /* 批次号*/

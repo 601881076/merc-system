@@ -2,6 +2,7 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +32,7 @@ public interface AuthorizationCancelService {
      * @param dismissBatch
      * @return
      */
-    void exportExcel(HttpServletResponse response, TDismissBatch dismissBatch);
+    void exportExcel(HttpServletResponse response, TDismissBatchExcel dismissBatch);
 
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.service.AuthorizationCancelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +39,8 @@ public class AuthorizationCancelController {
 
     @ApiOperation(value = "授权取消列表分页查询")
     @GetMapping("/cancelPage")
-    public CommonResult<CommonPage<TDismissBatch>> SelectAuthorizationCancel(TDismissBatch dismissBatch, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TDismissBatch>> SelectAuthorizationCancel(TDismissBatch dismissBatch,
+                                                                             @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权取消列表分页查询1,{}", dismissBatch.toString());
 
@@ -49,7 +51,7 @@ public class AuthorizationCancelController {
 
     @ApiOperation(value = "授权取消列表批量导出")
     @GetMapping("/excelBatchExport")
-    public void excelBatchExport(HttpServletResponse response, TDismissBatch dismissBatch) {
+    public void excelBatchExport(HttpServletResponse response, TDismissBatchExcel dismissBatch) {
         log.info("授权取消列表批量导出, 参数 = " + dismissBatch.toString());
         cancelService.exportExcel(response, dismissBatch);
     }
