@@ -1,6 +1,7 @@
 package com.xhnj.controller;
 
 import com.xhnj.common.CommonResult;
+import com.xhnj.common.ResultCode;
 import com.xhnj.model.TConfig;
 import com.xhnj.model.TMenu;
 import com.xhnj.model.TRole;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,8 +36,8 @@ public class ConfigController {
 
     @ApiOperation("获取指定配置")
     @GetMapping("/qvalue")
-    public CommonResult<TConfig> qvalue(TConfig configs) {
-        TConfig config = configService.selctOne(configs);
+    public CommonResult<List<TConfig>> qvalue(TConfig configs) {
+        List<TConfig> config = configService.selctOne(configs);
         return CommonResult.success(config);
     }
 
@@ -45,6 +47,9 @@ public class ConfigController {
         int count = configService.updOne(configs);
         if(count > 0)
             return CommonResult.success(count);
+        else if (0 == count)
+            return CommonResult.failed(ResultCode.FAILED,"无此数据");
+
         return CommonResult.failed();
     }
 }

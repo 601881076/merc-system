@@ -6,10 +6,32 @@
         name,
         value
     </sql>
+
     <select id="selctOne" resultType="com.xhnj.model.TConfig">
-        SELECT <include refid="confSql"/> from t_config  where field_name=#{configs.fieldName,jdbcType=VARBINARY}
+        SELECT <include refid="confSql"/> from t_config
+        where 1 = 1
+
+        /* 字段名*/
+        <if test="config.fieldName != null and config.fieldName != ''">
+            and field_name = #{config.fieldName, jdbcType=VARCHAR}
+        </if>
+
+        /* 名称*/
+        <if test="config.name != null and config.name != ''">
+            and name = #{config.name, jdbcType=VARCHAR}
+        </if>
+
+        /* 配置值*/
+        <if test="config.value != null and config.value != ''">
+            and value = #{config.value, jdbcType=VARCHAR}
+        </if>
+
     </select>
+
+
     <update id="updOne" >
-        UPDATE t_config  SET value=#{configs.fieldName,jdbcType=VARBINARY}  where field_name=#{configs.fieldName,jdbcType=VARBINARY}
+        UPDATE t_config SET
+        value = #{config.value,jdbcType=VARCHAR}
+        where field_name = #{config.fieldName,jdbcType=VARCHAR}
     </update>
 </mapper>
