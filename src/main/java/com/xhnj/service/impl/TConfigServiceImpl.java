@@ -39,8 +39,7 @@ public class TConfigServiceImpl extends ServiceImpl<TConfigMapper, TConfig> impl
 
 
     @Override
-    public TConfig selctOne(TConfig configs) {
-
+    public List<TConfig> selctOne(TConfig configs) {
         return configMapper.selctOne(configs);
     }
 

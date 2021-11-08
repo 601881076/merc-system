@@ -8,6 +8,8 @@ import com.xhnj.model.TConfig;
 import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
+
 /**
  * <p>
  * 配置表 服务类
@@ -18,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface TConfigService extends IService<TConfig> {
 
-    TConfig selctOne(TConfig configs);
+    List<TConfig> selctOne(TConfig configs);
 
 
     int updOne(TConfig configs);
