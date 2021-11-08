@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.common.ResultCode;
 import com.xhnj.model.TAdmin;
+import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.service.ApprovalManagementService;
@@ -69,6 +71,19 @@ public class BatchCheckController {
     public CommonResult refuse(@RequestParam List<String> batchNo) {
         log.info("授权取消审批拒绝传入参数 = " + batchNo.toString());
 
+        if ( 0 >= batchNo.size())
+            return CommonResult.failed(ResultCode.PLEASE_SELECT, "请选择一条数据进行操作");
+
+        // 校验该list中是否有已审核通过的批次
+        List<TBatchCheck> batchCheckList =  approvalManagementService.selectCheckPassBatch(batchNo);
+        if (0 < batchCheckList.size()) {
+            // 将校验失败的批次号组成XXXXX,XXXXX的形式返给前端
+            StringBuffer sb = new StringBuffer();
+            batchCheckList.forEach(item -> sb.append(item.getBatchNo()).append(","));
+
+            return CommonResult.failed(ResultCode.FAILED,"[" + sb + "]批次审核已通过，请重新选择");
+        }
+
         // 获取当前登录用户
         TAdmin currentUser = UserUtil.getCurrentAdminUser();
 
@@ -84,15 +99,25 @@ public class BatchCheckController {
     public CommonResult approve(@RequestParam List<String> batchNo) {
         log.info("授权取消审批批准传入参数 = " + batchNo.toString());
 
+        if ( 0 >= batchNo.size())
+            return CommonResult.failed(ResultCode.PLEASE_SELECT, "请选择一条数据进行操作");
+
+        // 校验该list中是否有已审核通过的批次
+        List<TBatchCheck> batchCheckList =  approvalManagementService.selectCheckPassBatch(batchNo);
+        if (0 < batchCheckList.size()) {
+            // 将校验失败的批次号组成XXXXX,XXXXX的形式返给前端
+            StringBuffer sb = new StringBuffer();
+            batchCheckList.forEach(item -> sb.append(item.getBatchNo()).append(","));
+
+            return CommonResult.failed(ResultCode.FAILED,"[" + sb + "]批次审核已通过，请重新选择");
+        }
+
         // 获取当前登录用户
         TAdmin currentUser = UserUtil.getCurrentAdminUser();
 
-        // 校验当前批次状态是否为 审核成功/审核失败。
-
-
         int count = approvalManagementService.update(1, batchNo, currentUser);
 
-        // 审核通过之后讲批次号发往消息队列
+        // 审核通过之后将批次号发往消息队列
 //        batchNo.forEach(item -> mqSend(exchange, "/ums", item));
 
         if (count > 0)

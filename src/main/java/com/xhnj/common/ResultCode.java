@@ -10,7 +10,8 @@ public enum ResultCode implements IErrorCode {
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限"),
     PASSWOR_DOVERRUN(501,"输入密码次数超过3次，用户已被禁用"),
-    USER_DISSABLE(502,"用户已被锁，无法登录");
+    USER_DISSABLE(502,"用户已被锁，无法登录"),
+    PLEASE_SELECT(0001, "请选择一条数据进行操作");
 
     private long code;
     private String message;

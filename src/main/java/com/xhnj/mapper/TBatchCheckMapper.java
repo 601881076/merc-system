@@ -35,4 +35,11 @@ public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
     Long  secBatchOne(@Param("batchno")String batchno);
 
     Long  secDisOne(@Param("batchno")String batchno);
+
+    /**
+     * 根据批次查询审核已通过的
+     * @param batchNoList
+     * @return
+     */
+    List<TBatchCheck> selectCheckPassBatch(@Param("batchNoList")List<String> batchNoList);
 }
