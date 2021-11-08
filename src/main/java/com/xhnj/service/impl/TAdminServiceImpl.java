@@ -3,9 +3,11 @@ package com.xhnj.service.impl;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.mapper.TAdminRoleMapper;
 import com.xhnj.model.TAdminRole;
+import com.xhnj.model.TAdminRoles;
 import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.model.TAdmin;
@@ -94,13 +96,13 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
-    public Page getUserPage(String keyword, Integer pageSize, Integer pageNum) {
-        Page<TAdmin> page = new Page<>(pageNum, pageSize);
-        QueryWrapper wrapper = new QueryWrapper();
+    public IPage getUserPage(String keyword, Integer pageSize, Integer pageNum) {
+        Page<TAdminRoles> page = new Page<>(pageNum, pageSize);
+        TAdmin admin=new TAdmin();
         if(StrUtil.isNotBlank(keyword)) {
-            wrapper.like("name", keyword);
+            admin.setUsername(keyword);
         }
-        return adminMapper.selectPage(page, wrapper);
+        return adminMapper.listPage(page, admin);
     }
 
     @Override
@@ -181,5 +183,9 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
             return  tadminrolemapper.insertRole(tadminrole);
         }
 
+    }
+    @Override
+    public TAdminRole slecRole(Long id) {
+        return  tadminrolemapper.selcRole(id);
     }
 }

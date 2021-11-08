@@ -7,6 +7,9 @@
     <select id="getRole" resultType="long">
         SELECT count(role_id) from t_admin_role where user_id=#{tadminrole.userId,jdbcType=VARBINARY}
     </select>
+    <select id="selcRole" resultType="com.xhnj.model.TAdminRole">
+        SELECT * from t_admin_role where user_id=#{id,jdbcType=VARBINARY}
+    </select>
     <insert id="insertRole" >
         insert into t_admin_role
         (

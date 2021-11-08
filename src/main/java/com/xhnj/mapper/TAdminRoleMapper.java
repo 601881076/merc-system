@@ -18,4 +18,6 @@ public interface TAdminRoleMapper extends BaseMapper<TAdminRole> {
     int insertRole(@Param("tadminrole") TAdminRole tadminrole);
 
     long getRole(@Param("tadminrole") TAdminRole tadminrole);
+
+    TAdminRole selcRole(@Param("id") Long id);
 }

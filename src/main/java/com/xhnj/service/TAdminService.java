@@ -1,5 +1,6 @@
 package com.xhnj.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.model.TAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -20,7 +21,7 @@ public interface TAdminService extends IService<TAdmin> {
 
     TAdmin getAdminByUsername(String username);
 
-    Page getUserPage(String keyword, Integer pageSize, Integer pageNum);
+    IPage getUserPage(String keyword, Integer pageSize, Integer pageNum);
 
     UserDetails loadUserByUsername(String username);
 
@@ -35,5 +36,7 @@ public interface TAdminService extends IService<TAdmin> {
     int updatePass(UmsAdminUpdatePassParam admin);
 
     int updateRole(TAdminRole tadminrole);
+
+    TAdminRole slecRole(Long id);
 
 }

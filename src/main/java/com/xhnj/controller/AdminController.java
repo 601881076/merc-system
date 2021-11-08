@@ -1,12 +1,14 @@
 package com.xhnj.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
 import com.xhnj.model.TAdminRole;
+import com.xhnj.model.TAdminRoles;
 import com.xhnj.pojo.query.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
 import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
@@ -53,10 +55,10 @@ public class AdminController {
 
     @ApiOperation(value = "分页获取用户列表数据")
     @GetMapping("/list")
-    public CommonResult<CommonPage<TAdmin>> list(@RequestParam(value = "keyword", required = false) String keyword,
-                                                 @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
-                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        Page page = adminService.getUserPage(keyword, pageSize, pageNum);
+    public CommonResult<CommonPage<TAdminRoles>> list(@RequestParam(value = "keyword", required = false) String keyword,
+                                                      @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        IPage page = adminService.getUserPage(keyword, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }
 
@@ -100,12 +102,14 @@ public class AdminController {
             return CommonResult.unauthorized(null);
         TAdmin admin = adminService.getAdminByUsername(principal.getName());
         Long id = admin.getId();
+        TAdminRole admrol = adminService.slecRole(id);
         Map<String, Object> data = new HashMap<>();
         data.put("username", admin.getUsername());
         data.put("userType", admin.getUserType());
         data.put("nikeName", admin.getNickName());
         data.put("roles", roleService.getUmsRole(id));
         data.put("icon", admin.getIcon());
+        data.put("roleId", admrol.getRoleId());
         data.put("menus", roleService.getUmsMenuByAdminId(id));
         if (admin.getFirstLoginTime()== null) {
             data.put("fistFlag", "0");

@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TAdminMapper">
+    <sql id="plaSql">
+          adm.id ,
+          adm.username,
+          adm.password ,
+          adm.icon ,
+          adm.email,
+          adm.nick_name ,
+          adm.note ,
+          adm.status,
+          adm.user_type ,
+          adm.first_login_time ,
+          adm.is_overdue ,
+          adm.create_time ,
+          adm.login_time ,
+          adm.last_login_ip ,
+          adm.update_time datetime,
+          role.role_id
+    </sql>
 
+    <select id="listPage" resultType="com.xhnj.model.TAdminRoles">
+        SELECT
+        <include refid="plaSql" />
+        FROM t_admin adm left join t_admin_role role on adm.id=role.user_id
+        WHERE 1=1
+        <if test="admin.username != null and admin.username != ''">
+            and username=#{admin.username,jdbcType=INTEGER}
+        </if>
+
+    </select>
     <!--用户上传文件时，输入密码次数超过3次禁用该用户-->
     <update id="updateUserStatusToDisableByUserName" >
         update t_admin set status = 0 where id=#{admin.id,jdbcType=INTEGER}
