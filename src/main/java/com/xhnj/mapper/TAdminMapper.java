@@ -1,7 +1,10 @@
 package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TAdmin;
+import com.xhnj.model.TAdminRoles;
+import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 
 /*
@@ -12,4 +15,5 @@ import org.apache.ibatis.annotations.Param;
 public interface TAdminMapper extends BaseMapper<TAdmin> {
     int updateUserStatusToDisableByUserName(@Param("admin") TAdmin admin);
 
+    IPage listPage(IPage<TAdminRoles> page, @Param("admin") TAdmin admin);
 }
