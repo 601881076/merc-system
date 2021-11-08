@@ -122,6 +122,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         if(StrUtil.isBlank(admin.getPassword())) {
             throw new BusinessException("用户密码不能为空");
         }
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminMapper.updateById(admin);
     }
 
