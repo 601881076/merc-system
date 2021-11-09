@@ -11,13 +11,6 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class UmsAdminUpdatePassParam {
 
-    @NotEmpty(message = "id不能为空")
-    private Long id;
-
-    @NotEmpty(message = "用户名不能为空")
-    private String username;
-
-
     private String opassword;
 
     @NotEmpty(message = "新密码不能为空")

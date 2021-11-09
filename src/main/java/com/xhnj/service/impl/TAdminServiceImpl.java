@@ -155,7 +155,8 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     @Override
     public int updatePass(UmsAdminUpdatePassParam adminpass) {
         log.info("修改密码："+adminpass.toString());
-        UserDetails userDetails = loadUserByUsername(adminpass.getUsername());
+        TAdmin user = UserUtil.getCurrentAdminUser();
+        UserDetails userDetails = loadUserByUsername(user.getUsername());
         if(adminpass.getType()==0){
             String password = adminpass.getOpassword();
             if(userDetails == null)
@@ -165,8 +166,8 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
             }
         }
         TAdmin admin=new TAdmin();
-        admin.setUsername(adminpass.getUsername());
-        admin.setId(adminpass.getId());
+        admin.setUsername(user.getUsername());
+        admin.setId(user.getId());
         admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
         return adminMapper.updateById(admin);
     }
