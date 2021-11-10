@@ -27,10 +27,10 @@
         is_send,
         bank_ret_code,
         reason,
-        single_max,
+        CONVERT(single_max/100, decimal(15,2)) AS "single_max",
         day_max,
         month_max,
-        sum_max,
+        CONVERT(sum_max/100, decimal(15,2)) AS "sum_max" ,
         start_date,
         end_date
     </sql>
@@ -109,10 +109,10 @@
         agree.sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
-        agree.single_max	,
+        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
         agree.day_max		,
         agree.month_max	,
-        agree.sum_max		,
+        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
         agree.start_date	,
         agree.end_date	,
         agree.create_time	,
@@ -125,11 +125,11 @@
         select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1=1
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(start_date, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(end_date, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
