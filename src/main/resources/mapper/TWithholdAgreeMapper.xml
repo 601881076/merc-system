@@ -47,7 +47,7 @@
             #{item.sourceType, jdbcType=BIGINT},
             #{item.dealFlag, jdbcType=BIGINT},
             #{item.bankCode,jdbcType=VARCHAR},
-            #{item.bankName,jdbcType=VARCHAR},
+            (select bank_name from t_banks where inter_bank_no = #{item.bankCode,jdbcType=VARCHAR}),
             #{item.systemBatch,jdbcType=VARCHAR},
             #{item.projectNo,jdbcType=VARCHAR},
             #{item.agreementId,jdbcType=VARCHAR},
@@ -149,7 +149,7 @@
         </if>
 
         <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
-            and bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+            and bankCode = #{withholdAgree.bankCode,jdbcType=VARCHAR}
         </if>
 
     <!--    <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
