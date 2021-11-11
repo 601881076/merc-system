@@ -148,8 +148,8 @@
             and cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
         </if>
 
-        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
-            and bankCode = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+            and bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
         </if>
 
     <!--    <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
@@ -194,8 +194,8 @@
             and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
         </if>
 
-        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
-            and agree.bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+            and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
         </if>
     </select>
 
@@ -229,8 +229,8 @@
             and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
         </if>
 
-        <if test="withholdAgree.bankName !=null and withholdAgree.bankName != ''">
-            and agree.bank_name = #{withholdAgree.bankName,jdbcType=VARCHAR}
+        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+            and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
         </if>
 
         order by agree.create_time desc
