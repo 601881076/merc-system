@@ -42,72 +42,82 @@ public class BatchCheckServiceImpl implements BatchCheckService {
         list.stream().forEach(item -> {
             log.info("sourceType = " + item.getSourceType());
             // 资源类型
-            switch (item.getSourceType()) {
-                case "0" :
-                    item.setSourceType(SourceTypeEnum.sourceTypeDD.desc());
-                    break;
-                case "1" :
-                    item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
-                    break;
-                case "2" :
-                    item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getSourceType()) {
+                switch (item.getSourceType()) {
+                    case "0" :
+                        item.setSourceType(SourceTypeEnum.sourceTypeDD.desc());
+                        break;
+                    case "1" :
+                        item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
+                        break;
+                    case "2" :
+                        item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
 
+
             // 状态
-            switch (item.getStatus()) {
-                case "-1" :
-                    item.setStatus(BatchStatusEnum.STATUS_HOLD.desc());
-                    break;
-                case "0" :
-                    item.setStatus(BatchStatusEnum.STATUS_WATI.desc());
-                    break;
-                case "1" :
-                    item.setStatus(BatchStatusEnum.STATUS_COMMIT.desc());
-                    break;
-                case "2" :
-                    item.setStatus(BatchStatusEnum.STATUS_REQUEST.desc());
-                    break;
-                case "3" :
-                    item.setStatus(BatchStatusEnum.STATUS_MSG.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getStatus()) {
+                switch (item.getStatus()) {
+                    case "-1" :
+                        item.setStatus(BatchStatusEnum.STATUS_HOLD.desc());
+                        break;
+                    case "0" :
+                        item.setStatus(BatchStatusEnum.STATUS_WATI.desc());
+                        break;
+                    case "1" :
+                        item.setStatus(BatchStatusEnum.STATUS_COMMIT.desc());
+                        break;
+                    case "2" :
+                        item.setStatus(BatchStatusEnum.STATUS_REQUEST.desc());
+                        break;
+                    case "3" :
+                        item.setStatus(BatchStatusEnum.STATUS_MSG.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
 
             // 审核结果
-            switch (item.getCheckResult()) {
-                case "0" :
-                    item.setCheckResult(CheckResultEnum.CHECK_RESULT_WATI.desc());
-                    break;
-                case "1" :
-                    item.setCheckResult(CheckResultEnum.CHECK_RESULT_PASS.desc());
-                    break;
-                case "2" :
-                    item.setCheckResult(CheckResultEnum.CHECK_RESULT_REFUSE.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getCheckResult()) {
+                switch (item.getCheckResult()) {
+                    case "0" :
+                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_WATI.desc());
+                        break;
+                    case "1" :
+                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_PASS.desc());
+                        break;
+                    case "2" :
+                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_REFUSE.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
 
+
             // 审核状态
-            switch (item.getChkStatus()) {
-                case "0" :
-                    item.setChkStatus(CheckStatusEnum.CHECK_STATUS_WAIT.desc());
-                    break;
-                case "1" :
-                    item.setChkStatus(CheckStatusEnum.CHECK_STATUS_COMMIT.desc());
-                    break;
-                case "2" :
-                    item.setChkStatus(CheckStatusEnum.CHECK_STATUS_PASS.desc());
-                    break;
-                case "3" :
-                    item.setChkStatus(CheckStatusEnum.CHECK_STATUS_REFUSE.desc());
-                    break;
-                default:
-                    break;
+            if (null != item.getChkStatus()) {
+                switch (item.getChkStatus()) {
+                    case "0" :
+                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_WAIT.desc());
+                        break;
+                    case "1" :
+                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_COMMIT.desc());
+                        break;
+                    case "2" :
+                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_PASS.desc());
+                        break;
+                    case "3" :
+                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_REFUSE.desc());
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
