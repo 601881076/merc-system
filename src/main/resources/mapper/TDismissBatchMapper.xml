@@ -105,8 +105,11 @@
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
-        <if test="dismissBatch.status != null">
-            and batch.status = #{dismissBatch.status,jdbcType=INTEGER}
+        <if test="dismissBatch.status != null and dismissBatch.statusList.size() > 0">
+            and batch.status in
+            <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
+                #{item, jdbcType=INTEGER}
+            </foreach >
         </if>
 
         /* 审核状态*/
