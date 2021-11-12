@@ -74,6 +74,9 @@ public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements
         roleMenuMapper.deleteByRoleId(roleId);
 
         List<TRoleMenu> roleMenuList = new ArrayList<>();
+        if(menuIds.size()==0)
+            throw new BusinessException("分配菜单不能为空");
+
         if(!CollUtil.isEmpty(menuIds)){
             TRoleMenu roleMenu = null;
             for (Long menuId: menuIds) {
