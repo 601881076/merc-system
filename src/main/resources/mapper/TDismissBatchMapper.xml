@@ -96,15 +96,15 @@
                 batch.create_time
         from t_dismiss_batch batch left join t_dismiss_batch_check chk on batch.id = chk.batch_id
         where 1 = 1
-
-        <if test="dismissBatch.startTime != null and dismissBatch.startTime.length > 0">
+        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
-        <if test="dismissBatch.endTime != null and dismissBatch.endTime.length > 0">
+        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
+        /*授权状态*/
         <if test="dismissBatch.status != null and dismissBatch.statusList.size() > 0">
             and batch.status in
             <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
