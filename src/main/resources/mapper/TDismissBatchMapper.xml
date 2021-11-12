@@ -118,7 +118,7 @@
         </if>
 
         /*授权状态*/
-        <if test="dismissBatch.status != null and dismissBatch.statusList.size() > 0">
+        <if test="dismissBatch.statusList != null and dismissBatch.statusList.size() > 0">
             and batch.status in
             <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
                 #{item, jdbcType=INTEGER}
