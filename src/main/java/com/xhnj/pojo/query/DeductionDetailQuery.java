@@ -19,5 +19,10 @@ public class DeductionDetailQuery implements Serializable  {
     /** 查询开始时间*/
     private String endTime;
 
+    private String batchNo;
+    private String agreementId;
 
+    private String bankCode;
+
+    private String customerName;
 }
