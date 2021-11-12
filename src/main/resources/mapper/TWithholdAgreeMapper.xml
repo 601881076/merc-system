@@ -114,7 +114,7 @@
         agree.month_max	,
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
         agree.start_date	,
-        agree.end_date	,
+        date_format(agree.end_date, '%Y-%m-%d') end_date	,
         agree.create_time	,
         agree.update_time
 
