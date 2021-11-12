@@ -3,6 +3,7 @@ package com.xhnj.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TWithholdAgree;
+import com.xhnj.model.TWithholdAgreeExcel;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,6 +23,13 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     List<TWithholdAgree> getByCardNo(@Param("cardNoList") List<String> cardNoList, @Param("dealFlag") Integer dealFlag);
 
     IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 条件查询导出
+     * @param withholdAgree
+     * @return
+     */
+    List<TWithholdAgreeExcel> conditionQueryList(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 查询短信发送未完成授权

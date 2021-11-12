@@ -1,15 +1,24 @@
 package com.xhnj.service.impl;
 
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
+import com.xhnj.common.CommonPage;
+import com.xhnj.common.CommonResult;
 import com.xhnj.component.ValidateProcessor;
 import com.xhnj.constant.ValidateTypeConstant;
+import com.xhnj.enums.*;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.model.TWithholdAgree;
+import com.xhnj.model.TWithholdAgreeExcel;
 import com.xhnj.service.TWithholdAgreeService;
+import com.xhnj.service.TWithholdCancleService;
 import com.xhnj.util.BusinUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +26,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /*
@@ -35,6 +47,7 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     private TDismissBatchMapper dismissBatchMapper;
     @Autowired
     private BusinUtil businUtil;
+
 
     @Override
     public IPage conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
@@ -92,6 +105,74 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         validateProcessor.validate(ValidateTypeConstant.WITHHOLDAGREE_BATCH_CANCLE);
 
         return 1;
+    }
+
+    @Override
+    public void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
+        log.info("授权取消列表批量导出");
+
+        // 获取导出数据
+        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(withholdAgree);
+
+        // 释义转换
+        list.stream().forEach(item -> {
+            log.info("状态1{}, 发送状态1{}", item.getStatus(), item.getIsSend());
+            // 状态
+            if (null != item.getStatus()) {
+                switch (item.getStatus()) {
+                    case "0" :
+                        item.setStatus(AuthorizationRseultEnum.PROCESSING.desc());
+                        break;
+                    case "1":
+                        item.setStatus(AuthorizationRseultEnum.SUCCESS.desc());
+                        break;
+                    case "2" :
+                        item.setStatus(AuthorizationRseultEnum.FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 是否发送到银行
+            if (null != item.getIsSend()) {
+                switch (item.getIsSend()) {
+                    case "0" :
+                        item.setIsSend(IsSendEnum.SEND_SUCCESS.desc());
+                        break;
+                    case "1":
+                        item.setIsSend(IsSendEnum.SEND_FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            log.info("状态2{}, 发送状态2{}", item.getStatus(), item.getIsSend());
+        });
+
+
+        String fileName = "授权报告查询";
+
+        try {
+            response.setContentType("application/vnd.ms-excel;charset=utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
+            ServletOutputStream out = response.getOutputStream();
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
+            Sheet sheet = new Sheet(1,0, TWithholdAgreeExcel.class);
+            //设置自适应宽度
+            sheet.setAutoWidth(Boolean.TRUE);
+            sheet.setSheetName("授权报告查询");
+            writer.write(list, sheet);
+            writer.finish();
+            out.flush();
+            response.getOutputStream().close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

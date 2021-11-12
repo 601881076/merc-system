@@ -3,6 +3,7 @@ package com.xhnj.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.service.TWithholdCancleService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /*
  @Description 代扣协议
@@ -62,5 +65,17 @@ public class WithholdAgreeController {
 
         return CommonResult.success(CommonPage.restPage(page));
     }
+
+    @ApiOperation(value = "授权报告查询导出")
+    @GetMapping("/excelBatchExport")
+    public void excelBatchExport(HttpServletResponse response, TWithholdAgree withholdAgree) {
+        log.info("授权报告查询导出，请求参数{}", withholdAgree.toString());
+
+
+        log.info("授权取消列表批量导出, 参数 = " + withholdAgree.toString());
+        withholdAgreeService.exportExcel(response, withholdAgree);
+    }
+
+
 
 }
