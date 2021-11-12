@@ -2,9 +2,12 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 
 /*
  @Description
@@ -45,6 +48,14 @@ public interface TWithholdAgreeService {
      * @return
      */
     int uploadExcel(MultipartFile file);
+
+
+    /**
+     * 授权报告查询导出
+     * @param response
+     * @param withholdAgree
+     */
+    void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree);
 
 
 }
