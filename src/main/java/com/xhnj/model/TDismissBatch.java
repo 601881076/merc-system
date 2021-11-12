@@ -62,6 +62,9 @@ public class TDismissBatch implements Serializable {
 
     private Integer status;
 
+    @TableField(exist = false)
+    private List<String> statusList;
+
     private String createTime;
 
     private String updateTime;

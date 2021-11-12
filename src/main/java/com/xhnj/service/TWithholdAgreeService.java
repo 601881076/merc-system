@@ -8,6 +8,7 @@ import com.xhnj.pojo.query.WithholdAgreeParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /*
  @Description
@@ -53,9 +54,9 @@ public interface TWithholdAgreeService {
     /**
      * 授权报告查询导出
      * @param response
-     * @param withholdAgree
+     * @param idList
      */
-    void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree);
+    void exportExcel(HttpServletResponse response, List<String> idList);
 
 
 }

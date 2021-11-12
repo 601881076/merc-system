@@ -108,11 +108,11 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     }
 
     @Override
-    public void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
+    public void exportExcel(HttpServletResponse response, List<String> idList) {
         log.info("授权取消列表批量导出");
 
         // 获取导出数据
-        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(withholdAgree);
+        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(idList);
 
         // 释义转换
         list.stream().forEach(item -> {

@@ -10,6 +10,7 @@ import com.xhnj.service.TWithholdCancleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /*
  @Description 代扣协议
@@ -68,12 +70,11 @@ public class WithholdAgreeController {
 
     @ApiOperation(value = "授权报告查询导出")
     @GetMapping("/excelBatchExport")
-    public void excelBatchExport(HttpServletResponse response, TWithholdAgree withholdAgree) {
-        log.info("授权报告查询导出，请求参数{}", withholdAgree.toString());
+    public void excelBatchExport(HttpServletResponse response, @RequestParam("id") List<String> idList) {
+        log.info("授权报告查询导出，请求参数{}", idList.toString());
 
 
-        log.info("授权取消列表批量导出, 参数 = " + withholdAgree.toString());
-        withholdAgreeService.exportExcel(response, withholdAgree);
+        withholdAgreeService.exportExcel(response, idList);
     }
 
 

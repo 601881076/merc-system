@@ -34,11 +34,17 @@
         <include refid="plaSql" />
         FROM t_batch_dtl
         WHERE 1=1
-        <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tbatchDtl.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
+            and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
         </if>
-        <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tbatchDtl.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
+            and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+        </if>
+        <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
+            and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
+        </if>
+        <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
+            and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
         </if>
     </select>
 </mapper>
