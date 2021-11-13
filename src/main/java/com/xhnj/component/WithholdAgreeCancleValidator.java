@@ -76,6 +76,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             }
             log.info("receive list size 授权取消上传: {}",list.size());
             if(list.size() > 1000){
+                excelListener.getDatas().clear();
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
             //校验是否重复取消
@@ -100,9 +101,11 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             TAdmin admin = adminService.getAdminByUsername(username);
             Integer totalTrans = (Integer) context.get("totalTrans");
             if(!passwordEncoder.matches(password,admin.getPassword())){
+                excelListener.getDatas().clear();
                 throw new BusinValidateException("密码不正确");
             }
             if (!totalTrans.equals(list.size())){
+                excelListener.getDatas().clear();
                 BusinValidateException validateException = new BusinValidateException("总数量与上传文件不一致");
                 throw validateException;
 
@@ -118,6 +121,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             if(CollUtil.isNotEmpty(withholdCancleList)){
                 for (TWithholdCancle cancle: withholdCancleList) {
                     if(!"2".equals(cancle.getStatus().toString())){
+                        excelListener.getDatas().clear();
                         throw new BusinValidateException("重置失败数据");
                     }
                 }
@@ -136,6 +140,5 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
         dismissBatchMapper.insert(dismissBatch);
         //添加明细
         withholdCancleMapper.addBatch(cancelList);
-        excelListener.getDatas().clear();
     }
 }
