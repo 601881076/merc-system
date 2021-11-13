@@ -133,7 +133,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
         dismissBatch.setSystemBatch((String) context.get("batchNo"));
         dismissBatch.setTotalTrans((Integer) context.get("totalTrans"));
         dismissBatch.setStatus(-1);
-        dismissBatchMapper.add(dismissBatch);
+        dismissBatchMapper.insert(dismissBatch);
         //添加明细
         withholdCancleMapper.addBatch(cancelList);
         excelListener.getDatas().clear();
