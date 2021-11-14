@@ -172,5 +172,9 @@ public class TBatchDtl implements Serializable {
 
     private Date updateTime;
 
+    /**
+     * 合同编号
+     */
+    private String contractNo;
 
 }

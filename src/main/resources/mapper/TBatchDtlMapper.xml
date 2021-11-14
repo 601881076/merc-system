@@ -80,7 +80,7 @@
         pay_type,           trade_time,                    pay_recv,                 currency,                  money,
         recv_account,       recv_account_name,             recv_bank_no,             recv_bank_name,            card_no,
         customer_name,      pay_bank_no,                   pay_bank_name,            usages,                    summary,
-        postscript,     system_type
+        postscript,     system_type, contract_no
 
         )
         VALUES
@@ -107,7 +107,8 @@
             #{item.usages,jdbcType=VARCHAR},
             #{item.summary,jdbcType=VARCHAR},
             #{item.postscript,jdbcType=VARCHAR},
-            #{item.systemType,jdbcType=INTEGER}
+            #{item.systemType,jdbcType=INTEGER},
+            #{item.contractNo, jdbcType=VARCHAR}
             )
         </foreach >
     </insert>

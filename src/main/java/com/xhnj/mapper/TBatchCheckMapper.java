@@ -3,8 +3,7 @@ package com.xhnj.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TBatchCheck;
-import com.xhnj.model.TBatchCheckSuccessExcel;
-import com.xhnj.pojo.query.DisMissBatchQuery;
+import com.xhnj.model.TWithholdCancleExcel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
 
     int insertCheck(@Param("list") List<TBatchCheck> batchId);
 
-    List<TBatchCheckSuccessExcel> getListToBatchNo(@Param("dismissBatch") DisMissBatchQuery dismissBatch);
+    List<TWithholdCancleExcel> getListToBatchNo(@Param("list") List<String> list);
 
     int updateStatusByBatchNo(@Param("status") int status,
                               @Param("checkResult") int checkResult,

@@ -89,10 +89,11 @@
     <select id="getByCardNo" resultType="com.xhnj.model.TWithholdCancle">
         SELECT
         source_type,
-        status
+        status,
+        card_no
         FROM t_withhold_cancle
         WHERE card_no IN
-        <foreach  collection="cardNoList" item="req" open="(" close=")" separator=" or ">
+        <foreach  collection="cardNoList" item="req" open="(" close=")" separator=",">
             #{req,jdbcType=VARCHAR}
         </foreach>
     </select>
@@ -137,6 +138,11 @@
 
         <if test="withholdAgree.status !=null">
             and status = #{withholdAgree.status,jdbcType=INTEGER}
+        </if>
+
+        /*协议编号*/
+        <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+            and agreement_id = #{withholdAgree.agreementId, jdbcType=VARCHAR}
         </if>
 
     </select>

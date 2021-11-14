@@ -3,21 +3,10 @@ package com.xhnj.service.impl;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.enums.BatchStatusEnum;
-import com.xhnj.enums.CheckResultEnum;
-import com.xhnj.enums.CheckStatusEnum;
-import com.xhnj.enums.SourceTypeEnum;
-import com.xhnj.mapper.TBatchCheckMapper;
-import com.xhnj.mapper.TDismissBatchQueryMapper;
-import com.xhnj.model.TBatchCheckSuccessExcel;
-import com.xhnj.model.TBatchNo;
-import com.xhnj.model.WithholdSuccessExcel;
-import com.xhnj.pojo.query.DeductionBatchQuery;
+import com.xhnj.model.TWithholdCancleExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.pojo.query.WithholdParam;
-import com.xhnj.service.*;
+import com.xhnj.service.BatchCheckService;
+import com.xhnj.service.TBatchChecUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +25,13 @@ public class BatchCheckServiceImpl implements BatchCheckService {
 
     @Override
     public void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
-        log.info("授权取消审批报告");
-        List<TBatchCheckSuccessExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery);
+        log.info("授权取消审批明细报告");
+        List<TWithholdCancleExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery.getSystemBatchList());
 
         list.stream().forEach(item -> {
             log.info("sourceType = " + item.getSourceType());
             // 资源类型
-            if (null != item.getSourceType()) {
+            /*if (null != item.getSourceType()) {
                 switch (item.getSourceType()) {
                     case "0" :
                         item.setSourceType(SourceTypeEnum.sourceTypeDD.desc());
@@ -118,20 +107,20 @@ public class BatchCheckServiceImpl implements BatchCheckService {
                     default:
                         break;
                 }
-            }
+            }*/
         });
 
-        String fileName = "授权取消审批报告";
+        String fileName = "授权取消审批明细报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
             response.setCharacterEncoding("utf-8");
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
-            Sheet sheet = new Sheet(1,0, TBatchCheckSuccessExcel.class);
+            Sheet sheet = new Sheet(1,0, TWithholdCancleExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
-            sheet.setSheetName("授权取消审批报告");
+            sheet.setSheetName("授权取消审批明细报告");
             writer.write(list,sheet);
             writer.finish();
             out.flush();

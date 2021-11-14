@@ -1,11 +1,8 @@
 package com.xhnj.pojo.query;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TDismissBatchCheck;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -77,6 +74,8 @@ public class DisMissBatchQuery implements Serializable  {
     private String upUserName;
 
     private TDismissBatchCheck batchCheckList;
+
+    private List<String> systemBatchList;
 
 
 }

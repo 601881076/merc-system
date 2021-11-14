@@ -1,15 +1,11 @@
 package com.xhnj.pojo.query;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xhnj.model.TBatchCheck;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -95,5 +91,7 @@ public class DeductionBatchQuery implements Serializable  {
     private String upUserName;
 
     private TBatchCheck batchCheck;
+
+    private String contractNo;
 
 }

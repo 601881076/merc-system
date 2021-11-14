@@ -1,11 +1,6 @@
 package com.xhnj.service;
 
-import com.xhnj.model.TBatchCheckSuccessExcel;
-import com.xhnj.model.WithholdFailExcel;
-import com.xhnj.model.WithholdSuccessExcel;
-import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.pojo.query.WithholdParam;
-import com.xhnj.pojo.vo.WithholdDetailVO;
+import com.xhnj.model.TWithholdCancleExcel;
 
 import java.util.List;
 
@@ -22,6 +17,6 @@ import java.util.List;
 public interface TBatchChecUploadService {
 
 
-    List<TBatchCheckSuccessExcel> getListToBatchCheck(DisMissBatchQuery dismissBatch);
+    List<TWithholdCancleExcel> getListToBatchCheck(List<String> systemBatchList);
 
 }

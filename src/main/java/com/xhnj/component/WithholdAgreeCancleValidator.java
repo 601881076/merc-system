@@ -79,7 +79,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 excelListener.getDatas().clear();
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
-            //校验是否重复取消
+
+
             //生成系统批次号
             String batchNo = businUtil.getBatchNo("yyyyMMdd", 10);
             context.set("batchNo",batchNo);
@@ -119,11 +120,18 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             log.info(withholdCancleList.toString());
 
             if(CollUtil.isNotEmpty(withholdCancleList)){
+                boolean flag = true;
+                StringBuffer sb = new StringBuffer("卡号[");
                 for (TWithholdCancle cancle: withholdCancleList) {
                     if(!"2".equals(cancle.getStatus().toString())){
-                        excelListener.getDatas().clear();
-                        throw new BusinValidateException("重置失败数据");
+                        sb.append(cancle.getCardNo()).append(",");
+                        flag = false;
                     }
+                }
+
+                if (!flag) {
+                    excelListener.getDatas().clear();
+                    throw new BusinValidateException(sb.append("]").toString() + "已重复上传");
                 }
             }
         } catch (IOException e) {

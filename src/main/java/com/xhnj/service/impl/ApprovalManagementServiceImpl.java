@@ -1,30 +1,18 @@
 package com.xhnj.service.impl;
 
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.constant.ValueConstance;
 import com.xhnj.mapper.TBatchCheckMapper;
-import com.xhnj.mapper.TBatchNoMapper;
-import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TDismissBatchQueryMapper;
-import com.xhnj.model.*;
-import com.xhnj.pojo.query.DeductionBatchQuery;
+import com.xhnj.model.TAdmin;
+import com.xhnj.model.TBatchCheck;
 import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.service.ApprovalManagementService;
 import com.xhnj.service.BatchCheckService;
-import com.xhnj.service.TWithholdService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 @Service

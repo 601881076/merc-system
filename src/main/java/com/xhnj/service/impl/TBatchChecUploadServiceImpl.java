@@ -3,15 +3,9 @@ package com.xhnj.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
-import com.xhnj.model.TBatchCheckSuccessExcel;
 import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.WithholdFailExcel;
-import com.xhnj.model.WithholdSuccessExcel;
-import com.xhnj.pojo.query.DisMissBatchQuery;
-import com.xhnj.pojo.query.WithholdParam;
-import com.xhnj.pojo.vo.WithholdDetailVO;
+import com.xhnj.model.TWithholdCancleExcel;
 import com.xhnj.service.TBatchChecUploadService;
-import com.xhnj.service.TBatchDtlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +28,8 @@ public class TBatchChecUploadServiceImpl extends ServiceImpl<TBatchDtlMapper, TB
     TBatchCheckMapper batchCheckMapper;
 
     @Override
-    public List<TBatchCheckSuccessExcel> getListToBatchCheck(DisMissBatchQuery dismissBatch) {
-        return batchCheckMapper.getListToBatchNo(dismissBatch);
+    public List<TWithholdCancleExcel> getListToBatchCheck(List<String> list) {
+        return batchCheckMapper.getListToBatchNo(list);
     }
 
 

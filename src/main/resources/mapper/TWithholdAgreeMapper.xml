@@ -122,7 +122,12 @@
 
 
     <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
-        select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1=1
+        select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1 = 1
+
+        /*协议编号*/
+        <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+            and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+        </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
             and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
@@ -151,10 +156,6 @@
         <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
             and bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
         </if>
-
-    <!--    <if test="withholdAgree.dealFlag != null and withholdAgree.dealFlag != ''">
-            and deal_flag = #{withholdAgree.dealFlag,jdbcType=INTEGER}
-        </if>-->
 
         <if test="withholdAgree.status !=null">
             and status = #{withholdAgree.status,jdbcType=INTEGER}
