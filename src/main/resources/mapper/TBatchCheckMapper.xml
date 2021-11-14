@@ -121,7 +121,7 @@
 
     <select id="getListToBatchNo" resultType="com.xhnj.model.TWithholdCancleExcel">
         SELECT
-        <include refid="withholdCancleSql" />
+        <include refid="withholdCancleSqlList" />
         FROM t_withhold_cancle cancle left join t_withhold_agree_sms sms on cancle.bizserial_no = sms.bizserial_no
         WHERE system_batch
         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
