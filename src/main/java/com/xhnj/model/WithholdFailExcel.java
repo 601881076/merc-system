@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Data
 public class WithholdFailExcel extends BaseRowModel {
-    @ExcelProperty(value = "银行账号", index = 0)
+    @ExcelProperty(value = "Bank Account", index = 0)
     private String recvAccount;
     @ExcelProperty(value = "客户合同号", index = 1)
     private String contractNo;

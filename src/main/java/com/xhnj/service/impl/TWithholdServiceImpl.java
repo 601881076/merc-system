@@ -109,10 +109,8 @@ public class TWithholdServiceImpl implements TWithholdService {
 
     @Override
     public void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam) {
-        if(withholdParam.getFromType() == null){
-            withholdParam.setFromType(ValueConstance.SOURCE_MDD);
-        }
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
+        log.info("list:"+list.toString());
         list.stream().forEach(e ->e.setRecvAccount(businUtil.maskBankCard(e.getRecvAccount())));
         String fileName = "扣款成功报告";
         try {
@@ -187,9 +185,6 @@ public class TWithholdServiceImpl implements TWithholdService {
 
     @Override
     public void exportExcelFail(HttpServletResponse response, WithholdParam withholdParam) {
-        if(withholdParam.getFromType() == null){
-            withholdParam.setFromType(ValueConstance.SOURCE_MDD);
-        }
         List<WithholdFailExcel> list = platformserialService.getFailList(withholdParam);
         list.stream().forEach(e ->e.setRecvAccount(businUtil.maskBankCard(e.getRecvAccount())));
         String fileName = "扣款失败报告";

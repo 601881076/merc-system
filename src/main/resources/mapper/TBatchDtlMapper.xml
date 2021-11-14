@@ -58,7 +58,18 @@
 
 
     </sql>
+    <sql id="succsql">
 
+        trade_time,
+        substr(trade_time,1,10) AS tradedt,
+        substr(trade_time,1,10) AS effdt,
+        CONVERT(money/100, decimal(15,2)) AS "money",
+        recv_account,
+        customer_name,
+        CONCAT('BANKPMT',customer_name) AS description,
+        contract_no,
+        'LA' AS belong
+    </sql>
     <insert id="addBatch" parameterType="list">
         INSERT INTO t_batch_dtl
         (batch_no,           agreement_id,                 source_type,                bank_code,                 order_no,
@@ -117,7 +128,7 @@
 
     <select id="getList" resultType="com.xhnj.model.WithholdSuccessExcel">
         SELECT
-           <include refid="plaSql" />
+           <include refid="succsql" />
         FROM t_batch_dtl
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
