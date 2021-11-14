@@ -98,6 +98,17 @@
         </foreach>
     </select>
 
+    <!--校验导入数据是否重复-->
+    <select id="isRepeatData" resultType="com.xhnj.model.TWithholdCancle">
+        SELECT
+        source_type,
+        status,
+        card_no
+        FROM t_withhold_cancle
+        WHERE card_no = #{withholdCancle.cardNo, jdbcType=VARCHAR}
+              and agreement_id = #{withholdCancle.agreementId, jdbcType=VARCHAR}
+    </select>
+
     <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdCancle">
         SELECT
             <include refid="withholdCancleSql" />

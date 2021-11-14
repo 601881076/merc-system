@@ -1,7 +1,6 @@
 package com.xhnj.component;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
 import com.xhnj.annotation.BusinValidator;
@@ -114,12 +113,29 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             List<String> cardNoList = cancelList.stream()
                     .map(TWithholdCancle::getCardNo).distinct()
                     .collect(Collectors.toList());
-            List<TWithholdCancle> withholdCancleList = withholdCancleMapper.getByCardNo(cardNoList);
+//            List<TWithholdCancle> withholdCancleList = withholdCancleMapper.getByCardNo(cardNoList);
 
-            log.info("agreeList");
-            log.info(withholdCancleList.toString());
+            // 通过银行卡号 + 协议号 确认数据是否已重复
+            boolean flag = true;
+            StringBuffer sb = new StringBuffer("以下卡号+协议号重复[");
+            for (int i = 0; i < cancelList.size(); i++) {
+                TWithholdCancle withholdCancle = withholdCancleMapper.isRepeatData(cancelList.get(i));
 
-            if(CollUtil.isNotEmpty(withholdCancleList)){
+                if (null != withholdCancle) {
+                    flag = false;
+                    sb.append(cancelList.get(i).getCardNo())
+                            .append("+")
+                            .append(cancelList.get(i).getAgreementId())
+                            .append(",");
+                }
+            }
+
+            if (!flag) {
+                excelListener.getDatas().clear();
+                throw new BusinValidateException(sb.append("]").toString() + "已重复上传");
+            }
+
+            /*if(CollUtil.isNotEmpty(withholdCancleList)){
                 boolean flag = true;
                 StringBuffer sb = new StringBuffer("卡号[");
                 for (TWithholdCancle cancle: withholdCancleList) {
@@ -133,7 +149,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                     excelListener.getDatas().clear();
                     throw new BusinValidateException(sb.append("]").toString() + "已重复上传");
                 }
-            }
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         }

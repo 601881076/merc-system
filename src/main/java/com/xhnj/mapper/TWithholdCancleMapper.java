@@ -20,6 +20,8 @@ public interface TWithholdCancleMapper extends BaseMapper<TWithholdCancle> {
 
     List<TWithholdCancle> getByCardNo(@Param("cardNoList") List<String> cardNoList);
 
+    TWithholdCancle isRepeatData(@Param("withholdCancle") TWithholdCancle withholdCancle);
+
     int addBatch(@Param("list") List<TWithholdCancle> list);
 
     IPage<TWithholdCancle> listPageByBatchNo(IPage<TWithholdCancle> page, String batchNo);
