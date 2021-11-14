@@ -84,6 +84,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             }
             log.info("receive list size: {}",list.size());
             if(list.size() > 1000){
+                excelListener.getDatas().clear();
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
             //生成批次号,由当前用户+当前日期组成+随机数
@@ -116,9 +117,11 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             totalAmt=businUtil.coverAmount(totalAmt,0);
             TAdmin admin = adminService.getAdminByUsername(username);
             if(!passwordEncoder.matches(password,admin.getPassword())){
+                excelListener.getDatas().clear();
                 throw new BusinValidateException("密码不正确");
             }
             if (!(totalTrans.equals(list.size())&&totalAmt1.equals(totalAmt.toString()))){
+                excelListener.getDatas().clear();
                 BusinValidateException validateException = new BusinValidateException("总金额或总数量与上传文件不一致");
                 throw validateException;
 
@@ -138,7 +141,6 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        excelListener.getDatas().clear();
 
     }
 
