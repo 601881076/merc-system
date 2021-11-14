@@ -125,7 +125,7 @@ public class TWithholdCancleExcel extends BaseRowModel {
      * 状态(0->处理中;1->成功;2->失败)
      */
     @ExcelProperty(value = "状态", index = 10)
-    private Integer status;
+    private String status;
 
     /**
      * 是否发送到银行(0->未发送;1->已发送)
@@ -160,7 +160,7 @@ public class TWithholdCancleExcel extends BaseRowModel {
     /**
      * 当月累计(元)
      */
-    @ExcelProperty(value = "当天累计(元)", index = 16)
+    @ExcelProperty(value = "当月累计(元)", index = 16)
     private BigDecimal monthMax;
 
     /**

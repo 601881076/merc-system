@@ -123,7 +123,7 @@
         SELECT
         <include refid="withholdCancleSqlList" />
         FROM t_withhold_cancle cancle left join t_withhold_agree_sms sms on cancle.bizserial_no = sms.bizserial_no
-        WHERE system_batch
+        WHERE system_batch in
         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
             #{item,jdbcType=VARCHAR}
         </foreach>

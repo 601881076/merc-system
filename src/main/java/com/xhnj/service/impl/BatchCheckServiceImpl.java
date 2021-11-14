@@ -3,6 +3,7 @@ package com.xhnj.service.impl;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.xhnj.enums.CancleStatusEnum;
 import com.xhnj.model.TWithholdCancleExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.service.BatchCheckService;
@@ -25,89 +26,25 @@ public class BatchCheckServiceImpl implements BatchCheckService {
 
     @Override
     public void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
-        log.info("授权取消审批明细报告");
+        log.info("授权取消审批明细报告,systemBatchList{}", disMissBatchQuery.getSystemBatchList());
         List<TWithholdCancleExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery.getSystemBatchList());
 
         list.stream().forEach(item -> {
-            log.info("sourceType = " + item.getSourceType());
-            // 资源类型
-            /*if (null != item.getSourceType()) {
-                switch (item.getSourceType()) {
-                    case "0" :
-                        item.setSourceType(SourceTypeEnum.sourceTypeDD.desc());
-                        break;
-                    case "1" :
-                        item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
-                        break;
-                    case "2" :
-                        item.setSourceType(SourceTypeEnum.sourceTypeSDSP.desc());
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-
-            // 状态
             if (null != item.getStatus()) {
                 switch (item.getStatus()) {
-                    case "-1" :
-                        item.setStatus(BatchStatusEnum.STATUS_HOLD.desc());
-                        break;
                     case "0" :
-                        item.setStatus(BatchStatusEnum.STATUS_WATI.desc());
+                        item.setStatus(CancleStatusEnum.systemIDS.desc());
                         break;
                     case "1" :
-                        item.setStatus(BatchStatusEnum.STATUS_COMMIT.desc());
+                        item.setStatus(CancleStatusEnum.systemCIF.desc());
                         break;
                     case "2" :
-                        item.setStatus(BatchStatusEnum.STATUS_REQUEST.desc());
-                        break;
-                    case "3" :
-                        item.setStatus(BatchStatusEnum.STATUS_MSG.desc());
+                        item.setStatus(CancleStatusEnum.systemPAS.desc());
                         break;
                     default:
                         break;
                 }
             }
-
-            // 审核结果
-            if (null != item.getCheckResult()) {
-                switch (item.getCheckResult()) {
-                    case "0" :
-                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_WATI.desc());
-                        break;
-                    case "1" :
-                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_PASS.desc());
-                        break;
-                    case "2" :
-                        item.setCheckResult(CheckResultEnum.CHECK_RESULT_REFUSE.desc());
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-
-            // 审核状态
-            if (null != item.getChkStatus()) {
-                switch (item.getChkStatus()) {
-                    case "0" :
-                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_WAIT.desc());
-                        break;
-                    case "1" :
-                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_COMMIT.desc());
-                        break;
-                    case "2" :
-                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_PASS.desc());
-                        break;
-                    case "3" :
-                        item.setChkStatus(CheckStatusEnum.CHECK_STATUS_REFUSE.desc());
-                        break;
-                    default:
-                        break;
-                }
-            }*/
         });
 
         String fileName = "授权取消审批明细报告";
