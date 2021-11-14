@@ -26,7 +26,11 @@
         postscript,
         create_time,
         reason,
-        contract_no
+        contract_no,
+        pay_result,
+        ret_code,
+        recoState,
+        recoResult
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TBatchDtl">
