@@ -138,12 +138,19 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNo.setSourceType(ValueConstance.SOURCE_MDD);
             batchNo.setBatchNo(batchNoStr);
 
+            // 生成系统批次号
+            String systemBatchNo = businUtil.getBatchNo("yyyyMMdd", 10);
+            batchNo.setSystemBatch(systemBatchNo);
+
+
             batchNoMapper.insert(batchNo);
 
             //批量插入明细
             platformserialMapper.addBatch(originalList);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            excelListener.getDatas().clear();
         }
 
     }

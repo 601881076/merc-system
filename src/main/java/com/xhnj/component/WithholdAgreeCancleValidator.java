@@ -152,6 +152,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             }*/
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            excelListener.getDatas().clear();
         }
 
         //添加批次
