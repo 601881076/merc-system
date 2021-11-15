@@ -42,8 +42,13 @@ public class WithholdAgreeController {
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权条件查询，请求参数{}", withholdAgree.toString());
 
+
+        // 查询信息
+        IPage page = withholdAgreeService.conditionQuery(withholdAgree,pageSize, pageNum);
+
+
         // 如果status = 4，则查询 操作标志 = 2 的数据。
-        if (null != withholdAgree.getStatus()) {
+        /*if (null != withholdAgree.getStatus()) {
             int status = withholdAgree.getStatus();
             if (4 == status) {
                 log.info("操作标志");
@@ -63,7 +68,7 @@ public class WithholdAgreeController {
 
             long totalPage = status == 4  ? 1 : page.getTotal();
             page.setTotal(totalPage);
-        }
+        }*/
 
         return CommonResult.success(CommonPage.restPage(page));
     }

@@ -25,6 +25,14 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
+     * 授权报告查询 - 条件查询成功数据
+     * @param page
+     * @param withholdAgree
+     * @return
+     */
+    IPage<TWithholdAgree> selectSuccess(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
      * 条件查询导出
      * @param idList
      * @return

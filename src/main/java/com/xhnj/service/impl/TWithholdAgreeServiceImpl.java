@@ -54,9 +54,19 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         log.info("授权报告查询");
         IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
 
+        if (null != withholdAgree.getStatus()) {
+            log.info("查询报告状态{}", withholdAgree.getStatus());
+
+            switch (withholdAgree.getStatus()) {
+                case 0 :
+                    // 查询成功/失败
+                    return withholdAgreeMapper.selectSuccess(page,withholdAgree);
+            }
+        }
+
         // 根据前端上送状态判断本次查询内容
         // 1 > 成功; 2 > 失败；3 > 短信发送未完成授权（需要关联短信表）；4 > 只显示最新授权状态（查询最新一条）；5 > 授权取消查标识为接触的数据
-        if (null != withholdAgree.getStatus()) {
+        /*if (null != withholdAgree.getStatus()) {
             int status = withholdAgree.getStatus();
             log.info("状态{}", status);
             switch (status) {
@@ -73,7 +83,7 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                 default:
                     return withholdAgreeMapper.conditionQuery(page,withholdAgree);
             }
-        }
+        }*/
 
         return withholdAgreeMapper.conditionQuery(page,withholdAgree);
     }

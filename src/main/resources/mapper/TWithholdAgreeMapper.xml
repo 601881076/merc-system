@@ -164,6 +164,59 @@
 
     </select>
 
+    <!--
+        授权报告页面查询：查询成功
+        查询逻辑：
+        对相同的银行卡 和agreementID来说，判断最后一条记录是成功还是失败及取消，需要结合授权和取消表，确认最后一条记录。是成功还是失败
+    -->
+    <select id="selectSuccess" resultType="com.xhnj.model.TWithholdAgree">
+        select <include refid="withholdAgreeSql"/> from t_withhold_agree agree
+        where id in (
+            select max(t.id)
+            from t_withhold_agree_sms sms left join t_withhold_agree t on sms.agreement_id = t.agreement_id and sms.card_no = t.card_no
+
+            /*协议编号*/
+            <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+                and t.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+            </if>
+
+            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+                and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            </if>
+
+            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+                and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            </if>
+
+            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+                and t.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            </if>
+
+            <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+                and t.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+            </if>
+
+            <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+                and t.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+            </if>
+
+            <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+                and t.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+            </if>
+
+            <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+                and t.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="withholdAgree.status !=null">
+                and t.status = #{withholdAgree.status,jdbcType=INTEGER}
+            </if>
+
+            group by t.agreement_id, t.card_no
+        )
+
+    </select>
+
     <!--授权报告条件导出-->
     <select id="conditionQueryList" resultType="com.xhnj.model.TWithholdAgreeExcel">
         select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where
