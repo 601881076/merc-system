@@ -7,7 +7,7 @@ import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
-import com.xhnj.constant.ValueConstance;
+import com.xhnj.constant.ValueConstant;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdCancleMapper;
 import com.xhnj.model.TAdmin;
@@ -88,8 +88,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             for (int i = 0; i < list.size(); i++) {
                 vo = (AgreeDismissDetailVO) list.get(i);
                 TWithholdCancle withholdCancle = BeanUtil.copyProperties(vo, TWithholdCancle.class);
-                withholdCancle.setSystemType(ValueConstance.SYSTEM_TYPE_MDD);
-                withholdCancle.setSourceType(ValueConstance.SOURCE_MDD);
+                withholdCancle.setSystemType(ValueConstant.SYSTEM_TYPE_MDD);
+                withholdCancle.setSourceType(ValueConstant.SOURCE_MDD);
                 withholdCancle.setSystemBatch(batchNo);
                 withholdCancle.setAgreementId(vo.getAgreementid());
 
@@ -158,8 +158,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
 
         //添加批次
         TDismissBatch dismissBatch = new TDismissBatch();
-        dismissBatch.setSystemType(ValueConstance.SYSTEM_TYPE_MDD);
-        dismissBatch.setSourceType(ValueConstance.SOURCE_MDD);
+        dismissBatch.setSystemType(ValueConstant.SYSTEM_TYPE_MDD);
+        dismissBatch.setSourceType(ValueConstant.SOURCE_MDD);
         dismissBatch.setSystemBatch((String) context.get("batchNo"));
         dismissBatch.setTotalTrans((Integer) context.get("totalTrans"));
         dismissBatch.setStatus(-1);

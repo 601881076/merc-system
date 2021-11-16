@@ -9,7 +9,7 @@ import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
-import com.xhnj.constant.ValueConstance;
+import com.xhnj.constant.ValueConstant;
 import com.xhnj.mapper.TBatchDtlMapper;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.model.TAdmin;
@@ -101,9 +101,9 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 platformserial = BeanUtil.copyProperties(withholdDetailVO, TBatchDtl.class);
                 platformserial.setBatchNo(batchNoStr);
                 platformserial.setOrderNo(businUtil.generateOrderNo());
-                platformserial.setPayRecv(ValueConstance.WITHHOLD);
+                platformserial.setPayRecv(ValueConstant.WITHHOLD);
                 platformserial.setSystemType(6);
-                platformserial.setSourceType(ValueConstance.SOURCE_MDD);
+                platformserial.setSourceType(ValueConstant.SOURCE_MDD);
                 platformserial.setPayType(0);
                 platformserial.setMoney(businUtil.coverAmount(withholdDetailVO.getMoney(),1));
                 platformserial.setCurrency("人民币");
@@ -135,7 +135,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNo.setTotalTrans(list.size());
             batchNo.setTotalAmt(businUtil.coverAmount(totalAmt,1));
             batchNo.setSystemType(6);
-            batchNo.setSourceType(ValueConstance.SOURCE_MDD);
+            batchNo.setSourceType(ValueConstant.SOURCE_MDD);
             batchNo.setBatchNo(batchNoStr);
             batchNo.setIsHold(0);
 

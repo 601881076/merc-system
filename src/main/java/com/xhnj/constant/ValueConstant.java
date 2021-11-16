@@ -5,7 +5,7 @@ package com.xhnj.constant;
  *@author kang.li
  *@date 2021/9/19 16:27   
  */
-public class ValueConstance {
+public class ValueConstant {
 
     /**
      * 系统来源类型
@@ -17,7 +17,7 @@ public class ValueConstance {
      * 数据来源类型
      */
     public static final Integer SOURCE_INTERFACE = 0;
-    public static final Integer SOURCE_MDD = 1;
+    public static final Integer SOURCE_MDD = 2;
 
 
     /**
