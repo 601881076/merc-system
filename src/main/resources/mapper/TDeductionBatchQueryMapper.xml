@@ -74,7 +74,7 @@
         where 1 = 1
         <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
-        </if>
+        </if>wh
         <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
