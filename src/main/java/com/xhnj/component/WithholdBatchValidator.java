@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
@@ -12,9 +13,11 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstant;
 import com.xhnj.mapper.TBatchDtlMapper;
 import com.xhnj.mapper.TBatchNoMapper;
+import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TBatchDtl;
 import com.xhnj.model.TBatchNo;
+import com.xhnj.model.TWithholdAgree;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.util.BusinUtil;
@@ -54,6 +57,8 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private ExcelListener excelListener;
+    @Autowired
+    private TWithholdAgreeMapper tWithholdAgreeMapper;
     @Value("${rsa.privateKey}")
     private String privateKey;
 
@@ -98,6 +103,11 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             BigDecimal totalAmt = new BigDecimal("0");
             for (int i = 0; i < list.size(); i++) {
                 withholdDetailVO = (WithholdDetailVO) list.get(i);
+                String bankCode = withholdDetailVO.getBankCode();
+                List<TWithholdAgree> tWithholdAgreeIPage = tWithholdAgreeMapper.selectBankcode(bankCode);
+                if(tWithholdAgreeIPage.size()<1){
+                    throw new BusinValidateException(bankCode+"银行码不存在！！！请检查");
+                }
                 platformserial = BeanUtil.copyProperties(withholdDetailVO, TBatchDtl.class);
                 platformserial.setBatchNo(batchNoStr);
                 platformserial.setOrderNo(businUtil.generateOrderNo());

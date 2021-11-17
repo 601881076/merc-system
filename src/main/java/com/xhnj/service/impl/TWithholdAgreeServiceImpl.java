@@ -13,10 +13,8 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.enums.*;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
-import com.xhnj.model.TDismissBatch;
-import com.xhnj.model.TDismissBatchExcel;
-import com.xhnj.model.TWithholdAgree;
-import com.xhnj.model.TWithholdAgreeExcel;
+import com.xhnj.model.*;
+import com.xhnj.pojo.query.WithholdAgreeQuery;
 import com.xhnj.service.TWithholdAgreeService;
 import com.xhnj.service.TWithholdCancleService;
 import com.xhnj.util.BusinUtil;
@@ -29,6 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -52,40 +51,82 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     @Override
     public IPage conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
         log.info("授权报告查询");
-        IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
+        IPage<WithholdAgreeQuery> page = new Page<>(pageNum, pageSize);
 
         if (null != withholdAgree.getStatus()) {
             log.info("查询报告状态{}", withholdAgree.getStatus());
 
             switch (withholdAgree.getStatus()) {
-                case 0 :
-                    // 查询成功/失败
-                    return withholdAgreeMapper.selectSuccess(page,withholdAgree);
+                case 3 :
+                    // 查询授权取消
+                    return withholdAgreeMapper.selectAuthorizationCancel(page,withholdAgree);
+                case 1 :
+
+                    return withholdAgreeMapper.notCompletedAuth(page, withholdAgree);
+
+
+                    /* 本来想采用分批次查询，然后汇总到一起的方式处理，但是最后发现无法正确的显示每页的数据。 比如第一页的数据如何做到与第二页的数据不重复？
+
+
+
+                    * 未完成授权查询分两种情况
+                    * 1. 第一种情况，短信表存在数据，授权表无数据
+                    * 2.  短信表、授权表都存在数据，但是授权表对应状态是失败的
+                    * */
+
+                    // 声明数据汇总集合，用户存储两次查询的数据
+                    /*List<WithholdAgreeQuery> list = new ArrayList<>();
+
+                    // 分页偏移量
+                    int minNumber = pageSize * (pageNum - 1);
+
+                    // 总数量
+                    int count = 0;*/
+
+                    /*
+                    * 1. 第一种情况，短信表存在数据，授权表无数据。
+                    * 分两次查询，第一次查出短信表有数据，授权表无数据的卡号+协议号
+                    * 第二次根据 以上查出来的卡号 + 协议号查出具体数据
+                    * */
+
+                    // 第一次查询
+                    /*List<WithholdAgreeQuery> smsList = withholdAgreeMapper.selectSmsExistsAndAuthorizationNotExists(withholdAgree);
+                    if (0 < smsList.size()) {
+                        // 第二次查询 需要进行分页查询
+
+                        // count查询
+                        count = withholdAgreeMapper.selectSmsExistsAndAuthorizationNotExistsCount(smsList, withholdAgree);
+
+                        // 数据查询
+                        list = withholdAgreeMapper.selectSmsExistsAndAuthorizationNotExistsList(smsList, withholdAgree, minNumber, pageSize);
+
+                    }
+
+                    *//*
+                    * 第二种情况查询
+                    * 短信表、授权表都存在数据，但是授权表对应状态是失败的
+                    * *//*
+
+                    // count查询
+                    int twoResultCount = withholdAgreeMapper.selectSmsAuthorizationBothExistsCount(withholdAgree, minNumber, pageSize);
+
+                    // 数据查询
+                    list.addAll(withholdAgreeMapper.selectSmsAuthorizationBothExistsList(withholdAgree, minNumber, pageSize));
+
+                    // 总数量
+                    count += twoResultCount;
+                    page.setTotal(count);
+
+                    // 页数
+                    page.setPages(0 == count % 20 ? count % 20 : count / 20 + 1);
+
+                    // 当前页记录
+                    page.setRecords(list);*/
             }
         }
 
-        // 根据前端上送状态判断本次查询内容
-        // 1 > 成功; 2 > 失败；3 > 短信发送未完成授权（需要关联短信表）；4 > 只显示最新授权状态（查询最新一条）；5 > 授权取消查标识为接触的数据
-        /*if (null != withholdAgree.getStatus()) {
-            int status = withholdAgree.getStatus();
-            log.info("状态{}", status);
-            switch (status) {
-                case 3:
-                    // 短信发送未完成授权（需要关联短信表）
-                    return withholdAgreeMapper.selectSmsIsNotCompleted(page,withholdAgree);
-                case 4:
-                    // 查询最新的一条数据
-                    page = new Page<>(1,1);
-                    return withholdAgreeMapper.selectLatestDate(page,withholdAgree);
-                case 5:
-                    //
-                    return withholdAgreeMapper.conditionQuery(page,withholdAgree);
-                default:
-                    return withholdAgreeMapper.conditionQuery(page,withholdAgree);
-            }
-        }*/
-
-        return withholdAgreeMapper.conditionQuery(page,withholdAgree);
+        // 查询成功的授权报告
+        return withholdAgreeMapper.selectSuccess(page,withholdAgree);
     }
 
     @Override
