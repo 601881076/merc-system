@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdAgreeExcel;
+import com.xhnj.model.TWithholdAgreeSms;
 import com.xhnj.pojo.query.WithholdAgreeParam;
+import com.xhnj.pojo.query.WithholdAgreeQuery;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ import java.util.List;
  * @author lk
  * @since 2021-08-10
  */
+@Repository
 public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     IPage<TWithholdAgree> listPageByBatchNo(IPage<TWithholdAgree> page, @Param("batchNo") String batchNo);
 
@@ -30,7 +34,15 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
      * @param withholdAgree
      * @return
      */
-    IPage<TWithholdAgree> selectSuccess(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
+    IPage<WithholdAgreeQuery> selectSuccess(IPage<WithholdAgreeQuery> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权报告查询 - 查询授权取消
+     * @param page
+     * @param withholdAgree
+     * @return
+     */
+    IPage<WithholdAgreeQuery> selectAuthorizationCancel(IPage<WithholdAgreeQuery> page, @Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 条件查询导出
@@ -40,23 +52,69 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     List<TWithholdAgreeExcel> conditionQueryList(@Param("list") List<String> idList);
 
     /**
-     * 查询短信发送未完成授权
+     * 授权报告查询页面 -- 未完成授权状态查询
      * @param page
      * @param withholdAgree
      * @return
      */
-    IPage<TWithholdAgree> selectSmsIsNotCompleted(IPage<TWithholdAgree> page,
+    IPage<WithholdAgreeQuery> notCompletedAuth(IPage<WithholdAgreeQuery> page,
                                                   @Param("withholdAgree") TWithholdAgree withholdAgree);
 
+
+    int addBatch(@Param("list") List<TWithholdAgree> list);
+
+    List<TWithholdAgree> selectBankcode(@Param("bankCode") String bankCode);
+
     /**
-     * 查询最新一条数据
-     * @param page
+     * 授权报告查询 -- 未完成授权状态查询
+     * 查出短信表有数据，授权表无数据的卡号+协议号
      * @param withholdAgree
      * @return
      */
-    IPage<TWithholdAgree> selectLatestDate(IPage<TWithholdAgree> page,
-                                           @Param("withholdAgree") TWithholdAgree withholdAgree);
+    List<WithholdAgreeQuery> selectSmsExistsAndAuthorizationNotExists(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
-    int addBatch(@Param("list") List<TWithholdAgree> list);
+    /**
+     * 授权报告查询 -- 未完成授权状态查询
+     * 根据卡号和协议号查询出 未完成授权状态的数据
+     * @param smsList
+     * @return
+     */
+    List<TWithholdAgreeSms> selectSmsExistsAndAuthorizationNotExistsList(@Param("smsList") List<TWithholdAgreeSms> smsList,
+                                                                         @Param("withholdAgree") TWithholdAgree withholdAgree,
+                                                                         @Param("minNumber") Integer minNumber,
+                                                                         @Param("pageSize") Integer pageSize);
+    /**
+     * 授权报告查询 -- 未完成授权状态查询
+     * 根据卡号和协议号查询出 未完成授权状态的数据 总数量
+     * @param smsList
+     * @return
+     */
+    int selectSmsExistsAndAuthorizationNotExistsCount(@Param("smsList") List<WithholdAgreeQuery> smsList,
+                                                                         @Param("withholdAgree") TWithholdAgree withholdAgree);
+
+
+    /**
+     * 授权报告查询 -- 未完成授权状态查询
+     * 短信表、授权表都存在数据，但是授权表对应状态是失败的 -- count查询
+     * @param withholdAgree
+     * @param minNumber 分页查询最小值
+     * @param pageSize 分页查询当前页数量
+     * @return
+     */
+    int selectSmsAuthorizationBothExistsCount(@Param("withholdAgree") TWithholdAgree withholdAgree,
+                                         @Param("minNumber") Integer minNumber,
+                                         @Param("pageSize") Integer pageSize);
+
+    /**
+     * 授权报告查询 -- 未完成授权状态查询
+     * 短信表、授权表都存在数据，但是授权表对应状态是失败的 -- 数据查询
+     * @param withholdAgree
+     * @param minNumber 分页查询最小值
+     * @param pageSize 分页查询当前页数量
+     * @return
+     */
+    List<TWithholdAgreeSms> selectSmsAuthorizationBothExistsList(@Param("withholdAgree") TWithholdAgree withholdAgree,
+                                         @Param("minNumber") Integer minNumber,
+                                         @Param("pageSize") Integer pageSize);
 
 }

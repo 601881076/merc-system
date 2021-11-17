@@ -9,9 +9,11 @@ import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstant;
 import com.xhnj.mapper.TDismissBatchMapper;
+import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.mapper.TWithholdCancleMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
+import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
 import com.xhnj.service.TAdminService;
@@ -48,6 +50,8 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
     private BusinUtil businUtil;
     @Autowired
     private TAdminService adminService;
+    @Autowired
+    private TWithholdAgreeMapper tWithholdAgreeMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -87,6 +91,11 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             AgreeDismissDetailVO vo = null;
             for (int i = 0; i < list.size(); i++) {
                 vo = (AgreeDismissDetailVO) list.get(i);
+                String bankCode = vo.getBankCode();
+                List<TWithholdAgree> tWithholdAgreeIPage = tWithholdAgreeMapper.selectBankcode(bankCode);
+                if(tWithholdAgreeIPage.size()<1){
+                    throw new BusinValidateException(bankCode+"银行码不存在！！！请检查");
+                }
                 TWithholdCancle withholdCancle = BeanUtil.copyProperties(vo, TWithholdCancle.class);
                 withholdCancle.setSystemType(ValueConstant.SYSTEM_TYPE_MDD);
                 withholdCancle.setSourceType(ValueConstant.SOURCE_MDD);
