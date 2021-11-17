@@ -93,6 +93,7 @@
         <if test="dismissBatch.batchNo!=null and dismissBatch.batchNo!=''">
             and batch.batch_no=#{dismissBatch.batchNo,jdbcType=VARCHAR}
         </if>
+        and batch.source_type='2'
         order by batch.create_time desc
     </select>
 
