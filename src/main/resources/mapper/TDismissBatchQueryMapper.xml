@@ -73,6 +73,8 @@
         <if test="dismissBatch.systemBatch!=null and dismissBatch.systemBatch!=''">
             and dis.system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
         </if>
+        and dis.source_type='2'
+
     </select>
 
 
