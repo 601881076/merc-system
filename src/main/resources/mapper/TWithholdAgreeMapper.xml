@@ -704,4 +704,8 @@
 
 
 
+    <!--校验福特行号是否存在-->
+    <select id="selectBankcode" resultType="com.xhnj.model.TWithholdAgree">
+        select 1 from  t_bank_code_mapp where bank_code=#{bankCode}
+    </select>
 </mapper>
