@@ -44,6 +44,14 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
      */
     IPage<WithholdAgreeQuery> selectAuthorizationCancel(IPage<WithholdAgreeQuery> page, @Param("withholdAgree") TWithholdAgree withholdAgree);
 
+
+    /**
+     * 授权报告查询 - 查询授权取消
+     * @param withholdAgree
+     * @return
+     */
+    List<TWithholdAgreeExcel> selectAuthorizationCancelExport(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
     /**
      * 条件查询导出
      * @param withholdAgree
@@ -59,6 +67,14 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
      */
     IPage<WithholdAgreeQuery> notCompletedAuth(IPage<WithholdAgreeQuery> page,
                                                   @Param("withholdAgree") TWithholdAgree withholdAgree);
+
+
+    /**
+     * 授权报告查询页面 -- 未完成授权状态查询导出
+     * @param withholdAgree
+     * @return
+     */
+    List<TWithholdAgreeExcel> notCompletedAuthExport( @Param("withholdAgree") TWithholdAgree withholdAgree);
 
 
     int addBatch(@Param("list") List<TWithholdAgree> list);

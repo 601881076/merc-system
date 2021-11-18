@@ -59,9 +59,11 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             switch (withholdAgree.getStatus()) {
                 case 3 :
                     // 查询授权取消
+                    log.info("查询授权取消{}", withholdAgree.toString());
                     return withholdAgreeMapper.selectAuthorizationCancel(page,withholdAgree);
                 case 1 :
-
+                    // 未完成授权
+                    log.info("未完成授权{}", withholdAgree.toString());
                     return withholdAgreeMapper.notCompletedAuth(page, withholdAgree);
 
 
@@ -163,21 +165,47 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         log.info("授权取消列表批量导出");
 
         // 获取导出数据
-        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(withholdAgree);
+        List<TWithholdAgreeExcel> list = null;
+
+        if (null != withholdAgree.getStatus()) {
+            log.info("查询报告状态{}", withholdAgree.getStatus());
+
+            switch (withholdAgree.getStatus()) {
+                case 3 :
+                    // 查询授权取消
+                    log.info("查询授权取消{}", withholdAgree.toString());
+                    list =  withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree);
+                    break;
+                case 1 :
+                    // 未完成授权
+                    log.info("未完成授权{}", withholdAgree.toString());
+                    list =  withholdAgreeMapper.notCompletedAuthExport(withholdAgree);
+                    break;
+                default:
+                    list = withholdAgreeMapper.conditionQueryList(withholdAgree);
+                    break;
+            }
+        }
 
         // 释义转换
         list.stream().forEach(item -> {
-            // 状态
+            // 状态 0 -> 授权成功； 1 -> 未完成授权失败；2 -> 短信已发送未完成授权；3 ->授权取消成功;4 -> 授权取消失败;
             if (null != item.getStatus()) {
                 switch (item.getStatus()) {
                     case "0" :
-                        item.setStatus(AuthorizationRseultEnum.PROCESSING.desc());
+                        item.setStatus(AuthorizationReportRseultEnum.SUCCESS.desc());
                         break;
                     case "1":
-                        item.setStatus(AuthorizationRseultEnum.SUCCESS.desc());
+                        item.setStatus(AuthorizationReportRseultEnum.FAIL.desc());
                         break;
                     case "2" :
-                        item.setStatus(AuthorizationRseultEnum.FAIL.desc());
+                        item.setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS_AUTH_FAIL.desc());
+                        break;
+                    case "3" :
+                        item.setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        break;
+                    case "4" :
+                        item.setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
                         break;
                     default:
                         break;
@@ -192,6 +220,17 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                         break;
                     case "1":
                         item.setIsSend(IsSendEnum.SEND_FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 证件类型
+            if (null != item.getCertType()) {
+                switch (item.getCertType()) {
+                    case "1" :
+                        item.setCertType("身份证");
                         break;
                     default:
                         break;
