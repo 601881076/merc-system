@@ -159,15 +159,14 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     }
 
     @Override
-    public void exportExcel(HttpServletResponse response, List<String> idList) {
+    public void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
         log.info("授权取消列表批量导出");
 
         // 获取导出数据
-        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(idList);
+        List<TWithholdAgreeExcel> list = withholdAgreeMapper.conditionQueryList(withholdAgree);
 
         // 释义转换
         list.stream().forEach(item -> {
-            log.info("状态1{}, 发送状态1{}", item.getStatus(), item.getIsSend());
             // 状态
             if (null != item.getStatus()) {
                 switch (item.getStatus()) {
@@ -199,7 +198,6 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                 }
             }
 
-            log.info("状态2{}, 发送状态2{}", item.getStatus(), item.getIsSend());
         });
 
 

@@ -54,9 +54,9 @@ public interface TWithholdAgreeService {
     /**
      * 授权报告查询导出
      * @param response
-     * @param idList
+     * @param withholdAgree
      */
-    void exportExcel(HttpServletResponse response, List<String> idList);
+    void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree);
 
 
 }

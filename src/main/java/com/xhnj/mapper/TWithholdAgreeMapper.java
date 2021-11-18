@@ -46,10 +46,10 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
 
     /**
      * 条件查询导出
-     * @param idList
+     * @param withholdAgree
      * @return
      */
-    List<TWithholdAgreeExcel> conditionQueryList(@Param("list") List<String> idList);
+    List<TWithholdAgreeExcel> conditionQueryList(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 授权报告查询页面 -- 未完成授权状态查询
