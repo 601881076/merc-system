@@ -1,6 +1,7 @@
 package com.xhnj.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -100,6 +101,20 @@ public class TWithholdAgreeSms implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    /** 上传时间*/
+    @TableField(exist = false)
+    private String uploadTime;
+
+    /** 协议生效日*/
+    @TableField(exist = false)
+    private String startDateString;
+
+    /** 协议结束日*/
+    @TableField(exist = false)
+    private String endDateString;
+
+
 
 
 }

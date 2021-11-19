@@ -47,7 +47,7 @@ public class AgreeDismissDetailVO extends BaseRowModel {
     @DateTimeAnnotation(format = "yyyymmdd", message = "Invalid format，The correct format is：yyyymmdd")
     private String endDate;
 
-    @ExcelProperty(value = "所属公司", index = 8)
+    @ExcelProperty(value = "所属公司(2000-ford,2001-linconln)", index = 8)
     @NotBlank(message = "finLabelCd param cannot be empty")
     private String finLabelCd;
 

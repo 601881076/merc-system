@@ -66,7 +66,7 @@
         CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
         CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        agree.start_date	,
+        date_format(agree.start_date, '%Y-%m-%d') start_date	,
         date_format(agree.end_date, '%Y-%m-%d') end_date	,
         agree.create_time	,
         agree.update_time   ,
@@ -125,7 +125,6 @@
         agree.id		,
         agree.system_type	,
         agree.source_type	,
-/*        agree.deal_flag	,*/
         agree.bank_code	,
         agree.bank_name	,
         agree.system_batch	,
@@ -151,7 +150,46 @@
         CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
         CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        agree.start_date	,
+        date_format(agree.start_date, '%Y-%m-%d') start_date ,
+        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        agree.create_time	,
+        agree.update_time   ,
+        date_format(agree.create_time, '%Y-%m-%d') upload_time,
+        date_format(agree.start_date, '%Y-%m-%d') start_date_string ,
+        date_format(agree.end_date, '%Y-%m-%d') end_date_string
+
+    </sql>
+
+    <sql id="selectSuccessSql">
+        agree.id		,
+        agree.system_type	,
+        agree.source_type	,
+        agree.bank_code	,
+        agree.bank_name	,
+        agree.system_batch	,
+        agree.fin_label_cd	,
+        agree.project_no	,
+        agree.agreement_id	,
+        agree.bizserial_no	,
+        agree.mobile_no	,
+        agree.card_no		,
+        agree.customer_name 	,
+        agree.cert_type	,
+        agree.cert_no		,
+        agree.check_no	,
+        agree.send_no		,
+        agree.own_spec	,
+        agree.re_own_spec	,
+        (case when agree.`status` = 0 then 0 else 5 end) status		,
+        agree.is_send		,
+        agree.sms_status	,
+        agree.bank_ret_code 	,
+        agree.reason		,
+        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
+        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
+        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
+        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
+        date_format(agree.start_date, '%Y-%m-%d') start_date	,
         date_format(agree.end_date, '%Y-%m-%d') end_date	,
         agree.create_time	,
         agree.update_time   ,
@@ -203,7 +241,6 @@
         agree.id		,
         agree.system_type	,
         agree.source_type	,
-/*        agree.deal_flag	,*/
         agree.bank_code	,
         agree.bank_name	,
         '' system_batch	,
@@ -229,7 +266,7 @@
         CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
         CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        agree.start_date	,
+        date_format(agree.start_date, '%Y-%m-%d') start_date	,
         date_format(agree.end_date, '%Y-%m-%d') end_date	,
         agree.create_time	,
         agree.update_time   ,
@@ -269,6 +306,50 @@
 
     <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
         select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1 = 1
+
+        /*协议编号*/
+        <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+            and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+        </if>
+
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+            and card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+            and bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+        </if>
+
+        <if test="withholdAgree.status !=null">
+            and status = #{withholdAgree.status,jdbcType=INTEGER}
+        </if>
+
+
+    </select>
+
+    <!--授权查询报告页面 精准查询-->
+    <select id="selectSuccessList" resultType="com.xhnj.pojo.query.WithholdAgreeQuery">
+        select <include refid="selectSuccessSql"/> from t_withhold_agree agree where 1 = 1
 
         /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">

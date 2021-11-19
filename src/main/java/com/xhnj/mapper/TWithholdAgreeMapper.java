@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdAgreeExcel;
 import com.xhnj.model.TWithholdAgreeSms;
-import com.xhnj.pojo.query.WithholdAgreeParam;
 import com.xhnj.pojo.query.WithholdAgreeQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -58,6 +57,13 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
      * @return
      */
     List<TWithholdAgreeExcel> conditionQueryList(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权查询报告页面 -- 精准查询
+     * @param withholdAgree
+     * @return
+     */
+    List<WithholdAgreeQuery> selectSuccessList(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 授权报告查询页面 -- 未完成授权状态查询
