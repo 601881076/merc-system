@@ -238,39 +238,39 @@
 
     <!--未完成授权 > 短信已发送未执行授权 -->
     <sql id="messageSendAndNotCompletedAuth">
-        agree.id		,
-        agree.system_type	,
-        agree.source_type	,
-        agree.bank_code	,
-        agree.bank_name	,
+        sms.id		,
+        sms.system_type	,
+        sms.source_type	,
+        sms.bank_code	,
+        sms.bank_name	,
         '' system_batch	,
         '' fin_label_cd	,
-        agree.project_no	,
-        agree.agreement_id	,
-        agree.bizserial_no	,
-        agree.mobile_no	,
-        agree.card_no		,
-        agree.customer_name 	,
-        agree.cert_type	,
-        agree.cert_no		,
-        agree.check_no	,
+        sms.project_no	,
+        sms.agreement_id	,
+        sms.bizserial_no	,
+        sms.mobile_no	,
+        sms.card_no		,
+        sms.customer_name 	,
+        sms.cert_type	,
+        sms.cert_no		,
+        sms.check_no	,
         '' send_no		,
-        agree.own_spec	,
+        sms.own_spec	,
         '' re_own_spec	,
         2 status		,
-        agree.is_send		,
+        sms.is_send		,
         '' sms_status	,
-        agree.bank_ret_code 	,
-        agree.reason		,
-        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
-        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
-        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
-        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        date_format(agree.start_date, '%Y-%m-%d') start_date	,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
-        agree.create_time	,
-        agree.update_time   ,
-        agree.create_time upload_time
+        sms.bank_ret_code 	,
+        sms.reason		,
+        CONVERT(sms.single_max/100, decimal(15,2)) AS "single_max" 	,
+        CONVERT(sms.day_max/100, decimal(15,2)) AS "day_max"		,
+        CONVERT(sms.month_max/100, decimal(15,2)) AS "month_max",
+        CONVERT(sms.sum_max/100, decimal(15,2)) AS "sum_max" ,
+        date_format(sms.start_date, '%Y-%m-%d') start_date	,
+        date_format(sms.end_date, '%Y-%m-%d') end_date	,
+        sms.create_time	,
+        sms.update_time   ,
+        sms.create_time upload_time
     </sql>
 
     <sql id="withholdCancelField">
@@ -769,47 +769,42 @@
     <!--未完成授权状态查询-->
     <select id="notCompletedAuth" resultType="com.xhnj.pojo.query.WithholdAgreeQuery">
         SELECT * from (
-            select <include refid="messageSendAndNotCompletedAuth"/> from t_withhold_agree_sms agree
-            where (card_no, agreement_id) in (
-                select card_no, agreement_id from (select card_no, agreement_id from t_withhold_agree_sms group by card_no, agreement_id) t1
-                where (t1.agreement_id, t1.card_no) not in
-                (
-                select card_no, agreement_id from t_withhold_agree_sms sms where (sms.card_no, sms.agreement_id)
-                 in (select card_no, agreement_id from t_withhold_agree group by card_no, agreement_id)
-                )
-            )
+            select <include refid="messageSendAndNotCompletedAuth"/>
+            from t_withhold_agree_sms sms left join t_withhold_agree agree
+            on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
+            where agree.id is null
 
             <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+                and sms.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
             </if>
 
             /*协议编号*/
             <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+                and sms.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
             </if>
 
             <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+                and date_format(sms.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
             </if>
 
             <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+                and date_format(sms.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
             </if>
 
             <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+                and sms.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
             </if>
 
             <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+                and sms.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
             </if>
 
             <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+                and sms.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
             </if>
 
             <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+                and sms.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
             </if>
 
             union
@@ -957,6 +952,6 @@
 
     <!--校验福特行号是否存在-->
     <select id="selectBankcode" resultType="com.xhnj.model.TWithholdAgree">
-        select 1 from  t_bank_code_mapp where bank_code=#{bankCode}
+        select bank_name from  t_bank_code_mapp where bank_code=#{bankCode}
     </select>
 </mapper>

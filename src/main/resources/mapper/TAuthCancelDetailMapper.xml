@@ -44,6 +44,8 @@
         <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
             and status=#{tbatchDtl.status,jdbcType=INTEGER}
         </if>
+
+        order by create_time desc
     </select>
 
 

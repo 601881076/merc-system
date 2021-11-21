@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,6 +101,9 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 withholdCancle.setSourceType(ValueConstant.SOURCE_MDD);
                 withholdCancle.setSystemBatch(batchNo);
                 withholdCancle.setAgreementId(vo.getAgreementid());
+
+                // 获取银行名称
+                withholdCancle.setBankName(tWithholdAgreeIPage.get(0).getBankName());
 
                 cancelList.add(withholdCancle);
             }

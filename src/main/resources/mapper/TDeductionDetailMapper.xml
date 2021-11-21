@@ -50,5 +50,7 @@
         <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
             and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
         </if>
+
+        order by create_time desc
     </select>
 </mapper>
