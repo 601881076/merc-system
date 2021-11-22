@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.component.ValidateProcessor;
 import com.xhnj.constant.ValidateTypeConstant;
-import com.xhnj.enums.AuthorizationReportRseultEnum;
+import com.xhnj.enums.AuthorizationRseultEnum;
 import com.xhnj.enums.IsSendEnum;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
@@ -27,6 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /*

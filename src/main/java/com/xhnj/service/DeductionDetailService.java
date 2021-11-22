@@ -1,9 +1,10 @@
 package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xhnj.model.TBatchDtl;
 import com.xhnj.pojo.query.DeductionDetailQuery;
 import com.xhnj.pojo.query.PoundageParam;
+
+import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpServletResponse;
 
