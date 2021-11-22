@@ -95,5 +95,7 @@ public class TAdmin extends Model implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+    //判断管理元是否重制过密码（0->未重制；1->已重制）
+    private String isRepassword;
 
 }

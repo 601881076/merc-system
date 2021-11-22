@@ -5,6 +5,7 @@ import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdCancle;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @author lk
  * @since 2021-11-06
  */
+@Repository
 public interface TWithholdCancleMapper extends BaseMapper<TWithholdCancle> {
 
     List<TWithholdCancle> getByCardNo(@Param("cardNoList") List<String> cardNoList);

@@ -5,7 +5,9 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
+import com.xhnj.pojo.query.DeductionDetailQuery;
 import com.xhnj.service.AuthCancelDetailService;
+import com.xhnj.service.DeductionDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @program: ums-admin
@@ -35,5 +39,10 @@ public class AuthoCancellDetailController {
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = AuthCancelDetailService.listPage(detailQuery,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
+    }
+    @ApiOperation(value = "授权取消明细导出")
+    @GetMapping("/export")
+    public void excelExport(HttpServletResponse response, AuthCancelDetailQuery detailQuery){
+        AuthCancelDetailService.exportExcel(response,detailQuery);
     }
 }

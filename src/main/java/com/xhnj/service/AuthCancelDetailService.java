@@ -2,7 +2,9 @@ package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
-import com.xhnj.pojo.query.DeductionDetailQuery;
+
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @program: ums-admin
@@ -19,4 +21,5 @@ public interface AuthCancelDetailService {
      * @return
      */
     IPage listPage(AuthCancelDetailQuery detailQuery, Integer pageSize, Integer pageNum);
+    void exportExcel(HttpServletResponse response, AuthCancelDetailQuery tbatchDtl);
 }

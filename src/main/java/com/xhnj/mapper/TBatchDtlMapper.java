@@ -7,6 +7,7 @@ import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * @author lk
  * @since 2021-08-11
  */
+@Repository
 public interface TBatchDtlMapper extends BaseMapper<TBatchDtl> {
     IPage<TBatchDtl> listPageByBatchNo(IPage<TBatchDtl> page, @Param("batchNo") String batchNo);
 

@@ -106,6 +106,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public UserDetails loadUserByUsername(String username) {
         //用户不存在则创建
         TAdmin admin = getAdminByUsername(username);
@@ -120,15 +121,15 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int resetPass(TAdmin admin) {
-        if(StrUtil.isBlank(admin.getPassword())) {
-            throw new BusinessException("用户密码不能为空");
-        }
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        admin.setPassword("12345678");
+        admin.setFirstLoginTime(null);
         return adminMapper.updateById(admin);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateAdmin(TAdmin admin) {
         if(StrUtil.isNotBlank(admin.getPassword())){
             admin.setPassword(null);
@@ -137,6 +138,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int insertAdmin(TAdmin admin) {
         if(StrUtil.isNotBlank(admin.getPassword())){
             admin.setPassword(passwordEncoder.encode(admin.getPassword()));
@@ -153,6 +155,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updatePass(UmsAdminUpdatePassParam adminpass) {
         log.info("修改密码："+adminpass.toString());
         TAdmin user = UserUtil.getCurrentAdminUser();
@@ -169,10 +172,12 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         admin.setUsername(user.getUsername());
         admin.setId(user.getId());
         admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
+        admin.setIsRepassword("0");//修改密码后状态改为0
         return adminMapper.updateById(admin);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int updateRole(TAdminRole tadminrole) {
         log.info("tadminrole:"+tadminrole.toString());
         if(tadminrole.getUserId()==null){

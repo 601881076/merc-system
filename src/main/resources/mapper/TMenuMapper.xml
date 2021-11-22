@@ -17,4 +17,7 @@
     <select id="getUmsMenu" resultType="com.xhnj.model.TMenu">
         SELECT <include refid="menuSql"/> from t_menu where id=#{roleId,jdbcType=VARBINARY}
     </select>
+    <select id="selectMenuList" resultType="com.xhnj.model.TMenu">
+        select id,name,parent_id,level,sort,create_time,update_time,status FROM t_menu WHERE level = 0 LIMIT 0,20
+    </select>
 </mapper>

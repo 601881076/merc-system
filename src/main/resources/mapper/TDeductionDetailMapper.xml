@@ -12,8 +12,7 @@
         trade_time,
         pay_recv,
         currency,
-     /*   CONVERT(money/100, decimal(15,2)) AS "money",*/
-        money,
+        CONVERT(money/100, decimal(15,2)) AS "money",
         recv_account,
         recv_account_name,
         recv_bank_no,
@@ -27,7 +26,14 @@
         postscript,
         create_time,
         reason,
-        contract_no
+        contract_no,
+        pay_result,
+        ret_code,
+        recoState,
+        recoResult
+    </sql>
+    <sql id="expdtl">
+
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TBatchDtl">
@@ -47,7 +53,5 @@
         <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
             and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
         </if>
-
-        order by create_time desc
     </select>
 </mapper>

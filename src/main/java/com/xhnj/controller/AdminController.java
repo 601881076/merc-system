@@ -1,8 +1,8 @@
 package com.xhnj.controller;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.annotation.MyLog;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
@@ -29,7 +29,6 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * <p>
@@ -86,13 +85,19 @@ public class AdminController {
         }
 
         // 校验用户是否被锁
-        if ("502".equals(token))
-            return CommonResult.failed(ResultCode.USER_DISSABLE,"用户已被锁，无法登录");
+        if ("502".equals(token)) {
+            return CommonResult.failed(ResultCode.USER_DISSABLE, "用户已被锁，无法登录");
+        }
+        TAdmin adminByUsername = adminService.getAdminByUsername(umsAdminLoginParam.getUsername());
 
 
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
+        if(StrUtil.isBlank((CharSequence) adminByUsername.getFirstLoginTime())){
+            return CommonResult.success(tokenMap,"密码已重制,请重新修改密码");
+
+        }
         return CommonResult.success(tokenMap);
     }
 
@@ -110,7 +115,7 @@ public class AdminController {
         data.put("nikeName", admin.getNickName());
         data.put("roles", roleService.getUmsRole(id));
         data.put("icon", admin.getIcon());
-        Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
+        data.put("roleId", admrol.getRoleId());
         data.put("menus", roleService.getUmsMenuByAdminId(id));
         if (admin.getFirstLoginTime()== null) {
             data.put("fistFlag", "0");
@@ -176,7 +181,7 @@ public class AdminController {
     public CommonResult resetPass(TAdmin admin) {
         int count = adminService.resetPass(admin);
         if(count > 0)
-            return CommonResult.success(count);
+            return CommonResult.success("重制密码成功，密码为 12345678，请稍后自行修改密码");
         return CommonResult.failed();
     }
     @ApiOperation("分配角色")
