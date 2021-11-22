@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.Date;
-
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.xhnj.annotation.FieldRepeatValidator;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +11,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -95,7 +94,5 @@ public class TAdmin extends Model implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-    //判断管理元是否重制过密码（0->未重制；1->已重制）
-    private String isRepassword;
 
 }
