@@ -54,7 +54,6 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
 
         if (null != withholdAgree.getStatus()) {
             log.info("查询报告状态{}", withholdAgree.getStatus());
-
             switch (withholdAgree.getStatus()) {
                 case 3 :
                     // 查询授权取消
@@ -64,6 +63,11 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                     // 未完成授权
                     log.info("未完成授权{}", withholdAgree.toString());
                     return withholdAgreeMapper.notCompletedAuth(page, withholdAgree);
+
+                default:
+                    // 授权成功
+                    log.info("查询成功数据");
+                    return withholdAgreeMapper.selectSuccess(page,withholdAgree);
             }
         } else {
             /*
@@ -71,16 +75,21 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
             * */
 
+            // 查询授权成功数据
+            List<WithholdAgreeQuery> list = withholdAgreeMapper.selectSuccessList(withholdAgree);
 
-            // TODO 查询授权成功数据
-            List<WithholdAgreeQuery> successList = withholdAgreeMapper.selectSuccessList(withholdAgree);
+            // 查询未完成授权数据
+            list.addAll(withholdAgreeMapper.notCompletedAuth(withholdAgree));
 
-            log.info("精确查询{}",successList.toString());
+            // 查询授权取消数据
+            list.addAll(withholdAgreeMapper.selectAuthorizationCancel(withholdAgree));
 
+            page.setTotal(0);
+            page.setRecords(list);
+
+            return page;
         }
 
-        // 查询成功的授权报告
-        return withholdAgreeMapper.selectSuccess(page,withholdAgree);
     }
 
     @Override

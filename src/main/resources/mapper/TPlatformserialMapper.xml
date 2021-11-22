@@ -70,7 +70,7 @@
 
 
 
-    <select id="getByOrderNoList" resultType="com.xhnj.model.TPlatformserial">
+    <!--<select id="getByOrderNoList" resultType="com.xhnj.model.TPlatformserial">
         SELECT
            id
         FROM t_platformserial
@@ -85,7 +85,7 @@
             <include refid="plaSql" />
         FROM t_platformserial
         WHERE batch_no = #{batchNo,jdbcType=VARCHAR}
-    </select>
+    </select>-->
 
     <select id="getList" resultType="com.xhnj.model.WithholdSuccessExcel">
         SELECT
