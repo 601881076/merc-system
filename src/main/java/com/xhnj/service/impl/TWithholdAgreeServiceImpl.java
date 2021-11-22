@@ -53,21 +53,41 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         IPage<WithholdAgreeQuery> page = new Page<>(pageNum, pageSize);
 
         if (null != withholdAgree.getStatus()) {
-            log.info("查询报告状态{}", withholdAgree.getStatus());
+            int count = 0;
+            // 分页数据
+            List<WithholdAgreeQuery> list;
+
             switch (withholdAgree.getStatus()) {
                 case 3 :
                     // 查询授权取消
                     log.info("查询授权取消{}", withholdAgree.toString());
                     return withholdAgreeMapper.selectAuthorizationCancel(page,withholdAgree);
                 case 1 :
-                    // 未完成授权
+                    // 未完成授权 手动分页
                     log.info("未完成授权{}", withholdAgree.toString());
-                    return withholdAgreeMapper.notCompletedAuth(page, withholdAgree);
+
+                    // 汇总查询
+                    count = withholdAgreeMapper.notCompletedAuthCount(withholdAgree);
+                    if (0 < count) {
+                        list = withholdAgreeMapper.notCompletedAuth(pageSize, pageNum, withholdAgree);
+
+                        page.setTotal(count);
+                        page.setRecords(list);
+                    }
+
+                    return page;
 
                 default:
-                    // 授权成功
                     log.info("查询成功数据");
-                    return withholdAgreeMapper.selectSuccess(page,withholdAgree);
+                    // 手动分页汇总查询
+                    count = withholdAgreeMapper.selectSuccessCount(withholdAgree);
+                    if (0 < count) {
+                        list = withholdAgreeMapper.selectSuccess(pageSize, pageNum, withholdAgree);
+                        page.setRecords(list);
+                        page.setTotal(count);
+                    }
+
+                    return page;
             }
         } else {
             /*
