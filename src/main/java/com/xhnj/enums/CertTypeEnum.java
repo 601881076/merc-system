@@ -1,7 +1,7 @@
 package com.xhnj.enums;
 
 /**
-* @Description:    授权报告结果枚举类
+* @Description:    身份证枚举
 * @Author:         tan_yi
 * @CreateDate:     2021/11/2 20:18
 * @UpdateUser:     tan_yi
@@ -10,14 +10,9 @@ package com.xhnj.enums;
 * @Version:        1.0
 * @company:        newLand
 */
-public enum AuthorizationReportRseultEnum {
+public enum CertTypeEnum {
 
-    SUCCESS("0", "授权成功"),
-    FAIL("1", "未完成授权失败"),
-    SMS_SUCCESS_AUTH_FAIL("2", "短信已发送未完成授权"),
-    AUTH_CANCEL_SUCCESS("3","授权取消成功"),
-    AUTH_CANCEL_FAIL("4","授权取消失败"),
-    AUTHORIZATION_FAIL("5","授权失败");
+    ID_CARD("1", "身份证");
 
 
     public String value() {
@@ -31,7 +26,7 @@ public enum AuthorizationReportRseultEnum {
     private String value;
     private String desc;
 
-    AuthorizationReportRseultEnum(String value, String desc) {
+    CertTypeEnum(String value, String desc) {
         this.value = value;
         this.desc = desc;
     }

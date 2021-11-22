@@ -47,14 +47,6 @@ public class WithholdAgreeController {
         return CommonResult.success(CommonPage.restPage(page));
     }
 
-   /* @ApiOperation(value = "授权报告查询导出")
-    @GetMapping("/excelBatchExport")
-    public void excelBatchExport(HttpServletResponse response, @RequestParam("id") List<String> idList) {
-        log.info("授权报告查询导出，请求参数{}", idList.toString());
-
-
-        withholdAgreeService.exportExcel(response, idList);
-    }*/
    @ApiOperation(value = "授权报告查询导出")
    @GetMapping("/excelBatchExport")
    public void excelBatchExport(HttpServletResponse response, TWithholdAgree withholdAgree) {

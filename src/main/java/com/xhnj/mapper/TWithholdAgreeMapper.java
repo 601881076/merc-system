@@ -29,11 +29,24 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
 
     /**
      * 授权报告查询 - 条件查询成功数据
-     * @param page
      * @param withholdAgree
      * @return
      */
-    IPage<WithholdAgreeQuery> selectSuccess(IPage<WithholdAgreeQuery> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
+    List<WithholdAgreeQuery> selectSuccess( Integer pageSize, Integer pageNum, @Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权报告查询 - 授权成功导出
+     * @param withholdAgree
+     * @return
+     */
+    List<TWithholdAgreeExcel> selectSuccessExport(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权报告查询 - 条件查询成功数据汇总
+     * @param withholdAgree
+     * @return
+     */
+    int selectSuccessCount(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 授权报告查询 - 查询授权取消
@@ -73,19 +86,39 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
     List<WithholdAgreeQuery> selectSuccessList(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
-     * 授权查询报告页面 -- 精准查询第二步, 查询未完成授权数据
+     * 授权查询报告页面 -- 精准查询第一步, 查询已授权数据
      * @param withholdAgree
      * @return
      */
-    List<WithholdAgreeQuery> notCompletedAuth(@Param("withholdAgree") TWithholdAgree withholdAgree);
+    List<TWithholdAgreeExcel> selectSuccessListExport(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权查询报告页面 -- 查询未完成数据
+     * @param withholdAgree
+     * @return
+     */
+    List<WithholdAgreeQuery> notCompletedAuthList(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权查询报告页面 -- 查询未完成数据 导出功能
+     * @param withholdAgree
+     * @return
+     */
+    List<TWithholdAgreeExcel> notCompletedAuthListExport(@Param("withholdAgree") TWithholdAgree withholdAgree);
+
+    /**
+     * 授权查询报告页面 --  查询未完成授权数据汇总查询
+     * @param withholdAgree
+     * @return
+     */
+    int notCompletedAuthCount(@Param("withholdAgree") TWithholdAgree withholdAgree);
 
     /**
      * 授权报告查询页面 -- 未完成授权状态查询
-     * @param page
      * @param withholdAgree
      * @return
      */
-    IPage<WithholdAgreeQuery> notCompletedAuth(IPage<WithholdAgreeQuery> page,
+    List<WithholdAgreeQuery> notCompletedAuth( Integer pageSize, Integer pageNum,
                                                   @Param("withholdAgree") TWithholdAgree withholdAgree);
 
 
@@ -161,5 +194,4 @@ public interface TWithholdAgreeMapper extends BaseMapper<TWithholdAgree> {
      * 获取导出数据
      */
     List<TWithholdAgree> selectList(@Param("withholdAgree") TWithholdAgree withholdAgree);
-
 }

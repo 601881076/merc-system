@@ -8,7 +8,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.component.ValidateProcessor;
 import com.xhnj.constant.ValidateTypeConstant;
-import com.xhnj.enums.AuthorizationRseultEnum;
+import com.xhnj.enums.AuthorizationReportRseultEnum;
+import com.xhnj.enums.CertTypeEnum;
 import com.xhnj.enums.IsSendEnum;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
@@ -54,21 +55,41 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         IPage<WithholdAgreeQuery> page = new Page<>(pageNum, pageSize);
 
         if (null != withholdAgree.getStatus()) {
-            log.info("查询报告状态{}", withholdAgree.getStatus());
+            int count = 0;
+            // 分页数据
+            List<WithholdAgreeQuery> list;
+
             switch (withholdAgree.getStatus()) {
                 case 3 :
                     // 查询授权取消
                     log.info("查询授权取消{}", withholdAgree.toString());
                     return withholdAgreeMapper.selectAuthorizationCancel(page,withholdAgree);
                 case 1 :
-                    // 未完成授权
+                    // 未完成授权 手动分页
                     log.info("未完成授权{}", withholdAgree.toString());
-                    return withholdAgreeMapper.notCompletedAuth(page, withholdAgree);
+
+                    // 汇总查询
+                    count = withholdAgreeMapper.notCompletedAuthCount(withholdAgree);
+                    if (0 < count) {
+                        list = withholdAgreeMapper.notCompletedAuth(pageSize, pageNum, withholdAgree);
+
+                        page.setTotal(count);
+                        page.setRecords(list);
+                    }
+
+                    return page;
 
                 default:
-                    // 授权成功
                     log.info("查询成功数据");
-                    return withholdAgreeMapper.selectSuccess(page,withholdAgree);
+                    // 手动分页汇总查询
+                    count = withholdAgreeMapper.selectSuccessCount(withholdAgree);
+                    if (0 < count) {
+                        list = withholdAgreeMapper.selectSuccess(pageSize, pageNum, withholdAgree);
+                        page.setRecords(list);
+                        page.setTotal(count);
+                    }
+
+                    return page;
             }
         } else {
             /*
@@ -80,7 +101,7 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             List<WithholdAgreeQuery> list = withholdAgreeMapper.selectSuccessList(withholdAgree);
 
             // 查询未完成授权数据
-            list.addAll(withholdAgreeMapper.notCompletedAuth(withholdAgree));
+            list.addAll(withholdAgreeMapper.notCompletedAuthList(withholdAgree));
 
             // 查询授权取消数据
             list.addAll(withholdAgreeMapper.selectAuthorizationCancel(withholdAgree));
@@ -125,64 +146,102 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
     @Override
     public void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
         log.info("授权取消列表批量导出");
-        //获取导出数据
-        List<TWithholdAgree> list1 = withholdAgreeMapper.selectList(withholdAgree);
         List<TWithholdAgreeExcel> list = new ArrayList<>();
 
-        TWithholdAgreeExcel tWithholdAgreeExcel;
-        for (int i = 0; i < list1.size(); i++) {
-            tWithholdAgreeExcel = new TWithholdAgreeExcel();
-            //tAuthCancelExcel.setAgreementId(tBatchDtls.get(i).getAgreementId());
-            tWithholdAgreeExcel.setAgreementId(list1.get(i).getAgreementId());
-            tWithholdAgreeExcel.setBankCode(list1.get(i).getBankCode());
-            tWithholdAgreeExcel.setBankName(list1.get(i).getBankName());
-            tWithholdAgreeExcel.setBankRetCode(list1.get(i).getBankRetCode());
-            tWithholdAgreeExcel.setBizserialNo(list1.get(i).getBizserialNo());
-            tWithholdAgreeExcel.setCardNo(list1.get(i).getCardNo());
-            tWithholdAgreeExcel.setCertNo(list1.get(i).getCertNo());
-            tWithholdAgreeExcel.setCertType(list1.get(i).getCertType());
-            tWithholdAgreeExcel.setCheckNo(list1.get(i).getCheckNo());
-            tWithholdAgreeExcel.setCreateTime(list1.get(i).getCreateTime());
-            tWithholdAgreeExcel.setCustomerName(list1.get(i).getCustomerName());
-            tWithholdAgreeExcel.setDayMax(list1.get(i).getDayMax());
-            tWithholdAgreeExcel.setDealFlag(list1.get(i).getDealFlag());
-            tWithholdAgreeExcel.setEndDate(list1.get(i).getEndDate());
-            tWithholdAgreeExcel.setStartDate(list1.get(i).getStartDate());
-            tWithholdAgreeExcel.setMobileNo(list1.get(i).getMobileNo());
-            switch (list1.get(i).getIsSend()) {
-                case 0 :
-                    tWithholdAgreeExcel.setIsSend(IsSendEnum.SEND_SUCCESS.desc());
+        //获取导出数据
+        if (null != withholdAgree.getStatus()) {
+            switch (withholdAgree.getStatus()) {
+                case 3 :
+                    // 查询授权取消
+                    log.info("授权报告查询 -- 授权取消状态导出 {}", withholdAgree.toString());
+
+                    list = withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree);
                     break;
-                case 1:
-                    tWithholdAgreeExcel.setIsSend(IsSendEnum.SEND_FAIL.desc());
+                case 1 :
+                    // 未完成授权
+                    log.info("授权报告查询 -- 未完成授权导出 {}", withholdAgree.toString());
+
+                    list = withholdAgreeMapper.notCompletedAuthExport(withholdAgree);
                     break;
                 default:
+                    log.info("授权报告查询 -- 授权成功导出 {}", withholdAgree.toString());
+
+                    list = withholdAgreeMapper.selectSuccessExport(withholdAgree);
                     break;
             }
-            tWithholdAgreeExcel.setMonthMax(list1.get(i).getMonthMax());
-            tWithholdAgreeExcel.setOwnSpec(list1.get(i).getOwnSpec());
-            tWithholdAgreeExcel.setProjectNo(list1.get(i).getProjectNo());
-            tWithholdAgreeExcel.setReason(list1.get(i).getReason());
-            switch (list1.get(i).getStatus()) {
-                case 0 :
-                    tWithholdAgreeExcel.setStatus(AuthorizationRseultEnum.PROCESSING.desc());
-                    break;
-                case 1:
-                    tWithholdAgreeExcel.setStatus(AuthorizationRseultEnum.SUCCESS.desc());
-                    break;
-                case 2 :
-                    tWithholdAgreeExcel.setStatus(AuthorizationRseultEnum.FAIL.desc());
-                    break;
-                default:
-                    break;
-            }
-            tWithholdAgreeExcel.setUploadTime(list1.get(i).getUpdateTime());
-            tWithholdAgreeExcel.setSingleMax(list1.get(i).getSingleMax());
 
+        } else {
+            /*
+             * 当条件存在精确查询时，例如(银行卡号、证件号、客户姓名、手机号、协议编号)
+             * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
+             * */
 
-            /*BeanUtils.copyProperties(list1.get(i),tWithholdAgreeExcel);*/
-            list.add(tWithholdAgreeExcel);
+            // 查询授权成功数据
+            list = withholdAgreeMapper.selectSuccessListExport(withholdAgree);
+
+            // 查询未完成授权数据
+            list.addAll(withholdAgreeMapper.notCompletedAuthListExport(withholdAgree));
+
+            // 查询授权取消数据
+            list.addAll(withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree));
+
         }
+
+        // 翻译code
+        for (int i = 0; i < list.size(); i++) {
+            // 授权结果 0 -> 授权成功； 1 -> 未完成授权失败；2 -> 短信已发送未完成授权；3 ->授权取消成功;4 -> 授权取消失败; 5 -> 授权失败
+            if (null != list.get(i).getStatus()) {
+                switch (list.get(i).getStatus()) {
+                    case "0":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SUCCESS.desc());
+                        break;
+                    case "1":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.FAIL.desc());
+                        break;
+                    case "2":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS_AUTH_FAIL.desc());
+                        break;
+                    case "3":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        break;
+                    case "4":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        break;
+                    case "5":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 是否发送银行
+            if (null != list.get(i).getIsSend()) {
+                switch (list.get(i).getIsSend()) {
+                    case "0" :
+                        list.get(i).setIsSend(IsSendEnum.SEND_SUCCESS.desc());
+                        break;
+                    case "1" :
+                        list.get(i).setIsSend(IsSendEnum.SEND_FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 证件信息
+            if (null != list.get(i).getCertType()) {
+                switch (list.get(i).getCertType()) {
+                    case "1" :
+                        list.get(i).setCertType(CertTypeEnum.ID_CARD.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
         String fileName = "授权报告查询";
 
         try {
