@@ -36,12 +36,13 @@
     </sql>
     <insert id="insert" parameterType="list">
         insert into t_batch_check
-            (batch_id, batch_no, up_user_id,up_user_name,check_user_id,check_user_name,remark,status)
+            (batch_id, batch_no,check_result, up_user_id,up_user_name,check_user_id,check_user_name,remark,status)
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
              #{item.batchId,jdbcType=BIGINT},
              #{item.batchNo,jdbcType=VARCHAR},
+             #{item.checkResult,jdbcType=BIGINT},
              #{item.upUserId,jdbcType=BIGINT},
              #{item.upUserName,jdbcType=VARCHAR},
              #{item.checkUserId,jdbcType=BIGINT},
@@ -76,7 +77,7 @@
         update t_batch_check set
         status = #{status}, check_result = #{checkResult},
         check_user_id = #{admin.id}, check_user_name = #{admin.username},
-        update_time = NOW()
+        update_time = getdate()
         where batch_no in
         (
         <foreach collection="batchNo" item="item" index="index" separator=",">

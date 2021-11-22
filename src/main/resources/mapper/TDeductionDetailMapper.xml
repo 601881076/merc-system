@@ -12,7 +12,8 @@
         trade_time,
         pay_recv,
         currency,
-        CONVERT(money/100, decimal(15,2)) AS "money",
+     /*   CONVERT(money/100, decimal(15,2)) AS "money",*/
+        money,
         recv_account,
         recv_account_name,
         recv_bank_no,
@@ -26,11 +27,7 @@
         postscript,
         create_time,
         reason,
-        contract_no,
-        pay_result,
-        ret_code,
-        recoState,
-        recoResult
+        contract_no
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TBatchDtl">

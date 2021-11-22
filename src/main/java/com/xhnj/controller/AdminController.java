@@ -29,6 +29,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>
@@ -109,7 +110,7 @@ public class AdminController {
         data.put("nikeName", admin.getNickName());
         data.put("roles", roleService.getUmsRole(id));
         data.put("icon", admin.getIcon());
-        data.put("roleId", admrol.getRoleId());
+        Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
         data.put("menus", roleService.getUmsMenuByAdminId(id));
         if (admin.getFirstLoginTime()== null) {
             data.put("fistFlag", "0");

@@ -11,17 +11,14 @@
         SELECT <include refid="confSql"/> from t_config
         where 1 = 1
 
-        /* 字段名*/
         <if test="config.fieldName != null and config.fieldName != ''">
             and field_name = #{config.fieldName, jdbcType=VARCHAR}
         </if>
 
-        /* 名称*/
         <if test="config.name != null and config.name != ''">
             and name = #{config.name, jdbcType=VARCHAR}
         </if>
 
-        /* 配置值*/
         <if test="config.value != null and config.value != ''">
             and value = #{config.value, jdbcType=VARCHAR}
         </if>

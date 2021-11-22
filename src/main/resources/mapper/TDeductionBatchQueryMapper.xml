@@ -48,7 +48,7 @@
         batch.system_batch,
         batch.batch_desc,
         batch.total_trans,
-        CONVERT(batch.total_amt/100, decimal(15,2)) AS "total_amt",
+        Convert(decimal(15,2),batch.total_amt/100) AS "total_amt",
         batch.status,
         batch.success_trans,
         batch.fail_trans,
@@ -71,10 +71,10 @@
         left join t_batch_check chk on batch.batch_no = chk.batch_no
         where 1 = 1
         <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
-            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{dismissBatch.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
         </if>
         <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
-            and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
         </if>
         <if test="dismissBatch.status!=null and dismissBatch.status!=''">
             and chk.status IN
@@ -83,7 +83,10 @@
             </foreach>
         </if>
         <if test="dismissBatch.isAudit!=null and dismissBatch.isAudit!=''">
-            and batch.status=#{dismissBatch.isAudit,jdbcType=INTEGER}
+            and batch.status IN
+            <foreach collection = "auditList" item = "audit" open = "(" close = ")" separator = "," >
+                #{audit}
+            </foreach>
         </if>
         <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
             and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}

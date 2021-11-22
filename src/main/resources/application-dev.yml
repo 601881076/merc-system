@@ -2,19 +2,25 @@ dispatch:
   uploadPath: D:/var/uploaded_files/
 logging:
   level:
-    root: info
-    com.xhnj: info
+    root: debug
+    com.xhnj: debug
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.100.251.90:3306/bankserver?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: aczS4lnsWkiVzxFOYk3zxO7BO7PPRlKZKSDdQSlk3a0yf1MmOcItfgpHKVUfXSB2pXgQ8yq1FGfLHHDYW1Wigg==
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://47.100.251.90:3306/bankserver?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: aczS4lnsWkiVzxFOYk3zxO7BO7PPRlKZKSDdQSlk3a0yf1MmOcItfgpHKVUfXSB2pXgQ8yq1FGfLHHDYW1Wigg==
 
 #    url: jdbc:mysql://127.0.0.1:3306/xxx?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
 #    username: xxx
 #    password: xxx
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://47.100.251.90:1433;DatabaseName=UMSDD
+    username: sa
+    password: p@ssw0rd
       #    initialSize: 1
       #    minIdle: 3
       #    maxActive: 20
@@ -45,10 +51,10 @@ spring:
       max-wait: 6000 #最大等待时间
       connect-properties: config.decrypt=true;config.decrypt.key=${spring.datasource.druid.config.key}
 
-      config:
-        enabled: true
-        #加密公钥
-        key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKaDYNbGECOcd8gbIc1p7tEScaj7lSuYsZSdIGaZKzLnwvph+3/96oVGfbidXaeqI9NfoAqs8LnazAiKUNxxtBECAwEAAQ==
+#      config:
+#        enabled: true
+#        #加密公钥
+#        key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKaDYNbGECOcd8gbIc1p7tEScaj7lSuYsZSdIGaZKzLnwvph+3/96oVGfbidXaeqI9NfoAqs8LnazAiKUNxxtBECAwEAAQ==
 
 #  redis:
 #    host: 127.0.0.1

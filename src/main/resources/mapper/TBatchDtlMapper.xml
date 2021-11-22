@@ -7,36 +7,36 @@
 
 
     <sql id="plaSql">
-        id,
-        batch_no,
-        agreement_id,
-        system_type,
-        source_type,
-        bank_code,
-        order_no,
-        pay_type,
-        trade_time,
-        pay_recv,
-        currency,
-        CONVERT(money/100, decimal(15,2)) AS "money",
-        recv_account,
-        recv_account_name,
-        recv_bank_no,
-        recv_bank_name,
-        card_no,
-        customer_name,
-        pay_bank_no,
-        pay_bank_name,
-        usages,
-        summary,
-        postscript,
-        create_time,
-        reason,
-        contract_no,
-        pay_result,
-        ret_code,
-        recoState,
-        recoResult
+        tbd.id,
+        tbd.batch_no,
+        tbd.agreement_id,
+        tbd.system_type,
+        tbd.source_type,
+        tbd.bank_code,
+        tbd.order_no,
+        tbd.pay_type,
+        tbd.trade_time,
+        tbd.pay_recv,
+        tbd.currency,
+        tbd.money,
+        tbd.recv_account,
+        tbd.recv_account_name,
+        tbd.recv_bank_no,
+        tbd.recv_bank_name,
+        tbd.card_no,
+        tbd.customer_name,
+        tbd.pay_bank_no,
+        tbd.pay_bank_name,
+        tbd.usages,
+        tbd.summary,
+        tbd.postscript,
+        tbd.create_time,
+        tbd.reason,
+        tbd.contract_no,
+        tbd.pay_result,
+        tbd.ret_code,
+        tbd.recoState,
+        tbd.recoResult
     </sql>
 
     <sql id="batchNoSql">
@@ -65,9 +65,9 @@
     <sql id="succsql">
 
         trade_time,
-        substr(trade_time,1,10) AS tradedt,
-        substr(trade_time,1,10) AS effdt,
-        CONVERT(money/100, decimal(15,2)) AS "money",
+        SUBSTRING(trade_time,1,10) AS tradedt,
+        SUBSTRING(trade_time,1,10) AS effdt,
+        money,
         recv_account,
         customer_name,
         CONCAT('BANKPMT',customer_name) AS description,
@@ -80,7 +80,7 @@
         pay_type,           trade_time,                    pay_recv,                 currency,                  money,
         recv_account,       recv_account_name,             recv_bank_no,             recv_bank_name,            card_no,
         customer_name,      pay_bank_no,                   pay_bank_name,            usages,                    summary,
-        postscript,     system_type, contract_no
+        postscript,         system_type,                   contract_no,              seq_no
 
         )
         VALUES
@@ -92,7 +92,7 @@
             #{item.bankCode,jdbcType=VARCHAR} ,
             #{item.orderNo,jdbcType=VARCHAR} ,
             #{item.payType,jdbcType=INTEGER} ,
-            now(),
+            GETDATE(),
             #{item.payRecv,jdbcType=INTEGER} ,
             #{item.currency,jdbcType=VARCHAR} ,
             #{item.money,jdbcType=DECIMAL} ,
@@ -108,7 +108,8 @@
             #{item.summary,jdbcType=VARCHAR},
             #{item.postscript,jdbcType=VARCHAR},
             #{item.systemType,jdbcType=INTEGER},
-            #{item.contractNo, jdbcType=VARCHAR}
+            #{item.contractNo, jdbcType=VARCHAR},
+            #{item.seqNo, jdbcType=VARCHAR}
             )
         </foreach >
     </insert>
@@ -117,8 +118,8 @@
     <select id="getByBatchNoList" resultType="com.xhnj.pojo.vo.WithholdDetailVO">
         SELECT
            <include refid="plaSql"/>
-        FROM t_batch_dtl
-        WHERE batch_no IN
+        FROM t_batch_dtl tbd
+        WHERE tbd.batch_no IN
         <foreach collection = "list" item = "batchNo" open = "(" close = ")" separator = "," >
              #{batchNo}
         </foreach>
@@ -126,23 +127,25 @@
 
     <select id="listPageByBatchNo" resultType="com.xhnj.model.TBatchDtl">
         SELECT
-            <include refid="plaSql" />
-        FROM t_batch_dtl
-        WHERE batch_no = #{batchNo,jdbcType=VARCHAR}
+            <include refid="plaSql" />,
+            tbcm.bank_name
+        FROM t_batch_dtl tbd
+        LEFT JOIN t_bank_code_mapp tbcm ON tbd.bank_code = tbcm.busin_code
+        WHERE tbd.batch_no = #{batchNo,jdbcType=VARCHAR}
     </select>
 
     <select id="getList" resultType="com.xhnj.model.WithholdSuccessExcel">
         SELECT
-           <include refid="succsql" />
-        FROM t_batch_dtl
+           <include refid="plaSql" />
+        FROM t_batch_dtl tbd
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
-            AND source_type = #{withholdParam.fromType,jdbcType=INTEGER}
+            AND tbd.source_type = #{withholdParam.fromType,jdbcType=INTEGER}
         </if>
         <if test="withholdParam.payResult != null">
-            AND pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
+            AND tbd.pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
         </if>
-        AND batch_no IN
+        AND tbd.batch_no IN
         <foreach collection = "withholdParam.batchNo" item = "batchNo" open = "(" close = ")" separator = "," >
             #{batchNo}
         </foreach>
@@ -152,15 +155,15 @@
     <select id="getFailList" resultType="com.xhnj.model.WithholdFailExcel">
         SELECT
             <include refid="plaSql" />
-        FROM t_batch_dtl
+        FROM t_batch_dtl tbd
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
-            AND source_type = #{withholdParam.fromType,jdbcType=INTEGER}
+            AND tbd.source_type = #{withholdParam.fromType,jdbcType=INTEGER}
         </if>
         <if test="withholdParam.payResult != null">
-            AND pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
+            AND tbd.pay_result = #{withholdParam.payResult,jdbcType=INTEGER}
         </if>
-        AND batch_no IN
+        AND tbd.batch_no IN
         <foreach collection = "withholdParam.batchNo" item = "batchNo" open = "(" close = ")" separator = "," >
             #{batchNo}
         </foreach>

@@ -27,10 +27,10 @@
         is_send,
         bank_ret_code,
         reason,
-        CONVERT(single_max/100, decimal(15,2)) AS "single_max",
-        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"	,
-        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
-        CONVERT(sum_max/100, decimal(15,2)) AS "sum_max" ,
+        Convert(decimal(15,2),single_max/100) single_max,
+        Convert(decimal(15,2),day_max/100) day_max,
+        Convert(decimal(15,2),month_max/100) month_max,
+        Convert(decimal(15,2),sum_max/100) sum_max,
         start_date,
         end_date
     </sql>
@@ -59,15 +59,14 @@
         agree.re_own_spec	,
         1 `status`		,
         agree.is_send		,
-        agree.sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
         CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
         CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
         CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        date_format(agree.start_date, '%Y-%m-%d') start_date	,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        CONVERT(varchar(100), agree.start_date, 23) start_date	,
+        CONVERT(varchar(100), agree.end_date, 23) end_date	,
         agree.create_time	,
         agree.update_time   ,
         agree.create_time upload_time
@@ -85,7 +84,7 @@
             #{item.sourceType, jdbcType=BIGINT},
             #{item.dealFlag, jdbcType=BIGINT},
             #{item.bankCode,jdbcType=VARCHAR},
-            (select bank_name from t_banks where inter_bank_no = #{item.bankCode,jdbcType=VARCHAR}),
+            #{item.bankName,jdbcType=VARCHAR},
             #{item.systemBatch,jdbcType=VARCHAR},
             #{item.projectNo,jdbcType=VARCHAR},
             #{item.agreementId,jdbcType=VARCHAR},
@@ -143,20 +142,17 @@
         agree.re_own_spec	,
         agree.status		,
         agree.is_send		,
-        agree.sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
-        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
-        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
-        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
-        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        date_format(agree.start_date, '%Y-%m-%d') start_date ,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        Convert(decimal(15,2),agree.single_max/100) single_max,
+        Convert(decimal(15,2),agree.day_max/100) day_max,
+        Convert(decimal(15,2),agree.month_max/100) month_max,
+        Convert(decimal(15,2),agree.sum_max/100) sum_max,
+        agree.start_date	,
+        agree.end_date,
         agree.create_time	,
         agree.update_time   ,
-        date_format(agree.create_time, '%Y-%m-%d') upload_time,
-        date_format(agree.start_date, '%Y-%m-%d') start_date_string ,
-        date_format(agree.end_date, '%Y-%m-%d') end_date_string
+        agree.create_time upload_time
 
     </sql>
 
@@ -180,30 +176,27 @@
         agree.send_no		,
         agree.own_spec	,
         agree.re_own_spec	,
-        (case when agree.`status` = 0 then 0 else 5 end) status		,
+        (case when agree.status = 0 then 0 else 5 end) status		,
         agree.is_send		,
-        agree.sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
         CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
         CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
         CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
         CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        date_format(agree.start_date, '%Y-%m-%d') start_date	,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        CONVERT(varchar(100), agree.start_date, 23) start_date	,
+        CONVERT(varchar(100), agree.end_date, 23) end_date	,
         agree.create_time	,
         agree.update_time   ,
         agree.create_time upload_time
 
     </sql>
 
-
     <!--代扣协议短信表字段-->
     <sql id="withholdAgreeSmsSql">
         agree.id		,
         agree.system_type	,
         agree.source_type	,
-/*        agree.deal_flag	,*/
         agree.bank_code	,
         agree.bank_name	,
         '' system_batch	,
@@ -225,12 +218,12 @@
         '' sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
-        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
-        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
-        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
-        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
+        Convert(decimal(15,2),single_max/100) single_max,
+        Convert(decimal(15,2),day_max/100) day_max,
+        Convert(decimal(15,2),month_max/100) month_max,
+        Convert(decimal(15,2),sum_max/100) sum_max,
         agree.start_date	,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        agree.end_date,
         agree.create_time	,
         agree.update_time   ,
         agree.create_time upload_time
@@ -262,12 +255,12 @@
         '' sms_status	,
         agree.bank_ret_code 	,
         agree.reason		,
-        CONVERT(agree.single_max/100, decimal(15,2)) AS "single_max" 	,
-        CONVERT(agree.day_max/100, decimal(15,2)) AS "day_max"		,
-        CONVERT(agree.month_max/100, decimal(15,2)) AS "month_max",
-        CONVERT(agree.sum_max/100, decimal(15,2)) AS "sum_max" ,
-        date_format(agree.start_date, '%Y-%m-%d') start_date	,
-        date_format(agree.end_date, '%Y-%m-%d') end_date	,
+        Convert(decimal(15,2),agree.single_max/100) single_max,
+        Convert(decimal(15,2),agree.day_max/100) day_max,
+        Convert(decimal(15,2),agree.month_max/100) month_max,
+        Convert(decimal(15,2),agree.sum_max/100) sum_max,
+        agree.start_date	,
+        CONVERT(varchar(100), agree.end_date, 23) end_date	,
         agree.create_time	,
         agree.update_time   ,
         agree.create_time upload_time
@@ -277,7 +270,6 @@
         t.id		,
         t.system_type	,
         t.source_type	,
-        /*        t.deal_flag	,*/
         t.bank_code	,
         t.bank_name	,
         t.system_batch	,
@@ -292,11 +284,11 @@
         t.cert_no		,
         t.own_spec	,
         t.re_own_spec	,
-        (case when t.`status` = 0 then 3 else 4 end) status		,
+        (case when t.status = 0 then 3 else 4 end) status,
         t.is_send		,
         t.bank_ret_code 	,
         t.reason		,
-        date_format(t.end_date, '%Y-%m-%d') end_date	,
+        end_date	,
         t.create_time	,
         t.update_time   ,
         t.update_time upload_time
@@ -304,68 +296,67 @@
     </sql>
 
 
+
     <select id="conditionQuery" resultType="com.xhnj.model.TWithholdAgree">
-        select <include refid="withholdAgreeSql"/> from t_withhold_agree  agree where 1 = 1
+        select <include refid="withholdAgreeSql"/> from t_withhold_agree agree
 
-        /*协议编号*/
-        <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-            and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
-        </if>
+        <where>
+            <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+                and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+            </if>
 
-        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-        </if>
+            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+                and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+            </if>
 
-        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-        </if>
+            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+                and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+            </if>
 
-        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-        </if>
+            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+                and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+            </if>
 
-        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-            and mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-        </if>
+            <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+                and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+            </if>
 
-        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-            and card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
-        </if>
+            <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+                and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+            </if>
 
-        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-            and cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-        </if>
+            <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+                and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+            </if>
 
-        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-            and bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
-        </if>
+            <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+                and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+            </if>
 
-        <if test="withholdAgree.status !=null">
-            and status = #{withholdAgree.status,jdbcType=INTEGER}
-        </if>
-
-
+            <if test="withholdAgree.status !=null">
+                and agree.status = #{withholdAgree.status,jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
 
     <!--授权查询报告页面 精准查询-->
     <select id="selectSuccessList" resultType="com.xhnj.pojo.query.WithholdAgreeQuery">
         select <include refid="selectSuccessSql"/> from t_withhold_agree agree where 1 = 1
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -391,59 +382,91 @@
 
     </select>
 
+	 <sql id="selectSuccessRowList">
+        row_number() over (PARTITION by agree.card_no, agree.agreement_id order by agree.create_time desc) rn,
+        agree.id		,
+        agree.system_type	,
+        agree.source_type	,
+        agree.bank_code	,
+        agree.bank_name	,
+        agree.system_batch	,
+        agree.fin_label_cd	,
+        agree.project_no	,
+        agree.agreement_id	,
+        agree.bizserial_no	,
+        agree.mobile_no	,
+        agree.card_no		,
+        agree.customer_name 	,
+        agree.cert_type	,
+        agree.cert_no		,
+        agree.check_no	,
+        agree.send_no		,
+        agree.own_spec	,
+        agree.re_own_spec	,
+        agree.status		,
+        agree.is_send		,
+        agree.bank_ret_code 	,
+        agree.reason		,
+        CONVERT(decimal(15,2),agree.single_max/100) AS "single_max" 	,
+        CONVERT(decimal(15,2),agree.day_max/100) AS "day_max"		,
+        CONVERT(decimal(15,2),agree.month_max/100) AS "month_max",
+        CONVERT(decimal(15,2),agree.sum_max/100) AS "sum_max" ,
+        CONVERT(varchar(100), agree.start_date, 23)  start_date ,
+        CONVERT(varchar(100), agree.end_date, 23)  end_date	,
+        agree.create_time	,
+        agree.update_time   ,
+        CONVERT(varchar(100), agree.create_time, 23) upload_time,
+        CONVERT(varchar(100), agree.start_date, 23) start_date_string ,
+        CONVERT(varchar(100), agree.end_date, 23) end_date_string
+     </sql>
     <!--
         授权报告页面查询：查询成功
         查询逻辑：
         对相同的银行卡 和agreementID来说，判断最后一条记录是成功还是失败及取消，需要结合授权和取消表，确认最后一条记录。是成功还是失败
     -->
     <select id="selectSuccess" resultType="com.xhnj.model.TWithholdAgreeSms">
-        select <include refid="withholdAgreeSql"/> from t_withhold_agree agree
-        where (agree.agreement_id, agree.card_no, agree.create_time) in (
-            select t.agreement_id, t.card_no, max(t.create_time)
-            from t_withhold_agree_sms sms left join t_withhold_agree t on sms.agreement_id = t.agreement_id and sms.card_no = t.card_no
+		select * from (
+			select 
+				<include refid="selectSuccessRowList"/>
+			from t_withhold_agree_sms sms left join t_withhold_agree agree
+				on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
+			where 1 = 1
 
-            /*协议编号*/
-            <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                and t.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+					and t.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+        </if>
 
-            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+        </if>
 
-            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and t.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-            </if>
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and t.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+        </if>
 
-            <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and t.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+					and t.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                and t.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+					and t.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and t.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+					and t.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                and t.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+					and t.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.status !=null">
-                and t.status = #{withholdAgree.status,jdbcType=INTEGER}
-            </if>
-
-            group by t.agreement_id, t.card_no
-        )
+		) t1 where t1.rn = 1 and t1.status = 0
 
     </select>
-
     <!--
         授权报告页面查询：查询授权取消
     -->
@@ -451,21 +474,20 @@
         select <include refid="withholdCancelField"/> from t_withhold_cancle t
         where 1 = 1
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -486,7 +508,6 @@
 
 
     </select>
-
     <!--
         授权报告页面查询：查询授权取消 导出
     -->
@@ -494,21 +515,20 @@
         select <include refid="withholdCancelField"/> from t_withhold_cancle t
         where 1 = 1
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -529,7 +549,6 @@
 
 
     </select>
-
     <!--授权报告条件导出-->
     <select id="conditionQueryList" resultType="com.xhnj.model.TWithholdAgreeExcel">
         select <include refid="withholdAgreeSql"/> from t_withhold_agree agree
@@ -537,21 +556,20 @@
         select t.agreement_id, t.card_no, max(t.create_time)
         from t_withhold_agree_sms sms left join t_withhold_agree t on sms.agreement_id = t.agreement_id and sms.card_no = t.card_no
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and t.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(t.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and t.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and t.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -576,8 +594,6 @@
 
         group by t.agreement_id, t.card_no
         )
-
-
     </select>
 
     <!--查出短信表有数据，授权表无数据的卡号+协议号-->
@@ -593,7 +609,6 @@
             and t1.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
         </if>
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and t1.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
@@ -611,15 +626,15 @@
         )
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -650,15 +665,11 @@
         )
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-        </if>
-
-        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -674,8 +685,6 @@
         </if>
 
     </select>
-
-
     <!--短信表、授权表都存在数据，但是授权表对应状态是失败的 count查询-->
     <select id="selectSmsAuthorizationBothExistsCount" resultType="java.lang.Integer">
         select count(1) countNo from t_withhold_agree agree
@@ -690,21 +699,20 @@
             and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
         </if>
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -735,21 +743,20 @@
             and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
         </if>
 
-        /*协议编号*/
         <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
             and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
@@ -769,91 +776,85 @@
     <!--未完成授权状态查询-->
     <select id="notCompletedAuth" resultType="com.xhnj.pojo.query.WithholdAgreeQuery">
         SELECT * from (
-            select <include refid="messageSendAndNotCompletedAuth"/> from t_withhold_agree_sms agree
-            where (card_no, agreement_id) in (
-                select card_no, agreement_id from (select card_no, agreement_id from t_withhold_agree_sms group by card_no, agreement_id) t1
-                where (t1.agreement_id, t1.card_no) not in
-                (
-                select card_no, agreement_id from t_withhold_agree_sms sms where (sms.card_no, sms.agreement_id)
-                 in (select card_no, agreement_id from t_withhold_agree group by card_no, agreement_id)
-                )
-            )
+            select <include refid="messageSendAndNotCompletedAuth"/>
+            from t_withhold_agree_sms sms left join t_withhold_agree agree
+            on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
+            where agree.id is null
 
             <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+                and sms.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
             </if>
 
-            /*协议编号*/
             <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+                and sms.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
             </if>
 
-            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+        </if>
 
-            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+        </if>
 
-            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-            </if>
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+        </if>
 
             <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+                and sms.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
             </if>
 
             <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+                and sms.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
             </if>
 
             <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+                and sms.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
             </if>
 
             union
 
-            select <include refid="notCompletedAuthFailSql"/> from t_withhold_agree agree
-            where (agree.agreement_id, agree.card_no, agree.create_time) in (
-                select t.agreement_id, t.card_no,max(t.create_time)
-                from t_withhold_agree_sms sms left join t_withhold_agree t on sms.agreement_id = t.agreement_id and sms.card_no = t.card_no
-                where t.status = 1
-                group by t.agreement_id, t.card_no
-            )
+            select * from (
+			select 
+				<include refid="selectSuccessRowList"/>
+			from t_withhold_agree_sms sms left join t_withhold_agree agree
+				on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
+			where 1 = 1
 
-            <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+					and t.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+			</if>
 
-            /*协议编号*/
-            <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
-            </if>
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+        </if>
 
-            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            CONVERT(varchar(100), t.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+        </if>
 
-            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and t.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+        </if>
 
-            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-            </if>
+			<if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+					and t.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+					and t.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+					and t.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+			</if>
 
-            <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
-            </if>
+			<if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+					and t.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+			</if>
+
+		) t1 where t1.rn = 1 and t1.status = 1
 
 	) t2
 
@@ -877,22 +878,21 @@
                 and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
             </if>
 
-            /*协议编号*/
             <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
                 and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
             </if>
 
-            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+        </if>
 
-            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            CONVERT(varchar(100), agree.create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+        </if>
 
-            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-            </if>
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+        </if>
 
             <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
                 and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
@@ -920,30 +920,29 @@
                 and agree.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
             </if>
 
-            /*协议编号*/
             <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
                 and agree.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
             </if>
 
-            <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+        </if>
 
-            <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and date_format(agree.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
-            </if>
+        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]>  CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+        </if>
 
-            <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and agree.customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
-            </if>
+        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+            and agree.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+        </if>
 
-            <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-            </if>
+        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+            and agree.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+        </if>
 
-            <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-            </if>
+        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+            and agree.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+        </if>
 
             <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
                 and agree.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
