@@ -35,10 +35,10 @@
         FROM t_withhold_cancle
         WHERE 1=1
         <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tbatchDtl.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
         </if>
         <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tbatchDtl.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]>  CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
         </if>
         <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
             and status=#{tbatchDtl.status,jdbcType=INTEGER}
@@ -54,6 +54,9 @@
         </if>
         <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
             and card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
+        </if>
+        <if test="tbatchDtl.systemBatch!=null and tbatchDtl.systemBatch!=''">
+            and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARCHAR}
         </if>
     </select>
 

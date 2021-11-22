@@ -60,6 +60,9 @@
         chk.status chkStatus,
         chk.check_result,
         chk.up_user_name,
+        chk.check_time,
+        chk.check_user_id,
+        chk.check_user_name,
         chk.check_time
     </sql>
 

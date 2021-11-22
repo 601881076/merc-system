@@ -12,7 +12,7 @@
         trade_time,
         pay_recv,
         currency,
-        CONVERT(money/100, decimal(15,2)) AS "money",
+        CONVERT(decimal(15,2), money/100) AS "money",
         recv_account,
         recv_account_name,
         recv_bank_no,
@@ -53,5 +53,7 @@
         <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
             and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
         </if>
+
+        order by create_time desc
     </select>
 </mapper>

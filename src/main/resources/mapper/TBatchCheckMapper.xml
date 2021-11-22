@@ -77,7 +77,7 @@
         update t_batch_check set
         status = #{status}, check_result = #{checkResult},
         check_user_id = #{admin.id}, check_user_name = #{admin.username},
-        update_time = getdate()
+        update_time = getdate(), check_time = getdate()
         where batch_no in
         (
         <foreach collection="batchNo" item="item" index="index" separator=",">

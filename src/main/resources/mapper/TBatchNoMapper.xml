@@ -42,8 +42,10 @@
             and status=#{batchNo.status,jdbcType=INTEGER}
         </if>
 
+        order by create_time desc
 
     </select>
+
     <delete id="deleteById">
         delete from t_batch_no where status=-1 and id=#{id}
     </delete>
