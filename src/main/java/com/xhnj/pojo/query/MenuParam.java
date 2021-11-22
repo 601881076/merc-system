@@ -14,4 +14,5 @@ public class MenuParam {
     private Long parentId;
     private String keyword;
     private Integer level;
+    private String name;
 }

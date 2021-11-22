@@ -35,7 +35,7 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
     public Page listPage(MenuParam menuParam, Integer pageSize, Integer pageNum) {
         Page<TMenu> page = new Page<>(pageNum, pageSize);
         QueryWrapper wrapper = new QueryWrapper();
-        String keyword = menuParam.getKeyword();
+        String keyword = menuParam.getName();
         Long parentId = menuParam.getParentId();
         if(StrUtil.isNotBlank(keyword)) {
             wrapper.like("name", keyword);
@@ -50,6 +50,14 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
     public Page listLevel(MenuParam menuParam, Integer pageSize, Integer pageNum){
         Page<TMenu> page = new Page<>(pageNum, pageSize);
         QueryWrapper wrapper = new QueryWrapper();
+        String keyword = menuParam.getName();
+        Long parentId = menuParam.getParentId();
+        if(StrUtil.isNotBlank(keyword)) {
+            wrapper.like("name", keyword);
+        }
+        if(parentId != null){
+            wrapper.eq("parent_id",parentId);
+        }
         wrapper.eq("level",menuParam.getLevel());
         return menuMapper.selectPage(page,wrapper);
     }
