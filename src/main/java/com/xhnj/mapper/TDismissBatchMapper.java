@@ -6,6 +6,7 @@ import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TDismissBatchExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @author lk
  * @since 2021-09-22
  */
+@Repository
 public interface TDismissBatchMapper extends BaseMapper<TDismissBatch> {
     IPage<TDismissBatch> listPage(IPage<TDismissBatch> page,@Param("dismissBatch") TDismissBatch dismissBatch);
 
