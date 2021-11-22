@@ -19,4 +19,10 @@ public class AuthCancelDetailQuery {
 
 
     private String status;
+
+    private String agreementId;
+
+    private String customerName;
+    private String bankCode;
+    private String cardNo;
 }

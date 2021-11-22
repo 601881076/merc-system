@@ -25,4 +25,5 @@ public class DeductionDetailQuery implements Serializable  {
     private String bankCode;
 
     private String customerName;
+    private String cardNo;
 }

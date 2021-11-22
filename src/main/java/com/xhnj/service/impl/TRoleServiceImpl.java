@@ -63,8 +63,12 @@ public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int delete(Long id) {
+        TRole tRole = roleMapper.selectById(id);
         if(id == null)
             throw new BusinessException("id不能为空");
+        if(tRole.getStatus()==0){
+            throw new BusinessException("用户角色已分配不能删除");
+        }
         return roleMapper.deleteById(id);
     }
 

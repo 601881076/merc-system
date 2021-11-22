@@ -6,6 +6,7 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.model.TBatchDtl;
 import com.xhnj.model.TBatchNo;
 import com.xhnj.pojo.query.DeductionDetailQuery;
+import com.xhnj.pojo.query.PoundageParam;
 import com.xhnj.service.DeductionDetailService;
 import com.xhnj.service.TWithholdService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @program: ums-admin
@@ -34,5 +37,10 @@ public class DeductionDetailController {
                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = DeductionDetailService.listPage(tbatchDtl,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
+    }
+    @ApiOperation(value = "扣款明细导出excel")
+    @GetMapping("/export")
+    public void excelExport(HttpServletResponse response, DeductionDetailQuery tbatchDtl){
+        DeductionDetailService.exportExcel(response,tbatchDtl);
     }
 }

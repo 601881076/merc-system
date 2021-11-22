@@ -143,10 +143,10 @@ public class TWithholdAgreeExcel extends BaseRowModel {
     private BigDecimal sumMax;
 
     @ExcelProperty(value = "协议生效日", index = 17)
-    private Date startDate;
+    private String startDate;
 
     @ExcelProperty(value = "协议结束日", index = 18)
-    private Date endDate;
+    private String endDate;
 
     @ExcelProperty(value = "日期", index = 0)
     private Date createTime;

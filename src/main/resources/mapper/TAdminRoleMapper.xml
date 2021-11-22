@@ -17,8 +17,8 @@
         )
         values
             (
-            #{tadminrole.userId},
-            #{tadminrole.roleId}
+            #{tadminrole.roleId},
+            #{tadminrole.userId}
             )
 
     </insert>
