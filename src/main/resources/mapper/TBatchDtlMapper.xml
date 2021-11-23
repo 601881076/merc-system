@@ -18,7 +18,7 @@
         tbd.trade_time,
         tbd.pay_recv,
         tbd.currency,
-        tbd.money,
+        ROUND(CAST(tbd.money AS FLOAT)/100, 2) money,
         tbd.recv_account,
         tbd.recv_account_name,
         tbd.recv_bank_no,

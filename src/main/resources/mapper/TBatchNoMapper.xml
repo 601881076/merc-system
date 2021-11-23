@@ -54,7 +54,7 @@
         select * from (
             SELECT #{param.startDate} + '~' + #{param.endDate} time,
                      sum(t.success_trans) success_trans,
-                     (select bank_name from t_bank_code_mapp where bank_code = t.bank_code) bank_name,
+                     (select bank_name from t_bank_code_mapp where busin_code = t.bank_code) bank_name,
                      sum(t.success_trans) * 0.1 as feeMoney
             from t_batch_no t
             where 1 = 1
