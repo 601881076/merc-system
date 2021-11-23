@@ -35,7 +35,7 @@ public class FeeMoneyQuery extends BaseRowModel implements Serializable {
     private String bankName;
 
     /** 信息服务费(元)*/
-    @ExcelProperty(value = "信息服务费（元）", index = 3)
+    @ExcelProperty(value = "信息服务费(元)", index = 3)
     private BigDecimal feeMoney ;
 
 
