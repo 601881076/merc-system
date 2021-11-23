@@ -133,7 +133,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             for (int i = 0; i < cancelList.size(); i++) {
                 List<TWithholdCancle> withholdCancle = withholdCancleMapper.isRepeatData(cancelList.get(i));
 
-                if (null != withholdCancle) {
+                if (0 < withholdCancle.size()) {
                     flag = false;
                     sb.append(cancelList.get(i).getCardNo())
                             .append("+")
