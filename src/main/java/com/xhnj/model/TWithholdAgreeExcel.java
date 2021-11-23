@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -152,7 +151,7 @@ public class TWithholdAgreeExcel extends BaseRowModel {
     private Date createTime;
 
     @ExcelProperty(value = "上传日期", index = 19)
-    private Date uploadTime;
+    private String uploadTime;
 
     private Date updateTime;
 }

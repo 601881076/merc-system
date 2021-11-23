@@ -1350,11 +1350,11 @@
         </if>
 
         <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{withholdAgree.startDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
         </if>
 
         <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{withholdAgree.endDate,jdbcType=TIMESTAMP},'%Y-%m-%d')
+            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
