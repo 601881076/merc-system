@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 菜单表 服务实现类
+ * 菜单表 服务实
  * </p>
  *
  * @author lk

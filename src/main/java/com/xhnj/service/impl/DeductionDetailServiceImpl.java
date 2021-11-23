@@ -44,7 +44,7 @@ public class DeductionDetailServiceImpl implements DeductionDetailService {
  */
     @Override
     public void exportExcel(HttpServletResponse response, DeductionDetailQuery tbatchDtl) {
-        List<TBatchDtl> tBatchDtls = TDeductionDetailMapper.listPage(tbatchDtl);
+        List<TBatchDtl> tBatchDtls = TDeductionDetailMapper.listPage1(tbatchDtl);
         //先声音明细excel的pojo类；在循环中创建新的对象，每一次都会有一个新的地址值，不会出现数据重复
         TBatDtlExcel tBatDtlExcel;
         List<TBatDtlExcel> list = new ArrayList<>();

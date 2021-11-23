@@ -177,9 +177,4 @@ public class TBatchDtl implements Serializable {
      */
     private String contractNo;
 
-    @TableField(exist = false)
-    private String systemBatch;
-
-    private String seqNo;
-
 }

@@ -22,6 +22,6 @@ public interface TDeductionDetailMapper extends BaseMapper<TBatchDtl> {
 
     IPage<TWithholdAgree> listPage(IPage<TBatchDtl> page, @Param("tbatchDtl") DeductionDetailQuery tbatchDtl);
 
-    List<TBatchDtl> listPage(@Param("tbatchDtl") DeductionDetailQuery tbatchDtl);
+    List<TBatchDtl> listPage1(@Param("tbatchDtl") DeductionDetailQuery tbatchDtl);
 
 }

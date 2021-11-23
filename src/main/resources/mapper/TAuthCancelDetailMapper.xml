@@ -26,7 +26,7 @@
         reason,
         contract_date,
         end_date,
-        CONVERT(varchar(100), update_time, 23) update_time
+        date_format(update_time, '%Y-%m-%d') update_time
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TWithholdCancle">
@@ -35,10 +35,10 @@
         FROM t_withhold_cancle
         WHERE 1=1
         <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]>  CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ >= ]]> str_to_date(#{tbatchDtl.startTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
         <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]>  CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
+            and date_format(create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{tbatchDtl.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
         <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
             and status=#{tbatchDtl.status,jdbcType=INTEGER}
@@ -56,8 +56,9 @@
             and card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
         </if>
         <if test="tbatchDtl.systemBatch!=null and tbatchDtl.systemBatch!=''">
-            and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARCHAR}
+            and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARBINARY}
         </if>
+        order by create_time desc
     </select>
 
 

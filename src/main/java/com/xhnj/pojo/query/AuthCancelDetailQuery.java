@@ -25,4 +25,5 @@ public class AuthCancelDetailQuery {
     private String customerName;
     private String bankCode;
     private String cardNo;
+    private String systemBatch;
 }
