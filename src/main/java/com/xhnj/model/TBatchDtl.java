@@ -180,4 +180,6 @@ public class TBatchDtl implements Serializable {
     @TableField(exist = false)
     private String systemBatch;
 
+    private String seqNo;
+
 }
