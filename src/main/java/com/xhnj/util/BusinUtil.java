@@ -9,8 +9,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import sun.plugin2.gluegen.runtime.CPU;
-
 import java.math.BigDecimal;
 
 /*
