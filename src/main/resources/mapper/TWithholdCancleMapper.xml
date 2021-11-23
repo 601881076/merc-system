@@ -61,7 +61,7 @@
         (system_type,           source_type,               bank_code,                  bank_name,                 system_batch,
         fin_label_cd,           project_no,                agreement_id,               bizserial_no,              mobile_no,
         card_no,                customer_name,             cert_type,                  cert_no,                   own_spec,
-        end_date
+        contract_date,     end_date
         )
         VALUES
         <foreach collection ="list" item="item" index= "index" separator =",">
@@ -81,6 +81,7 @@
             #{item.certType,jdbcType=VARCHAR},
             #{item.certNo,jdbcType=VARCHAR},
             #{item.ownSpec,jdbcType=VARCHAR},
+            #{item.contractDate,jdbcType=VARCHAR},
             #{item.endDate,jdbcType=VARCHAR}
             )
         </foreach >

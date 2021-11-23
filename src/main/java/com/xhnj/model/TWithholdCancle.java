@@ -129,12 +129,12 @@ public class TWithholdCancle implements Serializable {
     /**
      * 合同结束日期
      */
-    private Date contractDate;
+    private String contractDate;
 
     /**
      * 协议失效日
      */
-    private Date endDate;
+    private String endDate;
 
     private Date createTime;
 

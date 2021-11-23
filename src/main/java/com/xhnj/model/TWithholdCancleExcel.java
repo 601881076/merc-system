@@ -172,13 +172,13 @@ public class TWithholdCancleExcel extends BaseRowModel {
     /**
      * 合同结束日期
      */
-    private Date contractDate;
+    private String contractDate;
 
     /**
      * 协议生效日
      */
     @ExcelProperty(value = "协议生效日", index = 18)
-    private Date startDate;
+    private String startDate;
 
 
 
@@ -186,7 +186,7 @@ public class TWithholdCancleExcel extends BaseRowModel {
      * 协议失效日
      */
     @ExcelProperty(value = "协议失效日", index = 19)
-    private Date endDate;
+    private String endDate;
 
     private Date createTime;
 

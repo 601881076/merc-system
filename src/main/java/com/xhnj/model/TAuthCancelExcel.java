@@ -35,9 +35,9 @@ public class TAuthCancelExcel extends BaseRowModel {
     @ExcelProperty(value = "失败原因", index = 9)
     private String reason;
     @ExcelProperty(value = "合同结束日期", index = 10)
-    private Date contractDate;
+    private String contractDate;
     @ExcelProperty(value = "协议失效日", index = 11)
-    private Date endDate;
+    private String endDate;
 
 
 }

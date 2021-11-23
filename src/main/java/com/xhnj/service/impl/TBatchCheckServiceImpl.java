@@ -55,6 +55,7 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
             batchCheck.setUpUserId(id);
             batchCheck.setUpUserName(username);
             batchCheck.setStatus(1);
+            batchCheck.setCheckResult(0);
             list.add(batchCheck);
         }
         log.info("list:"+list.toString());
@@ -87,6 +88,7 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
             dismissBatchCheck.setUpUserId(id);
             dismissBatchCheck.setUpUserName(username);
             dismissBatchCheck.setStatus(1);
+            dismissBatchCheck.setCheckResult(0);
             list.add(dismissBatchCheck);
         }
         log.info("list:"+list.toString());
