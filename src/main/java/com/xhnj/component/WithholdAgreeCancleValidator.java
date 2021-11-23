@@ -131,7 +131,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             boolean flag = true;
             StringBuffer sb = new StringBuffer("以下卡号+协议号重复[");
             for (int i = 0; i < cancelList.size(); i++) {
-                TWithholdCancle withholdCancle = withholdCancleMapper.isRepeatData(cancelList.get(i));
+                List<TWithholdCancle> withholdCancle = withholdCancleMapper.isRepeatData(cancelList.get(i));
 
                 if (null != withholdCancle) {
                     flag = false;
