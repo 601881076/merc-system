@@ -26,7 +26,7 @@
         reason,
         contract_date,
         end_date,
-        date_format(update_time, '%Y-%m-%d') update_time
+        CONVERT(varchar(100), update_time, 23) update_time
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TWithholdCancle">
