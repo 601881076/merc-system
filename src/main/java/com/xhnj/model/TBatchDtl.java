@@ -177,4 +177,5 @@ public class TBatchDtl implements Serializable {
      */
     private String contractNo;
 
+    private String seqNo;
 }

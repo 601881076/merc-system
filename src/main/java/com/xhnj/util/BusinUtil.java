@@ -1,5 +1,6 @@
 package com.xhnj.util;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
@@ -8,6 +9,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import sun.plugin2.gluegen.runtime.CPU;
 
 import java.math.BigDecimal;
 
@@ -116,5 +118,17 @@ public class BusinUtil {
         sb.append(DateUtil.format(DateUtil.date(), format))
                 .append(RandomUtil.randomNumbers(n));
         return sb.toString();
+    }
+
+    public String getSeqNo(int count){
+        String seqNo = "0000000" + count;
+        if(count >= 10 && count < 100){
+            seqNo = "00000" + count;
+        } else if(count >= 100 && count < 1000){
+            seqNo = "00000" + count;
+        } else if(count >= 1000){
+            seqNo = "0000" + count;
+        }
+        return seqNo;
     }
 }
