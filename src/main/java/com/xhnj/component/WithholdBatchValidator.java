@@ -118,6 +118,12 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 platformserial.setMoney(businUtil.coverAmount(withholdDetailVO.getMoney(),1));
                 platformserial.setCurrency("人民币");
 
+                if("11001".equals(bankCode)){
+                    platformserial.setSeqNo("00000" + i);
+                } else if("308".equals(bankCode)){
+                    platformserial.setSeqNo(businUtil.getSeqNo(i));
+                }
+
                 // 合同编号
                 platformserial.setContractNo(withholdDetailVO.getContractNo());
 
