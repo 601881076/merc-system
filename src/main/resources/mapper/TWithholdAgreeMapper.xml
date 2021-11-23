@@ -1358,7 +1358,7 @@
         </if>
 
         <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-            and customer_name like "%"#{withholdAgree.customerName,jdbcType=VARCHAR}"%"
+            and customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">

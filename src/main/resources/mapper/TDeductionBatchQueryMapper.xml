@@ -34,6 +34,8 @@
             <result property="checkUserName" column="check_user_name" />
             <result property="remark" column="de_pic" />
             <result property="checkTime" column="check_time" />
+            <result property="createTime" column="chk_create_time" />
+
         </collection>
     </resultMap>
 
@@ -62,7 +64,8 @@
         chk.up_user_name,
         chk.check_user_id,
         chk.check_user_name,
-        chk.check_time
+        chk.check_time,
+        chk.create_time chk_create_time
     </sql>
 
 
