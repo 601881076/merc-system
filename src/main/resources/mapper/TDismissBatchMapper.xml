@@ -98,12 +98,12 @@
         select  batch.id,
                 batch.source_type,
 				chk.check_result,
-				chk.`status` checkStatus,
+				chk.status checkStatus,
 				batch.bank_code,
 				batch.system_batch,
 				batch.batch_desc,
 				batch.total_trans,
-				batch.`status`,
+				batch.status,
 				batch.success_trans,
 				batch.fail_trans,
                 batch.create_time
@@ -117,7 +117,6 @@
             and date_format(batch.create_time, '%Y-%m-%d') <![CDATA[ <= ]]> str_to_date(#{dismissBatch.endTime,jdbcType=TIMESTAMP},'%Y-%m-%d')
         </if>
 
-        /*授权状态*/
         <if test="dismissBatch.statusList != null and dismissBatch.statusList.size() > 0">
             and batch.status in
             <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
@@ -125,7 +124,6 @@
             </foreach >
         </if>
 
-        /* 审核状态*/
         <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
             and chk.status in
             <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
@@ -133,8 +131,6 @@
             </foreach >
         </if>
 
-
-        /* 批次号*/
         <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
             and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
         </if>
