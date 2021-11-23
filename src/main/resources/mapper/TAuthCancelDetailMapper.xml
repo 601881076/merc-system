@@ -26,38 +26,39 @@
         reason,
         contract_date,
         end_date,
-        CONVERT(varchar(100), update_time, 23) update_time
+        update_time
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TWithholdCancle">
         SELECT
             <include refid="cancleSql" />
         FROM t_withhold_cancle
-        WHERE 1=1
-        <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
-        </if>
-        <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
-        </if>
-        <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
-            and status=#{tbatchDtl.status,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.agreementId != null and tbatchDtl.agreementId != ''">
-            and agreement_id=#{tbatchDtl.agreementId,jdbcType=VARBINARY}
-        </if>
-        <if test="tbatchDtl.customerName != null and tbatchDtl.customerName != ''">
-            and customer_name=#{tbatchDtl.customerName,jdbcType=VARBINARY}
-        </if>
-        <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-            and bank_code=#{tbatchDtl.bankCode,jdbcType=VARBINARY}
-        </if>
-        <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
-            and card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
-        </if>
-        <if test="tbatchDtl.systemBatch!=null and tbatchDtl.systemBatch!=''">
-            and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARBINARY}
-        </if>
+        <where>
+            <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
+                and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
+            </if>
+            <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
+                and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
+            </if>
+            <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
+                and status=#{tbatchDtl.status,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.agreementId != null and tbatchDtl.agreementId != ''">
+                and agreement_id=#{tbatchDtl.agreementId,jdbcType=VARBINARY}
+            </if>
+            <if test="tbatchDtl.customerName != null and tbatchDtl.customerName != ''">
+                and customer_name=#{tbatchDtl.customerName,jdbcType=VARBINARY}
+            </if>
+            <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
+                and bank_code=#{tbatchDtl.bankCode,jdbcType=VARBINARY}
+            </if>
+            <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
+                and card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
+            </if>
+            <if test="tbatchDtl.systemBatch!=null and tbatchDtl.systemBatch!=''">
+                and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARBINARY}
+            </if>
+        </where>
         order by create_time desc
     </select>
 

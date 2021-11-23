@@ -29,4 +29,6 @@ public interface TBatchNoMapper extends BaseMapper<TBatchNo> {
      * @return
      */
     List<FeeMoneyQuery> getFeeMoneySum(@Param("param") PoundageParam poundageParam);
+
+    TBatchNo findBatchByBatchNo(@Param("batchNo")String batchNo);
 }

@@ -21,29 +21,26 @@
         ret_own_spec,
         create_time,
         update_time
-
-
     </sql>
     <select id="listPage" resultType="com.xhnj.model.TBatchNo">
-        select <include refid="batchNoSql"/> from t_batch_no where 1=1
+        select <include refid="batchNoSql"/> from t_batch_no
+        <where>
+            <if test="batchNo.startDate !=null and batchNo.startDate != ''">
+                and create_time<![CDATA[ >= ]]>#{batchNo.startDate,jdbcType=TIMESTAMP}
+            </if>
 
-        <if test="batchNo.startDate !=null and batchNo.startDate != ''">
-            and create_time<![CDATA[ >= ]]>#{batchNo.startDate,jdbcType=TIMESTAMP}
-        </if>
+            <if test="batchNo.endDate !=null and batchNo.endDate != ''">
+                and create_time<![CDATA[ <= ]]>#{batchNo.endDate,jdbcType=TIMESTAMP}
+            </if>
 
-        <if test="batchNo.endDate !=null and batchNo.endDate != ''">
-            and create_time<![CDATA[ <= ]]>#{batchNo.endDate,jdbcType=TIMESTAMP}
-        </if>
-
-        <if test="batchNo.batchNo!=null and batchNo.batchNo!=''">
-            and batch_no=#{batchNo.batchNo,jdbcType=VARCHAR}
-        </if>
-        <if test="batchNo.status!=null and batchNo.status!=''">
-            and status=#{batchNo.status,jdbcType=INTEGER}
-        </if>
-
+            <if test="batchNo.batchNo!=null and batchNo.batchNo!=''">
+                and batch_no=#{batchNo.batchNo,jdbcType=VARCHAR}
+            </if>
+            <if test="batchNo.status!=null and batchNo.status!=''">
+                and status=#{batchNo.status,jdbcType=INTEGER}
+            </if>
+        </where>
         order by create_time desc
-
     </select>
 
     <delete id="deleteById">
@@ -57,14 +54,14 @@
                      (select bank_name from t_bank_code_mapp where busin_code = t.bank_code) bank_name,
                      sum(t.success_trans) * 0.1 as feeMoney
             from t_batch_no t
-            where 1 = 1
-
-            <if test="param.startDate != null and param.startDate != ''">
-                and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{param.startDate}, 23)
-            </if>
-            <if test="param.endDate != null and param.endDate != ''">
-                and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{param.endDate}, 23)
-            </if>
+            <where>
+                <if test="param.startDate != null and param.startDate != ''">
+                    and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{param.startDate}, 23)
+                </if>
+                <if test="param.endDate != null and param.endDate != ''">
+                    and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{param.endDate}, 23)
+                </if>
+            </where>
             group by bank_code
         ) t1 where success_trans > 0
     </select>

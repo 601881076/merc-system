@@ -5,30 +5,30 @@
     <select id="listPage" resultType="com.xhnj.model.TLog">
         select user_name, operate, object_type, object_name, descript, create_time
         from t_log
-        where 1 = 1
+        <where>
+            <if test="tlog.startDate !=null and tlog.startDate != ''">
+                and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tlog.startDate}, 23)
+            </if>
 
-        <if test="tlog.startDate !=null and tlog.startDate != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tlog.startDate}, 23)
-        </if>
+            <if test="tlog.endDate !=null and tlog.endDate != ''">
+                and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tlog.endDate}, 23)
+            </if>
 
-        <if test="tlog.endDate !=null and tlog.endDate != ''">
-            and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tlog.endDate}, 23)
-        </if>
+            <if test="tlog.userName !=null and tlog.userName != ''">
+                and user_name = #{tlog.userName, jdbcType=VARCHAR}
+            </if>
 
-        <if test="tlog.userName !=null and tlog.userName != ''">
-            and user_name = #{tlog.userName, jdbcType=VARCHAR}
-        </if>
+            <if test="tlog.operate !=null and tlog.operate != ''">
+                and operate = #{tlog.operate, jdbcType=VARCHAR}
+            </if>
 
-        <if test="tlog.operate !=null and tlog.operate != ''">
-            and operate = #{tlog.operate, jdbcType=VARCHAR}
-        </if>
+            <if test="tlog.objectType !=null and tlog.objectType != ''">
+                and object_type = #{tlog.objectType, jdbcType=VARCHAR}
+            </if>
 
-        <if test="tlog.objectType !=null and tlog.objectType != ''">
-            and object_type = #{tlog.objectType, jdbcType=VARCHAR}
-        </if>
-
-        <if test="tlog.objectName !=null and tlog.objectName != ''">
-            and object_name = #{tlog.objectName, jdbcType=VARCHAR}
-        </if>
+            <if test="tlog.objectName !=null and tlog.objectName != ''">
+                and object_name = #{tlog.objectName, jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 </mapper>

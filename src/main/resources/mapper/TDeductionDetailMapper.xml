@@ -12,7 +12,7 @@
         trade_time,
         pay_recv,
         currency,
-        CONVERT(decimal(15,2), money/100) AS "money",
+        ROUND(CAST(money AS FLOAT)/100, 2) AS "money",
         recv_account,
         recv_account_name,
         recv_bank_no,
@@ -40,22 +40,23 @@
         SELECT
         <include refid="plaSql" />
         FROM t_batch_dtl
-        WHERE 1=1
-        <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
-            and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
-            and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
-            and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-            and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-            and card_no=#{tbatchDtl.cardNo,jdbcType=VARCHAR}
-        </if>
+        <where>
+            <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
+                and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
+                and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
+                and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
+                and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
+                and card_no=#{tbatchDtl.cardNo,jdbcType=VARCHAR}
+            </if>
+        </where>
         order by create_time desc
     </select>
 
@@ -63,19 +64,20 @@
         SELECT
         <include refid="plaSql" />
         FROM t_batch_dtl
-        WHERE 1=1
-        <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
-            and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
-            and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
-            and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
-        </if>
-        <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-            and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
-        </if>
+        <where>
+            <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
+                and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
+                and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
+                and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
+            </if>
+            <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
+                and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
+            </if>
+        </where>
         order by create_time desc
     </select>
 </mapper>

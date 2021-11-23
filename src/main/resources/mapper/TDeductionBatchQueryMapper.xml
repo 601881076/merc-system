@@ -35,7 +35,6 @@
             <result property="remark" column="de_pic" />
             <result property="checkTime" column="check_time" />
             <result property="createTime" column="chk_create_time" />
-
         </collection>
     </resultMap>
 
@@ -50,7 +49,7 @@
         batch.system_batch,
         batch.batch_desc,
         batch.total_trans,
-        Convert(decimal(15,2),batch.total_amt/100) AS "total_amt",
+        ROUND(CAST(batch.total_amt AS FLOAT)/100, 2) AS "total_amt",
         batch.status,
         batch.success_trans,
         batch.fail_trans,
@@ -74,31 +73,32 @@
             <include refid="SqlList"/>
         from t_batch_no batch
         left join t_batch_check chk on batch.batch_no = chk.batch_no
-        where 1 = 1
-        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
-        </if>
-        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
-        </if>
-        <if test="dismissBatch.status!=null and dismissBatch.status!=''">
-            and chk.status IN
-            <foreach collection = "statusList" item = "status" open = "(" close = ")" separator = "," >
-                #{status}
-            </foreach>
-        </if>
-        <if test="dismissBatch.isAudit!=null and dismissBatch.isAudit!=''">
-            and batch.status IN
-            <foreach collection = "auditList" item = "audit" open = "(" close = ")" separator = "," >
-                #{audit}
-            </foreach>
-        </if>
-        <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
-            and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
-        </if>
-        <if test="dismissBatch.batchNo!=null and dismissBatch.batchNo!=''">
-            and batch.batch_no=#{dismissBatch.batchNo,jdbcType=VARCHAR}
-        </if>
+        <where>
+            <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
+                and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
+            </if>
+            <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
+                and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
+            </if>
+            <if test="dismissBatch.status!=null and dismissBatch.status!=''">
+                and chk.status IN
+                <foreach collection = "statusList" item = "status" open = "(" close = ")" separator = "," >
+                    #{status}
+                </foreach>
+            </if>
+            <if test="dismissBatch.isAudit!=null and dismissBatch.isAudit!=''">
+                and batch.status IN
+                <foreach collection = "auditList" item = "audit" open = "(" close = ")" separator = "," >
+                    #{audit}
+                </foreach>
+            </if>
+            <if test="dismissBatch.upUserName!=null and dismissBatch.upUserName!=''">
+                and chk.up_user_name=#{dismissBatch.upUserName,jdbcType=VARCHAR}
+            </if>
+            <if test="dismissBatch.batchNo!=null and dismissBatch.batchNo!=''">
+                and batch.batch_no=#{dismissBatch.batchNo,jdbcType=VARCHAR}
+            </if>
+        </where>
         and batch.source_type='2'
         order by batch.create_time desc
     </select>

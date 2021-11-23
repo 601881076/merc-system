@@ -63,30 +63,33 @@
         select
             <include refid="dismissSql"/>
         from t_dismiss_batch dis left join t_batch_check chk on dis.id = chk.batch_id
-        where 1=1
-        <if test="dismissBatch.createTime != null">
-            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="dismissBatch.systemBatch !=null and dismissBatch.systemBatch != ''">
-            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
-        </if>
-        <if test="dismissBatch.status != null and dismissBatch.status != ''">
-            and status=#{dismissBatch.status,jdbcType=INTEGER}
-        </if>
+        <where>
+            <if test="dismissBatch.createTime != null">
+                and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="dismissBatch.systemBatch !=null and dismissBatch.systemBatch != ''">
+                and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
+            </if>
+            <if test="dismissBatch.status != null and dismissBatch.status != ''">
+                and status=#{dismissBatch.status,jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
 
 
     <select id="listPage" resultType="com.xhnj.model.TDismissBatch">
-        select <include refid="dismissSql"/> from t_dismiss_batch where 1=1
-        <if test="dismissBatch.createTime!=null">
-            and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
-        </if>
-        <if test="dismissBatch.systemBatch!=null and dismissBatch.systemBatch!=''">
-            and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
-        </if>
-        <if test="dismissBatch.status!=null and dismissBatch.status!=''">
-            and status=#{dismissBatch.status,jdbcType=INTEGER}
-        </if>
+        select <include refid="dismissSql"/> from t_dismiss_batch
+        <where>
+            <if test="dismissBatch.createTime!=null">
+                and create_time<![CDATA[ >= ]]>#{dismissBatch.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="dismissBatch.systemBatch!=null and dismissBatch.systemBatch!=''">
+                and system_batch=#{dismissBatch.systemBatch,jdbcType=VARCHAR}
+            </if>
+            <if test="dismissBatch.status!=null and dismissBatch.status!=''">
+                and status=#{dismissBatch.status,jdbcType=INTEGER}
+            </if>
+        </where>
     </select>
 
     <delete id="deleteById">
@@ -108,34 +111,34 @@
 				batch.fail_trans,
                 batch.create_time
         from t_dismiss_batch batch left join t_dismiss_batch_check chk on batch.id = chk.batch_id
-        where 1 = 1
-        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
-        </if>
+        <where>
+            <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
+                and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
+            </if>
 
-        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
-        </if>
+            <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
+                and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
+            </if>
 
-        <if test="dismissBatch.statusList != null and dismissBatch.statusList.size() > 0">
-            and batch.status in
-            <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
-                #{item, jdbcType=INTEGER}
-            </foreach >
-        </if>
+            <if test="dismissBatch.statusList != null and dismissBatch.statusList.size() > 0">
+                and batch.status in
+                <foreach collection ="dismissBatch.statusList" item="item" index= "index"  open="(" separator ="," close=")">
+                    #{item, jdbcType=INTEGER}
+                </foreach >
+            </if>
 
-        <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
-            and chk.status in
-            <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
-               #{item, jdbcType=INTEGER}
-            </foreach >
-        </if>
+            <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
+                and chk.status in
+                <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
+                    #{item, jdbcType=INTEGER}
+                </foreach >
+            </if>
 
-        <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
-            and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
-        </if>
+            <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
+                and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
+            </if>
+        </where>
         order by batch.create_time desc
-
     </select>
 
 
@@ -154,34 +157,32 @@
         batch.fail_trans,
         batch.create_time
         from t_dismiss_batch batch left join t_batch_check chk on batch.id = chk.batch_id and chk.type = 1
-        where 1 = 1
-        <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
-        </if>
+       <where>
+           <if test="dismissBatch.startTime != null and dismissBatch.startTime != ''">
+               and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{dismissBatch.startTime}, 23)
+           </if>
 
-        <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
-            and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
-        </if>
+           <if test="dismissBatch.endTime != null and dismissBatch.endTime != ''">
+               and CONVERT(varchar(100), batch.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{dismissBatch.endTime}, 23)
+           </if>
 
-        <if test="dismissBatch.status != null">
-            and batch.status = #{dismissBatch.status,jdbcType=INTEGER}
-        </if>
+           <if test="dismissBatch.status != null">
+               and batch.status = #{dismissBatch.status,jdbcType=INTEGER}
+           </if>
 
-        /* 审核状态*/
-        <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
-            and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
+           <if test="dismissBatch.checkStatusList != null and dismissBatch.checkStatusList.size() > 0">
+               and chk.status = #{dismissBatch.checkStatus,jdbcType=INTEGER}
 
-            and chk.status in
-            <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
-                #{item, jdbcType=INTEGER}
-            </foreach >
-        </if>
+               and chk.status in
+               <foreach collection ="dismissBatch.checkStatusList" item="item" index= "index"  open="(" separator ="," close=")">
+                   #{item, jdbcType=INTEGER}
+               </foreach >
+           </if>
 
-        /* 批次号*/
-        <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
-            and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
-        </if>
-
+           <if test="dismissBatch.systemBatch != null and dismissBatch.systemBatch != ''">
+               and batch.system_batch = #{dismissBatch.systemBatch,jdbcType=VARCHAR}
+           </if>
+       </where>
         order by batch.create_time desc
     </select>
 
