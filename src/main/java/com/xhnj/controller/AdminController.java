@@ -82,7 +82,7 @@ public class AdminController {
 
         String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
         if (token == null) {
-            return CommonResult.validateFailed("登录失败");
+            return CommonResult.validateFailed("用户名或密码错误");
         }
 
         // 校验用户是否被锁
