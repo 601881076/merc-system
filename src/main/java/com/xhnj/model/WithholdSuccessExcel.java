@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 public class WithholdSuccessExcel extends BaseRowModel {
     @ExcelProperty(value = "Bank Account", index = 0)
-    private String recvAccount;
+    private String recvAccNo;
     @ExcelProperty(value = "Effective (Trade)Date", index = 1)
     private Date tradeTime;
     @ExcelProperty(value = "Credit (Payment)Amount", index = 2)
