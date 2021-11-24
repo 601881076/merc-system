@@ -111,11 +111,11 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         //用户不存在则创建
         TAdmin admin = getAdminByUsername(username);
         if (admin == null) {
-            TAdmin adm = new TAdmin();
-            adm.setUsername(username);
-            adm.setPassword(passwordEncoder.encode(defaultpassword));
-            adminMapper.insert(adm);
-            return new AdminUserDetails(adm);
+//            TAdmin adm = new TAdmin();
+//            adm.setUsername(username);
+//            adm.setPassword(passwordEncoder.encode(defaultpassword));
+//            adminMapper.insert(adm);
+            return null;
         }
         return new AdminUserDetails(admin);
     }
