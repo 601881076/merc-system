@@ -118,7 +118,9 @@ public class AdminController {
         data.put("icon", admin.getIcon());
         Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
         data.put("menus", roleService.getUmsMenuByAdminId(id));
+
         if (admin.getFirstLoginTime()== null) {
+            adminService.updateAdminFirstTime(admin.getUsername());
             data.put("fistFlag", "0");
         }else{
             data.put("fistFlag", "1");
@@ -182,7 +184,7 @@ public class AdminController {
     public CommonResult resetPass(TAdmin admin) {
         int count = adminService.resetPass(admin);
         if(count > 0)
-            return CommonResult.success("重制密码成功，密码为 12345678，请稍后自行修改密码");
+            return CommonResult.success("重制密码成功，密码为 Passwd!23，请稍后自行修改密码");
         return CommonResult.failed();
     }
     @ApiOperation("分配角色")
