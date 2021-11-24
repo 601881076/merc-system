@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 /**
 * @Description:    系统日志：切面处理类
@@ -82,7 +83,8 @@ public class SysLogAspect {
         tLog.setParams(params);*/
 
         //获取用户名
-        tLog.setUserName(UserUtil.getCurrentAdminUser().getUsername());
+        Optional.ofNullable(UserUtil.getCurrentAdminUser()).ifPresent(e -> tLog.setUserName(UserUtil.getCurrentAdminUser().getUsername()));
+
         //获取用户ip地址
         /*HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
         sysLog.setIp(IPUtils.getIpAddr(request));*/

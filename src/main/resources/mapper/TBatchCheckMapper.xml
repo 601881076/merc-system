@@ -91,7 +91,7 @@
         cancle.system_type,
         cancle.source_type,
         cancle.bank_code,
-        cancle.bank_name,
+      /*  cancle.bank_name,*/
         cancle.system_batch,
         cancle.fin_label_cd,
         cancle.project_no,
@@ -122,8 +122,10 @@
 
     <select id="getListToBatchNo" resultType="com.xhnj.model.TWithholdCancleExcel">
         SELECT
-        <include refid="withholdCancleSqlList" />
+        <include refid="withholdCancleSqlList" />,
+         bcm.bank_name
         FROM t_withhold_cancle cancle left join t_withhold_agree_sms sms on cancle.bizserial_no = sms.bizserial_no
+        LEFT JOIN t_bank_code_mapp bcm ON cancle.bank_code = bcm.busin_code
         WHERE system_batch in
         <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
             #{item,jdbcType=VARCHAR}
