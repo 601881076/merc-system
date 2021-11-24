@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.component.ValidateProcessor;
 import com.xhnj.constant.ValidateTypeConstant;
-import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
+import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.model.*;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
@@ -17,6 +17,7 @@ import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TBatchDtlService;
 import com.xhnj.service.TWithholdService;
 import com.xhnj.util.BusinUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
 /*
  @Description
  *@author kang.li
@@ -108,7 +108,7 @@ public class TWithholdServiceImpl implements TWithholdService {
     public void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam) {
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
         log.info("list:"+list.toString());
-        list.stream().forEach(e ->e.setRecvAccount(businUtil.maskBankCard(e.getRecvAccount())));
+        list.stream().forEach(e ->e.setRecvAccNo(businUtil.maskBankCard(e.getRecvAccNo())));
         String fileName = "扣款成功报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
