@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TMenuMapper">
     <sql id="menuSql">
-        id,
-        name,
-        parent_id,
-        level,
-        sort,
-        create_time,
-        update_time,
-        status
+        a.id,
+        a.name,
+        a.parent_id,
+        a.level,
+        a.sort,
+        a.create_time,
+        a.update_time,
+        a.status
     </sql>
     <select id="getUmsMenuByAdminId" resultType="com.xhnj.model.TMenu">
         SELECT <include refid="menuSql"/> from  t_menu a
