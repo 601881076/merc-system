@@ -22,7 +22,7 @@ public interface TConfigService extends IService<TConfig> {
 
     List<TConfig> selctOne(TConfig configs);
 
-
+    TConfig selectByFieldName(TConfig configs);
     int updOne(TConfig configs);
 
 

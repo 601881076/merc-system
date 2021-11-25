@@ -21,4 +21,5 @@ public interface TAdminMapper extends BaseMapper<TAdmin> {
 
     int updateAdminFirstTIme(Long id);
     int updateAdminFirstFlg(Long id);
+    int updateAdminStatus(String username);
 }

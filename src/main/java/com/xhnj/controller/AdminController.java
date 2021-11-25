@@ -9,10 +9,12 @@ import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
 import com.xhnj.model.TAdminRole;
 import com.xhnj.model.TAdminRoles;
+import com.xhnj.model.TConfig;
 import com.xhnj.pojo.query.UmsAdminLoginParam;
 import com.xhnj.model.TAdmin;
 import com.xhnj.pojo.query.UmsAdminUpdatePassParam;
 import com.xhnj.service.TAdminService;
+import com.xhnj.service.TConfigService;
 import com.xhnj.service.TRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +56,8 @@ public class AdminController {
     private TAdminService adminService;
     @Autowired
     private TRoleService roleService;
+    @Autowired
+    private TConfigService configService;
 
     @ApiOperation(value = "分页获取用户列表数据")
     @GetMapping("/list")
@@ -96,6 +101,7 @@ public class AdminController {
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         if(adminByUsername.getFistFlag().equals("0")){
+            adminService.updateAdminStatus(adminByUsername.getUsername());
             return CommonResult.success(tokenMap,"用户为首次登陆或密码已重制,请重新修改密码");
 
         }
@@ -119,6 +125,20 @@ public class AdminController {
         Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
         data.put("menus", roleService.getUmsMenuByAdminId(id));
         data.put("fistFlag", admin.getFistFlag());
+        TConfig tConfig = new TConfig();
+        tConfig.setFieldName("passwordTime");
+        TConfig tConfig1 = configService.selectByFieldName(tConfig);
+        String passwordTime = tConfig1.getValue();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String ly_time = sdf.format(new java.util.Date());
+        if(admin.getFirstLoginTime() != null){
+            String format = sdf.format(admin.getFirstLoginTime());
+            int i = Integer.parseInt(format);
+            int i1 = Integer.parseInt(ly_time);
+            if(i1 - i >= Integer.parseInt(passwordTime)){
+                adminService.updateAdminFirstFlg(admin.getId());
+            }
+        }
         if (admin.getFistFlag().equals("0") ) {
             adminService.updateAdminFirstTime(admin.getId());
         }

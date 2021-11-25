@@ -211,4 +211,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     public int updateAdminFirstFlg(Long id) {
         return adminMapper.updateAdminFirstFlg(id);
     }
+
+    @Override
+    public int updateAdminStatus(String username) {
+
+        return adminMapper.updateAdminStatus(username);
+    }
 }

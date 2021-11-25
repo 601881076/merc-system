@@ -64,5 +64,13 @@ public class TMenu extends Model implements Serializable {
      */
     @NotNull(message = "状态不能为空")
     private Integer status;
+    /**
+     * 前端名称
+     */
+    private String frontName;
+    /**
+     * 前端图标
+     */
+    private String frontImg;
 
 }
