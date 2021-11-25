@@ -176,6 +176,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         admin.setId(user.getId());
         admin.setPassword(passwordEncoder.encode(adminpass.getPassword()));
 //        admin.setIsRepassword("0");//修改密码后状态改为0
+        admin.setStatus(1);
         admin.setFistFlag("1");
         return adminMapper.updateById(admin);
     }
