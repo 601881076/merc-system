@@ -2,35 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xhnj.mapper.TDeductionDetailMapper">
     <sql id="plaSql">
-        id,
-        batch_no,
-        agreement_id,
-        source_type,
-        bank_code,
-        order_no,
-        pay_type,
-        trade_time,
-        pay_recv,
-        currency,
-        ROUND(CAST(money AS FLOAT)/100, 2) AS "money",
-        recv_account,
-        recv_account_name,
-        recv_bank_no,
-        recv_bank_name,
-        card_no,
-        customer_name,
-        pay_bank_no,
-        pay_bank_name,
-        usages,
-        summary,
-        postscript,
-        create_time,
-        reason,
-        contract_no,
-        pay_result,
-        ret_code,
-        recoState,
-        recoResult
+        dtl.id,
+        dtl.batch_no,
+        dtl.agreement_id,
+        dtl.source_type,
+        dtl.bank_code,
+        dtl.order_no,
+        dtl.pay_type,
+        dtl.trade_time,
+        dtl.pay_recv,
+        dtl.currency,
+        ROUND(CAST(dtl.money AS FLOAT)/100, 2) AS "money",
+        dtl.recv_account,
+        dtl.recv_account_name,
+        dtl.recv_bank_no,
+        dtl.recv_bank_name,
+        dtl.card_no,
+        dtl.customer_name,
+        dtl.pay_bank_no,
+        dtl.pay_bank_name,
+        dtl.usages,
+        dtl.summary,
+        dtl.postscript,
+        dtl.create_time,
+        dtl.reason,
+        dtl.contract_no,
+        dtl.pay_result,
+        dtl.ret_code,
+        dtl.recoState,
+        dtl.recoResult,
+        ROUND(CAST(batch.total_amt AS FLOAT)/100, 2) AS "total_amt",
+        batch.total_trans,
+        batch.status,
+        batch.success_trans,
+        batch.fail_trans,
+        batch.process_trans,
+        batch.serial_no
     </sql>
     <sql id="expdtl">
 
@@ -39,25 +46,25 @@
     <select id="listPage" resultType="com.xhnj.model.TBatchDtl">
         SELECT
         <include refid="plaSql" />
-        FROM t_batch_dtl
+        FROM t_batch_dtl dtl left join t_batch_no batch on dtl.batch_no = batch.batch_no
         <where>
             <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
-                and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
+                and dtl.batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
-                and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+                and dtl.customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
-                and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
+                and dtl.agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-                and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
+                and dtl.bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-                and card_no=#{tbatchDtl.cardNo,jdbcType=VARCHAR}
+                and dtl.card_no=#{tbatchDtl.cardNo,jdbcType=VARCHAR}
             </if>
         </where>
-        order by create_time desc
+        order by dtl.create_time desc
     </select>
 
     <select id="listPage1" resultType="com.xhnj.model.TBatchDtl">
