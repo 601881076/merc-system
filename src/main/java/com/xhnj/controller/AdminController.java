@@ -95,7 +95,7 @@ public class AdminController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        if(StrUtil.isBlank((CharSequence) adminByUsername.getFirstLoginTime())){
+        if(adminByUsername.getFirstLoginTime() == null){
             return CommonResult.success(tokenMap,"密码已重制,请重新修改密码");
 
         }
