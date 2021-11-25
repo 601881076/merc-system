@@ -101,9 +101,8 @@ public class AdminController {
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         if(adminByUsername.getFistFlag().equals("0")){
-            adminService.updateAdminStatus(adminByUsername.getUsername());
+//            adminService.updateAdminStatus(adminByUsername.getUsername());
             return CommonResult.success(tokenMap,"用户为首次登陆或密码已重制,请重新修改密码");
-
         }
         return CommonResult.success(tokenMap);
     }

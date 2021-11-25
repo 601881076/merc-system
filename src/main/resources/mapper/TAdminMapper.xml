@@ -49,6 +49,6 @@
         ]]>
     </update>
     <update id="updateAdminStatus">
-        update t_admin set status = 0 where username = #{username}
+        update t_admin set status = 0 where username = #{username} and user_type !='0'
     </update>
 </mapper>
