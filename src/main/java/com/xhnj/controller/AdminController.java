@@ -135,6 +135,7 @@ public class AdminController {
             int i = Integer.parseInt(format);
             int i1 = Integer.parseInt(ly_time);
             if(i1 - i >= Integer.parseInt(passwordTime)){
+                adminService.updateAdminStatus(admin.getUsername());
                 adminService.updateAdminFirstFlg(admin.getId());
             }
         }
