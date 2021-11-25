@@ -178,4 +178,76 @@ public class TBatchDtl implements Serializable {
     private String contractNo;
 
     private String seqNo;
+
+    /** 总金额(分为单位)*/
+    @TableField(exist = false)
+    private BigDecimal totalAmt;
+
+    /** 总比数*/
+    @TableField(exist = false)
+    private int totalTrans;
+
+    /** 银行已处理和待处理*/
+    @TableField(exist = false)
+    private int status;
+
+    /** 成功笔数*/
+    @TableField(exist = false)
+    private int successTrans;
+
+    /** 失败笔数*/
+    @TableField(exist = false)
+    private int failTrans;
+
+    /** 处理中笔数*/
+    @TableField(exist = false)
+    private int processTrans;
+
+    /** 银行产生的流水号*/
+    @TableField(exist = false)
+    private int serialNo;
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
