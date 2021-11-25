@@ -95,7 +95,7 @@ public class AdminController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        if(StrUtil.isBlank((CharSequence) adminByUsername.getFirstLoginTime())){
+        if(adminByUsername.getFistFlag()=="0"){
             return CommonResult.success(tokenMap,"密码已重制,请重新修改密码");
 
         }
@@ -118,12 +118,10 @@ public class AdminController {
         data.put("icon", admin.getIcon());
         Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
         data.put("menus", roleService.getUmsMenuByAdminId(id));
-
-        if (admin.getFirstLoginTime()== null) {
+        data.put("fistFlag", admin.getFistFlag());
+        if (admin.getFistFlag()== "0") {
             adminService.updateAdminFirstTime(admin.getUsername());
-            data.put("fistFlag", "0");
-        }else{
-            data.put("fistFlag", "1");
+            adminService.updateAdminFirstFlg(admin.getUsername());
         }
         return CommonResult.success(data);
 

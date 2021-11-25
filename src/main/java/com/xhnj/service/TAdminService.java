@@ -39,5 +39,6 @@ public interface TAdminService extends IService<TAdmin> {
 
     TAdminRole slecRole(Long id);
     int updateAdminFirstTime(String username);
+    int updateAdminFirstFlg(String username);
 
 }

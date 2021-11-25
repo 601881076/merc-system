@@ -94,5 +94,13 @@ public class TAdmin extends Model implements Serializable {
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+    /**
+     * @Auther: zhanglujun
+     * @Date: 2021/11/24 下午6:17
+     * @Description: TODO
+     * @param:
+     * 判断是否首次登陆
+     */
+    private String fistFlag;
 
 }
