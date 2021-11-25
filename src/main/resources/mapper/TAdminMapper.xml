@@ -17,6 +17,7 @@
           adm.login_time ,
           adm.last_login_ip ,
           adm.update_time datetime,
+          adm.fist_flag,
           role.role_id
     </sql>
 

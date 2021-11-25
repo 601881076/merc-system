@@ -96,4 +96,5 @@ public class TAdminRoles extends Model implements Serializable {
     private Date updateTime;
 
     private Long roleId;
+    private Long fistFlag;
 }
