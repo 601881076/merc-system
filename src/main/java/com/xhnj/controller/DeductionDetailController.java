@@ -4,16 +4,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.TBatchNo;
 import com.xhnj.pojo.query.DeductionDetailQuery;
-import com.xhnj.pojo.query.PoundageParam;
 import com.xhnj.service.DeductionDetailService;
-import com.xhnj.service.TWithholdService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,6 +35,7 @@ public class DeductionDetailController {
     @GetMapping("/page")
     public CommonResult<CommonPage<TBatchDtl>> list(DeductionDetailQuery tbatchDtl, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        log.info("分页查询扣款明细,{}", tbatchDtl.toString());
         IPage page = DeductionDetailService.listPage(tbatchDtl,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));
     }

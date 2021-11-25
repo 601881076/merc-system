@@ -45,7 +45,7 @@
 
     <select id="listPage" resultType="com.xhnj.model.TBatchDtl">
         SELECT
-        <include refid="plaSql" />
+        <include refid="plaSql"/>
         FROM t_batch_dtl dtl left join t_batch_no batch on dtl.batch_no = batch.batch_no
         <where>
             <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
@@ -60,8 +60,8 @@
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
                 and dtl.bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
             </if>
-            <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-                and dtl.card_no=#{tbatchDtl.cardNo,jdbcType=VARCHAR}
+            <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
+                and dtl.card_no = #{tbatchDtl.cardNo,jdbcType=VARCHAR}
             </if>
         </where>
         order by dtl.create_time desc
@@ -69,22 +69,25 @@
 
     <select id="listPage1" resultType="com.xhnj.model.TBatchDtl">
         SELECT
-        <include refid="plaSql" />
-        FROM t_batch_dtl
+        <include refid="plaSql"/>
+        FROM t_batch_dtl dtl left join t_batch_no batch on dtl.batch_no = batch.batch_no
         <where>
             <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
-                and batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
+                and dtl.batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
-                and customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+                and dtl.customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
-                and agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
+                and dtl.agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-                and bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
+                and dtl.bank_code=#{tbatchDtl.bankCode,jdbcType=INTEGER}
+            </if>
+
+            <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
+                and dtl.card_no = #{tbatchDtl.cardNo,jdbcType=VARCHAR}
             </if>
         </where>
-        order by create_time desc
     </select>
 </mapper>

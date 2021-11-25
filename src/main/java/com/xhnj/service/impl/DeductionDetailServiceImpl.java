@@ -6,7 +6,6 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.enums.IsSendEnum;
 import com.xhnj.mapper.TDeductionDetailMapper;
 import com.xhnj.model.TBatDtlExcel;
 import com.xhnj.model.TBatchDtl;
@@ -58,53 +57,64 @@ public class DeductionDetailServiceImpl implements DeductionDetailService {
                 tBatDtlExcel.setMoney(tBatchDtls.get(i).getMoney());
                 tBatDtlExcel.setOrderNo(tBatchDtls.get(i).getOrderNo());
                 tBatDtlExcel.setPayBankName(tBatchDtls.get(i).getPayBankName());
-                switch (tBatchDtls.get(i).getPayResult()) {
-                    case 0 :
-                        tBatDtlExcel.setPayResult("正在处理");
-                        break;
-                    case 1:
-                        tBatDtlExcel.setPayResult("成功");
-                        break;
-                    case 2:
-                        tBatDtlExcel.setPayResult("银行返回失败");
-                        break;
-                    case 3:
-                        tBatDtlExcel.setPayResult("连不上银行服务导致失败");
-                        break;
-                    case 4:
-                        tBatDtlExcel.setPayResult("收不到银行响应导致失败");
-                        break;
-                    case 5:
-                        tBatDtlExcel.setPayResult("管理员手工设置失败");
-                        break;
-                    default:
-                        break;
+
+                if (null != tBatchDtls.get(i).getPayResult()) {
+                    switch (tBatchDtls.get(i).getPayResult()) {
+                        case 0 :
+                            tBatDtlExcel.setPayResult("正在处理");
+                            break;
+                        case 1:
+                            tBatDtlExcel.setPayResult("成功");
+                            break;
+                        case 2:
+                            tBatDtlExcel.setPayResult("银行返回失败");
+                            break;
+                        case 3:
+                            tBatDtlExcel.setPayResult("连不上银行服务导致失败");
+                            break;
+                        case 4:
+                            tBatDtlExcel.setPayResult("收不到银行响应导致失败");
+                            break;
+                        case 5:
+                            tBatDtlExcel.setPayResult("管理员手工设置失败");
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
                 tBatDtlExcel.setReason(tBatchDtls.get(i).getReason());
                 tBatDtlExcel.setRecoResult(tBatchDtls.get(i).getRecoResult());
-                switch (tBatchDtls.get(i).getRecoState()) {
-                    case 0:
-                        tBatDtlExcel.setRecoState("未对账");
-                        break;
-                    case 1:
-                        tBatDtlExcel.setRecoState("已对账");
-                        break;
-                    default:
-                        break;
+
+                if (null != tBatchDtls.get(i).getRecoState()) {
+                    switch (tBatchDtls.get(i).getRecoState()) {
+                        case 0:
+                            tBatDtlExcel.setRecoState("未对账");
+                            break;
+                        case 1:
+                            tBatDtlExcel.setRecoState("已对账");
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                switch (tBatchDtls.get(i).getSourceType()) {
-                    case 0:
-                        tBatDtlExcel.setSourceType("DD");
-                        break;
-                    case 1:
-                        tBatDtlExcel.setSourceType("SDSP");
-                        break;
-                    case 2:
-                        tBatDtlExcel.setSourceType("MDD");
-                        break;
-                    default:
-                        break;
+
+                if (null != tBatchDtls.get(i).getSourceType()) {
+                    switch (tBatchDtls.get(i).getSourceType()) {
+                        case 0:
+                            tBatDtlExcel.setSourceType("DD");
+                            break;
+                        case 1:
+                            tBatDtlExcel.setSourceType("SDSP");
+                            break;
+                        case 2:
+                            tBatDtlExcel.setSourceType("MDD");
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
                 tBatDtlExcel.setRecvAccountName(tBatchDtls.get(i).getRecvAccountName());
                 tBatDtlExcel.setRetCode(tBatchDtls.get(i).getRetCode());
                 tBatDtlExcel.setTradeTime(tBatchDtls.get(i).getTradeTime());

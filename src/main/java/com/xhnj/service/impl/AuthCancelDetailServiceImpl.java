@@ -6,12 +6,10 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.mapper.TAuthCancelDetailMapper;
-import com.xhnj.mapper.TDeductionDetailMapper;
-import com.xhnj.model.*;
+import com.xhnj.model.TAuthCancelExcel;
+import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
-import com.xhnj.pojo.query.DeductionDetailQuery;
 import com.xhnj.service.AuthCancelDetailService;
-import com.xhnj.service.DeductionDetailService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -53,32 +51,38 @@ public class AuthCancelDetailServiceImpl implements AuthCancelDetailService {
             tAuthCancelExcel.setCustomerName(tBatchDtls.get(i).getCustomerName());
             tAuthCancelExcel.setEndDate(tBatchDtls.get(i).getEndDate());
             //0->未发送;1->已发送
-            switch (tBatchDtls.get(i).getIsSend()) {
-                case 0:
-                    tAuthCancelExcel.setIsSend("未发送");
-                    break;
-                case 1:
-                    tAuthCancelExcel.setIsSend("已发送");
-                    break;
-                default:
-                    break;
+            if (null != tBatchDtls.get(i).getIsSend()) {
+                switch (tBatchDtls.get(i).getIsSend()) {
+                    case 0:
+                        tAuthCancelExcel.setIsSend("未发送");
+                        break;
+                    case 1:
+                        tAuthCancelExcel.setIsSend("已发送");
+                        break;
+                    default:
+                        break;
+                }
             }
+
             tAuthCancelExcel.setMobileNo(tBatchDtls.get(i).getMobileNo());
             tAuthCancelExcel.setReason(tBatchDtls.get(i).getReason());
             //(0->处理中;1->成功;2->失败)
-            switch (tBatchDtls.get(i).getStatus()) {
-                case 0:
-                    tAuthCancelExcel.setIsSend("处理中");
-                    break;
-                case 1:
-                    tAuthCancelExcel.setIsSend("成功");
-                    break;
-                case 2:
-                    tAuthCancelExcel.setIsSend("失败");
-                    break;
-                default:
-                    break;
+            if (null != tBatchDtls.get(i).getStatus()) {
+                switch (tBatchDtls.get(i).getStatus()) {
+                    case 0:
+                        tAuthCancelExcel.setIsSend("处理中");
+                        break;
+                    case 1:
+                        tAuthCancelExcel.setIsSend("成功");
+                        break;
+                    case 2:
+                        tAuthCancelExcel.setIsSend("失败");
+                        break;
+                    default:
+                        break;
+                }
             }
+
             list.add(tAuthCancelExcel);
         }
         String fileName = "授权取消明细";
