@@ -124,7 +124,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     @Transactional(rollbackFor = Exception.class)
     public int resetPass(TAdmin admin) {
         String username = admin.getUsername();
-        admin.setPassword("Passwd!23");
+        admin.setPassword( passwordEncoder.encode("Passwd!23"));
         admin.setFirstLoginTime(null);
         admin.setFistFlag("0");
         admin.setUsername(username);
