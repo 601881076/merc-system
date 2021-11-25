@@ -16,4 +16,8 @@ public interface TAdminMapper extends BaseMapper<TAdmin> {
     int updateUserStatusToDisableByUserName(@Param("admin") TAdmin admin);
 
     IPage listPage(IPage<TAdminRoles> page, @Param("admin") TAdmin admin);
+
+    int updateByUsername(@Param("admin") TAdmin admin);
+
+    int updateAdminFirstTIme(String username);
 }

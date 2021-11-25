@@ -123,9 +123,11 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int resetPass(TAdmin admin) {
-        admin.setPassword("12345678");
+        String username = admin.getUsername();
+        admin.setPassword("Passwd!23");
         admin.setFirstLoginTime(null);
-        return adminMapper.updateById(admin);
+        admin.setUsername(username);
+        return adminMapper.updateByUsername(admin);
     }
 
     @Override
@@ -193,5 +195,12 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     @Override
     public TAdminRole slecRole(Long id) {
         return  tadminrolemapper.selcRole(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int updateAdminFirstTime(String username) {
+
+        return adminMapper.updateAdminFirstTIme(username);
     }
 }

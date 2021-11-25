@@ -34,4 +34,12 @@
     <update id="updateUserStatusToDisableByUserName" >
         update t_admin set status = 0 where id=#{admin.id,jdbcType=INTEGER}
     </update>
+    <update id="updateByUsername">
+        update t_admin set password = #{admin.password},first_login_time = #{admin.firstLoginTime} where username=#{admin.username}
+    </update>
+    <update id="updateAdminFirstTIme">
+        <![CDATA[
+        update t_admin set first_login_time = CONVERT(varchar,GETDATE(),120) where username=#{username}
+        ]]>
+    </update>
 </mapper>
