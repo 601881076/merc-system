@@ -40,12 +40,12 @@
     </update>
     <update id="updateAdminFirstTIme">
         <![CDATA[
-        update t_admin set first_login_time = CONVERT(varchar,GETDATE(),120) where username=#{username}
+        update t_admin set first_login_time = CONVERT(varchar,GETDATE(),120) where id=#{id}
         ]]>
     </update>
     <update id="updateAdminFirstFlg">
          <![CDATA[
-        update t_admin set fist_flag = '1' where username=#{username}
+        update t_admin set fist_flag = '1' where id=#{id}
         ]]>
     </update>
 </mapper>
