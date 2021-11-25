@@ -126,6 +126,7 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         String username = admin.getUsername();
         admin.setPassword("Passwd!23");
         admin.setFirstLoginTime(null);
+        admin.setFistFlag("0");
         admin.setUsername(username);
         return adminMapper.updateByUsername(admin);
     }
@@ -202,5 +203,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     public int updateAdminFirstTime(String username) {
 
         return adminMapper.updateAdminFirstTIme(username);
+    }
+
+    @Override
+    public int updateAdminFirstFlg(String username) {
+        return adminMapper.updateAdminFirstFlg(username);
     }
 }

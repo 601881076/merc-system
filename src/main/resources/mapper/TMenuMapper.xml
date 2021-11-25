@@ -12,7 +12,9 @@
         status
     </sql>
     <select id="getUmsMenuByAdminId" resultType="com.xhnj.model.TMenu">
-        SELECT <include refid="menuSql"/> from t_menu where parent_id=#{adminId,jdbcType=VARBINARY}
+        SELECT <include refid="menuSql"/> from  t_menu a
+        join t_role_menu b
+        on a.id=b.menu_id where b.role_id=#{adminId,jdbcType=VARBINARY}
     </select>
     <select id="getUmsMenu" resultType="com.xhnj.model.TMenu">
         SELECT <include refid="menuSql"/>
