@@ -95,8 +95,8 @@ public class AdminController {
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
-        if(adminByUsername.getFistFlag()=="0"){
-            return CommonResult.success(tokenMap,"密码已重制,请重新修改密码");
+        if(adminByUsername.getFistFlag().equals("0")){
+            return CommonResult.success(tokenMap,"用户为首次登陆或密码已重制,请重新修改密码");
 
         }
         return CommonResult.success(tokenMap);
@@ -119,9 +119,8 @@ public class AdminController {
         Optional.ofNullable(admrol).ifPresent(e -> data.put("roleId", admrol.getRoleId()));
         data.put("menus", roleService.getUmsMenuByAdminId(id));
         data.put("fistFlag", admin.getFistFlag());
-        if (admin.getFistFlag()== "0") {
-            adminService.updateAdminFirstTime(admin.getUsername());
-            adminService.updateAdminFirstFlg(admin.getUsername());
+        if (admin.getFistFlag().equals("0") ) {
+            adminService.updateAdminFirstTime(admin.getId());
         }
         return CommonResult.success(data);
 
