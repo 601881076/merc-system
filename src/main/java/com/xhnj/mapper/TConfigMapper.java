@@ -17,6 +17,6 @@ import java.util.List;
  */
 public interface TConfigMapper extends BaseMapper<TConfig> {
     List<TConfig> selctOne(@Param("config") TConfig configs);
-
+    TConfig selectByFieldName(@Param("config") TConfig configs);
     int updOne(@Param("config") TConfig configs);
 }

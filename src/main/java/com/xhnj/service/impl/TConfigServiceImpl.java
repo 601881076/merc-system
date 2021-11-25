@@ -43,6 +43,12 @@ public class TConfigServiceImpl extends ServiceImpl<TConfigMapper, TConfig> impl
         return configMapper.selctOne(configs);
     }
 
+    @Override
+    public TConfig selectByFieldName(TConfig configs) {
+
+        return configMapper.selectByFieldName(configs);
+    }
+
 
     @Override
     public int updOne(TConfig configs) {
