@@ -9,19 +9,24 @@
 
     <select id="selctOne" resultType="com.xhnj.model.TConfig">
         SELECT <include refid="confSql"/> from t_config
-        <where>
-            <if test="config.fieldName != null and config.fieldName != ''">
-                and field_name = #{config.fieldName, jdbcType=VARCHAR}
-            </if>
+        where 1 = 1
+
+        <if test="config.fieldName != null and config.fieldName != ''">
+            and field_name = #{config.fieldName, jdbcType=VARCHAR}
+        </if>
 
             <if test="config.name != null and config.name != ''">
                 and name = #{config.name, jdbcType=VARCHAR}
             </if>
 
-            <if test="config.value != null and config.value != ''">
-                and value = #{config.value, jdbcType=VARCHAR}
-            </if>
-        </where>
+        <if test="config.value != null and config.value != ''">
+            and value = #{config.value, jdbcType=VARCHAR}
+        </if>
+
+    </select>
+    <select id="selectByFieldName" resultType="com.xhnj.model.TConfig">
+        select <include refid="confSql"/> from t_config
+        where 1=1 and field_name = #{config.fieldName, jdbcType=VARCHAR}
     </select>
 
 
