@@ -86,6 +86,19 @@
         )
     </update>
 
+    <!--修改审批表状态-->
+    <update id="updateStatus" parameterType="list">
+        update t_batch_check set
+        status = #{status},
+        update_time = getdate()
+        where batch_no in
+
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+
+    </update>
+
     <sql id="withholdCancleSqlList">
         cancle.id,
         cancle.system_type,

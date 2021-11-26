@@ -5,12 +5,12 @@ import com.xhnj.common.exception.BusinessException;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TDismissBatchCheckMapper;
 import com.xhnj.model.TBatchCheck;
-import com.xhnj.model.TBatchNo;
 import com.xhnj.model.TDismissBatchCheck;
 import com.xhnj.service.TBatchCheckService;
 import com.xhnj.util.UserUtil;
-import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,5 +97,11 @@ public class TBatchCheckServiceImpl extends ServiceImpl<TBatchCheckMapper, TBatc
         }else {
             return dismissBatchCheckMapper.addbatch(list);
         }
+    }
+
+    @Override
+    public int updateStatus(int status, List<String> batchIdList) {
+
+        return batchCheckMapper.updateStatus(status, batchIdList);
     }
 }

@@ -205,7 +205,7 @@ public class TBatchDtl implements Serializable {
 
     /** 银行产生的流水号*/
     @TableField(exist = false)
-    private int serialNo;
+    private String serialNo;
 
 
 }
