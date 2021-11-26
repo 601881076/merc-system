@@ -36,7 +36,11 @@
         tbd.pay_result,
         tbd.ret_code,
         tbd.recoState,
-        tbd.recoResult
+        tbd.recoResult,
+        CONVERT(varchar(100), trade_time, 23) AS tradedt,
+        CONVERT(varchar(100), trade_time, 23) AS effdt,
+        'LA' AS belong,
+        mapp.recv_acc_no
     </sql>
 
     <sql id="batchNoSql">
@@ -59,7 +63,6 @@
         ret_own_spec,
         create_time,
         update_time
-
 
     </sql>
     <sql id="succsql">
@@ -134,10 +137,11 @@
         WHERE tbd.batch_no = #{batchNo,jdbcType=VARCHAR}
     </select>
 
+    <!--导出成功回盘-->
     <select id="getList" resultType="com.xhnj.model.WithholdSuccessExcel">
         SELECT
            <include refid="plaSql" />
-        FROM t_batch_dtl tbd
+        FROM t_batch_dtl tbd left join t_bank_code_mapp mapp on tbd.bank_code = mapp.busin_code
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
             AND tbd.source_type = #{withholdParam.fromType,jdbcType=INTEGER}
@@ -155,7 +159,7 @@
     <select id="getFailList" resultType="com.xhnj.model.WithholdFailExcel">
         SELECT
             <include refid="plaSql" />
-        FROM t_batch_dtl tbd
+        FROM t_batch_dtl tbd left join t_bank_code_mapp mapp on tbd.bank_code = mapp.busin_code
         WHERE 1 = 1
         <if test="withholdParam.fromType != null">
             AND tbd.source_type = #{withholdParam.fromType,jdbcType=INTEGER}

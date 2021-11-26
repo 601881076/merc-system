@@ -59,6 +59,7 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
             wrapper.eq("parent_id",parentId);
         }
         wrapper.eq("level",menuParam.getLevel());
+        wrapper.orderByDesc("create_time");
         return menuMapper.selectPage(page,wrapper);
     }
 

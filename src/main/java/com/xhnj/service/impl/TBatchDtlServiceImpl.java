@@ -36,7 +36,6 @@ public class TBatchDtlServiceImpl extends ServiceImpl<TBatchDtlMapper, TBatchDtl
     @Override
     public List<TBatchCheckSuccessExcel> getListToBatchCheck(DisMissBatchQuery dismissBatch) {
         log.info("进入的是TBatchCheckSuccessExcel");
-        List<TBatchCheckSuccessExcel> list = platformserialMapper.getListToBatchNo(dismissBatch);
         return platformserialMapper.getListToBatchNo(dismissBatch);
     }
 
