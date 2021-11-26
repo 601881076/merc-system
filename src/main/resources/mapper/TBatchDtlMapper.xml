@@ -121,7 +121,7 @@
     <select id="getByBatchNoList" resultType="com.xhnj.pojo.vo.WithholdDetailVO">
         SELECT
            <include refid="plaSql"/>
-        FROM t_batch_dtl tbd
+        FROM t_batch_dtl tbd left join t_bank_code_mapp mapp on tbd.bank_code = mapp.busin_code
         WHERE tbd.batch_no IN
         <foreach collection = "list" item = "batchNo" open = "(" close = ")" separator = "," >
              #{batchNo}
@@ -132,7 +132,7 @@
         SELECT
             <include refid="plaSql" />,
             tbcm.bank_name
-        FROM t_batch_dtl tbd
+        FROM t_batch_dtl tbd left join t_bank_code_mapp mapp on tbd.bank_code = mapp.busin_code
         LEFT JOIN t_bank_code_mapp tbcm ON tbd.bank_code = tbcm.busin_code
         WHERE tbd.batch_no = #{batchNo,jdbcType=VARCHAR}
     </select>
