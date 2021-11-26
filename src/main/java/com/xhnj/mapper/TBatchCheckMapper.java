@@ -5,6 +5,7 @@ import com.xhnj.model.TAdmin;
 import com.xhnj.model.TBatchCheck;
 import com.xhnj.model.TWithholdCancleExcel;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @author lk
  * @since 2021-10-25
  */
+@Repository
 public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
     int insert(@Param("list") List<TBatchCheck> list);
 
@@ -41,4 +43,13 @@ public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
      * @return
      */
     List<TBatchCheck> selectCheckPassBatch(@Param("batchNoList")List<String> batchNoList);
+
+    /**
+     * 修改审批表状态
+     * @param batchIdList 需要修改的batchId
+     * @param status 审核状态(0->待提交;1->已提交;2->审核通过;3->审核拒绝)
+     * @return
+     */
+    int updateStatus(@Param("status") int status,
+                     @Param("list") List<String> batchIdList);
 }

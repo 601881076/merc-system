@@ -163,11 +163,25 @@ public class WithholdController {
     @GetMapping("/batchCheck")
     @MyLog(operate = "添加", objectType = "代扣批次", objectName = "批量扣款管理", descript = "批量批次审核")
     public CommonResult batchCheck(@RequestParam List<String> batchId){
-        int count=batchCheckService.insert(batchId);
+        /*int count=batchCheckService.insert(batchId);
         if (count>0){
             return CommonResult.success(count);
-        }
-        return CommonResult.failed();
+        }*/
+
+        /**create to tanyi on 2021/11/26 11:35
+         * 需求变更
+         * 原需求：上传文件时只在批次表进行插入数据，提交审核时才对批次审批表进行新增
+         * 需求变更：上传文件除开再批次表插入数据外，对批次审批表也要进行插入数据。
+         *  提交审核操作从对审批表进行新增操作改成对审批表进行status修改。
+         *
+         * */
+
+        int count = batchCheckService.updateStatus(1, batchId);
+
+
+        /**create to tanyi on 2021/11/26 11:35 */
+
+        return 0 < count ? CommonResult.success(count) : CommonResult.failed();
     }
 
 

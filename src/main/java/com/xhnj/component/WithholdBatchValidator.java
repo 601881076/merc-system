@@ -5,19 +5,16 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstant;
+import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
 import com.xhnj.mapper.TBatchNoMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
-import com.xhnj.model.TAdmin;
-import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.TBatchNo;
-import com.xhnj.model.TWithholdAgree;
+import com.xhnj.model.*;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.util.BusinUtil;
@@ -59,6 +56,8 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     private ExcelListener excelListener;
     @Autowired
     private TWithholdAgreeMapper tWithholdAgreeMapper;
+    @Autowired
+    private TBatchCheckMapper batchCheckMapper;
     @Value("${rsa.privateKey}")
     private String privateKey;
 
@@ -164,6 +163,21 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
 
             //批量插入明细
             platformserialMapper.addBatch(originalList);
+
+            // 插入批次审批表
+            TBatchCheck batchCheck = new TBatchCheck();
+            batchCheck.setBatchId(batchNo.getId());
+            batchCheck.setStatus(0);
+            batchCheck.setBatchNo(batchNo.getBatchNo());
+            batchCheck.setUpUserId(UserUtil.getCurrentAdminUser().getId());
+            batchCheck.setUpUserName(UserUtil.getCurrentAdminUser().getUsername());
+            batchCheck.setCheckResult(0);
+
+            List<TBatchCheck> batchCheckList = new ArrayList<>();
+            batchCheckList.add(batchCheck);
+
+            batchCheckMapper.insert(batchCheckList);
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
