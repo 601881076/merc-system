@@ -115,7 +115,7 @@ public class DeductionDetailServiceImpl implements DeductionDetailService {
                     }
                 }
 
-                tBatDtlExcel.setRecvAccountName(tBatchDtls.get(i).getRecvAccountName());
+                tBatDtlExcel.setRecvAccountName(tBatchDtls.get(i).getCustomerName());
                 tBatDtlExcel.setRetCode(tBatchDtls.get(i).getRetCode());
                 tBatDtlExcel.setTradeTime(tBatchDtls.get(i).getTradeTime());
                 tBatDtlExcel.setUsages(tBatchDtls.get(i).getUsages());

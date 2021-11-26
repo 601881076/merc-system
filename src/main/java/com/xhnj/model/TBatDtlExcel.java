@@ -32,7 +32,7 @@ public class TBatDtlExcel extends BaseRowModel {
     @ExcelProperty(value = "交易金额", index = 8)
     private BigDecimal money;
     @ExcelProperty(value = "付款户名", index = 10)
-    private String RecvAccountName;
+    private String recvAccountName;
     @ExcelProperty(value = "付款银行名称", index = 11)
     private String payBankName;
     @ExcelProperty(value = "用途", index = 12)

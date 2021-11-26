@@ -20,7 +20,6 @@
         dtl.card_no,
         dtl.customer_name,
         dtl.pay_bank_no,
-        dtl.pay_bank_name,
         dtl.usages,
         dtl.summary,
         dtl.postscript,
@@ -69,8 +68,10 @@
 
     <select id="listPage1" resultType="com.xhnj.model.TBatchDtl">
         SELECT
-        <include refid="plaSql"/>
+        <include refid="plaSql"/>,
+               bcm.bank_name AS "pay_bank_name"
         FROM t_batch_dtl dtl left join t_batch_no batch on dtl.batch_no = batch.batch_no
+           left join t_bank_code_mapp bcm on dtl.bank_code = bcm.busin_code
         <where>
             <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
                 and dtl.batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
