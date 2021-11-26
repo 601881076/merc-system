@@ -49,7 +49,7 @@
 
     <select id="getFeeMoneySum" resultType="com.xhnj.pojo.query.FeeMoneyQuery">
         select * from (
-            SELECT concat(#{param.startDate},#{param.endDate}) time,
+            SELECT concat(#{param.startDate},'~',#{param.endDate}) time,
                      sum(t.success_trans) success_trans,
                      (select bank_name from t_bank_code_mapp where busin_code = t.bank_code) bank_name,
                      sum(t.success_trans) * 0.1 as feeMoney
