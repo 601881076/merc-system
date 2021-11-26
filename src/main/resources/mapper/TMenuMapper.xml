@@ -20,7 +20,7 @@
         SELECT <include refid="menuSql"/>
         from t_menu a
         join t_role_menu b
-        on a.id=b.menu_id where b.role_id=(select role_id from t_admin_role where user_id=#{adminId,jdbcType=VARBINARY})
+        on a.id=b.menu_id where b.role_id=#{roleId,jdbcType=VARBINARY}
     </select>
     <select id="selectMenuList" resultType="com.xhnj.model.TMenu">
         select id,name,parent_id,level,sort,create_time,update_time,status FROM t_menu WHERE level = 0 LIMIT 0,20
