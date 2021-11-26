@@ -114,7 +114,8 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 platformserial.setSystemType(6);
                 platformserial.setSourceType(ValueConstant.SOURCE_MDD);
                 platformserial.setPayType(0);
-                platformserial.setMoney(businUtil.coverAmount(withholdDetailVO.getMoney(),1));
+                BigDecimal bigDecimal = new BigDecimal(withholdDetailVO.getMoney());
+                platformserial.setMoney(businUtil.coverAmount(bigDecimal,1));
                 platformserial.setCurrency("人民币");
 
                 if("11001".equals(bankCode)){
@@ -196,7 +197,8 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             pla.setBankCode(vo.getBankCode());
             pla.setOrderNo(vo.getOrderNo());
             pla.setPayType(0);
-            pla.setMoney(vo.getMoney());
+            BigDecimal bigDecimal = new BigDecimal(vo.getMoney());
+            pla.setMoney(bigDecimal);
             pla.setPayRecv(0);
             detail.add(pla);
         }
