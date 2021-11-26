@@ -47,7 +47,7 @@
                 and agreement_id=#{tbatchDtl.agreementId,jdbcType=VARBINARY}
             </if>
             <if test="tbatchDtl.customerName != null and tbatchDtl.customerName != ''">
-                and customer_name=#{tbatchDtl.customerName,jdbcType=VARBINARY}
+                and customer_name LIKE CONCAT('%',#{tbatchDtl.customerName,jdbcType=VARCHAR},'%')
             </if>
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
                 and bank_code=#{tbatchDtl.bankCode,jdbcType=VARBINARY}
