@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 /*
  @Description
@@ -45,7 +44,7 @@ public class WithholdDetailVO extends BaseRowModel {
 
     @ExcelProperty(value = "扣款金额（元）", index = 5)
     @NotNull(message = "tranAmt param cannot be empty")
-    private BigDecimal money;
+    private String money;
 
     private String rem;
 
