@@ -9,7 +9,9 @@
         a.sort,
         a.create_time,
         a.update_time,
-        a.status
+        a.status,
+        a.front_name,
+        a.front_img
     </sql>
     <select id="getUmsMenuByAdminId" resultType="com.xhnj.model.TMenu">
         SELECT <include refid="menuSql"/> from  t_menu a
