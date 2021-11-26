@@ -51,7 +51,7 @@
                 and dtl.batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.customerName!=null and tbatchDtl.customerName!=''">
-                and dtl.customer_name=#{tbatchDtl.customerName,jdbcType=INTEGER}
+                and dtl.customer_name LIKE CONCAT('%',#{tbatchDtl.customerName,jdbcType=VARCHAR},'%')
             </if>
             <if test="tbatchDtl.agreementId!=null and tbatchDtl.agreementId!=''">
                 and dtl.agreement_id=#{tbatchDtl.agreementId,jdbcType=INTEGER}
