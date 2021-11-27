@@ -4,8 +4,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author : zhanglujun
  * @version : v1.0
@@ -34,7 +32,7 @@ public class TAuthCancelExcel extends BaseRowModel {
     private String isSend;
     @ExcelProperty(value = "失败原因", index = 9)
     private String reason;
-    @ExcelProperty(value = "合同结束日期", index = 10)
+    @ExcelProperty(value = "合同结束日期(格式:20211101)", index = 10)
     private String contractDate;
     @ExcelProperty(value = "协议失效日", index = 11)
     private String endDate;
