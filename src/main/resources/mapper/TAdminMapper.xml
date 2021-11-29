@@ -45,7 +45,7 @@
     </update>
     <update id="updateAdminFirstFlg">
          <![CDATA[
-        update t_admin set fist_flag = '0' where id=#{id}
+        update t_admin set fist_flag = '0' where id=#{id} and  user_type !='0'
         ]]>
     </update>
     <update id="updateAdminStatus">
