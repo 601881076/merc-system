@@ -108,7 +108,7 @@ public class TWithholdServiceImpl implements TWithholdService {
     public void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam) {
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
         log.info("list:"+list.toString());
-        list.stream().forEach(e ->e.setRecvAccNo(businUtil.maskBankCard(e.getRecvAccNo())));
+//        list.stream().forEach(e ->e.setRecvAccNo(businUtil.maskBankCard(e.getRecvAccNo())));
         String fileName = "扣款成功报告";
         try {
             response.setContentType("application/vnd.ms-excel;charset=utf-8");
