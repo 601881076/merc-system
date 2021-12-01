@@ -7,6 +7,8 @@ import com.xhnj.model.TAdminRoles;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /*
  @Description
  *@author kang.li
@@ -22,4 +24,5 @@ public interface TAdminMapper extends BaseMapper<TAdmin> {
     int updateAdminFirstTIme(Long id);
     int updateAdminFirstFlg(Long id);
     int updateAdminStatus(String username);
+    List<TAdmin> selectByUsername(@Param("username") String username);
 }

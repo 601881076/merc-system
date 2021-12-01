@@ -31,6 +31,9 @@
         </if>
 
     </select>
+    <select id="selectByUsername" resultType="com.xhnj.model.TAdmin">
+        select * from t_admin where username=#{username}
+    </select>
     <!--用户上传文件时，输入密码次数超过3次禁用该用户-->
     <update id="updateUserStatusToDisableByUserName" >
         update t_admin set status = 0 where id=#{admin.id,jdbcType=INTEGER}

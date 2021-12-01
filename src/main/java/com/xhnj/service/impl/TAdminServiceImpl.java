@@ -143,6 +143,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int insertAdmin(TAdmin admin) {
+        List<TAdmin> tAdmins = adminMapper.selectByUsername(admin.getUsername());
+        if(tAdmins.size()>0){
+            throw new BusinessException("用户名已存在！");
+        }
         if(StrUtil.isNotBlank(admin.getPassword())){
             admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         }
