@@ -8,13 +8,11 @@ import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstant;
+import com.xhnj.mapper.TDismissBatchCheckMapper;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.mapper.TWithholdCancleMapper;
-import com.xhnj.model.TAdmin;
-import com.xhnj.model.TDismissBatch;
-import com.xhnj.model.TWithholdAgree;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.*;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.util.BusinUtil;
@@ -54,6 +52,9 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
     private TWithholdAgreeMapper tWithholdAgreeMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TDismissBatchCheckMapper dismissBatchCheckMapper;
 
     @Override
     public void validateInner() throws BusinValidateException {
@@ -178,5 +179,15 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
         dismissBatchMapper.insert(dismissBatch);
         //添加明细
         withholdCancleMapper.addBatch(cancelList);
+
+
+        // 授权取消审核批次表新增数据
+        TDismissBatchCheck dismissBatchCheck = new TDismissBatchCheck();
+        dismissBatchCheck.setBatchId(dismissBatch.getId());
+        dismissBatchCheck.setSystemBatch(dismissBatch.getSystemBatch());
+        dismissBatchCheck.setUpUserId(UserUtil.getCurrentAdminUser().getId());
+        dismissBatchCheck.setUpUserName(UserUtil.getCurrentAdminUser().getUsername());
+        dismissBatchCheckMapper.insert(dismissBatchCheck);
+
     }
 }
