@@ -52,4 +52,12 @@ public interface TBatchCheckMapper extends BaseMapper<TBatchCheck> {
      */
     int updateStatus(@Param("status") int status,
                      @Param("list") List<String> batchIdList);
+
+
+    /**
+     * 校验批次号中是否有状态 <> 0 的数据
+     * @param batchIdList
+     * @return
+     */
+    int selectCheckCommitedData(@Param("list") List<String> batchIdList);
 }

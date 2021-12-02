@@ -9,15 +9,13 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
 import com.xhnj.mapper.TAdminMapper;
+import com.xhnj.mapper.TDismissBatchCheckMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdCancle;
 import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.pojo.vo.BatchNoVO;
-import com.xhnj.service.TBatchCheckService;
-import com.xhnj.service.TWithholdAgreeService;
-import com.xhnj.service.TWithholdCancleService;
-import com.xhnj.service.WithholdAgreeDismissBaseService;
+import com.xhnj.service.*;
 import com.xhnj.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,6 +57,8 @@ public class WithholdAgreeDismissController {
     @Autowired
     private TBatchCheckService batchCheckService;
 
+    @Autowired
+    private TDismissBatchService dismissBatchService;
 
     @Resource
     private TAdminMapper adminMapper;
@@ -150,7 +150,11 @@ public class WithholdAgreeDismissController {
     @MyLog(operate = "添加", objectType = "授权批次", objectName = "授权取消管理", descript = "授权取消提交")
     public CommonResult batchCheckSub(@RequestParam List<String> batchId){
         log.info("batchId;"+batchId.toString());
-        int count=batchCheckService.insertCheck(batchId);
+
+//        int count = batchCheckService.insertCheck(batchId);
+
+        int count = dismissBatchService.updateStatusByBatchIdList(1, batchId);
+
         if (count>0){
             return CommonResult.success(count);
         }
