@@ -5,7 +5,6 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.service.TWithholdAgreeService;
-import com.xhnj.service.TWithholdCancleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -17,53 +16,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
-/*
- @Description 代扣协议
- *@author kang.li
- *@date 2021/9/17 20:14   
+/**
+ * @Description: 授权报告历史查询主控
+ * @Author: tan_yi
+ * @CreateDate: 2021/12/2 17:04
+ * @UpdateUser: tan_yi
+ * @UpdateDate: 2021/12/2 17:04
+ * @UpdateRemark: 修改内容
+ * @Version: 1.0
+ * @company: newLand
  */
-@Api(value = "代扣协议", tags = "代扣协议接口")
+@Api(value = "授权报告历史查询", tags = "授权报告历史查询")
 @RestController
-@RequestMapping("/withhold/agree")
+@RequestMapping("/agree/history")
 @Slf4j
-public class WithholdAgreeController {
+public class WithholdAgreeHistoryController {
+
     @Autowired
     private TWithholdAgreeService withholdAgreeService;
 
-
-    /*@ApiOperation(value = "授权条件查询")
+    @ApiOperation(value = "授权报告历史数据查询")
     @GetMapping("/query")
     public CommonResult<CommonPage<TWithholdAgree>> list(TWithholdAgree withholdAgree, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         log.info("授权条件查询，请求参数{}", withholdAgree.toString());
 
-
         // 查询信息
-        IPage page = withholdAgreeService.conditionQuery(withholdAgree,pageSize, pageNum);
-
-
-        return CommonResult.success(CommonPage.restPage(page));
-    }*/
-
-    @ApiOperation(value = "未完成授权条件查询")
-    @GetMapping("/query")
-    public CommonResult<CommonPage<TWithholdAgree>> list(TWithholdAgree withholdAgree, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
-                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        log.info("未完成授权条件查询，请求参数{}", withholdAgree.toString());
-
-
-        // 查询信息
-        IPage page = withholdAgreeService.conditionQuery(withholdAgree,pageSize, pageNum);
-
+        IPage page = withholdAgreeService.selectAgreeHistory(withholdAgree,pageSize, pageNum);
 
         return CommonResult.success(CommonPage.restPage(page));
     }
 
-   @ApiOperation(value = "授权报告查询导出")
-   @GetMapping("/excelBatchExport")
-   public void excelBatchExport(HttpServletResponse response, TWithholdAgree withholdAgree) {
+    @ApiOperation(value = "授权报告查询导出")
+    @GetMapping("/excelBatchExport")
+    public void excelBatchExport(HttpServletResponse response, TWithholdAgree withholdAgree) {
 
-       withholdAgreeService.exportExcel(response, withholdAgree);
+        withholdAgreeService.exportHistoryExcel(response, withholdAgree);
 
-   }
+    }
 }

@@ -26,6 +26,16 @@ public interface TWithholdAgreeService {
      */
     IPage conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum);
 
+
+    /**
+     * 授权报告历史查询
+     * @param withholdAgree
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    IPage selectAgreeHistory(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum);
+
     /**
      * 分页查询授权取消批次
      * @param pageSize
@@ -57,6 +67,14 @@ public interface TWithholdAgreeService {
      * @param withholdAgree
      */
     void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree);
+
+
+    /**
+     * 授权报告查询历史导出
+     * @param response
+     * @param withholdAgree
+     */
+    void exportHistoryExcel(HttpServletResponse response, TWithholdAgree withholdAgree);
 
 
 }
