@@ -40,7 +40,7 @@
         CONVERT(varchar(100), trade_time, 23) AS tradedt,
         CONVERT(varchar(100), trade_time, 23) AS effdt,
         'LA' AS belong,
-        mapp.recv_acc_no
+        mapp.recv_acc_no recv_account
     </sql>
 
     <sql id="batchNoSql">
