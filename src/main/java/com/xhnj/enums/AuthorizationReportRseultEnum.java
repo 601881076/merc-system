@@ -11,13 +11,19 @@ package com.xhnj.enums;
 * @company:        newLand
 */
 public enum AuthorizationReportRseultEnum {
+    SMS_SUCCESS("0", "短信发送成功"),
 
-    SUCCESS("0", "授权成功"),
-    FAIL("1", "未完成授权失败"),
-    SMS_SUCCESS_AUTH_FAIL("2", "短信已发送未完成授权"),
-    AUTH_CANCEL_SUCCESS("3","授权取消成功"),
-    AUTH_CANCEL_FAIL("4","授权取消失败"),
-    AUTHORIZATION_FAIL("5","授权失败");
+    SMS_FAIL("1", "短信发送失败"),
+
+    AUTHORIZATION_SUCCESS("2", "授权成功"),
+
+    AUTHORIZATION_FAIL("3","授权失败"),
+
+    AUTH_CANCEL_SUCCESS("4","授权取消成功"),
+
+    AUTH_CANCEL_FAIL("5","授权取消失败"),
+
+    AUTH_CANCEL_WAIT("6","授权取消待处理"),;
 
 
     public String value() {

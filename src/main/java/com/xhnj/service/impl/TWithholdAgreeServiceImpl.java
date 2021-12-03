@@ -54,7 +54,20 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         log.info("授权报告查询");
         IPage<WithholdAgreeQuery> page = new Page<>(pageNum, pageSize);
 
-        if (null != withholdAgree.getStatus()) {
+        log.info("未完成授权{}", withholdAgree.toString());
+
+        // 0 -> 授权成功; 1 -> 未完成授权; 3 -> 授权取消
+        int count = withholdAgreeMapper.notCompletedAuthCount(withholdAgree);
+        if (0 < count) {
+            List<WithholdAgreeQuery> list = withholdAgreeMapper.notCompletedAuth(pageSize, pageNum, withholdAgree);
+
+            page.setTotal(count);
+            page.setRecords(list);
+        }
+
+        return page;
+
+        /*if (null != withholdAgree.getStatus()) {
             int count = 0;
             // 分页数据
             List<WithholdAgreeQuery> list;
@@ -92,10 +105,10 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                     return page;
             }
         } else {
-            /*
+            *//*
             * 当条件存在精确查询时，例如(银行卡号、证件号、客户姓名、手机号、协议编号)
             * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
-            * */
+            * *//*
 
             // 查询授权成功数据
             List<WithholdAgreeQuery> list = withholdAgreeMapper.selectSuccessList(withholdAgree);
@@ -110,8 +123,25 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             page.setRecords(list);
 
             return page;
-        }
+        }*/
 
+    }
+
+    /**
+     * 授权报告历史查询
+     * 必须携带用户或授权信息之一
+     * 状态需要根据以下枚举来定
+     * 0 -> 授权成功； 1 -> 未完成授权失败；2 -> 短信已发送未完成授权；3 ->授权取消成功;4 -> 授权取消失败;
+     * @param withholdAgree
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @Override
+    public IPage selectAgreeHistory(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
+        IPage<WithholdAgreeQuery> page = new Page<>(pageNum, pageSize);
+
+        return withholdAgreeMapper.selectAgreeHistory(page, withholdAgree);
     }
 
     @Override
@@ -145,11 +175,13 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
 
     @Override
     public void exportExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
-        log.info("授权取消列表批量导出");
-        List<TWithholdAgreeExcel> list = new ArrayList<>();
+        log.info("授权报告查询 -- 未完成授权导出 {}", withholdAgree.toString());
+
+        // 未完成授权数据查询
+        List<TWithholdAgreeExcel> list = withholdAgreeMapper.notCompletedAuthExport(withholdAgree);
 
         //获取导出数据
-        if (null != withholdAgree.getStatus()) {
+        /*if (null != withholdAgree.getStatus()) {
             switch (withholdAgree.getStatus()) {
                 case 3 :
                     // 查询授权取消
@@ -171,10 +203,10 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             }
 
         } else {
-            /*
-             * 当条件存在精确查询时，例如(银行卡号、证件号、客户姓名、手机号、协议编号)
-             * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
-             * */
+            *//*
+         * 当条件存在精确查询时，例如(银行卡号、证件号、客户姓名、手机号、协议编号)
+         * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
+         * *//*
 
             // 查询授权成功数据
             list = withholdAgreeMapper.selectSuccessListExport(withholdAgree);
@@ -185,7 +217,7 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             // 查询授权取消数据
             list.addAll(withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree));
 
-        }
+        }*/
 
         // 翻译code
         for (int i = 0; i < list.size(); i++) {
@@ -193,22 +225,25 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             if (null != list.get(i).getStatus()) {
                 switch (list.get(i).getStatus()) {
                     case "0":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.SUCCESS.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS.desc());
                         break;
                     case "1":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.FAIL.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_FAIL.desc());
                         break;
                     case "2":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS_AUTH_FAIL.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_SUCCESS.desc());
                         break;
                     case "3":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
                         break;
                     case "4":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
                         break;
                     case "5":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        break;
+                    case "6":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_WAIT.desc());
                         break;
                     default:
                         break;
@@ -264,6 +299,98 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         }
     }
 
+    /**
+     * 授权报告历史导出
+     * @param response
+     * @param withholdAgree
+     */
+    @Override
+    public void exportHistoryExcel(HttpServletResponse response, TWithholdAgree withholdAgree) {
+        log.info("授权报告历史导出 --  {}", withholdAgree.toString());
+
+        // 未完成授权数据查询
+        List<TWithholdAgreeExcel> list = withholdAgreeMapper.selectAgreeHistoryExport(withholdAgree);
+
+
+        // 翻译code
+        for (int i = 0; i < list.size(); i++) {
+            // 授权结果 0 -> 短信发送成功; 1 -> 短信发送失败; 2 -> 授权成功; 3 -> 授权失败; 4 -> 授权取消成功; 5 -> 授权取消失败; 6 -> 授权取消待处理
+            if (null != list.get(i).getStatus()) {
+                switch (list.get(i).getStatus()) {
+                    case "0":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS.desc());
+                        break;
+                    case "1":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_FAIL.desc());
+                        break;
+                    case "2":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_SUCCESS.desc());
+                        break;
+                    case "3":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
+                        break;
+                    case "4":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        break;
+                    case "5":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        break;
+                    case "6":
+                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_WAIT.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 是否发送银行
+            if (null != list.get(i).getIsSend()) {
+                switch (list.get(i).getIsSend()) {
+                    case "0" :
+                        list.get(i).setIsSend(IsSendEnum.SEND_SUCCESS.desc());
+                        break;
+                    case "1" :
+                        list.get(i).setIsSend(IsSendEnum.SEND_FAIL.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // 证件信息
+            if (null != list.get(i).getCertType()) {
+                switch (list.get(i).getCertType()) {
+                    case "1" :
+                        list.get(i).setCertType(CertTypeEnum.ID_CARD.desc());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        String fileName = "授权报告查询";
+
+        try {
+            response.setContentType("application/vnd.ms-excel;charset=utf-8");
+            response.setCharacterEncoding("utf-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
+            ServletOutputStream out = response.getOutputStream();
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
+            Sheet sheet = new Sheet(1,0, TWithholdAgreeExcel.class);
+            //设置自适应宽度
+            sheet.setAutoWidth(Boolean.TRUE);
+            sheet.setSheetName("授权报告查询");
+            writer.write(list, sheet);
+            writer.finish();
+            out.flush();
+            response.getOutputStream().close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
   /*  @Override
     public void exportExcel(HttpServletResponse response, List<String> idList) {
         log.info("授权取消列表批量导出");
