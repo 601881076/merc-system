@@ -126,6 +126,29 @@
         )
     </update>
 
+
+    <!--修改审批表状态-->
+    <update id="updateByBatchIdList" parameterType="list">
+        update t_dismiss_batch_check set
+        status = #{status},
+        update_time = getdate()
+        where system_batch in
+
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+
+    </update>
+
+
+    <!--校验需要修改的批次中是否存在已提交的数据-->
+    <select id="selectIsCommitData" resultType="java.lang.Integer">
+        select count(1) countNo from t_dismiss_batch_check where status != 0 and  system_batch in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item, jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
 </mapper>
 
 

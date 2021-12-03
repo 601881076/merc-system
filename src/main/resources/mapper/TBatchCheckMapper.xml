@@ -166,6 +166,14 @@
     </select>
 
 
+    <!--校验批次号中是否有状态 <> 0 的数据-->
+    <select id="selectCheckCommitedData" resultType="java.lang.Integer">
+        select count(1) countNo from t_batch_check where status != 0 and batch_no in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item, jdbcType = VARCHAR}
+        </foreach>
+
+    </select>
 
 
 
