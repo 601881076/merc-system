@@ -84,8 +84,15 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int update(TMenu menu) {
-        if(menu.getId() == null)
+        if(menu.getId() == null) {
             throw new BusinessException("id不能为空");
+        }
+        if(StrUtil.isBlank(menu.getFrontImg())){
+            menu.setFrontImg("");
+        }
+        if(StrUtil.isBlank(menu.getFrontName())){
+            menu.setFrontName("");
+        }
         return menuMapper.updateById(menu);
     }
 
