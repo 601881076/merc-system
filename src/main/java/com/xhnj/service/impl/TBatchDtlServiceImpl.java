@@ -9,6 +9,7 @@ import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TBatchDtlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,28 +26,46 @@ import java.util.List;
 @Slf4j
 public class TBatchDtlServiceImpl extends ServiceImpl<TBatchDtlMapper, TBatchDtl> implements TBatchDtlService {
     @Resource
-    private TBatchDtlMapper platformserialMapper;
+    private TBatchDtlMapper batchDtlMapper;
 
     @Override
     public List<WithholdSuccessExcel> getList(WithholdParam withholdParam) {
         log.info("进入的是 WithholdSuccessExcel");
-        return platformserialMapper.getList(withholdParam);
+        return batchDtlMapper.getList(withholdParam);
     }
 
     @Override
     public List<TBatchCheckSuccessExcel> getListToBatchCheck(DisMissBatchQuery dismissBatch) {
         log.info("进入的是TBatchCheckSuccessExcel");
-        return platformserialMapper.getListToBatchNo(dismissBatch);
+        return batchDtlMapper.getListToBatchNo(dismissBatch);
     }
 
     @Override
     public List<WithholdDetailVO> getByBatchNoList(List<String> list) {
-        return platformserialMapper.getByBatchNoList(list);
+        return batchDtlMapper.getByBatchNoList(list);
     }
 
     @Override
     public List<WithholdFailExcel> getFailList(WithholdParam withholdParam) {
-        return platformserialMapper.getFailList(withholdParam);
+        return batchDtlMapper.getFailList(withholdParam);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int partialInsert(List<TBatchDtl> list, int count){
+        int insertLength = list.size();
+        int i = 0;
+        List<TBatchDtl> partialList = null;
+        while (insertLength > count){
+            partialList = list.subList(i, i+count);
+            batchDtlMapper.addBatch(partialList);
+            i = i + count;
+            insertLength = insertLength - count;
+        }
+        if(insertLength > 0){
+            partialList = list.subList(i, i+insertLength);
+            batchDtlMapper.addBatch(partialList);
+        }
+        return 1;
+    }
 }

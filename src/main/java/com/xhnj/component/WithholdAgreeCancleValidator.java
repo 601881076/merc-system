@@ -15,6 +15,7 @@ import com.xhnj.mapper.TWithholdCancleMapper;
 import com.xhnj.model.*;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
 import com.xhnj.service.TAdminService;
+import com.xhnj.service.TWithholdCancleService;
 import com.xhnj.util.BusinUtil;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +56,9 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
 
     @Autowired
     private TDismissBatchCheckMapper dismissBatchCheckMapper;
+
+    @Autowired
+    private TWithholdCancleService withholdCancleService;
 
     @Override
     public void validateInner() throws BusinValidateException {
@@ -178,7 +182,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
         dismissBatch.setStatus(-1);
         dismissBatchMapper.insert(dismissBatch);
         //添加明细
-        withholdCancleMapper.addBatch(cancelList);
+        withholdCancleService.partialInsert(cancelList, 80);
 
 
         // 授权取消审核批次表新增数据

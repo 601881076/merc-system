@@ -1,9 +1,6 @@
 package com.xhnj.service;
 
-import com.xhnj.model.TBatchCheckSuccessExcel;
-import com.xhnj.model.TBatchNo;
-import com.xhnj.model.WithholdFailExcel;
-import com.xhnj.model.WithholdSuccessExcel;
+import com.xhnj.model.*;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.pojo.vo.WithholdDetailVO;
@@ -24,4 +21,12 @@ public interface TBatchDtlService {
     List<WithholdFailExcel> getFailList(WithholdParam withholdParam);
 
     List<WithholdDetailVO> getByBatchNoList(List<String> list);
+
+    /**
+     * 分批插入
+     * @param list
+     * @param count 分批数量
+     * @return
+     */
+    int partialInsert(List<TBatchDtl> list, int count);
 }

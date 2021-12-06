@@ -1,5 +1,6 @@
 package com.xhnj.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -107,6 +108,9 @@ public class TWithholdServiceImpl implements TWithholdService {
     @Override
     public void exportExcelSuccess(HttpServletResponse response, WithholdParam withholdParam) {
         List<WithholdSuccessExcel> list = platformserialService.getList(withholdParam);
+        if(CollUtil.isNotEmpty(list)){
+            list.stream().forEach(e -> e.setDescription("BNKPMT" + e.getCustomerName()));
+        }
         log.info("list:"+list.toString());
 //        list.stream().forEach(e ->e.setRecvAccNo(businUtil.maskBankCard(e.getRecvAccNo())));
         String fileName = "扣款成功报告";

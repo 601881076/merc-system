@@ -17,6 +17,7 @@ import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.model.*;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TAdminService;
+import com.xhnj.service.TBatchDtlService;
 import com.xhnj.util.BusinUtil;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -58,6 +59,9 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     private TWithholdAgreeMapper tWithholdAgreeMapper;
     @Autowired
     private TBatchCheckMapper batchCheckMapper;
+    @Autowired
+    private TBatchDtlService batchDtlService;
+
     @Value("${rsa.privateKey}")
     private String privateKey;
 
@@ -163,7 +167,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNoMapper.insert(batchNo);
 
             //批量插入明细
-            platformserialMapper.addBatch(originalList);
+            batchDtlService.partialInsert(originalList, 80);
 
             // 插入批次审批表
             TBatchCheck batchCheck = new TBatchCheck();

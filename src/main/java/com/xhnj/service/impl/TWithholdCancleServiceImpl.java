@@ -3,6 +3,7 @@ package com.xhnj.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.mapper.TWithholdAgreeMapper;
+import com.xhnj.model.TBatchDtl;
 import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdCancle;
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.util.BusinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -48,5 +50,24 @@ public class TWithholdCancleServiceImpl extends ServiceImpl<TWithholdCancleMappe
     public IPage<TWithholdAgree> conditionQuery(TWithholdAgree withholdAgree, Integer pageSize, Integer pageNum) {
         IPage<TWithholdAgree> page = new Page<>(pageNum, pageSize);
         return withholdCancleMapper.conditionQuery(page,withholdAgree);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int partialInsert(List<TWithholdCancle> list, int count){
+        int insertLength = list.size();
+        int i = 0;
+        List<TWithholdCancle> partialList = null;
+        while (insertLength > count){
+            partialList = list.subList(i, i+count);
+            withholdCancleMapper.addBatch(partialList);
+            i = i + count;
+            insertLength = insertLength - count;
+        }
+        if(insertLength > 0){
+            partialList = list.subList(i, i+insertLength);
+            withholdCancleMapper.addBatch(partialList);
+        }
+        return 1;
     }
 }
