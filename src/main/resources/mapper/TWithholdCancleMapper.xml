@@ -88,15 +88,19 @@
     </insert>
 
 
-    <select id="getByCardNo" resultType="com.xhnj.model.TWithholdCancle">
+    <select id="getByCardNoAndAgreeId" resultType="com.xhnj.model.TWithholdCancle">
         SELECT
         source_type,
+        agreement_id,
         status,
         card_no
         FROM t_withhold_cancle
-        WHERE card_no IN
-        <foreach  collection="cardNoList" item="req" open="(" close=")" separator=",">
-            #{req,jdbcType=VARCHAR}
+        WHERE
+        <foreach  collection="cancelList" item="cancel" open="(" close=")" separator="or">
+           (
+                agreement_id = #{cancel.agreementId,jdbcType=VARCHAR}
+                AND card_no = #{cancel.cardNo,jdbcType=VARCHAR}
+            )
         </foreach>
     </select>
 

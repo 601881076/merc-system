@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public interface TWithholdCancleMapper extends BaseMapper<TWithholdCancle> {
 
-    List<TWithholdCancle> getByCardNo(@Param("cardNoList") List<String> cardNoList);
+    List<TWithholdCancle> getByCardNoAndAgreeId(@Param("cancelList") List<TWithholdCancle> cancelList);
 
     List<TWithholdCancle> isRepeatData(@Param("withholdCancle") TWithholdCancle withholdCancle);
 
