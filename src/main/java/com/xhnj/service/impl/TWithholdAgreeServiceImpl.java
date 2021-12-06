@@ -180,44 +180,6 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
         // 未完成授权数据查询
         List<TWithholdAgreeExcel> list = withholdAgreeMapper.notCompletedAuthExport(withholdAgree);
 
-        //获取导出数据
-        /*if (null != withholdAgree.getStatus()) {
-            switch (withholdAgree.getStatus()) {
-                case 3 :
-                    // 查询授权取消
-                    log.info("授权报告查询 -- 授权取消状态导出 {}", withholdAgree.toString());
-
-                    list = withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree);
-                    break;
-                case 1 :
-                    // 未完成授权
-                    log.info("授权报告查询 -- 未完成授权导出 {}", withholdAgree.toString());
-
-                    list = withholdAgreeMapper.notCompletedAuthExport(withholdAgree);
-                    break;
-                default:
-                    log.info("授权报告查询 -- 授权成功导出 {}", withholdAgree.toString());
-
-                    list = withholdAgreeMapper.selectSuccessExport(withholdAgree);
-                    break;
-            }
-
-        } else {
-            *//*
-         * 当条件存在精确查询时，例如(银行卡号、证件号、客户姓名、手机号、协议编号)
-         * 此种模式下，将做多次数据查询，最后将数据汇总至一个list，且不做分页(total = 0)
-         * *//*
-
-            // 查询授权成功数据
-            list = withholdAgreeMapper.selectSuccessListExport(withholdAgree);
-
-            // 查询未完成授权数据
-            list.addAll(withholdAgreeMapper.notCompletedAuthListExport(withholdAgree));
-
-            // 查询授权取消数据
-            list.addAll(withholdAgreeMapper.selectAuthorizationCancelExport(withholdAgree));
-
-        }*/
 
         // 翻译code
         for (int i = 0; i < list.size(); i++) {
