@@ -3,63 +3,64 @@
 <mapper namespace="com.xhnj.mapper.TAuthCancelDetailMapper">
 
     <sql id="cancleSql">
-        id,
-        system_type,
-        source_type,
-        bank_code,
-        bank_name,
-        system_batch,
-        fin_label_cd,
-        project_no,
-        agreement_id,
-        bizserial_no,
-        mobile_no,
-        card_no,
-        customer_name,
-        cert_type,
-        cert_no,
-        own_spec,
-        re_own_spec,
-        status,
-        is_send,
-        bank_ret_code,
-        reason,
-        contract_date,
-        end_date,
-        update_time
+        twc.id,
+        twc.system_type,
+        twc.source_type,
+        twc.bank_code,
+        twc.system_batch,
+        twc.fin_label_cd,
+        twc.project_no,
+        twc.agreement_id,
+        twc.bizserial_no,
+        twc.mobile_no,
+        twc.card_no,
+        twc.customer_name,
+        twc.cert_type,
+        twc.cert_no,
+        twc.own_spec,
+        twc.re_own_spec,
+        twc.status,
+        twc.is_send,
+        twc.bank_ret_code,
+        twc.reason,
+        twc.contract_date,
+        twc.end_date,
+        twc.update_time
     </sql>
 
     <select id="listPage" resultType="com.xhnj.model.TWithholdCancle">
         SELECT
-            <include refid="cancleSql" />
-        FROM t_withhold_cancle
+            <include refid="cancleSql" />,
+             bcm.bank_name
+        FROM t_withhold_cancle twc
+        left join t_bank_code_mapp bcm ON twc.bank_code = bcm.busin_code
         <where>
             <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
-                and CONVERT(varchar(100), create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
+                and CONVERT(varchar(100), twc.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
             </if>
             <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
-                and CONVERT(varchar(100), create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
+                and CONVERT(varchar(100), twc.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
             </if>
             <if test="tbatchDtl.status!=null and tbatchDtl.status!=''">
-                and status=#{tbatchDtl.status,jdbcType=INTEGER}
+                and twc.status=#{tbatchDtl.status,jdbcType=INTEGER}
             </if>
             <if test="tbatchDtl.agreementId != null and tbatchDtl.agreementId != ''">
-                and agreement_id=#{tbatchDtl.agreementId,jdbcType=VARBINARY}
+                and twc.agreement_id=#{tbatchDtl.agreementId,jdbcType=VARBINARY}
             </if>
             <if test="tbatchDtl.customerName != null and tbatchDtl.customerName != ''">
-                and customer_name LIKE CONCAT('%',#{tbatchDtl.customerName,jdbcType=VARCHAR},'%')
+                and twc.customer_name LIKE CONCAT('%',#{tbatchDtl.customerName,jdbcType=VARCHAR},'%')
             </if>
             <if test="tbatchDtl.bankCode!=null and tbatchDtl.bankCode!=''">
-                and bank_code=#{tbatchDtl.bankCode,jdbcType=VARBINARY}
+                and twc.bank_code=#{tbatchDtl.bankCode,jdbcType=VARBINARY}
             </if>
             <if test="tbatchDtl.cardNo!=null and tbatchDtl.cardNo!=''">
-                and card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
+                and twc.card_no=#{tbatchDtl.cardNo,jdbcType=VARBINARY}
             </if>
             <if test="tbatchDtl.systemBatch!=null and tbatchDtl.systemBatch!=''">
-                and system_batch=#{tbatchDtl.systemBatch,jdbcType=VARBINARY}
+                and twc.system_batch=#{tbatchDtl.systemBatch,jdbcType=VARBINARY}
             </if>
         </where>
-        order by create_time desc
+        order by twc.create_time desc
     </select>
 
 
