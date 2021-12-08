@@ -19,4 +19,5 @@ public interface TRoleMenuMapper extends BaseMapper<TRoleMenu> {
 
     int deleteByRoleId(@Param("roleId") Long roleId);
 
+    List<TRoleMenu> queryMuneByRoleId(@Param("roleId") Long roleId);
 }
