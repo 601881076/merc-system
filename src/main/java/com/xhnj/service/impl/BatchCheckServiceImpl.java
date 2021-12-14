@@ -4,7 +4,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.xhnj.enums.CancleStatusEnum;
-import com.xhnj.model.TWithholdCancleExcel;
+import com.xhnj.model.TWithholdCancelExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.service.BatchCheckService;
 import com.xhnj.service.TBatchChecUploadService;
@@ -27,7 +27,7 @@ public class BatchCheckServiceImpl implements BatchCheckService {
     @Override
     public void exportExcelSuccess(HttpServletResponse response, DisMissBatchQuery disMissBatchQuery) {
         log.info("授权取消审批明细报告,systemBatchList{}", disMissBatchQuery.getSystemBatchList());
-        List<TWithholdCancleExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery.getSystemBatchList());
+        List<TWithholdCancelExcel> list = tBatchChecUploadService.getListToBatchCheck(disMissBatchQuery.getSystemBatchList());
 
         list.stream().forEach(item -> {
             if (null != item.getStatus()) {
@@ -54,7 +54,7 @@ public class BatchCheckServiceImpl implements BatchCheckService {
             response.setHeader("Content-disposition", "attachment;filename=" + new String( fileName.getBytes("gb2312"), "ISO8859-1" ) + ".xls");
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX,true);
-            Sheet sheet = new Sheet(1,0, TWithholdCancleExcel.class);
+            Sheet sheet = new Sheet(1,0, TWithholdCancelExcel.class);
             //设置自适应宽度
             sheet.setAutoWidth(Boolean.TRUE);
             sheet.setSheetName("授权取消审批明细报告");

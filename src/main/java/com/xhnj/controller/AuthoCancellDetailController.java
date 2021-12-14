@@ -3,7 +3,7 @@ package com.xhnj.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ public class AuthoCancellDetailController {
 
     @ApiOperation(value = "分页查询授权取消明细")
     @GetMapping("/page")
-    public CommonResult<CommonPage<TWithholdCancle>> list(AuthCancelDetailQuery detailQuery, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TWithholdCancel>> list(AuthCancelDetailQuery detailQuery, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = AuthCancelDetailService.listPage(detailQuery,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));

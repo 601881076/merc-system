@@ -2,7 +2,7 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xhnj.model.TWithholdAgree;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -18,15 +18,15 @@ import java.util.List;
  * @since 2021-11-06
  */
 @Repository
-public interface TWithholdCancleMapper extends BaseMapper<TWithholdCancle> {
+public interface TWithholdCancleMapper extends BaseMapper<TWithholdCancel> {
 
-    List<TWithholdCancle> getByCardNoAndAgreeId(@Param("cancelList") List<TWithholdCancle> cancelList);
+    List<TWithholdCancel> getByCardNoAndAgreeId(@Param("cancelList") List<TWithholdCancel> cancelList);
 
-    List<TWithholdCancle> isRepeatData(@Param("withholdCancle") TWithholdCancle withholdCancle);
+    List<TWithholdCancel> isRepeatData(@Param("withholdCancle") TWithholdCancel withholdCancle);
 
-    int addBatch(@Param("list") List<TWithholdCancle> list);
+    int addBatch(@Param("list") List<TWithholdCancel> list);
 
-    IPage<TWithholdCancle> listPageByBatchNo(IPage<TWithholdCancle> page, String batchNo);
+    IPage<TWithholdCancel> listPageByBatchNo(IPage<TWithholdCancel> page, String batchNo);
 
     IPage<TWithholdAgree> conditionQuery(IPage<TWithholdAgree> page,@Param("withholdAgree") TWithholdAgree withholdAgree);
 }

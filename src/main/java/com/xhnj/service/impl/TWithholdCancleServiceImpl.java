@@ -2,13 +2,10 @@ package com.xhnj.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xhnj.mapper.TWithholdAgreeMapper;
-import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdAgree;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.xhnj.mapper.TWithholdCancleMapper;
-import com.xhnj.service.TWithholdCancleService;
+import com.xhnj.service.TWithholdCancelService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.util.BusinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +24,7 @@ import java.util.List;
  * @since 2021-11-06
  */
 @Service
-public class TWithholdCancleServiceImpl extends ServiceImpl<TWithholdCancleMapper, TWithholdCancle> implements TWithholdCancleService {
+public class TWithholdCancleServiceImpl extends ServiceImpl<TWithholdCancleMapper, TWithholdCancel> implements TWithholdCancelService {
     @Autowired
     private BusinUtil businUtil;
 
@@ -37,8 +34,8 @@ public class TWithholdCancleServiceImpl extends ServiceImpl<TWithholdCancleMappe
 
     @Override
     public IPage listPage(String batchNo, Integer pageSize, Integer pageNum) {
-        IPage<TWithholdCancle> page = new Page<>(pageNum, pageSize);
-        List<TWithholdCancle> records = page.getRecords();
+        IPage<TWithholdCancel> page = new Page<>(pageNum, pageSize);
+        List<TWithholdCancel> records = page.getRecords();
         records.stream().forEach(e ->e.setCardNo(businUtil.maskBankCard(e.getCardNo())));
         records.stream().forEach(e ->e.setCertNo(businUtil.maskBankCard(e.getCertNo())));
         records.stream().forEach(e ->e.setMobileNo(businUtil.maskPhone(e.getMobileNo())));
@@ -54,10 +51,10 @@ public class TWithholdCancleServiceImpl extends ServiceImpl<TWithholdCancleMappe
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int partialInsert(List<TWithholdCancle> list, int count){
+    public int partialInsert(List<TWithholdCancel> list, int count){
         int insertLength = list.size();
         int i = 0;
-        List<TWithholdCancle> partialList = null;
+        List<TWithholdCancel> partialList = null;
         while (insertLength > count){
             partialList = list.subList(i, i+count);
             withholdCancleMapper.addBatch(partialList);

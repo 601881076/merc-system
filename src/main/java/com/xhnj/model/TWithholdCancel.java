@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TWithholdCancle implements Serializable {
+public class TWithholdCancel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

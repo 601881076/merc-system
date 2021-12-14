@@ -9,10 +9,9 @@ import com.xhnj.common.CommonPage;
 import com.xhnj.common.CommonResult;
 import com.xhnj.common.ResultCode;
 import com.xhnj.mapper.TAdminMapper;
-import com.xhnj.mapper.TDismissBatchCheckMapper;
 import com.xhnj.model.TAdmin;
 import com.xhnj.model.TDismissBatch;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.xhnj.pojo.bo.AdminUserDetails;
 import com.xhnj.pojo.vo.BatchNoVO;
 import com.xhnj.service.*;
@@ -50,7 +49,7 @@ public class WithholdAgreeDismissController {
     @Autowired
     private TWithholdAgreeService withholdAgreeService;
     @Autowired
-    private TWithholdCancleService withholdCancleService;
+    private TWithholdCancelService withholdCancleService;
 
     @Autowired
     private WithholdAgreeDismissBaseService WithholdAgreeDismissBaseService;
@@ -79,7 +78,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "分页查询授权取消明细")
     @GetMapping("/getDetail/{batchNo}")
-    public CommonResult<CommonPage<TWithholdCancle>> list(@PathVariable("batchNo")String batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+    public CommonResult<CommonPage<TWithholdCancel>> list(@PathVariable("batchNo")String batchNo, @RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
                                                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         IPage page = withholdCancleService.listPage(batchNo,pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(page));

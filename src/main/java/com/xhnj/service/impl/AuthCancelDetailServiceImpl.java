@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xhnj.mapper.TAuthCancelDetailMapper;
 import com.xhnj.model.TAuthCancelExcel;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
 import com.xhnj.service.AuthCancelDetailService;
 import org.springframework.stereotype.Service;
@@ -31,13 +31,13 @@ public class AuthCancelDetailServiceImpl implements AuthCancelDetailService {
     TAuthCancelDetailMapper authCancelDetailMapper;
     @Override
     public IPage listPage(AuthCancelDetailQuery detailQuery, Integer pageSize, Integer pageNum) {
-        IPage<TWithholdCancle> page = new Page<>(pageNum, pageSize);
+        IPage<TWithholdCancel> page = new Page<>(pageNum, pageSize);
         return authCancelDetailMapper.listPage(page,detailQuery);
     }
 
     @Override
     public void exportExcel(HttpServletResponse response, AuthCancelDetailQuery tbatchDtl) {
-        List<TWithholdCancle>  tBatchDtls = authCancelDetailMapper.listPage(tbatchDtl);
+        List<TWithholdCancel>  tBatchDtls = authCancelDetailMapper.listPage(tbatchDtl);
         TAuthCancelExcel tAuthCancelExcel;
         List<TAuthCancelExcel> list = new ArrayList<>();
         for (int i = 0; i < tBatchDtls.size(); i++) {

@@ -133,7 +133,7 @@
 
     </sql>
 
-    <select id="getListToBatchNo" resultType="com.xhnj.model.TWithholdCancleExcel">
+    <select id="getListToBatchNo" resultType="com.xhnj.model.TWithholdCancelExcel">
         SELECT
         <include refid="withholdCancleSqlList" />,
          bcm.bank_name

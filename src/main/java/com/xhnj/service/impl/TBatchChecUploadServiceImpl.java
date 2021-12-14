@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xhnj.mapper.TBatchCheckMapper;
 import com.xhnj.mapper.TBatchDtlMapper;
 import com.xhnj.model.TBatchDtl;
-import com.xhnj.model.TWithholdCancleExcel;
+import com.xhnj.model.TWithholdCancelExcel;
 import com.xhnj.service.TBatchChecUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class TBatchChecUploadServiceImpl extends ServiceImpl<TBatchDtlMapper, TB
     TBatchCheckMapper batchCheckMapper;
 
     @Override
-    public List<TWithholdCancleExcel> getListToBatchCheck(List<String> list) {
+    public List<TWithholdCancelExcel> getListToBatchCheck(List<String> list) {
         return batchCheckMapper.getListToBatchNo(list);
     }
 

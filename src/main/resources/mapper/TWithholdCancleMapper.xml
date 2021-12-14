@@ -88,7 +88,7 @@
     </insert>
 
 
-    <select id="getByCardNoAndAgreeId" resultType="com.xhnj.model.TWithholdCancle">
+    <select id="getByCardNoAndAgreeId" resultType="com.xhnj.model.TWithholdCancel">
         SELECT
         source_type,
         agreement_id,
@@ -105,7 +105,7 @@
     </select>
 
     <!--校验导入数据是否重复-->
-    <select id="isRepeatData" resultType="com.xhnj.model.TWithholdCancle">
+    <select id="isRepeatData" resultType="com.xhnj.model.TWithholdCancel">
         SELECT
             source_type,
             status,
@@ -115,7 +115,7 @@
           and agreement_id = #{withholdCancle.agreementId, jdbcType=VARCHAR}
     </select>
 
-    <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdCancle">
+    <select id="listPageByBatchNo" resultType="com.xhnj.model.TWithholdCancel">
         SELECT
             <include refid="withholdCancleSql" />,
             tbcm.bank_name AS "bank_name"

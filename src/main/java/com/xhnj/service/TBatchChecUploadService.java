@@ -1,6 +1,6 @@
 package com.xhnj.service;
 
-import com.xhnj.model.TWithholdCancleExcel;
+import com.xhnj.model.TWithholdCancelExcel;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ import java.util.List;
 public interface TBatchChecUploadService {
 
 
-    List<TWithholdCancleExcel> getListToBatchCheck(List<String> systemBatchList);
+    List<TWithholdCancelExcel> getListToBatchCheck(List<String> systemBatchList);
 
 }

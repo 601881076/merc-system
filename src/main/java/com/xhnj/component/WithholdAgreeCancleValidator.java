@@ -2,11 +2,9 @@ package com.xhnj.component;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.itextpdf.text.log.SysoCounter;
 import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
@@ -16,7 +14,7 @@ import com.xhnj.mapper.*;
 import com.xhnj.model.*;
 import com.xhnj.pojo.vo.AgreeDismissDetailVO;
 import com.xhnj.service.TAdminService;
-import com.xhnj.service.TWithholdCancleService;
+import com.xhnj.service.TWithholdCancelService;
 import com.xhnj.util.BusinUtil;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +58,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
     private TDismissBatchCheckMapper dismissBatchCheckMapper;
 
     @Autowired
-    private TWithholdCancleService withholdCancleService;
+    private TWithholdCancelService withholdCancleService;
 
     @Override
     public void validateInner() throws BusinValidateException {
@@ -74,7 +72,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             throw new BusinValidateException("文件格式错误");
         }
 
-        List<TWithholdCancle> cancelList = new ArrayList<>();
+        List<TWithholdCancel> cancelList = new ArrayList<>();
         try {
             ExcelReader excelReader = new ExcelReader(multipartFile.getInputStream(), null, excelListener);
             //读取信息
@@ -109,7 +107,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 if(tWithholdAgreeIPage.size()<1){
                     throw new BusinValidateException(bankCode+"银行码不存在！！！请检查");
                 }*/
-                TWithholdCancle withholdCancle = BeanUtil.copyProperties(vo, TWithholdCancle.class);
+                TWithholdCancel withholdCancle = BeanUtil.copyProperties(vo, TWithholdCancel.class);
                 withholdCancle.setSystemType(ValueConstant.SYSTEM_TYPE_MDD);
                 withholdCancle.setSourceType(ValueConstant.SOURCE_MDD);
                 withholdCancle.setSystemBatch(batchNo);
@@ -174,7 +172,7 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
             }*/
 
 
-            List<TWithholdCancle> whCancelList = withholdCancleMapper.getByCardNoAndAgreeId(cancelList);
+            List<TWithholdCancel> whCancelList = withholdCancleMapper.getByCardNoAndAgreeId(cancelList);
             if(CollUtil.isNotEmpty(whCancelList)){
                 throw new BusinValidateException("[协议编号+卡号]不能重复");
             }

@@ -28,7 +28,7 @@
         twc.update_time
     </sql>
 
-    <select id="listPage" resultType="com.xhnj.model.TWithholdCancle">
+    <select id="listPage" resultType="com.xhnj.model.TWithholdCancel">
         SELECT
             <include refid="cancleSql" />,
              bcm.bank_name

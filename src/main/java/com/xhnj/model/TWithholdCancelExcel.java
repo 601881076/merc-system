@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class TWithholdCancleExcel extends BaseRowModel {
+public class TWithholdCancelExcel extends BaseRowModel {
 
     private static final long serialVersionUID = 1L;
 

@@ -2,9 +2,8 @@ package com.xhnj.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.xhnj.model.TWithholdCancle;
+import com.xhnj.model.TWithholdCancel;
 import com.xhnj.pojo.query.AuthCancelDetailQuery;
-import com.xhnj.pojo.query.DeductionDetailQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,10 +14,10 @@ import java.util.List;
  * @author: xiel
  * @create: 2021-11-05 17:32
  **/
-public interface TAuthCancelDetailMapper extends BaseMapper<TWithholdCancle> {
+public interface TAuthCancelDetailMapper extends BaseMapper<TWithholdCancel> {
 
-    IPage<TWithholdCancle> listPage(IPage<TWithholdCancle> page, @Param("tbatchDtl") AuthCancelDetailQuery tbatchDtl);
+    IPage<TWithholdCancel> listPage(IPage<TWithholdCancel> page, @Param("tbatchDtl") AuthCancelDetailQuery tbatchDtl);
 
-    List<TWithholdCancle> listPage(@Param("tbatchDtl") AuthCancelDetailQuery tbatchDtl);
+    List<TWithholdCancel> listPage(@Param("tbatchDtl") AuthCancelDetailQuery tbatchDtl);
 
 }
