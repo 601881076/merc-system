@@ -4,5 +4,7 @@
     <select id="getUmsRole" resultType="com.xhnj.model.TAdminRole">
         SELECT role_id from t_admin_role where user_id=#{adminId,jdbcType=VARBINARY}
     </select>
-
+    <select id="getRoleList" resultType="com.xhnj.model.TRole">
+        select user_id from t_admin_role where role_id=#{roleId,jdbcType=VARBINARY}
+    </select>
 </mapper>

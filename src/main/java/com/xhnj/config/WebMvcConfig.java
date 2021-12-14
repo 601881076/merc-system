@@ -29,8 +29,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //就是说 url 中出现 resourceHandler 匹配时，则映射到 location 中去,location 相当于虚拟路径
         //映射本地文件时，开头必须是 file:/// 开头，表示协议
         registry.addResourceHandler(resourceHandler).addResourceLocations("file:///" + location);
-
-        // 做静态资源映射
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 }
