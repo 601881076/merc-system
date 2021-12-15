@@ -80,6 +80,14 @@
         FROM t_batch_dtl dtl left join t_batch_no batch on dtl.batch_no = batch.batch_no
            left join t_bank_code_mapp bcm on dtl.bank_code = bcm.busin_code
         <where>
+
+            <if test="tbatchDtl.startTime != null and tbatchDtl.startTime != ''">
+                and CONVERT(varchar(100), dtl.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{tbatchDtl.startTime}, 23)
+            </if>
+            <if test="tbatchDtl.endTime != null and tbatchDtl.endTime != ''">
+                and CONVERT(varchar(100), dtl.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{tbatchDtl.endTime}, 23)
+            </if>
+
             <if test="tbatchDtl.batchNo!=null and tbatchDtl.batchNo!=''">
                 and dtl.batch_no=#{tbatchDtl.batchNo,jdbcType=INTEGER}
             </if>
