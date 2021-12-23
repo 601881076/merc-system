@@ -17,7 +17,6 @@ import com.xhnj.model.*;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.service.TBatchDtlService;
-import com.xhnj.service.TWithholdService;
 import com.xhnj.util.BusinUtil;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +46,6 @@ import java.util.stream.Collectors;
 public class WithholdBatchValidator extends BusinValidatorTemplate {
 
     @Autowired
-    private TBatchNoMapper batchNoMapper;
-    @Autowired
     private BusinUtil businUtil;
     @Autowired
     private TAdminService adminService;
@@ -56,10 +53,6 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private ExcelListener excelListener;
-    @Autowired
-    private TWithholdAgreeMapper tWithholdAgreeMapper;
-    @Autowired
-    private TBatchCheckMapper batchCheckMapper;
     @Autowired
     private TBatchDtlService batchDtlService;
     @Autowired
@@ -126,7 +119,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             String bankCode = null;
             BigDecimal sumAmt = new BigDecimal("0");
             List<String> bankCodeParamList = new ArrayList<>();
-            Set<String> set = new HashSet<>();
+            Set<String> bankCodeSet = new HashSet<>();
             int count = 1;
             for (int i = 0; i < list.size(); i++) {
                 withholdDetailVO = (WithholdDetailVO) list.get(i);
@@ -150,7 +143,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                     batchDtl.setSeqNo(businUtil.getSeqNo(count));
                 }
                 originalList.add(batchDtl);
-                set.add(bankCode);
+                bankCodeSet.add(bankCode);
                 sumAmt = sumAmt.add(batchDtl.getMoney());
 
                 if(!bankCodeParamList.contains(bankCode)){
@@ -188,8 +181,11 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNo.setSourceType(ValueConstant.SOURCE_MDD);
             batchNo.setBatchNo(batchNoStr);
             batchNo.setIsHold(0);
+            String systembatch = businUtil.getBatchNo("yyyyMMdd",10);
+            batchNo.setSystemBatch(systembatch);
 
-            batchDtlService.handleBatchDtl(batchNo, originalList, set);
+
+            batchDtlService.handleBatchDtl(batchNo, originalList, bankCodeSet);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
