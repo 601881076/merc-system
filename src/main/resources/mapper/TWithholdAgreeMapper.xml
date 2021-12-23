@@ -245,40 +245,40 @@
                 on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
                 where 1 = 1
 
-                <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                and sms.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
-                </if>
-
-                <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                and CONVERT(varchar(100), sms.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
-                </if>
-
-                <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                and CONVERT(varchar(100), sms.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
-                </if>
-
-                <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                and sms.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
-                </if>
-
-                <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                and sms.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-                </if>
-
-                <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                and sms.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
-                </if>
-
-                <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                and sms.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-                </if>
-
-                <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                and sms.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
-                </if>
 
                 ) t1 where t1.rn = 1 and t1.status = 1
 
+                <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+                    and t1.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+                    and CONVERT(varchar(100), t1.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+                </if>
+
+                <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+                    and CONVERT(varchar(100), t1.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+                </if>
+
+                <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+                    and t1.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+                </if>
+
+                <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+                    and t1.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+                    and t1.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+                    and t1.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+                    and t1.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+                </if>
             ) t2
         ) t3 where rownum = 1
         order by t3.create_time desc offset (#{pageNum} - 1) * #{pageSize}  row fetch next #{pageSize} row only
@@ -437,40 +437,41 @@
                     from t_withhold_agree_sms sms left join t_withhold_agree agree
                     on sms.agreement_id = agree.agreement_id and sms.card_no = agree.card_no
                     where 1 = 1
-                        <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
-                            and sms.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
-                        </if>
 
-                        <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
-                            and CONVERT(varchar(100), sms.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
-                        </if>
-
-                        <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
-                            and CONVERT(varchar(100), sms.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
-                        </if>
-
-                        <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
-                            and sms.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
-                        </if>
-
-                        <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
-                            and sms.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
-                        </if>
-
-                        <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
-                            and sms.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
-                        </if>
-
-                        <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
-                            and sms.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
-                        </if>
-
-                        <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
-                            and sms.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
-                        </if>
                 ) t1 where t1.rn = 1 and t1.status = 1
+                <if test="withholdAgree.agreementId != null and withholdAgree.agreementId != ''">
+                    and t1.agreement_id = #{withholdAgree.agreementId,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.startDate !=null and withholdAgree.startDate != ''">
+                    and CONVERT(varchar(100), t1.create_time, 23) <![CDATA[ >= ]]> CONVERT(varchar(100), #{withholdAgree.startDate}, 23)
+                </if>
+
+                <if test="withholdAgree.endDate !=null and withholdAgree.endDate != ''">
+                    and CONVERT(varchar(100), t1.create_time, 23) <![CDATA[ <= ]]> CONVERT(varchar(100), #{withholdAgree.endDate}, 23)
+                </if>
+
+                <if test="withholdAgree.customerName !=null and withholdAgree.customerName != ''">
+                    and t1.customer_name like CONCAT('%',#{withholdAgree.customerName,jdbcType=VARCHAR},'%')
+                </if>
+
+                <if test="withholdAgree.mobileNo !=null and withholdAgree.mobileNo != ''">
+                    and t1.mobile_no = #{withholdAgree.mobileNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
+                    and t1.card_no = #{withholdAgree.cardNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.certNo !=null and withholdAgree.certNo != ''">
+                    and t1.cert_no = #{withholdAgree.certNo,jdbcType=VARCHAR}
+                </if>
+
+                <if test="withholdAgree.bankCode !=null and withholdAgree.bankCode != ''">
+                    and t1.bank_code = #{withholdAgree.bankCode,jdbcType=VARCHAR}
+                </if>
             ) t2
-        ) t3 where rownum = 1
+        ) t3 where rownum = 1 order by t3.create_time desc
     </select>
 
 
