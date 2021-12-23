@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.pojo.bo.MenuNode;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.mapper.TMenuMapper;
@@ -96,9 +97,10 @@ public class TMenuServiceImpl extends ServiceImpl<TMenuMapper, TMenu> implements
         return menuMapper.updateById(menu);
     }
 
+    @MyLog(operate = "删除", objectType = "菜单", objectName = "菜单管理", descript = "删除菜单: #{#name}")
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int delete(Long id) {
+    public int delete(Long id, String name) {
         if(id == null)
             throw new BusinessException("id不能为空");
         return menuMapper.deleteById(id);

@@ -4,6 +4,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.xhnj.enums.CancleStatusEnum;
+import com.xhnj.enums.CertTypeEnum;
 import com.xhnj.model.TWithholdCancelExcel;
 import com.xhnj.pojo.query.DisMissBatchQuery;
 import com.xhnj.service.BatchCheckService;
@@ -45,6 +46,7 @@ public class BatchCheckServiceImpl implements BatchCheckService {
                         break;
                 }
             }
+            item.setCertType(CertTypeEnum.of(item.getCertType()).getDesc());
         });
 
         String fileName = "授权取消审批明细报告";

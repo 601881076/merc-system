@@ -138,5 +138,5 @@ public class WithholdAgreeQuery implements Serializable {
 
     private Date updateTime;
 
-
+    private Integer systemType;
 }

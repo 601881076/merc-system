@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.common.exception.BusinessException;
 import com.xhnj.mapper.TMenuMapper;
 import com.xhnj.mapper.TRoleMapper;
@@ -60,9 +61,10 @@ public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements
         return roleMapper.updateById(role);
     }
 
+    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "删除角色: #{#name}")
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int delete(Long id) {
+    public int delete(Long id, String name) {
         if(id == null)
             throw new BusinessException("id不能为空");
         List<TRole> roleList = roleMapper.getRoleList(id);
@@ -106,6 +108,13 @@ public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements
     @Override
     public List<TMenu> getUmsMenuByAdminId(Long adminId) {
         return menuMapper.getUmsMenuByAdminId(adminId);
+    }
+
+    @Override
+    public List<TRole> listAll() {
+        QueryWrapper<TRole> wrapper = new QueryWrapper<>();
+        wrapper.eq("status", 0);
+        return roleMapper.selectList(wrapper);
     }
 
 }

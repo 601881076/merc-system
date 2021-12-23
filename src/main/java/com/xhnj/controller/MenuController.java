@@ -67,7 +67,7 @@ public class MenuController {
 
     @ApiOperation("添加菜单")
     @PostMapping("/add")
-    @MyLog(operate = "添加", objectType = "菜单", objectName = "菜单管理", descript = "添加菜单")
+    @MyLog(operate = "添加", objectType = "菜单", objectName = "菜单管理", descript = "添加菜单: #{#menu.name}")
     public CommonResult create(@Validated @RequestBody TMenu menu, BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -95,9 +95,12 @@ public class MenuController {
 
     @ApiOperation("删除菜单")
     @PostMapping("/delete/{id}")
-    @MyLog(operate = "删除", objectType = "菜单", objectName = "菜单管理", descript = "删除菜单")
     public CommonResult delete(@PathVariable("id") Long id) {
-        int count = menuService.delete(id);
+        String name = "";
+        TMenu menu = menuService.getById(id);
+        if(menu != null)
+            name = menu.getName();
+        int count = menuService.delete(id, name);
         if(count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();

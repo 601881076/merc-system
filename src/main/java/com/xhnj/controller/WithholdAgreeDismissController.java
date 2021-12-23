@@ -96,7 +96,7 @@ public class WithholdAgreeDismissController {
 
     @ApiOperation(value = "取消授权excel上传")
     @PostMapping("/excelImport")
-    @MyLog(operate = "添加", objectType = "取消授权批次", objectName = "授权取消管理", descript = "取消授权excel上传")
+    @MyLog(operate = "添加", objectType = "取消授权批次", objectName = "授权取消管理", descript = "取消授权excel上传,批次号: #{#batchNoVO.batchNo}")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file, BatchNoVO batchNoVO){
 
         // 校验密码输入次数是否超过三次
@@ -130,8 +130,11 @@ public class WithholdAgreeDismissController {
         context.set("password",batchNoVO.getPassword());
         context.set("totalTrans",batchNoVO.getTotalTrans());
         int count = withholdAgreeService.uploadExcel(file);
+
+        String batchNo = context.get("batchNo") != null ? context.get("batchNo").toString():"";
+        batchNoVO.setBatchNo(batchNo);
         JSONObject data=new JSONObject();
-        data.put("batchNo",context.get("batchNo"));
+        data.put("batchNo", batchNo);
         if(count > 0)
             return CommonResult.success(data);
         return CommonResult.failed();

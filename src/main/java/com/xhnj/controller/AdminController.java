@@ -156,7 +156,7 @@ public class AdminController {
 
     @ApiOperation(value = "添加用户")
     @PostMapping("/insert")
-    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "用户管理", descript = "添加用户")
+    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "用户管理", descript = "添加用户: #{#admin.username}")
     public CommonResult insert(TAdmin admin){
         int count=adminService.insertAdmin(admin);
         if(count > 0)
@@ -176,10 +176,14 @@ public class AdminController {
 
     @ApiOperation("删除用户")
     @PostMapping("/delete/{id}")
-    @MyLog(operate = "删除", objectType = "系统权限管理", objectName = "用户管理", descript = "删除用户信息")
+    //@MyLog(operate = "删除", objectType = "系统权限管理", objectName = "用户管理", descript = "删除用户信息")
     public CommonResult delete(@PathVariable("id") Long id) {
         log.info("删除用户 = " + id);
-        int count = adminService.deleteAdmin(id);
+        TAdmin admin = adminService.getById(id);
+        String username = "";
+        if(admin != null)
+            username = admin.getUsername();
+        int count = adminService.deleteAdmin(id, username);
         if(count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();

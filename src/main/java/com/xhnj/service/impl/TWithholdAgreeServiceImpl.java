@@ -11,6 +11,7 @@ import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.enums.AuthorizationReportRseultEnum;
 import com.xhnj.enums.CertTypeEnum;
 import com.xhnj.enums.IsSendEnum;
+import com.xhnj.enums.SystemTypeEnum;
 import com.xhnj.mapper.TDismissBatchMapper;
 import com.xhnj.mapper.TWithholdAgreeMapper;
 import com.xhnj.model.TDismissBatch;
@@ -187,22 +188,28 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             if (null != list.get(i).getStatus()) {
                 switch (list.get(i).getStatus()) {
                     case "0":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_SUCCESS.desc());
+                        list.get(i).setStatus("授权成功");
                         break;
                     case "1":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_FAIL.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.SMS_FAIL.desc());
+                        list.get(i).setStatus("未完成授权失败");
                         break;
                     case "2":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_SUCCESS.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_SUCCESS.desc());
+                        list.get(i).setStatus("短信已发送未完成授权");
                         break;
                     case "3":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.AUTHORIZATION_FAIL.desc());
+                        list.get(i).setStatus("授权取消成功");
                         break;
                     case "4":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_SUCCESS.desc());
+                        list.get(i).setStatus("授权取消失败");
                         break;
                     case "5":
-                        list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        //list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_FAIL.desc());
+                        list.get(i).setStatus("授权失败");
                         break;
                     case "6":
                         list.get(i).setStatus(AuthorizationReportRseultEnum.AUTH_CANCEL_WAIT.desc());
@@ -227,7 +234,7 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
             }
 
             // 证件信息
-            if (null != list.get(i).getCertType()) {
+           /* if (null != list.get(i).getCertType()) {
                 switch (list.get(i).getCertType()) {
                     case "1" :
                         list.get(i).setCertType(CertTypeEnum.ID_CARD.desc());
@@ -235,7 +242,9 @@ public class TWithholdAgreeServiceImpl implements TWithholdAgreeService {
                     default:
                         break;
                 }
-            }
+            }*/
+            list.get(i).setCertType(CertTypeEnum.of(list.get(i).getCertType()).getDesc());
+            list.get(i).setSystemType(SystemTypeEnum.of(list.get(i).getSystemType()).getDesc());
         }
 
 

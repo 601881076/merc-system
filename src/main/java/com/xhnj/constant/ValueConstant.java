@@ -27,7 +27,8 @@ public class ValueConstant {
     public static final Integer PAY = 1;
 
     //----------------------代扣协议----------------
-    public static final int DEAL_SIGN = 0;   //签订
-    public static final int DEAL_DISMISS = 2;   //撤销
+    public static final Integer DEAL_SIGN = 0;   //签订
+    public static final Integer DEAL_DISMISS = 2;   //撤销
 
+    public static final String CMB_BANK_CODE = "308";  //招行
 }

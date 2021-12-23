@@ -15,4 +15,6 @@ public class BatchNoVO {
     private BigDecimal totalAmt;
 
     private String password;
+
+    private String batchNo;
 }

@@ -6,6 +6,7 @@ import com.xhnj.pojo.query.WithholdParam;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 
 import java.util.List;
+import java.util.Set;
 
 /*
  @Description
@@ -29,4 +30,13 @@ public interface TBatchDtlService {
      * @return
      */
     int partialInsert(List<TBatchDtl> list, int count);
+
+    /**
+     * 处理代扣批次
+     * @param batchNo
+     * @param originalList
+     * @param bankCodeSet
+     * @return
+     */
+    int handleBatchDtl(TBatchNo batchNo, List<TBatchDtl> originalList, Set<String> bankCodeSet);
 }

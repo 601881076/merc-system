@@ -1,11 +1,13 @@
 package com.xhnj.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xhnj.model.TDismissBatch;
 import com.xhnj.model.TWithholdAgree;
 import com.xhnj.model.TWithholdCancel;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -36,4 +38,13 @@ public interface TWithholdCancelService extends IService<TWithholdCancel> {
      * @return
      */
     int partialInsert(List<TWithholdCancel> list, int count);
+
+    /**
+     * 处理批次取消
+     * @param dismissBatch
+     * @param cancelList
+     * @param bankCodeSet
+     * @return
+     */
+    int handleBatchCancel(TDismissBatch dismissBatch, List<TWithholdCancel> cancelList, Set<String> bankCodeSet);
 }

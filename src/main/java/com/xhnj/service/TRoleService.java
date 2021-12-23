@@ -26,7 +26,7 @@ public interface TRoleService extends IService<TRole> {
      * @param id 角色id
      * @return
      */
-    int delete(Long id);
+    int delete(Long id, String name);
 
     /**
      *
@@ -56,4 +56,6 @@ public interface TRoleService extends IService<TRole> {
      * @return
      */
     List<TMenu> getUmsMenuByAdminId(Long adminId);
+
+    List<TRole> listAll();
 }

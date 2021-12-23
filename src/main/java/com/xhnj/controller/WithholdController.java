@@ -62,7 +62,7 @@ public class WithholdController {
 
     @ApiOperation(value = "上传代扣excel")
     @PostMapping("/excelImport")
-    @MyLog(operate = "添加", objectType = "代扣批次", objectName = "扣款批次上传", descript = "上传代扣excel")
+    @MyLog(operate = "添加", objectType = "代扣批次", objectName = "扣款批次上传", descript = "上传代扣excel,批次号: #{#batchNoVO.batchNo}")
     public CommonResult uploadExcel(@RequestParam("file") MultipartFile file,@Validated BatchNoVO batchNoVO){
 
         // 校验密码输入次数是否超过三次
@@ -96,8 +96,11 @@ public class WithholdController {
         context.set("totalAmt",batchNoVO.getTotalAmt());
         context.set("password",batchNoVO.getPassword());
         int count = withholdService.uploadExcel(file);
+
+        String batchNo = context.get("batchNo") != null ? context.get("batchNo").toString() : "";
+        batchNoVO.setBatchNo(batchNo);
         JSONObject data=new JSONObject();
-        data.put("batchNo",context.get("batchNo"));
+        data.put("batchNo", batchNo);
         if(count > 0)
             return CommonResult.success(data);
         return CommonResult.failed();

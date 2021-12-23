@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.annotation.MyLog;
 import com.xhnj.mapper.TAdminRoleMapper;
 import com.xhnj.model.TAdminRole;
 import com.xhnj.model.TAdminRoles;
@@ -154,9 +155,10 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
         return adminMapper.insert(admin);
     }
 
+    @MyLog(operate = "删除", objectType = "系统权限管理", objectName = "用户管理", descript = "删除用户: #{#username}")
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int deleteAdmin(Long id) {
+    public int deleteAdmin(Long id, String username) {
         if(id == null)
             throw new BusinessException("用户id不能为空");
         return adminMapper.deleteById(id);

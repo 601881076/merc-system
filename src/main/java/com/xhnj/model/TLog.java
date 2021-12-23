@@ -9,6 +9,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * @Description:    日志管理表
@@ -54,9 +55,9 @@ public class TLog extends Model implements Serializable {
     /**
      * 该条记录创建时间
      */
-    private String createTime;
+    private Date createTime;
 
-    private Integer updateTime;
+    private Date updateTime;
 
     @TableField(exist = false)
     private String startDate;

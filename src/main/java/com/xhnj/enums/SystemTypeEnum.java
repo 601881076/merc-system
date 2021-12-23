@@ -11,12 +11,23 @@ package com.xhnj.enums;
 * @company:        newLand
 */
 public enum SystemTypeEnum {
-
+    systemINTERFACE("0", "INTERFACE"),
     systemIDS("1", "IDS"),
-    systemCIF("2", "CIF"),
-    systemPAS("3", "CEFT"),
-    systemAMO("4", "AMO"),
-    systemUpload("6", "后台管理页面上传");
+    systemCIF("2", "COF"),
+    systemPAS("3", "PAS"),
+    systemCEFT("4", "CEFT"),
+    systemAMO("5", "AMO"),
+    systemUpload("6", "后台管理页面上传"),
+    DEFAULT("", "INTERFACE");
+
+    public static SystemTypeEnum of(String systemType){
+        for(SystemTypeEnum e: SystemTypeEnum.values()){
+            if(e.getValue().equals(systemType)){
+                return e;
+            }
+        }
+        return SystemTypeEnum.DEFAULT;
+    }
 
 
     public String value() {
@@ -25,6 +36,22 @@ public enum SystemTypeEnum {
 
     public String desc() {
         return desc;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     private String value;

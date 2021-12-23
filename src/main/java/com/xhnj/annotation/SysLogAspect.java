@@ -10,9 +10,16 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.common.TemplateParserContext;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -67,7 +74,14 @@ public class SysLogAspect {
             tLog.setObjectName(myLog.objectName());
 
             // 对象描述 -- 功能描述
-            tLog.setDescript(myLog.descript());
+            String descript = myLog.descript();
+            String description = null;
+            try {
+                description = executeTemplate(descript, joinPoint);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            tLog.setDescript(description);
         }
 
         //获取请求的类名
@@ -91,6 +105,22 @@ public class SysLogAspect {
 
         log.info("用户{} 进行了{} 操作", tLog.getUserName(), tLog.getDescript());
         //调用service保存SysLog实体类到数据库
+        tLog.setCreateTime(new Date());
         sysLogService.insertAdmin(tLog);
+    }
+
+    private String executeTemplate(String descript, JoinPoint joinPoint)throws Exception{
+        ExpressionParser parser = new SpelExpressionParser();
+        LocalVariableTableParameterNameDiscoverer discoverer = new LocalVariableTableParameterNameDiscoverer();
+        Method method = ((MethodSignature)joinPoint.getSignature()).getMethod();
+        String[] params = discoverer.getParameterNames(method);
+        Object[] args = joinPoint.getArgs();
+        EvaluationContext context = new StandardEvaluationContext();
+        for(int len = 0; len < params.length; len++){
+            context.setVariable(params[len], args[len]);
+        }
+        return parser.parseExpression(descript, new TemplateParserContext()).getValue(context, String.class);
+
+
     }
 }

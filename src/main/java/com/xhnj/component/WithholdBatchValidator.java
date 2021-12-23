@@ -1,23 +1,23 @@
 package com.xhnj.component;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.metadata.Sheet;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xhnj.annotation.BusinValidator;
 import com.xhnj.common.BusinValidatorContext;
 import com.xhnj.common.exception.BusinValidateException;
 import com.xhnj.constant.ValidateTypeConstant;
 import com.xhnj.constant.ValueConstant;
-import com.xhnj.mapper.TBatchCheckMapper;
-import com.xhnj.mapper.TBatchDtlMapper;
-import com.xhnj.mapper.TBatchNoMapper;
-import com.xhnj.mapper.TWithholdAgreeMapper;
+import com.xhnj.mapper.*;
 import com.xhnj.model.*;
 import com.xhnj.pojo.vo.WithholdDetailVO;
 import com.xhnj.service.TAdminService;
 import com.xhnj.service.TBatchDtlService;
+import com.xhnj.service.TWithholdService;
 import com.xhnj.util.BusinUtil;
 import com.xhnj.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /*
  @Description 手动上传批量代扣excel校验
@@ -43,8 +46,6 @@ import java.util.List;
 @BusinValidator(validateTypes = ValidateTypeConstant.WITHHOLD_BATCH, validateOrder = 1)
 public class WithholdBatchValidator extends BusinValidatorTemplate {
 
-    @Autowired
-    private TBatchDtlMapper platformserialMapper;
     @Autowired
     private TBatchNoMapper batchNoMapper;
     @Autowired
@@ -61,6 +62,8 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
     private TBatchCheckMapper batchCheckMapper;
     @Autowired
     private TBatchDtlService batchDtlService;
+    @Autowired
+    private TBankCodeMappMapper bankCodeMappMapper;
 
     @Value("${rsa.privateKey}")
     private String privateKey;
@@ -80,6 +83,15 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
         if(!(fileName.endsWith(".xlsx") || fileName.endsWith(".xls"))){
             throw new BusinValidateException("文件格式错误");
         }
+
+        String username = UserUtil.getCurrentAdminUser().getUsername();
+        String password= (String) context.get("password");
+        TAdmin admin = adminService.getAdminByUsername(username);
+        if(!passwordEncoder.matches(password,admin.getPassword())){
+            excelListener.getDatas().clear();
+            throw new BusinValidateException("密码不正确");
+        }
+
         //读取excel
         try {
             ExcelReader excelReader = new ExcelReader(multipartFile.getInputStream(), null, excelListener);
@@ -87,7 +99,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             excelReader.read(new Sheet(1, 1, WithholdDetailVO.class));
             //获取数据
             List<Object> list = excelListener.getDatas();
-            if(list == null){
+            if(CollUtil.isEmpty(list)){
                 throw new BusinValidateException("未读取到数据");
             }
             log.info("receive list size: {}",list.size());
@@ -95,62 +107,80 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
                 excelListener.getDatas().clear();
                 throw new BusinValidateException("明细条数不能超过1000条");
             }
+
+            Integer totalTrans = (Integer)context.get("totalTrans");
+            if(totalTrans.intValue() != list.size()){
+                excelListener.getDatas().clear();
+                BusinValidateException validateException = new BusinValidateException("总数量与上传文件明细数量不一致");
+                throw validateException;
+            }
+
             //生成批次号,由当前用户+当前日期组成+随机数
-            String username = UserUtil.getCurrentAdminUser().getUsername();
+
             String batchNoStr = username + DateUtil.format(DateUtil.date(), "yyyyMMdd")+RandomUtil.randomNumbers(7);
             context.set("batchNo",batchNoStr);
             List<TBatchDtl> originalList = new ArrayList<>();
             //转换数据类型
             WithholdDetailVO withholdDetailVO = null;
-            TBatchDtl platformserial = null;
-            BigDecimal totalAmt = new BigDecimal("0");
+            TBatchDtl batchDtl = null;
+            String bankCode = null;
+            BigDecimal sumAmt = new BigDecimal("0");
+            List<String> bankCodeParamList = new ArrayList<>();
+            Set<String> set = new HashSet<>();
+            int count = 1;
             for (int i = 0; i < list.size(); i++) {
                 withholdDetailVO = (WithholdDetailVO) list.get(i);
-                String bankCode = withholdDetailVO.getBankCode();
-                List<TWithholdAgree> tWithholdAgreeIPage = tWithholdAgreeMapper.selectBankcode(bankCode);
-                if(tWithholdAgreeIPage.size()<1){
-                    throw new BusinValidateException(bankCode+"银行码不存在！！！请检查");
-                }
-                platformserial = BeanUtil.copyProperties(withholdDetailVO, TBatchDtl.class);
-                platformserial.setBatchNo(batchNoStr);
-                platformserial.setOrderNo(businUtil.generateOrderNo());
-                platformserial.setPayRecv(ValueConstant.WITHHOLD);
-                platformserial.setSystemType(6);
-                platformserial.setSourceType(ValueConstant.SOURCE_MDD);
-                platformserial.setPayType(0);
+                bankCode = withholdDetailVO.getBankCode();
+
+                batchDtl = BeanUtil.copyProperties(withholdDetailVO, TBatchDtl.class);
+                batchDtl.setBatchNo(batchNoStr);
+                batchDtl.setOrderNo(businUtil.generateOrderNo());
+                batchDtl.setPayRecv(ValueConstant.WITHHOLD);
+                batchDtl.setSystemType(6);
+                batchDtl.setSourceType(ValueConstant.SOURCE_MDD);
+                batchDtl.setPayType(0);
                 BigDecimal bigDecimal = new BigDecimal(withholdDetailVO.getMoney());
-                platformserial.setMoney(businUtil.coverAmount(bigDecimal,1));
-                platformserial.setCurrency("人民币");
+                batchDtl.setMoney(businUtil.coverAmount(bigDecimal,1));
+                batchDtl.setCurrency("人民币");
 
-                if("11001".equals(bankCode)){
-                    platformserial.setSeqNo("00000" + i);
-                } else if("308".equals(bankCode)){
-                    platformserial.setSeqNo(businUtil.getSeqNo(i));
+                //合同编号
+                batchDtl.setContractNo(withholdDetailVO.getContractNo());
+                batchDtl.setSeqNo("00000" + count);
+                if(ValueConstant.CMB_BANK_CODE.equals(bankCode)){
+                    batchDtl.setSeqNo(businUtil.getSeqNo(count));
                 }
+                originalList.add(batchDtl);
+                set.add(bankCode);
+                sumAmt = sumAmt.add(batchDtl.getMoney());
 
-                // 合同编号
-                platformserial.setContractNo(withholdDetailVO.getContractNo());
-
-                originalList.add(platformserial);
-                totalAmt = totalAmt.add(platformserial.getMoney());
+                if(!bankCodeParamList.contains(bankCode)){
+                    bankCodeParamList.add(bankCode);
+                }
+                count++;
             }
-            String totalAmt1 = context.get("totalAmt").toString();
-            Integer totalTrans = (Integer) context.get("totalTrans");
-            String password= (String) context.get("password");
+            BigDecimal totalAmt = new BigDecimal(context.get("totalAmt").toString());
+
 //            password = RSAUtils.decryptDataOnJava(password, privateKey);  //解密密码
-            totalAmt=businUtil.coverAmount(totalAmt,0);
-            TAdmin admin = adminService.getAdminByUsername(username);
-            if(!passwordEncoder.matches(password,admin.getPassword())){
+            sumAmt = businUtil.coverAmount(sumAmt,0);
+
+            if (totalAmt.compareTo(sumAmt) != 0){
                 excelListener.getDatas().clear();
-                throw new BusinValidateException("密码不正确");
-            }
-            if (!(totalTrans.equals(list.size())&&totalAmt1.equals(totalAmt.toString()))){
-                excelListener.getDatas().clear();
-                BusinValidateException validateException = new BusinValidateException("总金额或总数量与上传文件不一致");
+                BusinValidateException validateException = new BusinValidateException("总金额与上传文件明细总额不一致");
                 throw validateException;
 
             }
-            //插入批次数据
+
+            QueryWrapper<TBankCodeMapp> wrapper = new QueryWrapper<>();
+            List<TBankCodeMapp> bankCodeMappList = bankCodeMappMapper.selectList(wrapper);
+            List<String> bankCodeList = bankCodeMappList.stream().map(TBankCodeMapp::getBusinCode).collect(Collectors.toList());
+
+            //校验bankCode
+            List<String> diffList = bankCodeParamList.stream()
+                    .filter(e -> !bankCodeList.contains(e)).collect(Collectors.toList());
+            if(CollUtil.isNotEmpty(diffList)){
+                throw new BusinValidateException("银行编码不存在: " + diffList.toString());
+            }
+
             TBatchNo batchNo = BeanUtil.copyProperties(list.get(0), TBatchNo.class);
             batchNo.setTotalTrans(list.size());
             batchNo.setTotalAmt(businUtil.coverAmount(totalAmt,1));
@@ -159,30 +189,7 @@ public class WithholdBatchValidator extends BusinValidatorTemplate {
             batchNo.setBatchNo(batchNoStr);
             batchNo.setIsHold(0);
 
-            // 生成系统批次号
-            String systemBatchNo = businUtil.getBatchNo("yyyyMMdd", 10);
-            batchNo.setSystemBatch(systemBatchNo);
-
-
-            batchNoMapper.insert(batchNo);
-
-            //批量插入明细
-            batchDtlService.partialInsert(originalList, 80);
-
-            // 插入批次审批表
-            TBatchCheck batchCheck = new TBatchCheck();
-            batchCheck.setBatchId(batchNo.getId());
-            batchCheck.setStatus(0);
-            batchCheck.setBatchNo(batchNo.getBatchNo());
-            batchCheck.setUpUserId(UserUtil.getCurrentAdminUser().getId());
-            batchCheck.setUpUserName(UserUtil.getCurrentAdminUser().getUsername());
-            batchCheck.setCheckResult(0);
-
-            List<TBatchCheck> batchCheckList = new ArrayList<>();
-            batchCheckList.add(batchCheck);
-
-            batchCheckMapper.insert(batchCheckList);
-
+            batchDtlService.handleBatchDtl(batchNo, originalList, set);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

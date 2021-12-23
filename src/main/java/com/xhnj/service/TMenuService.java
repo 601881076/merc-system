@@ -31,5 +31,5 @@ public interface TMenuService extends IService<TMenu> {
      * @param id 菜单id
      * @return
      */
-    int delete(Long id);
+    int delete(Long id, String name);
 }

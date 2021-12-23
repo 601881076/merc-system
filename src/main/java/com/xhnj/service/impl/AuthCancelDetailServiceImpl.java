@@ -5,6 +5,7 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xhnj.enums.CertTypeEnum;
 import com.xhnj.mapper.TAuthCancelDetailMapper;
 import com.xhnj.model.TAuthCancelExcel;
 import com.xhnj.model.TWithholdCancel;
@@ -46,10 +47,15 @@ public class AuthCancelDetailServiceImpl implements AuthCancelDetailService {
             tAuthCancelExcel.setBankRetCode(tBatchDtls.get(i).getBankRetCode());
             tAuthCancelExcel.setCardNo(tBatchDtls.get(i).getCardNo());
             tAuthCancelExcel.setCertNo(tBatchDtls.get(i).getCertNo());
-            tAuthCancelExcel.setCertType(tBatchDtls.get(i).getCertType());
+            tAuthCancelExcel.setCertType(CertTypeEnum.of(tBatchDtls.get(i).getCertType()).getDesc());
             tAuthCancelExcel.setContractDate(tBatchDtls.get(i).getContractDate());
             tAuthCancelExcel.setCustomerName(tBatchDtls.get(i).getCustomerName());
             tAuthCancelExcel.setEndDate(tBatchDtls.get(i).getEndDate());
+            tAuthCancelExcel.setSystemBatch(tBatchDtls.get(i).getSystemBatch());
+            tAuthCancelExcel.setBankCode(tBatchDtls.get(i).getBankCode());
+            tAuthCancelExcel.setBankName(tBatchDtls.get(i).getBankName());
+            tAuthCancelExcel.setUpdateTime(tBatchDtls.get(i).getUpdateTime());
+
             //0->未发送;1->已发送
             if (null != tBatchDtls.get(i).getIsSend()) {
                 switch (tBatchDtls.get(i).getIsSend()) {
@@ -65,18 +71,18 @@ public class AuthCancelDetailServiceImpl implements AuthCancelDetailService {
             }
 
             tAuthCancelExcel.setMobileNo(tBatchDtls.get(i).getMobileNo());
-            tAuthCancelExcel.setReason(tBatchDtls.get(i).getReason());
+            //tAuthCancelExcel.setReason(tBatchDtls.get(i).getReason());
             //(0->处理中;1->成功;2->失败)
             if (null != tBatchDtls.get(i).getStatus()) {
                 switch (tBatchDtls.get(i).getStatus()) {
                     case 0:
-                        tAuthCancelExcel.setIsSend("处理中");
+                        tAuthCancelExcel.setStatus("处理中");
                         break;
                     case 1:
-                        tAuthCancelExcel.setIsSend("成功");
+                        tAuthCancelExcel.setStatus("成功");
                         break;
                     case 2:
-                        tAuthCancelExcel.setIsSend("失败");
+                        tAuthCancelExcel.setStatus("失败");
                         break;
                     default:
                         break;

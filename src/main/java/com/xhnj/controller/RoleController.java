@@ -36,7 +36,7 @@ public class RoleController {
     @ApiOperation("获取所有角色")
     @GetMapping("/listAll")
     public CommonResult<List<TRole>> listAll() {
-        return CommonResult.success(roleService.list());
+        return CommonResult.success(roleService.listAll());
     }
 
     @ApiOperation(value = "分页获取角色列表数据")
@@ -57,7 +57,7 @@ public class RoleController {
 
     @ApiOperation("添加角色")
     @PostMapping("/add")
-    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "角色管理", descript = "添加角色")
+    @MyLog(operate = "添加", objectType = "系统权限管理", objectName = "角色管理", descript = "添加角色: #{#role.name}")
     public CommonResult create(@Validated @RequestBody TRole role, BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
         if(!fieldErrors.isEmpty()){
@@ -81,9 +81,12 @@ public class RoleController {
 
     @ApiOperation("删除角色")
     @PostMapping("/delete/{id}")
-    @MyLog(operate = "修改", objectType = "系统权限管理", objectName = "角色管理", descript = "删除角色")
     public CommonResult delete(@PathVariable("id") Long id) {
-        int count = roleService.delete(id);
+        String name = "";
+        TRole role = roleService.getById(id);
+        if(role != null)
+            name = role.getName();
+        int count = roleService.delete(id, name);
         if(count > 0)
             return CommonResult.success(count);
         return CommonResult.failed();
