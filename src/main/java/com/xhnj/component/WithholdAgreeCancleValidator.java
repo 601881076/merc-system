@@ -142,10 +142,10 @@ public class WithholdAgreeCancleValidator extends BusinValidatorTemplate{
                 throw new BusinValidateException("银行码不存在: " + diffList.toString());
             }
 
-            List<TWithholdCancel> whCancelList = withholdCancleMapper.getByCardNoAndAgreeId(cancelList);
+            /*List<TWithholdCancel> whCancelList = withholdCancleMapper.getByCardNoAndAgreeId(cancelList);
             if(CollUtil.isNotEmpty(whCancelList)){
                 throw new BusinValidateException("[协议编号+卡号]不能重复");
-            }
+            }*/
 
             TDismissBatch dismissBatch = new TDismissBatch();
             dismissBatch.setSystemType(ValueConstant.SYSTEM_TYPE_MDD);
