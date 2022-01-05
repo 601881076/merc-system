@@ -695,7 +695,7 @@
                 update_time,
                 CONVERT ( VARCHAR ( 100 ), create_time, 23 ) upload_time
 
-            from t_withhold_cancle cancel
+            from t_withhold_cancel cancel
 
             <where>
                 <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
@@ -912,7 +912,7 @@
         update_time,
         CONVERT ( VARCHAR ( 100 ), create_time, 23 ) upload_time
 
-        from t_withhold_cancle cancel
+        from t_withhold_cancel cancel
 
         <where>
             <if test="withholdAgree.cardNo !=null and withholdAgree.cardNo != ''">
