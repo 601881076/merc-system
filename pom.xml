@@ -79,7 +79,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.10</version>
+            <version>1.1.18</version>
         </dependency>
 
         <!-- Druid配置加密  不需要新建配置类-->
