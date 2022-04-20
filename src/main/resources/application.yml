@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /ums
+    context-path: /merchant
   session-timeout: 172800 # 48Сʱ
   #    tomcat:
   #        max-threads: 1000
@@ -10,7 +10,7 @@ server:
 
   tomcat:
     max-swallow-size: -1
-  port: 8078
+  port: 8081
 
 
 #  ssl:
@@ -23,7 +23,7 @@ server:
 
 spring:
   application:
-    name: ums-admin
+    name: merc-admin
   thymeleaf:
     mode: LEGACYHTML5
     cache: false
@@ -34,6 +34,7 @@ spring:
 
   profiles:
     active: dev
+
   servlet:
     multipart:
       max-file-size: 5MB
@@ -69,19 +70,10 @@ secure:
       - /**/*.xls
       - /actuator/**
       - /druid/**
-      - /admin/login
+      - /user/login
       - /common/sms
       - /validateCode/**
       - /uploadFiles/**
-
-
-uploadFile:
-  resourceHandler: /uploadFiles/**   #文件虚拟路径映射
-  location: C:/data/ #自定义上传文件本地保存路径
-
-
-defaultpassword: 123
-
 
 
 # ===== 自定义swagger配置 ===== #
@@ -98,7 +90,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
     ## 关闭sql打印
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*.xml
 
   global-config:
@@ -117,17 +109,4 @@ mybatis-plus:
 #    - classpath*:mapper/*.xml
 logging:
   config: classpath:logback-spring.xml
-
-wechat:
-  appid: wx02253cc6c534f17c
-  secret: b6297950ea303f00654aae375c6cfedf
-  login:
-    url: https://api.weixin.qq.com/sns/jscode2session
-  ##微信一键首次登陆插入用户表的初始密码
-  initpwd: 123
-  ##微信一键首次登陆插入用户表的初始昵称
-  initnickname: lQj
-
-#消息队列配置
-mq:
-  exchange: UMSDDEXCHANGE # 交换机地址
+  com.mercsystem.mapper: trace # 在数据库层级打印sql

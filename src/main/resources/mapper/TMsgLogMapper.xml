@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xhnj.mapper.TMsgLogMapper">
-
-    <select id="findDistinctBankByMap" resultType="com.xhnj.model.TMsgLog">
-        SELECT DISTINCT bank_code FROM t_msg_log WHERE batch_no = #{map.batchNo}
-    </select>
-
-</mapper>

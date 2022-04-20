@@ -1,32 +1,14 @@
 dispatch:
-  uploadPath: D:/var/uploaded_files/
-logging:
-  level:
-    root: debug
-    com.xhnj: debug
+#  uploadPath: D:/var/uploaded_files/
+
+
 spring:
   datasource:
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    driverClassName: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://47.100.251.90:3306/bankserver?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#    username: root
-#    password: aczS4lnsWkiVzxFOYk3zxO7BO7PPRlKZKSDdQSlk3a0yf1MmOcItfgpHKVUfXSB2pXgQ8yq1FGfLHHDYW1Wigg==
-
-#    url: jdbc:mysql://127.0.0.1:3306/xxx?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#    username: xxx
-#    password: xxx
-
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://47.100.251.90:1433;DatabaseName=UMSDD
-    username: sa
-    password: p@ssw0rd
-      #    initialSize: 1
-      #    minIdle: 3
-      #    maxActive: 20
-      #    # 配置获取连接等待超时的时间
-      #    maxWait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp10yn648kyewh933co.mysql.rds.aliyuncs.com:3306/szzdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: szzpay
+    password: sunzezhong
     timeBetweenEvictionRunsMillis: 60000
     # 配置一个连接在池中最小生存的时间，单位是毫秒
     minEvictableIdleTimeMillis: 30000

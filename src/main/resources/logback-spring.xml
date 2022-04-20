@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  scan="true" scanPeriod="60 seconds" debug="false">
-    <property name="LOG_HOME" value="C:/logs/umsadmin"/>
+    <!--日志根目录 这是一个可改变的参数-->
+    <property name="LOG_HOME" value="/Users/tanyi/IdeaProjects/privateWork/merc-system/logs"/>
+    <!--日志输入正则，这是一个可改变的参数
+        该格式中 %date 表示日期，%thread 表示线程名，%-5level
+        表示级别从左显示5个字符宽度，%logger{36} 表示 logger 名字最长36个字符，%msg 表示日志消息，%n 是换行符。-->
+    <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+    <!--日志都会存储在该路径下。%i 表示第 i 个文件，当日志文件达到指定大小时，会将日志生成到新的文件里，
+        这里的 i 就是文件索引，日志文件允许的大小可以设置，下面会讲解。这里需要注意的是，不管是 windows 系统还是 Linux 系统，
+        日志存储的路径必须要是绝对路径。-->
+    <property name="FILE_PATH" value="${LOG_HOME}/merchant.%d{yyyy-MM-dd}.%i.log" />
+
     <contextName>logback</contextName>
-    <!--输出到控制台-->
+
+    <!--定义控制台输出-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!--按照上面配置的LOG_PATTERN 来打印日志-->
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--定义日志文件的相关参数-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按照上面配置的FILE_PATH路径来保存日志 -->
+            <fileNamePattern>${FILE_PATH}</fileNamePattern>
+            <!-- 日志保存15天 -->
+            <maxHistory>15</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 单个日志文件的最大，超过则新建日志文件存储 -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <!-- 按照上面配置的LOG_PATTERN来打印日志 -->
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
     <!--按天生成日志-->
-    <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--<appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>
@@ -22,16 +54,20 @@
                 %d{yyyy-MM-dd HH:mm:ss} -%msg%n
             </Pattern>
         </layout>
-    </appender>
+    </appender>-->
 
-    <logger name="com.xhnj" additivity="false">
+    <!--针对包级别的输入-->
+    <logger name="com.mercsystem" level="INFO" additivity="false">
         <appender-ref ref="console"/>
-        <appender-ref ref="logFile" />
+        <appender-ref ref="FILE" />
     </logger>
 
-    <root level="error">
+    <!--针对全局输出级别-->
+    <root level="INFO">
+        <!--引用上面控制台配置-->
         <appender-ref ref="console"/>
-        <appender-ref ref="logFile" />
+        <!--引用自定义日志文件-->
+        <appender-ref ref="FILE" />
     </root>
 
 </configuration>

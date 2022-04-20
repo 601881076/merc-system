@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : lk
+Source Server         : tanyi
 Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : chef
