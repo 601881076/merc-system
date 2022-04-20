@@ -35,14 +35,12 @@ public class AdminController {
     @Autowired
     private TAdminService adminService;
 
-
-
     @ApiOperation(value = "登录以后返回token")
     @PostMapping("/login")
     @MyLog(operate = "登录", objectType = "登录操作", objectName = "登录", descript = "登录以后返回token")
     public CommonResult login(@Validated @RequestBody MercAdminLoginParam loginParam, BindingResult result, HttpServletRequest request) {
         log.info("登录接口 , 用户: {}", loginParam.getUsername());
-
+        log.info("请求成功");
 
         return CommonResult.success("登录成功");
     }
