@@ -66,9 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         registry.and()
                 .authorizeRequests()
                 // 暂时全部放开权限
-                .anyRequest()
-                // 所有请求都需认证
-                .authenticated()
+                .anyRequest().permitAll()
+                // TODO 暂时放开 所有请求都需认证
+//                .authenticated()
                 // 关闭跨站请求防护及不使用session
                 .and()
                 .csrf()
