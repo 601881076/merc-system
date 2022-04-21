@@ -1,6 +1,5 @@
 package com.mercsystem;
 
-import com.mercsystem.model.TAdmin;
 import com.mercsystem.pojo.bo.AdminUserDetails;
 import com.mercsystem.util.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +18,15 @@ public class ScenicApplicationTest {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Test
-    public void getToken() {
-        TAdmin admin = new TAdmin();
-        admin.setUsername("13574159400");
-        UserDetails userDetails = new AdminUserDetails(admin);
-        String token = jwtTokenUtil.generateToken(userDetails);
-
-        System.out.println(token);
-    }
+//    @Test
+//    public void getToken() {
+//        TAdmin admin = new TAdmin();
+//        admin.setUsername("13574159400");
+//        UserDetails userDetails = new AdminUserDetails(admin);
+//        String token = jwtTokenUtil.generateToken(userDetails);
+//
+//        System.out.println(token);
+//    }
 
     @Test
     public void getPassword() {

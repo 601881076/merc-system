@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.mercsystem.common.CommonResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * @author tanyi
  * @date 2022/4/20 11:02
 */
+@Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {

@@ -1,6 +1,5 @@
 package com.mercsystem.config;
 import com.mercsystem.component.DynamicSecurityService;
-import com.mercsystem.service.TAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,15 +23,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MallSecurityConfig extends SecurityConfig {
 
-    @Autowired
-    private TAdminService adminService;
-
-    @Override
-    @Bean
-    public UserDetailsService userDetailsService() {
-        //获取后台登录用户信息
-        return username -> adminService.loadUserByUsername(username);
-    }
+//    @Autowired
+//    private TAdminService adminService;
+//
+//    @Override
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        //获取后台登录用户信息
+//        return username -> adminService.loadUserByUsername(username);
+//    }
 
     @Bean
     public DynamicSecurityService dynamicSecurityService() {

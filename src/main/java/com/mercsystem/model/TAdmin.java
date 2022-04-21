@@ -1,33 +1,26 @@
 package com.mercsystem.model;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.mercsystem.annotation.FieldRepeatValidator;
-import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * <p>
- * 后台管理用户
+ * 后台管理用户表
  * </p>
  *
  * @author tanyi
- * @since 2021-02-24
+ * @since 2022-04-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@FieldRepeatValidator(fields = {"username"}, message = "用户名不能重复")
-@NoArgsConstructor
-public class TAdmin extends Model implements Serializable {
+public class TAdmin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,26 +30,31 @@ public class TAdmin extends Model implements Serializable {
     /**
      * 用户名
      */
-    @ApiModelProperty(value = "用户名", required = true)
     @NotBlank(message = "用户名不能为空")
-    @TableField(value = "username")
     private String username;
 
     /**
      * 密码
      */
+    @NotBlank(message = "密码不能为空")
     private String password;
 
+    @NotBlank(message = "手机号不能为空")
+    private String phone;
+
     /**
-     * 头像
+     * 头像url
      */
     private String icon;
 
+    /**
+     * token登录令牌
+     */
+    private String token;
 
     /**
      * 邮箱
      */
-    @ApiModelProperty(value = "邮箱")
     private String email;
 
     /**
@@ -64,38 +62,39 @@ public class TAdmin extends Model implements Serializable {
      */
     private String nickName;
 
-
     /**
      * 备注信息
      */
     private String note;
 
-    private Integer userType;
-
-
     /**
-     * 创建时间
+     * 帐号启用状态(0->禁用；1->启用)
      */
-    private Date createTime;
-
-    /**
-     * 最后登录时间
-     */
-    private Date loginTime;
+    private Boolean status;
 
     /**
      * 首次登录时间
      */
-    private Date firstLoginTime;
+    private LocalDateTime firstLoginTime;
 
     /**
-     * 帐号启用状态：0->禁用；1->启用
+     * 是否已过期(0->未过期;1->已过期)
      */
-    @ApiModelProperty(value = "状态", required = true)
-    private Integer status;
+    private Boolean isOverdue;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime createTime;
+
+    /**
+     * 最后登录时间
+     */
+    private LocalDateTime loginTime;
+
+    /**
+     * 最近一次登录IP地址
+     */
+    private String lastLoginIp;
+
+    private LocalDateTime updateTime;
 
 
 }

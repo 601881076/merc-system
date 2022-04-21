@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,10 +26,12 @@ import java.io.IOException;
  * @author tanyi
  * @date 2022/4/20 11:02
 */
+@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
-    @Autowired
-    private UserDetailsService userDetailsService;
+
+//    @Autowired
+//    private UserDetailsService userDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -41,23 +44,23 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        String authHeader = request.getHeader(this.tokenHeader);
-        if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
-            String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
-            String username = jwtTokenUtil.getUserNameFromToken(authToken);
-            LOGGER.info("checking username:{}", username);
-            String servletPath = request.getServletPath();
-            LOGGER.info("path: " + servletPath);
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    LOGGER.info("authenticated user:{}", username);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
-            }
-        }
+//        String authHeader = request.getHeader(this.tokenHeader);
+//        if (authHeader != null && authHeader.startsWith(this.tokenHead)) {
+//            String authToken = authHeader.substring(this.tokenHead.length());// The part after "Bearer "
+//            String username = jwtTokenUtil.getUserNameFromToken(authToken);
+//            LOGGER.info("checking username:{}", username);
+//            String servletPath = request.getServletPath();
+//            LOGGER.info("path: " + servletPath);
+//            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+//                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+//                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
+//                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+//                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//                    LOGGER.info("authenticated user:{}", username);
+//                    SecurityContextHolder.getContext().setAuthentication(authentication);
+//                }
+//            }
+//        }
         chain.doFilter(request, response);
     }
 }
