@@ -106,6 +106,14 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
     }
 
     @Override
+    public IPage getUserPage(Integer pageSize, Integer pageNum) {
+        Page<TAdminRoles> page = new Page<>(pageNum, pageSize);
+        TAdmin admin = new TAdmin();
+
+        return adminMapper.listPage(page, admin);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public UserDetails loadUserByUsername(String username) {
         //用户不存在则创建

@@ -21,6 +21,9 @@ public interface TAdminService extends IService<TAdmin> {
 
     IPage getUserPage(String keyword, Integer pageSize, Integer pageNum);
 
+
+    IPage getUserPage(Integer pageSize, Integer pageNum);
+
     UserDetails loadUserByUsername(String username);
 
     int updateAdmin(TAdmin admin);

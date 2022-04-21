@@ -1,13 +1,17 @@
 package com.mercsystem.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mercsystem.annotation.MyLog;
+import com.mercsystem.common.CommonPage;
 import com.mercsystem.common.CommonResult;
 import com.mercsystem.model.TAdminRole;
+import com.mercsystem.model.TAdminRoles;
 import com.mercsystem.pojo.query.MercAdminLoginParam;
 import com.mercsystem.model.TAdmin;
 import com.mercsystem.pojo.query.UmsAdminUpdatePassParam;
 import com.mercsystem.service.TAdminService;
+import com.mysql.cj.xdevapi.JsonArray;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @ClassName AdminController.java
@@ -34,6 +39,17 @@ public class AdminController {
 
     @Autowired
     private TAdminService adminService;
+
+    @ApiOperation(value = "获取用户列表")
+    @PostMapping("/list")
+    public CommonResult<CommonPage<TAdmin>>
+    getAdminList(@RequestParam(value = "pageSize", defaultValue = "5")Integer pageSize,
+                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+
+        IPage page = adminService.getUserPage(pageSize, pageNum);
+
+        return CommonResult.success(CommonPage.restPage(page));
+    }
 
     @ApiOperation(value = "登录以后返回token")
     @PostMapping("/login")

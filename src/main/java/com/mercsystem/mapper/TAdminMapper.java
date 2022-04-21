@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mercsystem.model.TAdmin;
 import com.mercsystem.model.TAdminRoles;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +23,12 @@ public interface TAdminMapper extends BaseMapper<TAdmin> {
 
     int updateUserStatusToDisableByUserName(@Param("admin") TAdmin admin);
 
+    /**
+     * 获取用户列表
+     * @param page
+     * @param admin
+     * @return
+     */
     IPage listPage(IPage<TAdminRoles> page, @Param("admin") TAdmin admin);
 
     int updateByUsername(@Param("admin") TAdmin admin);

@@ -9,6 +9,7 @@ import com.mercsystem.annotation.FieldRepeatValidator;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -25,6 +26,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @FieldRepeatValidator(fields = {"username"}, message = "用户名不能重复")
+@NoArgsConstructor
 public class TAdmin extends Model implements Serializable {
 
     private static final long serialVersionUID = 1L;
