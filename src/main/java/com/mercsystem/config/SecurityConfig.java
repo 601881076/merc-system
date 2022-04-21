@@ -1,6 +1,7 @@
 package com.mercsystem.config;
 import com.mercsystem.component.*;
 import com.mercsystem.util.JwtTokenUtil;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
@@ -65,10 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         registry.and()
                 .authorizeRequests()
                 // 暂时全部放开权限
-                .anyRequest().permitAll()
+                .anyRequest()
                 // 所有请求都需认证
-                // TODO 暂时放开认证，允许所有URL通过
-//                .authenticated()
+                .authenticated()
                 // 关闭跨站请求防护及不使用session
                 .and()
                 .csrf()

@@ -2,14 +2,21 @@ package com.mercsystem.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import com.mercsystem.common.exception.BusinessException;
+import com.mercsystem.model.TAdmin;
+import com.mercsystem.service.TAdminService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +41,12 @@ public class JwtTokenUtil {
     private Long expiration;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private TAdminService adminService;
+
+    /** md5工具类*/
+    @Autowired
+    private MD5Util md5Util;
 
     /**
      * 根据负责生成JWT的token
@@ -100,6 +113,36 @@ public class JwtTokenUtil {
     public boolean validateToken(String token, UserDetails userDetails) {
         String username = getUserNameFromToken(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
+
+    /**
+     * 验证token是否还有效
+     *
+     * @param token       客户端传入的token
+     * @param request     请求报文
+     */
+    public TAdmin validateToken(String token, HttpServletRequest request, HttpServletResponse response) {
+        // 获取当前用户名称
+        String username = request.getHeader("username");
+        // 当前请求ID
+        String requestID = request.getHeader("requestID");
+
+        // 根据用户名称查询token
+        TAdmin userInfo = adminService.selectUserInfoByUsername(username);
+        String backStageToken = userInfo.getToken() + requestID;
+
+        // (数据库token + requestID) → MD5 = 后台token
+        String encryptToken = md5Util.encryptMd5(backStageToken);
+
+        // 判断上送报文 与 后台加密后的token数据是否一致
+        if (!StringUtils.equals(token, encryptToken))
+            throw new BusinessException("token校验失败");
+
+        // 检验token时效性
+        if (isTokenExpired(userInfo.getToken()))
+            throw new BusinessException("token已失效");
+
+        return userInfo;
     }
 
     /**

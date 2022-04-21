@@ -70,7 +70,7 @@ secure:
       - /**/*.xls
       - /actuator/**
       - /druid/**
-      - /user/login
+      - /admin/login
       - /common/sms
       - /validateCode/**
       - /uploadFiles/**
@@ -110,3 +110,7 @@ mybatis-plus:
 logging:
   config: classpath:logback-spring.xml
   com.mercsystem.mapper: trace # 在数据库层级打印sql
+
+# MD5偏移量
+md5:
+  key: b928cf549f00861d091ee2baad2e9401

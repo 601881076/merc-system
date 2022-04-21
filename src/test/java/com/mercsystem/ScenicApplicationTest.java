@@ -2,6 +2,7 @@ package com.mercsystem;
 
 import com.mercsystem.pojo.bo.AdminUserDetails;
 import com.mercsystem.util.JwtTokenUtil;
+import com.mercsystem.util.MD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,16 @@ public class ScenicApplicationTest {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private MD5Util md5Util;
+
+    @Test
+    public void md5Encrypt() {
+        String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzU3NDE1OTQwMCIsImNyZWF0ZWQiOjE2NTA1NDYzNzU1NDcsImV4cCI6MTY1MzEzODM3NX0.TFR-rXavf5tcaGfe2qgVbpj_Bh4k58xaJiycMYKiYkaLjhAu_sh5NMKZDwbmCz7gcjVQqxEdDl9V5dg7B0xNYA";
+        token += "123456";
+        System.out.println(md5Util.encryptMd5(token));
+    }
 
 //    @Test
 //    public void getToken() {

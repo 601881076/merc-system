@@ -19,4 +19,19 @@ public interface TAdminService extends IService<TAdmin> {
      * @return
      */
     int insert(TAdmin admin);
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    TAdmin selectUserInfoByUsername(String username);
+
+
+    /**
+     * 更新用户信息
+     * @param admin
+     * @return
+     */
+    int update(TAdmin admin);
 }

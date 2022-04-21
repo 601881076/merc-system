@@ -43,4 +43,23 @@ public class TAdminServiceImpl extends ServiceImpl<TAdminMapper, TAdmin> impleme
 
         return insert;
     }
+
+    /**
+     * 根据用户名查询用户
+     * @param username
+     * @return
+     */
+    @Override
+    public TAdmin selectUserInfoByUsername(String username) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("username",username);
+        return adminMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public int update(TAdmin admin) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("id", admin.getId());
+        return adminMapper.update(admin, wrapper);
+    }
 }
