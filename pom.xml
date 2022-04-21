@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.xhnj</groupId>
-    <artifactId>ums-admin</artifactId>
+    <groupId>com.mercsystem</groupId>
+    <artifactId>merc-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ums-admin</name>
+    <name>merc-system</name>
     <packaging>jar</packaging>
     <description>Scenic Spots Mini Program</description>
 
@@ -24,14 +24,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+<!--            <scope>provided</scope>-->
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <!--要部署到tomcat中,这里要进行排除,避免冲突-->
-            <exclusions>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -40,7 +40,13 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <!--校验组件-->
