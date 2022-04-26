@@ -1,6 +1,8 @@
 package com.mercsystem.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.mercsystem.common.CommonResult;
 import com.mercsystem.common.exception.BusinessException;
 import com.mercsystem.model.TAdmin;
@@ -52,7 +54,7 @@ public class TAdminController {
      * @return
      */
     @PostMapping("/login")
-    public CommonResult login(@RequestBody MercAdminLoginParam loginParam) {
+    public CommonResult login(MercAdminLoginParam loginParam) {
         log.info("登录接口 , 请求数据: {}", loginParam);
         HashMap<String, String> map = new HashMap<>();
 
@@ -106,6 +108,54 @@ public class TAdminController {
     public CommonResult insert(@RequestBody TAdmin admin) {
         adminService.insert(admin);
         return CommonResult.success("注册成功");
+    }
+
+
+    /**
+     * 用户修改
+     * @param admin
+     * @return
+     */
+    @PostMapping("/update")
+    public CommonResult update(@RequestBody TAdmin admin) {
+        log.info("用户修改 username = {}, 对象 = {}", admin.getUsername(), admin);
+        int update = adminService.update(admin);
+        if (update != 1)
+            throw new BusinessException("用户不存在");
+
+        return CommonResult.success("修改成功");
+    }
+
+
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
+    @GetMapping("/delete/{userId}")
+    public CommonResult delete(@PathVariable Integer userId) {
+        boolean result = adminService.removeById(userId);
+        if (!result)
+            return CommonResult.failed("删除异常");
+
+        return CommonResult.success("删除成功");
+    }
+
+    /**
+     * 冻结用户
+     * @param userId
+     * @return
+     */
+    @GetMapping("/freeze/{userId}")
+    public CommonResult freeze(@PathVariable Integer userId) {
+
+        UpdateWrapper wrapper = new UpdateWrapper();
+        wrapper.set("status",0);
+        wrapper.eq("id",userId);
+        boolean result = adminService.update(wrapper);
+
+
+        return CommonResult.success("冻结成功");
     }
 
 
