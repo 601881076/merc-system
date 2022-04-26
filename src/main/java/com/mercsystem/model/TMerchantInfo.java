@@ -84,7 +84,7 @@ public class TMerchantInfo implements Serializable {
     /**
      * 省编码
      */
-    private String Province;
+    private String province;
 
     /**
      * 市编码

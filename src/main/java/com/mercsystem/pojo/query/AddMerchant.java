@@ -35,7 +35,7 @@ public class AddMerchant {
     @ApiModelProperty(value = "平台类型")
     private String manageType;
     @ApiModelProperty(value = "省编码")
-    private String Province;
+    private String province;
     @ApiModelProperty(value = "市编码")
     private String city;
     @ApiModelProperty(value = "区编码")

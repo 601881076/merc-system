@@ -24,7 +24,7 @@ public class ScenicApplicationTest {
 
     @Test
     public void md5Encrypt() {
-        String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzU3NDE1OTQwMCIsImNyZWF0ZWQiOjE2NTA1NDYzNzU1NDcsImV4cCI6MTY1MzEzODM3NX0.TFR-rXavf5tcaGfe2qgVbpj_Bh4k58xaJiycMYKiYkaLjhAu_sh5NMKZDwbmCz7gcjVQqxEdDl9V5dg7B0xNYA";
+        String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzU3NDE1OTQwMCIsImNyZWF0ZWQiOjE2NTA5Njc3ODc3ODksImV4cCI6MTY1MzU1OTc4N30.ZV3u7JOSVmBiThuQy13RNCsugi7rsKRIebKtYSV-89rPmYF9hwU6PQ8mMW1UaBuGQ6tzLpx2I0CCYKF0IXZsEA";
         token += "123456";
         System.out.println(md5Util.encryptMd5(token));
     }
