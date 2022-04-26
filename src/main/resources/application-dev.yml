@@ -49,6 +49,15 @@ spring:
 #    maxWaitMillis: 2000
 #    testOnBorrow: true
 
+uploadFile:
+  resourceHandler: /images/**   #文件虚拟路径映射
+  location: /Users/tanyi/IdeaProjects/privateWork/images/ #自定义上传文件本地保存路径
+
+# 系统配置
+system:
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: /Users/tanyi/IdeaProjects/privateWork/images
+
 pic:
   suffix: jpg,png,gif,mp4
 
