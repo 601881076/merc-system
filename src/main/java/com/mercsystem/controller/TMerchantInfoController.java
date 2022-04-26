@@ -1,29 +1,24 @@
 package com.mercsystem.controller;
 
 
-import com.alibaba.fastjson.JSONArray;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mercsystem.common.CommonResult;
-import com.mercsystem.model.TMercCoordinate;
+import com.mercsystem.model.TAdmin;
 import com.mercsystem.model.TMerchantInfo;
 import com.mercsystem.pojo.query.AddMerchant;
 import com.mercsystem.pojo.query.ExlInputMerchant;
 import com.mercsystem.pojo.query.QryMerchantParam;
 import com.mercsystem.service.TMercCoordinateService;
 import com.mercsystem.service.TMerchantInfoService;
-import io.swagger.models.auth.In;
+import com.mercsystem.util.UserUtil;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.security.core.parameters.P;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -122,6 +117,8 @@ public class TMerchantInfoController {
     }
     @PostMapping("/updateMerchant")
     private CommonResult updateMerchant(@RequestBody TMerchantInfo tMerchantInfo){
+        TAdmin currentAdminUser = UserUtil.getCurrentAdminUser();
+        tMerchantInfo.setUpdatePerson(currentAdminUser.getUsername());
         //调用修改接口
         Integer rat = tMerchantInfoService.updateMerchant(tMerchantInfo);
         if (rat>0){
@@ -130,15 +127,15 @@ public class TMerchantInfoController {
             return CommonResult.success("修改商户信息失败");
         }
     }
-    @PostMapping("/downloadAllClassmate")
-    public void downloadAllClassmate(HttpServletResponse response,@RequestBody ExlInputMerchant exlInputMerchant) throws IOException {
+    @GetMapping("/downloadAllClassmate")
+    public CommonResult downloadAllClassmate(HttpServletResponse response) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();//创建HSSFWorkbook对象,  excel的文档对象
         HSSFSheet sheet = workbook.createSheet("信息表"); //excel的表单
         Map<String,Object> param = new HashMap<>();
-        param.put("merc_id",exlInputMerchant.getMercId());
-        param.put("merc_name",exlInputMerchant.getMercName());
-        param.put("manage_start_time",exlInputMerchant.getManageStartTime());
-        param.put("manage_end_time",exlInputMerchant.getManageEndTime());
+//        param.put("merc_id",exlInputMerchant.getMercId());
+//        param.put("merc_name",exlInputMerchant.getMercName());
+//        param.put("manage_start_time",exlInputMerchant.getManageStartTime());
+//        param.put("manage_end_time",exlInputMerchant.getManageEndTime());
         List<TMerchantInfo> classmateList = tMerchantInfoService.exlTMerchantInfo(param);
 
         String fileName = "商户信息"  + ".xls";//设置要导出的文件的名字
@@ -172,11 +169,25 @@ public class TMerchantInfoController {
             row1.createCell(11).setCellValue(tMerchantInfo.getRacmerchantId());
             rowNum++;
         }
-
         response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName);
         response.flushBuffer();
-        workbook.write(response.getOutputStream());
+        File file = new File("D:\\song\\exl");
+        file.mkdirs();
+        FileOutputStream fileOutputStream = new FileOutputStream("D:\\song\\exl\\商户信息.xls");
+        workbook.write(fileOutputStream);
+        return CommonResult.success("D:\\song\\exl\\商户信息.xls");
+    }
+
+    //冻结商户
+    @PostMapping("/freezeMerchant")
+    private  CommonResult freezeMerchant(Integer merc_id){
+        int ret = tMerchantInfoService.freeZeMerchant(merc_id);
+        if (ret<0){
+            return CommonResult.success("商户已冻结成功");
+        }else{
+            return CommonResult.success("商户冻结失败");
+        }
     }
 
 }

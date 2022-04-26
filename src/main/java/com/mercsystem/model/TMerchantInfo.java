@@ -119,13 +119,11 @@ public class TMerchantInfo implements Serializable {
     /**
      * 商户创建时间
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 商户最新审核时间
      */
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime checkTime;
 
     /**

@@ -35,4 +35,6 @@ public interface TMerchantInfoService extends IService<TMerchantInfo> {
 
     Integer updateMerchant(TMerchantInfo tMerchantInfo);
 
+    Integer freeZeMerchant(Integer merc_id);  //冻结商户
+
 }
