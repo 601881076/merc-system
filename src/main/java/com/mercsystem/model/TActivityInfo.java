@@ -47,8 +47,6 @@ public class TActivityInfo implements Serializable {
      */
     private Integer tryEatRemainderNo;
 
-    private Integer column6;
-
     /**
      * 该活动返佣金额
      */
