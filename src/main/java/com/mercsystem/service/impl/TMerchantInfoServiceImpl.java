@@ -21,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -41,10 +42,10 @@ import java.util.Map;
  */
 @Service
 public class TMerchantInfoServiceImpl extends ServiceImpl<TMerchantInfoMapper, TMerchantInfo> implements TMerchantInfoService {
-    @Autowired
+    @Resource
     private TMerchantInfoMapper tMerchantInfoMapper;
 
-    @Autowired
+    @Resource
     private TMercCoordinateMapper tMercCoordinateMapper;
 
 
@@ -127,13 +128,11 @@ public class TMerchantInfoServiceImpl extends ServiceImpl<TMerchantInfoMapper, T
         addtMerchantInfo.setManageStatus(0);
         addtMerchantInfo.setCheckStatus(0);
         addtMerchantInfo.setStatus(0);
-        if (tMerchantInfo.getRacmerchantId()==null){
-            return -1;
-        }else{
-           TMerchantInfo qryMerchant= tMerchantInfoMapper.selectById(tMerchantInfo.getRacmerchantId());
-           if (qryMerchant==null){
-               return -1;
-           }
+        if (tMerchantInfo.getRacmerchantId()!=null){
+            TMerchantInfo qryMerchant= tMerchantInfoMapper.selectById(tMerchantInfo.getRacmerchantId());
+            if (qryMerchant==null){
+                return -1;
+            }
         }
         Integer rat = tMerchantInfoMapper.insert(addtMerchantInfo);
         if (rat>0){

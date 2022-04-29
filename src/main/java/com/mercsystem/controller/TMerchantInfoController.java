@@ -37,8 +37,6 @@ import java.util.Map;
 public class TMerchantInfoController {
     @Resource
     private TMerchantInfoService tMerchantInfoService;
-    @Resource
-    private TMercCoordinateService tMercCoordinateService;
 
     @PostMapping("/qryListMerchant")
     private Page qryListTMerchantInfo(@RequestBody QryMerchantParam qryMerchantParam){
@@ -128,14 +126,14 @@ public class TMerchantInfoController {
         }
     }
     @GetMapping("/downloadAllClassmate")
-    public CommonResult downloadAllClassmate(HttpServletResponse response) throws IOException {
+    public CommonResult downloadAllClassmate(@RequestBody ExlInputMerchant exlInputMerchant) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();//创建HSSFWorkbook对象,  excel的文档对象
         HSSFSheet sheet = workbook.createSheet("信息表"); //excel的表单
         Map<String,Object> param = new HashMap<>();
-//        param.put("merc_id",exlInputMerchant.getMercId());
-//        param.put("merc_name",exlInputMerchant.getMercName());
-//        param.put("manage_start_time",exlInputMerchant.getManageStartTime());
-//        param.put("manage_end_time",exlInputMerchant.getManageEndTime());
+        param.put("merc_id",exlInputMerchant.getMercId());
+        param.put("merc_name",exlInputMerchant.getMercName());
+        param.put("manage_start_time",exlInputMerchant.getManageStartTime());
+        param.put("manage_end_time",exlInputMerchant.getManageEndTime());
         List<TMerchantInfo> classmateList = tMerchantInfoService.exlTMerchantInfo(param);
 
         String fileName = "商户信息"  + ".xls";//设置要导出的文件的名字
@@ -169,9 +167,6 @@ public class TMerchantInfoController {
             row1.createCell(11).setCellValue(tMerchantInfo.getRacmerchantId());
             rowNum++;
         }
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
-        response.flushBuffer();
         File file = new File("D:\\song\\exl");
         file.mkdirs();
         FileOutputStream fileOutputStream = new FileOutputStream("D:\\song\\exl\\商户信息.xls");
