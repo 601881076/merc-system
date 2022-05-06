@@ -21,7 +21,7 @@ import java.security.MessageDigest;
 public class MD5Util {
 
     @Value("${md5.key}")
-    private static String md5Key;
+    private String md5Key;
 
     /**
      *
@@ -37,7 +37,7 @@ public class MD5Util {
         return md5DigestAsHex;
     }
 
-    private static byte[] md5(String s)
+    public static byte[] md5(String s)
     {
         MessageDigest algorithm;
         try

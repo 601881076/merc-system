@@ -3,22 +3,31 @@ package com.mercsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mercsystem.common.CommonPage;
 import com.mercsystem.common.CommonResult;
 import com.mercsystem.common.exception.BusinessException;
 import com.mercsystem.model.TAdmin;
 import com.mercsystem.pojo.bo.AdminUserDetails;
+import com.mercsystem.pojo.query.AdminRequestParam;
 import com.mercsystem.pojo.query.MercAdminLoginParam;
 import com.mercsystem.service.TAdminService;
 import com.mercsystem.util.JwtTokenUtil;
 import com.mercsystem.util.SMSUtils;
 import com.mercsystem.util.UserUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 /**
@@ -32,6 +41,7 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/admin")
 @Slf4j
+@Api(tags = "用户管理页面")
 public class TAdminController {
 
     @Autowired
@@ -48,12 +58,61 @@ public class TAdminController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    @PostMapping("/list")
+    @ApiOperation(value = "用户分页查询接口")
+    public CommonResult<CommonPage<TAdmin>> list(AdminRequestParam param) {
+        // 分页组件
+        Page page = new Page(param.getPageNum(), param.getPageSize());
+
+        // 日期格式化
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // 拼接sql条件
+        QueryWrapper wrapper = new QueryWrapper();
+        if (param.getUserId() != null) {
+            // 用户id
+            wrapper.eq("id", param.getUserId());
+        }
+
+        if (param.getStatus() != null) {
+            // 用户状态
+            wrapper.eq("status", param.getStatus());
+        }
+
+        if (StringUtils.hasLength(param.getStartTime())) {
+            // 开始时间
+            LocalDateTime startTime = LocalDateTime.parse(param.getStartTime(), formatter);
+            // 创建时间 >= 开始时间
+            wrapper.ge("create_time", startTime);
+        }
+
+        if (StringUtils.hasLength(param.getEndTime())) {
+            log.info("时间查询 {}", param.getEndTime());
+            // 结束时间
+            LocalDateTime endTime = LocalDateTime.parse(param.getEndTime(), formatter);
+            // 创建时间 <= 结束时间
+            wrapper.le("create_time", endTime);
+        }
+
+        // 分页查询 sql
+        Page result = adminService.page(page, wrapper);
+
+        return  CommonResult.success(CommonPage.restPage(result));
+    }
+
     /**
      * 登录接口， 登录成功返回token
      * @param loginParam
      * @return
      */
     @PostMapping("/login")
+    @ApiOperation(value = "用户登录接口")
     public CommonResult login(MercAdminLoginParam loginParam) {
         log.info("登录接口 , 请求数据: {}", loginParam);
         HashMap<String, String> map = new HashMap<>();
@@ -89,11 +148,12 @@ public class TAdminController {
     }
 
     /**
-     * 用户查询
+     * 用户详情查询
      * @param admin
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping("/detail")
+    @ApiOperation(value = "用户查询接口")
     public CommonResult select(TAdmin admin) {
         TAdmin user = UserUtil.getCurrentAdminUser();
         return CommonResult.success(user);
@@ -104,8 +164,9 @@ public class TAdminController {
      * @param admin
      * @return
      */
+    @ApiOperation(value = "用户注册接口")
     @PostMapping("/insert")
-    public CommonResult insert(@RequestBody TAdmin admin) {
+    public CommonResult insert( TAdmin admin) {
         adminService.insert(admin);
         return CommonResult.success("注册成功");
     }
@@ -116,8 +177,9 @@ public class TAdminController {
      * @param admin
      * @return
      */
+    @ApiOperation(value = "用户修改接口")
     @PostMapping("/update")
-    public CommonResult update(@RequestBody TAdmin admin) {
+    public CommonResult update( TAdmin admin) {
         log.info("用户修改 username = {}, 对象 = {}", admin.getUsername(), admin);
         int update = adminService.update(admin);
         if (update != 1)
@@ -132,6 +194,7 @@ public class TAdminController {
      * @param userId
      * @return
      */
+    @ApiOperation(value = "用户删除接口")
     @GetMapping("/delete/{userId}")
     public CommonResult delete(@PathVariable Integer userId) {
         boolean result = adminService.removeById(userId);
@@ -146,6 +209,7 @@ public class TAdminController {
      * @param userId
      * @return
      */
+    @ApiOperation(value = "用户冻结接口")
     @GetMapping("/freeze/{userId}")
     public CommonResult freeze(@PathVariable Integer userId) {
 

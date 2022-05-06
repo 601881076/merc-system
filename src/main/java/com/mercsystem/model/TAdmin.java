@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -32,6 +34,7 @@ public class TAdmin implements Serializable {
      * 用户名
      */
     @NotBlank(message = "用户名不能为空")
+    @ApiModelProperty(value = "用户名")
     private String username;
 
     /**

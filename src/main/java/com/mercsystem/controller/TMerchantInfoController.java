@@ -12,6 +12,8 @@ import com.mercsystem.pojo.query.QryMerchantParam;
 import com.mercsystem.service.TMercCoordinateService;
 import com.mercsystem.service.TMerchantInfoService;
 import com.mercsystem.util.UserUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +36,18 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/merchants")
+@Api(tags = "商户管理页面")
 public class TMerchantInfoController {
     @Resource
     private TMerchantInfoService tMerchantInfoService;
 
+    /**
+     * 分页查询商户信息
+     * @param qryMerchantParam
+     * @return
+     */
     @PostMapping("/qryListMerchant")
+    @ApiOperation(value = "分页查询商户信息")
     private Page qryListTMerchantInfo(@RequestBody QryMerchantParam qryMerchantParam){
         Page page = new Page(qryMerchantParam.getPageindex(),qryMerchantParam.getSize());
         Map<String,Object> paramMap = new HashMap<>();
@@ -71,6 +80,12 @@ public class TMerchantInfoController {
         return setpage;
     }
 
+    /**
+     * 新增商户
+     * @param tMerchantInfo
+     * @return
+     */
+    @ApiOperation(value = "商户新增接口")
     @PostMapping("/addMerchant")
     private CommonResult addMerchant(@RequestBody AddMerchant tMerchantInfo){
         Integer tmer = tMerchantInfoService.addTMerchant(tMerchantInfo);
@@ -81,11 +96,25 @@ public class TMerchantInfoController {
         }
 
     }
+
+    /**
+     * 商户详情查询
+     * @param merc_id
+     * @return
+     */
+    @ApiOperation("商户详情查询")
     @PostMapping("/qryMerchanInfo")
     private CommonResult<TMerchantInfo> qryMerchanInfo(Integer merc_id){
         TMerchantInfo tMerchantInfo =tMerchantInfoService.tmerchantInfo(merc_id);
         return CommonResult.success(tMerchantInfo);
     }
+
+    /**
+     * 商户删除
+     * @param merc_id
+     * @return
+     */
+    @ApiOperation(value = "商户删除")
     @PostMapping("/delMerchant")
     private CommonResult delMerchant(Integer merc_id){
         Integer rat = tMerchantInfoService.delMerchantByMercId(merc_id);
@@ -96,6 +125,14 @@ public class TMerchantInfoController {
         }
 
     }
+
+    /**
+     * 商户审核
+     * @param merc_id
+     * @param checkStatus
+     * @return
+     */
+    @ApiOperation(value = "商户审核")
     @PostMapping("/checkMerchant")
     private CommonResult checkMerchant(Integer merc_id,Integer checkStatus){
         //查询商户是否符合审核条件
@@ -113,6 +150,13 @@ public class TMerchantInfoController {
             return CommonResult.success("商户审核状态不满足");
         }
     }
+
+    /**
+     * 商户修改
+     * @param tMerchantInfo
+     * @return
+     */
+    @ApiOperation(value = "商户修改")
     @PostMapping("/updateMerchant")
     private CommonResult updateMerchant(@RequestBody TMerchantInfo tMerchantInfo){
         TAdmin currentAdminUser = UserUtil.getCurrentAdminUser();
@@ -125,6 +169,14 @@ public class TMerchantInfoController {
             return CommonResult.success("修改商户信息失败");
         }
     }
+
+    /**
+     * 商户导出
+     * @param exlInputMerchant
+     * @return
+     * @throws IOException
+     */
+    @ApiOperation(value = "商户导出")
     @GetMapping("/downloadAllClassmate")
     public CommonResult downloadAllClassmate(@RequestBody ExlInputMerchant exlInputMerchant) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();//创建HSSFWorkbook对象,  excel的文档对象
@@ -174,7 +226,13 @@ public class TMerchantInfoController {
         return CommonResult.success("D:\\song\\exl\\商户信息.xls");
     }
 
-    //冻结商户
+
+    /**
+     * 冻结商户
+     * @param merc_id
+     * @return
+     */
+    @ApiOperation(value = "冻结商户")
     @PostMapping("/freezeMerchant")
     private  CommonResult freezeMerchant(Integer merc_id){
         int ret = tMerchantInfoService.freeZeMerchant(merc_id);

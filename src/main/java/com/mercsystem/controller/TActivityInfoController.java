@@ -11,6 +11,8 @@ import com.mercsystem.model.TAdmin;
 import com.mercsystem.pojo.query.ActivityRequestParam;
 import com.mercsystem.service.TActivityInfoService;
 import com.mercsystem.util.UserUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * <p>
@@ -32,6 +35,7 @@ import java.time.LocalDateTime;
  */
 @RestController
 @RequestMapping("/activity")
+@Api(tags = "活动管理页面")
 public class TActivityInfoController {
 
     /** 活动服务层实现类*/
@@ -44,22 +48,28 @@ public class TActivityInfoController {
      * @param param
      * @return
      */
+    @ApiOperation(value = "分页查询活动信息数据")
     @PostMapping("/list")
     public CommonResult<CommonPage<TActivityInfo>> list(ActivityRequestParam param) {
         Page page = new Page(param.getPageNum(),param.getPageSize());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         QueryWrapper wrapper = new QueryWrapper();
         if (!ObjectUtils.isEmpty(param.getActivityId())) {
             // 活动id条件
             wrapper.eq("activity_id",param.getActivityId());
-        } else if (StringUtils.hasLength(param.getStartTime())) {
+        }
+
+        if (StringUtils.hasLength(param.getStartTime())) {
             // 开始时间
-            LocalDateTime startTime = LocalDateTime.parse(param.getStartTime());
+            LocalDateTime startTime = LocalDateTime.parse(param.getStartTime(), formatter);
             // 创建时间 >= 开始时间
             wrapper.ge("create_time", startTime);
-        } else if (StringUtils.hasLength(param.getEndTime())) {
+        }
+
+        if (StringUtils.hasLength(param.getEndTime())) {
             // 结束时间
-            LocalDateTime endTime = LocalDateTime.parse(param.getEndTime());
+            LocalDateTime endTime = LocalDateTime.parse(param.getEndTime(), formatter);
             // 创建时间 <= 结束时间
             wrapper.le("create_time",endTime);
         }
@@ -75,6 +85,7 @@ public class TActivityInfoController {
      */
     @PostMapping("/create")
     @Transactional(rollbackFor = Exception.class)
+    @ApiOperation(value = "活动创建")
     public CommonResult createActivity(TActivityInfo activityInfo) {
         // 获取当前登录用户
         TAdmin currentAdminUser = UserUtil.getCurrentAdminUser();
@@ -93,6 +104,7 @@ public class TActivityInfoController {
      */
     @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
+    @ApiOperation(value = "活动修改")
     public CommonResult update(TActivityInfo activityInfo) {
         // 获取当前登录用户
         TAdmin currentAdminUser = UserUtil.getCurrentAdminUser();

@@ -9,6 +9,8 @@ import com.mercsystem.pojo.query.ExlInputMerchant;
 import com.mercsystem.pojo.query.QryMerchantParam;
 import com.mercsystem.pojo.query.QryWithdarw;
 import com.mercsystem.service.TWithdrawInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +32,14 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/twithdrawinfo")
+@Api(tags = "提现管理页面")
 public class TWithdrawInfoController {
 
     @Resource
     private TWithdrawInfoService tWithdrawInfoService;
 
     @PostMapping("/qryListTWihtdrawInfo")
+    @ApiOperation(value = "提现订单分页查询")
     private Page qryListTWihtdrawInfo(@RequestBody QryWithdarw qryWithdarw){
         Page page = new Page(qryWithdarw.getPageindex(),qryWithdarw.getSize());
         Map<String,Object> paramMap = new HashMap<>();
@@ -54,7 +58,10 @@ public class TWithdrawInfoController {
         Page setpage = tWithdrawInfoService.qryTWithdrawInfo(page,paramMap);
         return setpage;
     }
+
+
     @PostMapping("/checkWithdrew")
+    @ApiOperation(value = "提现订单审核")
     private CommonResult checkWithdrew(Integer id,Integer status) {
         int ret = tWithdrawInfoService.chelkWithdatwInfo(id,status);
         if (ret<0){
@@ -65,6 +72,7 @@ public class TWithdrawInfoController {
     }
 
     @GetMapping("/outInputWithdrew")
+    @ApiOperation(value = "订单导出")
     public CommonResult outInputWithdrew() throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();//创建HSSFWorkbook对象,  excel的文档对象
         HSSFSheet sheet = workbook.createSheet("信息表"); //excel的表单
