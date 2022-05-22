@@ -34,7 +34,7 @@ public class QryMerchantParam {
     @ApiModelProperty(value = "商户状态")
     private Integer status;
     @ApiModelProperty(value = "每页显示的数据")
-    private Integer pageNum;
-    @ApiModelProperty(value = "当前页码")
     private Integer pageSize;
+    @ApiModelProperty(value = "当前页码")
+    private Integer currentPage;
 }

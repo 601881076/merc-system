@@ -50,7 +50,7 @@ public class TMerchantInfoController {
     @PostMapping("/qryListMerchant")
     @ApiOperation(value = "分页查询商户信息")
     private Page qryListTMerchantInfo(QryMerchantParam qryMerchantParam) {
-        Page page = new Page(qryMerchantParam.getPageSize(), qryMerchantParam.getPageNum());
+        Page page = new Page(qryMerchantParam.getCurrentPage(), qryMerchantParam.getPageSize());
 
         // 筛选条件
         QueryWrapper wrapper = new QueryWrapper();
