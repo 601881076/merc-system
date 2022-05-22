@@ -4,6 +4,7 @@ package com.mercsystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.mercsystem.annotation.MyLog;
 import com.mercsystem.common.CommonPage;
 import com.mercsystem.common.CommonResult;
 import com.mercsystem.common.exception.BusinessException;
@@ -68,7 +69,7 @@ public class TAdminController {
     @ApiOperation(value = "用户分页查询接口")
     public CommonResult<CommonPage<TAdmin>> list(AdminRequestParam param) {
         // 分页组件
-        Page page = new Page(param.getPageNum(), param.getPageSize());
+        Page page = new Page(param.getPageSize(), param.getPageNum());
 
         // 日期格式化
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -101,6 +102,7 @@ public class TAdminController {
         }
 
         // 分页查询 sql
+        wrapper.orderByAsc("id");
         Page result = adminService.page(page, wrapper);
 
         return  CommonResult.success(CommonPage.restPage(result));
@@ -218,8 +220,15 @@ public class TAdminController {
         wrapper.eq("id",userId);
         boolean result = adminService.update(wrapper);
 
-
         return CommonResult.success("冻结成功");
+    }
+
+
+    @ApiOperation(value = "退出接口")
+    @PostMapping("/logout")
+    public CommonResult logout() {
+        log.info("退出接口");
+        return CommonResult.success("退出成功");
     }
 
 

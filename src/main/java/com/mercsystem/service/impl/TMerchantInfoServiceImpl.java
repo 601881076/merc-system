@@ -20,6 +20,7 @@ import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
@@ -50,12 +51,8 @@ public class TMerchantInfoServiceImpl extends ServiceImpl<TMerchantInfoMapper, T
 
 
     @Override
-    public Page qryTMerchantInfo(Page page, Map<String,Object> param ) {
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.like("merc_name",param.get("merc_name").toString());
-        param.remove("merc_name");
-        queryWrapper.allEq(param);
-        Page  merchantInfoList = tMerchantInfoMapper.selectPage(page,queryWrapper);
+    public Page qryTMerchantInfo(Page page, QueryWrapper wrapper ) {
+        Page  merchantInfoList = tMerchantInfoMapper.selectPage(page,wrapper);
         return merchantInfoList;
     }
 

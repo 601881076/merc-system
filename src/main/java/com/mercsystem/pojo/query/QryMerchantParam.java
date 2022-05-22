@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 public class QryMerchantParam {
     @ApiModelProperty(value = "商户号")
-    private Integer merc_id;  //商户号
+    private Integer mercId;  //商户号
     @ApiModelProperty(value = "商户名称")
     private String mercName;  //商户名称
 
@@ -34,7 +34,7 @@ public class QryMerchantParam {
     @ApiModelProperty(value = "商户状态")
     private Integer status;
     @ApiModelProperty(value = "每页显示的数据")
-    private Integer size;
+    private Integer pageNum;
     @ApiModelProperty(value = "当前页码")
-    private Integer pageindex;
+    private Integer pageSize;
 }

@@ -1,5 +1,6 @@
 package com.mercsystem.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mercsystem.model.TMerchantInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -22,7 +23,7 @@ import java.util.Map;
 public interface TMerchantInfoService extends IService<TMerchantInfo> {
 
 
-    Page qryTMerchantInfo(Page page, Map<String,Object> param);
+    Page qryTMerchantInfo(Page page, QueryWrapper wrapper);
     List<TMerchantInfo> exlTMerchantInfo(Map<String,Object> param);
 
     TMerchantInfo tmerchantInfo(Integer merc_id);

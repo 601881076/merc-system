@@ -28,12 +28,12 @@ public class AdminRequestParam {
     @ApiModelProperty(value = "用户状态;0->禁用；1->启用")
     private Integer status;
 
-    @ApiModelProperty(value = "每页数量")
-    @NotBlank(message = "每页数量不能为空")
-    private Integer pageSize;
-
     @ApiModelProperty(value = "当前页")
     @NotBlank(message = "当前页不能为空")
+    private Integer pageSize;
+
+    @ApiModelProperty(value = "每页数量")
+    @NotBlank(message = "每页数量不能为空")
     private Integer pageNum;
 
 
