@@ -64,12 +64,12 @@ public class TMerchantInfo implements Serializable {
     /**
      * 经营开始时间
      */
-    private LocalDateTime manageStartTime;
+    private String manageStartTime;
 
     /**
      * 经营关闭时间
      */
-    private LocalDateTime manageEndTime;
+    private String manageEndTime;
 
     /**
      * 经营状态: 0 → 正常营业; 1 → 打烊; 2 → 休息; 3 → 平台关闭

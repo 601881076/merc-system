@@ -14,6 +14,7 @@ import com.mercsystem.service.TMerchantInfoService;
 import com.mercsystem.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +43,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/merchants")
 @Api(tags = "商户管理页面")
+@Slf4j
 public class TMerchantInfoController {
     @Resource
     private TMerchantInfoService tMerchantInfoService;
@@ -59,6 +66,8 @@ public class TMerchantInfoController {
         }
 
         Page setpage = tMerchantInfoService.qryTMerchantInfo(page, wrapper);
+
+
         return setpage;
     }
 
@@ -70,7 +79,8 @@ public class TMerchantInfoController {
      */
     @ApiOperation(value = "商户新增接口")
     @PostMapping("/addMerchant")
-    private CommonResult addMerchant(@RequestBody AddMerchant tMerchantInfo) {
+    private CommonResult addMerchant(AddMerchant tMerchantInfo) {
+        log.info("商户新增,[{}]", tMerchantInfo);
         Integer tmer = tMerchantInfoService.addTMerchant(tMerchantInfo);
         if (tmer > 0) {
             return CommonResult.success("添加商户成功");

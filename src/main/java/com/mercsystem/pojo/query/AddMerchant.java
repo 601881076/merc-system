@@ -2,6 +2,7 @@ package com.mercsystem.pojo.query;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,28 +13,36 @@ import java.time.LocalDateTime;
 /**
  * 商户注册信息
  */
-@Getter
-@Setter
+@Data
 public class AddMerchant {
     @ApiModelProperty(value = "商户名称", required = true)
-    @NotEmpty(message = "mercName")
+    @NotEmpty(message = "商户名称不能为空")
     private String mercName;
+
     @ApiModelProperty(value = "商户地址")
+    @NotEmpty(message = "商户地址不能为空")
     private String address;
+
     @ApiModelProperty(value = "联系人电话")
+    @NotEmpty(message = "联系人电话不能为空")
     private String contactPhone;
+
     @ApiModelProperty(value = "联系人姓名")
+    @NotEmpty(message = "联系人姓名不能为空")
     private String contactName;
+
+    @ApiModelProperty(value = "经营时间")
+    private String manageTime;
+
     @ApiModelProperty(value = "商家logo URL")
     private String logo;
-    @ApiModelProperty(value = "经营开始时间")
-    private String manageStartTime;
-    @ApiModelProperty(value = "经营开始时间")
-    private String manageEndTime;
+
     @ApiModelProperty(value = "经营状态")
     private Integer manageStatus;
+
     @ApiModelProperty(value = "平台类型")
-    private String manageType;
+    private String platformType;
+
     @ApiModelProperty(value = "省编码")
     private String province;
     @ApiModelProperty(value = "市编码")

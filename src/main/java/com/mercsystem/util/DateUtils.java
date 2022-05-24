@@ -1,5 +1,6 @@
 package com.mercsystem.util;
 
+import com.mercsystem.common.exception.BusinessException;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.lang.management.ManagementFactory;
@@ -15,6 +16,8 @@ import java.util.Date;
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {
+    public static String HH_mm = "HH:mm";
+
     public static String YYYY = "yyyy";
 
     public static String YYYY_MM = "yyyy-MM";
@@ -181,4 +184,30 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
     }
+
+    /**
+     * 时间比较，单位 =  HH:mm
+     * @param time1
+     * @param time2
+     * @param method 1: time1.after(time2) time1 > time2之后?
+     *               2: time1.equals(time2) time1 = time2?
+     *               3: time1.before(time2) time1 < time2?
+     * @return 是 true; 否: false
+     */
+    public static boolean hoursMinutesCompare(String time1, String time2, int method) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(DateUtils.HH_mm);
+        Date startTime = sdf.parse(time1);
+        Date endTime = sdf.parse(time2);
+
+        if (method == 1)
+            return startTime.after(endTime);
+        else if (method == 2)
+            return startTime.equals(endTime);
+        else if (method == 3)
+            return startTime.before(endTime);
+        else
+            throw new BusinessException("无效的比较");
+
+    }
+
 }
