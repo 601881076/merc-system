@@ -65,6 +65,8 @@ public class TMerchantInfoController {
             wrapper.eq("merc_id", qryMerchantParam.getMercId());
         }
 
+        wrapper.orderByDesc("create_time");
+
         Page setpage = tMerchantInfoService.qryTMerchantInfo(page, wrapper);
 
 
