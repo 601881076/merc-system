@@ -70,12 +70,12 @@ secure:
       - /**/*.xls
       - /actuator/**
       - /druid/**
+      - /admin/logout
       - /admin/login
       - /common/sms
       - /validateCode/**
       - /uploadFiles/**
       - /images/**
-
 
 # ===== 自定义swagger配置 ===== #
 swagger:

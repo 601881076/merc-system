@@ -1,7 +1,7 @@
 package com.mercsystem.config;
 import com.mercsystem.component.*;
 import com.mercsystem.util.JwtTokenUtil;
-import com.sun.xml.internal.bind.v2.TODO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author tanyi
  * @date 2022/4/20 11:04
 */
+@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired(required = false)
@@ -57,22 +58,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests();
         //不需要保护的资源路径允许访问
         for (String url : ignoreUrlsConfig.getUrls()) {
+            log.info("白名单 = {}", url);
             registry.antMatchers(url).permitAll();
         }
+
         //允许跨域请求的OPTIONS请求
         registry.antMatchers(HttpMethod.OPTIONS)
                 .permitAll();
-        // 任何请求需要身份认证
-        registry.and()
+
+                // 关闭跨站请求防护及不使用session
+        registry.and().csrf().disable()
+                // 任何请求需要身份认证
                 .authorizeRequests()
                 // 暂时全部放开权限
                 .anyRequest()
                 // 暂时放开 所有请求都需认证
-                .authenticated()
-                // 关闭跨站请求防护及不使用session
-                .and()
-                .csrf()
-                .disable()
+                .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // 自定义权限拒绝处理类

@@ -51,7 +51,7 @@ spring:
 
 uploadFile:
   resourceHandler: /images/**   #文件虚拟路径映射
-  location: /Users/tanyi/IdeaProjects/privateWork/images/ #自定义上传文件本地保存路径
+  location: /Users/tanyi/IdeaProjects/privateWork/images/ #自定义上传文件本地保存路径,将 resourceHandler 映射到 location
 
 # 系统配置
 system:

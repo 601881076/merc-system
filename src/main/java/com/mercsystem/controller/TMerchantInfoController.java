@@ -3,7 +3,9 @@ package com.mercsystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mercsystem.common.CommonResult;
+import com.mercsystem.config.SystemConfig;
 import com.mercsystem.model.TAdmin;
 import com.mercsystem.model.TMerchantInfo;
 import com.mercsystem.pojo.query.AddMerchant;
@@ -11,18 +13,21 @@ import com.mercsystem.pojo.query.ExlInputMerchant;
 import com.mercsystem.pojo.query.QryMerchantParam;
 import com.mercsystem.service.TMercCoordinateService;
 import com.mercsystem.service.TMerchantInfoService;
+import com.mercsystem.util.FileUploadUtils;
 import com.mercsystem.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -47,6 +52,11 @@ import java.util.Map;
 public class TMerchantInfoController {
     @Resource
     private TMerchantInfoService tMerchantInfoService;
+
+    /**
+     * 上传路径
+     */
+    private String filePath = SystemConfig.getUploadPath();
 
     /**
      * 分页查询商户信息
@@ -76,14 +86,15 @@ public class TMerchantInfoController {
     /**
      * 新增商户
      *
-     * @param tMerchantInfo
+     * @param orderParam 新增商户数据
      * @return
      */
     @ApiOperation(value = "商户新增接口")
     @PostMapping("/addMerchant")
-    private CommonResult addMerchant(AddMerchant tMerchantInfo) {
-        log.info("商户新增,[{}]", tMerchantInfo);
-        Integer tmer = tMerchantInfoService.addTMerchant(tMerchantInfo);
+    private CommonResult addMerchant(AddMerchant orderParam) throws IOException {
+        log.info("商户新增,[{}]", orderParam);
+
+        Integer tmer = tMerchantInfoService.addTMerchant(orderParam);
         if (tmer > 0) {
             return CommonResult.success("添加商户成功");
         } else {
@@ -92,7 +103,17 @@ public class TMerchantInfoController {
 
     }
 
+    @PostMapping("/upload")
+    @ApiOperation(value = "商户上传图片")
+    public CommonResult uploadPhoto(MultipartFile file) throws IOException {
+        log.info("商户上传图片,[{}]", file);
+
+        String upload = FileUploadUtils.upload(filePath,file);
+
+        return CommonResult.success(upload);
+    }
     /**
+     *
      * 商户详情查询
      *
      * @param merc_id
