@@ -24,6 +24,8 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -118,7 +120,6 @@ public class TMerchantInfoServiceImpl extends ServiceImpl<TMerchantInfoMapper, T
         TMerchantInfo addtMerchantInfo = new TMerchantInfo();
         BeanUtils.copyProperties(tMerchantInfo, addtMerchantInfo);
 
-        // 经营时间范围
         addtMerchantInfo.setContactName(UserUtil.getCurrentAdminUser().getUsername());
         addtMerchantInfo.setManageStatus(0);
         addtMerchantInfo.setCheckStatus(0);

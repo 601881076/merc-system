@@ -34,6 +34,12 @@ public class AddMerchant {
     @ApiModelProperty(value = "经营时间")
     private String manageTime;
 
+    @ApiModelProperty(value = "经营开始时间")
+    private String manageStartTime;
+
+    @ApiModelProperty(value = "经营结束时间")
+    private String manageEndTime;
+
     @ApiModelProperty(value = "商家logo URL")
     private String logo;
 
