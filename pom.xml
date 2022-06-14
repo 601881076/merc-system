@@ -20,6 +20,7 @@
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
         <commons.fileupload.version>1.4</commons.fileupload.version>
+        <ruoyi.version>3.8.2</ruoyi.version>
     </properties>
     <dependencies>
         <dependency>
@@ -269,6 +270,7 @@
             <artifactId>mssql-jdbc</artifactId>
             <scope>runtime</scope>
         </dependency>
+
     </dependencies>
 
     <build>

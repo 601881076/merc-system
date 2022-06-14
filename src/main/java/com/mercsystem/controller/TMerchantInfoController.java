@@ -4,6 +4,7 @@ package com.mercsystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mercsystem.common.CommonPage;
 import com.mercsystem.common.CommonResult;
 import com.mercsystem.config.SystemConfig;
 import com.mercsystem.model.TAdmin;
@@ -17,8 +18,11 @@ import com.mercsystem.util.FileUploadUtils;
 import com.mercsystem.util.UserUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,6 +62,7 @@ public class TMerchantInfoController {
      */
     private String filePath = SystemConfig.getUploadPath();
 
+
     /**
      * 分页查询商户信息
      *
@@ -66,7 +71,7 @@ public class TMerchantInfoController {
      */
     @PostMapping("/qryListMerchant")
     @ApiOperation(value = "分页查询商户信息")
-    private Page qryListTMerchantInfo(QryMerchantParam qryMerchantParam) {
+    private CommonResult<CommonPage<TMerchantInfo>> qryListTMerchantInfo(QryMerchantParam qryMerchantParam) {
         Page page = new Page(qryMerchantParam.getCurrentPage(), qryMerchantParam.getPageSize());
 
         // 筛选条件
@@ -75,12 +80,18 @@ public class TMerchantInfoController {
             wrapper.eq("merc_id", qryMerchantParam.getMercId());
         }
 
+        // 商户名称
+        if (StringUtils.hasLength(qryMerchantParam.getMercName())) {
+            wrapper.like("merc_name",qryMerchantParam.getMercName());
+        }
+        // 倒序查询
         wrapper.orderByDesc("create_time");
 
         Page setpage = tMerchantInfoService.qryTMerchantInfo(page, wrapper);
 
 
-        return setpage;
+
+        return CommonResult.success(CommonPage.restPage(setpage));
     }
 
     /**
@@ -147,26 +158,30 @@ public class TMerchantInfoController {
     /**
      * 商户审核
      *
-     * @param merc_id
-     * @param checkStatus
+     * @param addMerchant 商户请求参数
      * @return
      */
     @ApiOperation(value = "商户审核")
     @PostMapping("/checkMerchant")
-    private CommonResult checkMerchant(Integer merc_id, Integer checkStatus) {
+    private CommonResult checkMerchant(AddMerchant addMerchant) {
+        log.info("商户审核 = {}", addMerchant);
+
+        int merchantCheckStatus = addMerchant.getCheckStatus();
+
         //查询商户是否符合审核条件
-        TMerchantInfo tMerchantInfo = tMerchantInfoService.tmerchantInfo(merc_id);
+        TMerchantInfo tMerchantInfo = tMerchantInfoService.tmerchantInfo(addMerchant.getMercId());
         Integer rate = tMerchantInfo.getCheckStatus();
         if (rate == 0) {
-            Integer ret = tMerchantInfoService.updateMerchantByMercId(merc_id, checkStatus);
-            if (ret > 0) {
-                return CommonResult.success("商户审核成功");
-            } else {
-                return CommonResult.success("商户审核失败");
+            Integer ret = tMerchantInfoService.updateMerchantByMercId(addMerchant.getMercId(), addMerchant.getCheckStatus());
+            if (ret < 0) {
+                return CommonResult.failed("商户审核失败");
             }
 
+            String respMessage =  merchantCheckStatus == 1 ? "商户审核通过操作完成" : "商户审核拒绝完成";
+            return CommonResult.success(respMessage);
+
         } else {
-            return CommonResult.success("商户审核状态不满足");
+            return CommonResult.failed("商户审核状态不满足");
         }
     }
 
@@ -179,7 +194,9 @@ public class TMerchantInfoController {
      */
     @ApiOperation(value = "商户修改")
     @PostMapping("/updateMerchant")
-    private CommonResult updateMerchant(@RequestBody TMerchantInfo tMerchantInfo) {
+    private CommonResult updateMerchant(TMerchantInfo tMerchantInfo) {
+        log.info("商户修改接口 = {}", tMerchantInfo);
+
         TAdmin currentAdminUser = UserUtil.getCurrentAdminUser();
         tMerchantInfo.setUpdatePerson(currentAdminUser.getUsername());
         //调用修改接口
@@ -190,6 +207,7 @@ public class TMerchantInfoController {
             return CommonResult.success("修改商户信息失败");
         }
     }
+
 
     /**
      * 商户导出

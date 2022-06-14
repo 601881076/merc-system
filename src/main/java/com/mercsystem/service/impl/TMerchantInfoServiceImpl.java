@@ -133,22 +133,21 @@ public class TMerchantInfoServiceImpl extends ServiceImpl<TMerchantInfoMapper, T
         }
 
         Integer rat = tMerchantInfoMapper.insert(addtMerchantInfo);
-//        if (rat > 0) {
-//            // 保存商户地址信息
-//            Integer merc_id = addtMerchantInfo.getMercId();
-//            TMercCoordinate tMercCoordinate = new TMercCoordinate();
-//            tMercCoordinate.setMercId(merc_id);
-//            tMercCoordinate.setLatitude(addtMerchantInfo.getLatitude());
-//            tMercCoordinate.setLongitude(addtMerchantInfo.getLongitude());
-//            int len = 12;
-//            String geoHashCode = GeohashUtils.encodeLatLon(tMercCoordinate.getLatitude(), tMercCoordinate.getLongitude(), len);
-//            tMercCoordinate.setGeoHashCode(geoHashCode);
-//            int ret = tMercCoordinateMapper.insert(tMercCoordinate);
-//            if (ret > 0) {
-//                return ret;
-//            }
-//        }
-//        return -1;
+        if (rat > 0) {
+            // 保存商户地址信息
+            Integer merc_id = addtMerchantInfo.getMercId();
+            TMercCoordinate tMercCoordinate = new TMercCoordinate();
+            tMercCoordinate.setMercId(merc_id);
+            tMercCoordinate.setLatitude(addtMerchantInfo.getLatitude());
+            tMercCoordinate.setLongitude(addtMerchantInfo.getLongitude());
+            int len = 12;
+            String geoHashCode = GeohashUtils.encodeLatLon(tMercCoordinate.getLatitude(), tMercCoordinate.getLongitude(), len);
+            tMercCoordinate.setGeoHashCode(geoHashCode);
+            int ret = tMercCoordinateMapper.insert(tMercCoordinate);
+            if (ret > 0) {
+                return ret;
+            }
+        }
         return rat;
     }
 

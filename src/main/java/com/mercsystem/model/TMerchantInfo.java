@@ -3,16 +3,17 @@ package com.mercsystem.model;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -119,11 +120,15 @@ public class TMerchantInfo implements Serializable {
     /**
      * 商户创建时间
      */
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
      * 商户最新审核时间
      */
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime checkTime;
 
     /**

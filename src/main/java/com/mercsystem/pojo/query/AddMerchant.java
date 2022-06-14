@@ -15,6 +15,10 @@ import java.time.LocalDateTime;
  */
 @Data
 public class AddMerchant {
+
+    @ApiModelProperty(value = "商户号")
+    private Integer mercId;
+
     @ApiModelProperty(value = "商户名称", required = true)
     @NotEmpty(message = "商户名称不能为空")
     private String mercName;
@@ -61,7 +65,7 @@ public class AddMerchant {
     private Double latitude;
     @ApiModelProperty(value = "得分")
     private Integer score;
-    @ApiModelProperty(value = "审核状态")
+    @ApiModelProperty(value = "审核状态。1 -> 审核通过； 2 -> 审核失败")
     private Integer checkStatus;
     @ApiModelProperty(value = "商户创建时间")
     private LocalDateTime createTime;
